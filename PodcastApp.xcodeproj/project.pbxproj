@@ -101,14 +101,14 @@
 		0A0B7B4B2AC0AE3800C1D17B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				0A125D142AC0CA0A0006EACA /* AccountSettings */,
-				0A125D1E2AC0CA0A0006EACA /* Favorites */,
-				0A125D232AC0CA0A0006EACA /* Home */,
-				0A125D282AC0CA0A0006EACA /* PlayingNow */,
-				0A125D2D2AC0CA0A0006EACA /* ProfileSettings */,
-				0A125D192AC0CA0A0006EACA /* Search */,
 				0A0B7B532AC0B0A800C1D17B /* Auth */,
 				0A0B7B4C2AC0AE4A00C1D17B /* Onboarding */,
+				0A125D232AC0CA0A0006EACA /* Home */,
+				0A125D282AC0CA0A0006EACA /* PlayingNow */,
+				0A125D192AC0CA0A0006EACA /* Search */,
+				0A125D1E2AC0CA0A0006EACA /* Favorites */,
+				0A125D2D2AC0CA0A0006EACA /* ProfileSettings */,
+				0A125D142AC0CA0A0006EACA /* AccountSettings */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
