@@ -12,6 +12,7 @@
 		0A0B7B3F2AC0ABDC00C1D17B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0B7B3E2AC0ABDC00C1D17B /* Assets.xcassets */; };
 		0A0B7B422AC0ABDC00C1D17B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0B7B402AC0ABDC00C1D17B /* LaunchScreen.storyboard */; };
 		0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */; };
+		0A125D132AC0C8B30006EACA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D122AC0C8B30006EACA /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		0A0B7B412AC0ABDC00C1D17B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A0B7B432AC0ABDC00C1D17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		0A125D122AC0C8B30006EACA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 		0A0B7B292AC0ABDA00C1D17B = {
 			isa = PBXGroup;
 			children = (
+				0A125D122AC0C8B30006EACA /* README.md */,
 				0A0B7B342AC0ABDA00C1D17B /* PodcastApp */,
 				0A0B7B332AC0ABDA00C1D17B /* Products */,
 			);
@@ -194,6 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A125D132AC0C8B30006EACA /* README.md in Resources */,
 				0A0B7B422AC0ABDC00C1D17B /* LaunchScreen.storyboard in Resources */,
 				0A0B7B3F2AC0ABDC00C1D17B /* Assets.xcassets in Resources */,
 			);
