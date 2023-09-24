@@ -9,21 +9,19 @@
 /* Begin PBXBuildFile section */
 		0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0B7B352AC0ABDA00C1D17B /* AppDelegate.swift */; };
 		0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0B7B372AC0ABDA00C1D17B /* SceneDelegate.swift */; };
-		0A0B7B3A2AC0ABDA00C1D17B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0B7B392AC0ABDA00C1D17B /* ViewController.swift */; };
-		0A0B7B3D2AC0ABDA00C1D17B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0B7B3B2AC0ABDA00C1D17B /* Main.storyboard */; };
 		0A0B7B3F2AC0ABDC00C1D17B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0B7B3E2AC0ABDC00C1D17B /* Assets.xcassets */; };
 		0A0B7B422AC0ABDC00C1D17B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A0B7B402AC0ABDC00C1D17B /* LaunchScreen.storyboard */; };
+		0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A0B7B322AC0ABDA00C1D17B /* PodcastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A0B7B352AC0ABDA00C1D17B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A0B7B372AC0ABDA00C1D17B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0A0B7B392AC0ABDA00C1D17B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0A0B7B3C2AC0ABDA00C1D17B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A0B7B3E2AC0ABDC00C1D17B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A0B7B412AC0ABDC00C1D17B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A0B7B432AC0ABDC00C1D17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +54,86 @@
 		0A0B7B342AC0ABDA00C1D17B /* PodcastApp */ = {
 			isa = PBXGroup;
 			children = (
+				0A0B7B492AC0AC8100C1D17B /* App */,
+				0A0B7B522AC0B04600C1D17B /* Extensions */,
+				0A0B7B4B2AC0AE3800C1D17B /* Modules */,
+				0A0B7B4A2AC0ADAC00C1D17B /* SupportingFiles */,
+			);
+			path = PodcastApp;
+			sourceTree = "<group>";
+		};
+		0A0B7B492AC0AC8100C1D17B /* App */ = {
+			isa = PBXGroup;
+			children = (
 				0A0B7B352AC0ABDA00C1D17B /* AppDelegate.swift */,
 				0A0B7B372AC0ABDA00C1D17B /* SceneDelegate.swift */,
-				0A0B7B392AC0ABDA00C1D17B /* ViewController.swift */,
-				0A0B7B3B2AC0ABDA00C1D17B /* Main.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		0A0B7B4A2AC0ADAC00C1D17B /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				0A0B7B3E2AC0ABDC00C1D17B /* Assets.xcassets */,
 				0A0B7B402AC0ABDC00C1D17B /* LaunchScreen.storyboard */,
 				0A0B7B432AC0ABDC00C1D17B /* Info.plist */,
 			);
-			path = PodcastApp;
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		0A0B7B4B2AC0AE3800C1D17B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				0A0B7B532AC0B0A800C1D17B /* Auth */,
+				0A0B7B4C2AC0AE4A00C1D17B /* Onboarding */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		0A0B7B4C2AC0AE4A00C1D17B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0A0B7B4D2AC0AE6800C1D17B /* Model */,
+				0A0B7B4E2AC0AE7200C1D17B /* View */,
+				0A0B7B4F2AC0AE8200C1D17B /* Controller */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		0A0B7B4D2AC0AE6800C1D17B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0A0B7B4E2AC0AE7200C1D17B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A0B7B4F2AC0AE8200C1D17B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0A0B7B522AC0B04600C1D17B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +196,6 @@
 			files = (
 				0A0B7B422AC0ABDC00C1D17B /* LaunchScreen.storyboard in Resources */,
 				0A0B7B3F2AC0ABDC00C1D17B /* Assets.xcassets in Resources */,
-				0A0B7B3D2AC0ABDA00C1D17B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +206,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A0B7B3A2AC0ABDA00C1D17B /* ViewController.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
+				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0A0B7B3B2AC0ABDA00C1D17B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A0B7B3C2AC0ABDA00C1D17B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0A0B7B402AC0ABDC00C1D17B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,12 +349,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WN4BA2YG3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PodcastApp/Info.plist;
+				INFOPLIST_FILE = PodcastApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +362,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Zmey666.PodcastApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -317,12 +380,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7WN4BA2YG3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PodcastApp/Info.plist;
+				INFOPLIST_FILE = PodcastApp/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +393,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Zmey666.PodcastApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
