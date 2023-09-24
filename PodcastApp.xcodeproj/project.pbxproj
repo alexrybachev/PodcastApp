@@ -20,6 +20,10 @@
 		0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125D2F2AC0CA0A0006EACA /* ProfileSettingsViewController.swift */; };
 		0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125D3A2AC0CA230006EACA /* AuthViewController.swift */; };
 		0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125D3D2AC0CAB90006EACA /* AccountSettingsViewController.swift */; };
+		0A125D412AC0D2520006EACA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D402AC0D2520006EACA /* Kingfisher */; };
+		0A125D442AC0D26C0006EACA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D432AC0D26C0006EACA /* SnapKit */; };
+		0A125D472AC0D2BD0006EACA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D462AC0D2BD0006EACA /* Realm */; };
+		0A125D492AC0D2BD0006EACA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D482AC0D2BD0006EACA /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A125D492AC0D2BD0006EACA /* RealmSwift in Frameworks */,
+				0A125D472AC0D2BD0006EACA /* Realm in Frameworks */,
+				0A125D412AC0D2520006EACA /* Kingfisher in Frameworks */,
+				0A125D442AC0D26C0006EACA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +400,12 @@
 			dependencies = (
 			);
 			name = PodcastApp;
+			packageProductDependencies = (
+				0A125D402AC0D2520006EACA /* Kingfisher */,
+				0A125D432AC0D26C0006EACA /* SnapKit */,
+				0A125D462AC0D2BD0006EACA /* Realm */,
+				0A125D482AC0D2BD0006EACA /* RealmSwift */,
+			);
 			productName = PodcastApp;
 			productReference = 0A0B7B322AC0ABDA00C1D17B /* PodcastApp.app */;
 			productType = "com.apple.product-type.application";
@@ -420,6 +434,11 @@
 				Base,
 			);
 			mainGroup = 0A0B7B292AC0ABDA00C1D17B;
+			packageReferences = (
+				0A125D3F2AC0D2520006EACA /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0A125D422AC0D26C0006EACA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				0A125D452AC0D2BD0006EACA /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 0A0B7B332AC0ABDA00C1D17B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -672,6 +691,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A125D3F2AC0D2520006EACA /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		0A125D422AC0D26C0006EACA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		0A125D452AC0D2BD0006EACA /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A125D402AC0D2520006EACA /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A125D3F2AC0D2520006EACA /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		0A125D432AC0D26C0006EACA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A125D422AC0D26C0006EACA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		0A125D462AC0D2BD0006EACA /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A125D452AC0D2BD0006EACA /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		0A125D482AC0D2BD0006EACA /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A125D452AC0D2BD0006EACA /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A0B7B2A2AC0ABDA00C1D17B /* Project object */;
 }
