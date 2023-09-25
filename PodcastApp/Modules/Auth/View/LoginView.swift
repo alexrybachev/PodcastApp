@@ -18,90 +18,70 @@ final class LoginView: UIView {
         return mainStackView
     }()
     
+    // MARK: - Login Properties
     private lazy var loginPropertieView: UIView = {
         var loginPropertieView = UIView()
-        loginPropertieView.backgroundColor = .red
         return loginPropertieView
     }()
     
-    // MARK: - Login Properties
     lazy var loginLabel: UILabel = {
-        var loginLabel = UILabel()
-        loginLabel.text = "Enter login"
-        loginLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
-        loginLabel.font = UIFont.systemFont(ofSize: 14)
+        var loginLabel = setupCustomLabel(with: "Enter Login")
         return loginLabel
     }()
     
     lazy var loginTextField: UITextField = {
-        var loginTF = UITextField()
-        loginTF.layer.cornerRadius = 15
-        loginTF.layer.borderColor = UIColor.systemGray5.cgColor
-        loginTF.layer.borderWidth = 1
-        loginTF.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
-        loginTF.isSecureTextEntry = false
-        
-        // устанавливаем цвет текста в placeholder
-        let placeholderText = NSAttributedString(
-            string: "Login",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
-        loginTF.attributedPlaceholder = placeholderText
-        
-        // создаем отступ от левого края textField
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 40))
-        loginTF.leftView = leftView
-        loginTF.leftViewMode = .always
-        
-        
+        var loginTF = setupCustomTextField(with: "Login")
         return loginTF
     }()
     
-    // MARK: - Password Properties
-    lazy var passwordLabel: UILabel = {
-        var passwordLabel = UILabel()
-        passwordLabel.text = "Password"
-        passwordLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
-        passwordLabel.font = UIFont.systemFont(ofSize: 14)
-        return passwordLabel
-    }()
-    
-    lazy var passwordTextField: UITextField = {
-        var passwordTF = UITextField()
-        passwordTF.placeholder = "Password"
-        return passwordTF
-    }()
-    
-    lazy var eyeButton: UIButton = {
-        var eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-        eyeButton.tintColor = #colorLiteral(red: 0.6980392337, green: 0.6980391741, blue: 0.6980391741, alpha: 1)
-        eyeButton.addTarget(
-            self,
-            action: #selector(togglePasswordVisibility),
-            for: .touchUpInside
-        )
-        return eyeButton
-    }()
-    
-    lazy var rightViewForTF: UIView = {
+    lazy var rightViewForLoginTF: UIView = {
         var rightViewForTF = UIView()
         
         rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         return rightViewForTF
     }()
-
+    
+    // MARK: - Password Properties
+    private lazy var passwordPropertieView: UIView = {
+        var passwordPropView = UIView()
+        return passwordPropView
+    }()
+    
+    lazy var passwordLabel: UILabel = {
+        var passwordLabel = setupCustomLabel(with: "Password")
+        return passwordLabel
+    }()
+    
+    lazy var passwordTextField: UITextField = {
+        var passwordTF = setupCustomTextField(with: "Password")
+        return passwordTF
+    }()
+    
+    lazy var rightViewForPassworTF: UIView = {
+        var rightViewForTF = UIView()
+        
+        rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
+        return rightViewForTF
+    }()
+    
+    lazy var eyeLoginButton: UIButton = {
+       var eyeLoginButton = createEyeButton()
+        return eyeLoginButton
+    }()
+    
+    lazy var eyePasswordButton: UIButton = {
+        var eyePassButton = createEyeButton()
+        return eyePassButton
+    }()
+    
     // MARK: -  Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        self.addSubview(loginPropertieView)
-        self.addSubview(loginTextField)
+        addViews()
         
-        rightViewForTF.addSubview(eyeButton)
-        loginTextField.rightView = rightViewForTF
+        loginTextField.rightView = rightViewForLoginTF
         loginTextField.rightViewMode = .always
-        eyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
         
         setupConstraints()
     }
@@ -111,16 +91,25 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private Actions
-    @objc func togglePasswordVisibility() {
-
-        loginTextField.isSecureTextEntry.toggle()
-           let image = loginTextField.isSecureTextEntry
-           ? UIImage(systemName: "eye.slash.fill")
-           : UIImage(systemName: "eye.fill")
-           eyeButton.setImage(image, for: .normal)
-       }
+    @objc func toggleTextVisibility(_ sender: UIButton) {
+        if let textFIeld = sender.superview?.superview as? UITextField {
+            textFIeld.isSecureTextEntry.toggle()
+            let image = loginTextField.isSecureTextEntry
+            ? UIImage(systemName: "eye.slash.fill")
+            : UIImage(systemName: "eye.fill")
+            sender.setImage(image, for: .normal)
+        }
+    }
     
     // MARK: - Private Methods
+    private func addViews() {
+        self.addSubview(loginPropertieView)
+        
+        loginPropertieView.addSubview(loginLabel)
+        loginPropertieView.addSubview(loginTextField)
+        
+        rightViewForLoginTF.addSubview(eyeLoginButton)
+    }
     private func setupConstraints() {
         //        mainStackView.snp.makeConstraints { make in
         //            make.top.equalToSuperview().offset(140)
@@ -129,18 +118,68 @@ final class LoginView: UIView {
         //            make.height.equalTo(180)
         //        }
         //
-        //        loginPropertieView.snp.makeConstraints { make in
-        //            make.height.equalTo(100)
-        //            make.left.equalToSuperview().offset(16)
-        //            make.right.equalToSuperview().offset(-16)
-        //            make.top.equalToSuperview().offset(140)
-        //        }
-        loginTextField.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(200)
+        loginPropertieView.snp.makeConstraints { make in
+            make.height.equalTo(70)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.height.equalTo(50)
+            make.top.equalToSuperview().offset(140)
         }
-
+        
+        loginLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+        }
+        
+        loginTextField.snp.makeConstraints { make in
+            make.top.equalTo(loginLabel.snp.bottom).offset(5)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
+    
+    // MARK: - Create UI Methods
+    private func setupCustomLabel(with text: String) -> UILabel {
+        let customLabel = UILabel()
+        customLabel.text = text
+        customLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
+        customLabel.font = UIFont.systemFont(ofSize: 16)
+        return customLabel
+    }
+    
+    private func setupCustomTextField(with placeholder: String) -> UITextField {
+        var customTF = UITextField()
+        customTF.layer.cornerRadius = 13
+        customTF.layer.borderColor = UIColor.systemGray5.cgColor
+        customTF.layer.borderWidth = 1
+        customTF.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
+        customTF.isSecureTextEntry = false
+        
+        // устанавливаем цвет текста в placeholder
+        let placeholderText = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        customTF.attributedPlaceholder = placeholderText
+        
+        // создаем отступ от левого края textField
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 40))
+        customTF.leftView = leftView
+        customTF.leftViewMode = .always
+        
+        return customTF
+    }
+    
+    private func createEyeButton() -> UIButton {
+        let bustomEyeButton = UIButton(type: .custom)
+        bustomEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        bustomEyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
+        bustomEyeButton.tintColor = #colorLiteral(red: 0.6980392337, green: 0.6980391741, blue: 0.6980391741, alpha: 1)
+        bustomEyeButton.addTarget(
+            self,
+            action: #selector(toggleTextVisibility),
+            for: .touchUpInside
+        )
+        return bustomEyeButton
     }
 }
