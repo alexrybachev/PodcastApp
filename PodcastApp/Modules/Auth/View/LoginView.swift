@@ -65,6 +65,17 @@ final class LoginView: UIView {
         return eyePassButton
     }()
     
+    // MARK: - Button Properties
+    lazy var loginButton: UIButton = {
+        var logButton = UIButton(type: .system)
+        logButton.setTitle("Log In", for: .normal)
+        logButton.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+        logButton.layer.cornerRadius = 30
+        logButton.tintColor = .white
+        logButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        return logButton
+    }()
+    
     // MARK: -  Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,6 +110,7 @@ final class LoginView: UIView {
     private func addViews() {
         self.addSubview(loginPropertieView)
         self.addSubview(passwordPropertieView)
+        self.addSubview(loginButton)
         
         loginPropertieView.addSubview(loginLabel)
         loginPropertieView.addSubview(loginTextField)
@@ -122,7 +134,7 @@ final class LoginView: UIView {
             make.height.equalTo(70)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.top.equalTo(loginPropertieView.snp.bottom).offset(10)
+            make.top.equalTo(loginPropertieView.snp.bottom).offset(12)
         }
         
         loginLabel.snp.makeConstraints { make in
@@ -148,6 +160,13 @@ final class LoginView: UIView {
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordPropertieView.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.height.equalTo(57)
+        }
     }
     
     // MARK: - Create UI Methods
@@ -160,7 +179,7 @@ final class LoginView: UIView {
     }
     
     private func setupCustomTextField(with placeholder: String) -> UITextField {
-        var customTF = UITextField()
+        let customTF = UITextField()
         customTF.layer.cornerRadius = 13
         customTF.layer.borderColor = UIColor.systemGray5.cgColor
         customTF.layer.borderWidth = 1
