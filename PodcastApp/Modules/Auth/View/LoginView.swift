@@ -15,24 +15,25 @@ final class LoginView: UIView {
         return loginPropertieView
     }()
     
-    lazy var loginLabel: UILabel = {
-        var loginLabel = setupCustomLabel(with: "Enter Login")
+    private lazy var loginLabel: UILabel = {
+        var loginLabel = setupCustomLabel(text: "Enter Login", fontSize: 16)
         return loginLabel
     }()
     
     lazy var loginTextField: UITextField = {
         var loginTF = setupCustomTextField(with: "Login")
+        loginTF.rightView = rightViewForLoginTF
+        loginTF.rightViewMode = .always
         return loginTF
     }()
     
-    lazy var rightViewForLoginTF: UIView = {
+    private lazy var rightViewForLoginTF: UIView = {
         var rightViewForTF = UIView()
-        
         rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         return rightViewForTF
     }()
     
-    lazy var eyeLoginButton: UIButton = {
+    private lazy var eyeLoginButton: UIButton = {
         var eyeLoginButton = createEyeButton()
         return eyeLoginButton
     }()
@@ -43,30 +44,32 @@ final class LoginView: UIView {
         return passwordPropView
     }()
     
-    lazy var passwordLabel: UILabel = {
-        var passwordLabel = setupCustomLabel(with: "Password")
+    private lazy var passwordLabel: UILabel = {
+        var passwordLabel = setupCustomLabel(text: "Password", fontSize: 16)
         return passwordLabel
     }()
     
     lazy var passwordTextField: UITextField = {
         var passwordTF = setupCustomTextField(with: "Password")
+        passwordTF.rightView = rightViewForPassworTF
+        passwordTF.rightViewMode = .always
         return passwordTF
     }()
     
-    lazy var rightViewForPassworTF: UIView = {
+    private lazy var rightViewForPassworTF: UIView = {
         var rightViewForTF = UIView()
         
         rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         return rightViewForTF
     }()
     
-    lazy var eyePasswordButton: UIButton = {
+    private lazy var eyePasswordButton: UIButton = {
         var eyePassButton = createEyeButton()
         return eyePassButton
     }()
     
     // MARK: - Button Properties
-    lazy var loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         var logButton = UIButton(type: .system)
         logButton.setTitle("Log In", for: .normal)
         logButton.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
@@ -76,7 +79,7 @@ final class LoginView: UIView {
         return logButton
     }()
     
-    lazy var googleButton: UIButton = {
+    private lazy var googleButton: UIButton = {
         var googleButton = UIButton(type: .custom)
         googleButton.layer.borderColor = UIColor.black.cgColor
         googleButton.layer.borderWidth = 1
@@ -109,12 +112,20 @@ final class LoginView: UIView {
             make.centerY.equalTo(googleButton.snp.centerY)
         }
         
-        googleButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        googleButton.addTarget(self, action: #selector(buttonReleased), for: .touchDown)
+        googleButton.addTarget(
+            self,
+            action: #selector(buttonPressed),
+            for: .touchUpInside
+        )
+        googleButton.addTarget(
+            self,
+            action: #selector(buttonReleased),
+            for: .touchDown
+        )
         return googleButton
     }()
     
-    lazy var registerButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         var registerButton = UIButton(type: .system)
         registerButton.setTitle("Register", for: .normal)
         registerButton.tintColor = #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
@@ -123,35 +134,32 @@ final class LoginView: UIView {
     }()
     
     // MARK: - Other Properties
-    lazy var continueLabel: UILabel = {
-        var contLabel = UILabel()
-        contLabel.text = "Or continue with"
-        contLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-        contLabel.font = UIFont.systemFont(ofSize: 14)
+    private lazy var continueLabel: UILabel = {
+        var contLabel = setupCustomLabel(text: "Or cintinue with", fontSize: 14)
         return contLabel
     }()
     
-    lazy var leftLineView: UIView = {
+    private lazy var leftLineView: UIView = {
         var leftView = UIView()
         leftView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
         return leftView
     }()
     
-    lazy var rightLineView: UIView = {
+    private lazy var rightLineView: UIView = {
         var rightView = UIView()
         rightView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
         return rightView
     }()
     
-    lazy var noAccauntLabel: UILabel = {
-        var accLabel = UILabel()
-        accLabel.text = "Don't have an account yet?"
-        accLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
-        accLabel.font = UIFont.systemFont(ofSize: 13)
+    private lazy var noAccauntLabel: UILabel = {
+        var accLabel = setupCustomLabel(
+            text: "Don't have an account yet?",
+            fontSize: 13
+        )
         return accLabel
     }()
     
-    lazy var registerView: UIView = {
+    private lazy var registerView: UIView = {
         var registerView = UIView()
         return registerView
     }()
@@ -161,13 +169,6 @@ final class LoginView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         addViews()
-        
-        loginTextField.rightView = rightViewForLoginTF
-        loginTextField.rightViewMode = .always
-        
-        passwordTextField.rightView = rightViewForPassworTF
-        passwordTextField.rightViewMode = .always
-        
         setupConstraints()
     }
     
@@ -192,7 +193,7 @@ final class LoginView: UIView {
             self.googleButton.alpha = 1.0 // Уменьшаем прозрачность при нажатии
         })
     }
-
+    
     @objc func buttonReleased() {
         UIView.animate(withDuration: 0.1, animations: {
             self.googleButton.alpha = 0.5 // Устанавливаем обратно исходную прозрачность при отпускании
@@ -212,8 +213,6 @@ final class LoginView: UIView {
         
         registerView.addSubview(noAccauntLabel)
         registerView.addSubview(registerButton)
-//        self.addSubview(noAccauntLabel)
-//        self.addSubview(registerButton)
         
         loginPropertieView.addSubview(loginLabel)
         loginPropertieView.addSubview(loginTextField)
@@ -315,11 +314,11 @@ final class LoginView: UIView {
     }
     
     // MARK: - Create UI Methods
-    private func setupCustomLabel(with text: String) -> UILabel {
+    private func setupCustomLabel(text: String, fontSize: Int) -> UILabel {
         let customLabel = UILabel()
         customLabel.text = text
         customLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
-        customLabel.font = UIFont.systemFont(ofSize: 16)
+        customLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
         return customLabel
     }
     
