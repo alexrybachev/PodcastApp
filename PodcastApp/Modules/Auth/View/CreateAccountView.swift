@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateAccauntView: UIView {
+final class CreateAccountView: UIView {
     
     // MARK: - UI Properties
     private lazy var mainView: UIView = {
@@ -34,7 +34,7 @@ final class CreateAccauntView: UIView {
     
     lazy var emailTextField: UITextField = {
         let customTF = UITextField()
-            .createCustomTextField(placeholder: "Enter you email address")
+            .createCustomTextField(placeholder: "Enter your email address")
         customTF.layer.cornerRadius = 20
         customTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
         return customTF
@@ -103,13 +103,15 @@ final class CreateAccauntView: UIView {
     // методы для нажатия на кнопку googleButton
     @objc func buttonPressed() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.googleButton.alpha = 1.0 // Уменьшаем прозрачность при нажатии
+            // Уменьшаем прозрачность при нажатии
+            self.googleButton.alpha = 1.0
         })
     }
     
     @objc func buttonReleased() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.googleButton.alpha = 0.5 // Устанавливаем обратно исходную прозрачность при отпускании
+            // Устанавливаем обратно исходную прозрачность при отпускании
+            self.googleButton.alpha = 0.5
         })
     }
     

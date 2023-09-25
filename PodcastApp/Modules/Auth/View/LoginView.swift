@@ -10,7 +10,7 @@ import UIKit
 final class LoginView: UIView {
     
     // MARK: - Login Properties
-    private lazy var loginPropertieView: UIView = {
+    private lazy var loginContrainterView: UIView = {
         var loginPropertieView = UIView()
         return loginPropertieView
     }()
@@ -28,18 +28,12 @@ final class LoginView: UIView {
     }()
     
     private lazy var rightViewForLoginTF: UIView = {
-        var rightViewForTF = UIView()
-        rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
+        var rightViewForTF = createRightViewForTF()
         return rightViewForTF
     }()
     
-    private lazy var eyeLoginButton: UIButton = {
-        var eyeLoginButton = createEyeButton()
-        return eyeLoginButton
-    }()
-    
     // MARK: - Password Properties
-    private lazy var passwordPropertieView: UIView = {
+    private lazy var passwordContrainterView: UIView = {
         var passwordPropView = UIView()
         return passwordPropView
     }()
@@ -57,15 +51,8 @@ final class LoginView: UIView {
     }()
     
     private lazy var rightViewForPassworTF: UIView = {
-        var rightViewForTF = UIView()
-        
-        rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
+        var rightViewForTF = createRightViewForTF()
         return rightViewForTF
-    }()
-    
-    private lazy var eyePasswordButton: UIButton = {
-        var eyePassButton = createEyeButton()
-        return eyePassButton
     }()
     
     // MARK: - Button Properties
@@ -143,20 +130,22 @@ final class LoginView: UIView {
     // методы для нажатия на кнопку googleButton
     @objc func buttonPressed() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.googleButton.alpha = 1.0 // Уменьшаем прозрачность при нажатии
+            // Уменьшаем прозрачность при нажатии
+            self.googleButton.alpha = 1.0
         })
     }
     
     @objc func buttonReleased() {
         UIView.animate(withDuration: 0.1, animations: {
-            self.googleButton.alpha = 0.5 // Устанавливаем обратно исходную прозрачность при отпускании
+            // Устанавливаем обратно исходную прозрачность при отпускании
+            self.googleButton.alpha = 0.5
         })
     }
     
     // MARK: - Private Methods
     private func addViews() {
-        self.addSubview(loginPropertieView)
-        self.addSubview(passwordPropertieView)
+        self.addSubview(loginContrainterView)
+        self.addSubview(passwordContrainterView)
         self.addSubview(loginButton)
         self.addSubview(continueView)
         self.addSubview(googleButton)
@@ -165,29 +154,26 @@ final class LoginView: UIView {
         registerView.addSubview(noAccauntLabel)
         registerView.addSubview(registerButton)
         
-        loginPropertieView.addSubview(loginLabel)
-        loginPropertieView.addSubview(loginTextField)
+        loginContrainterView.addSubview(loginLabel)
+        loginContrainterView.addSubview(loginTextField)
         
-        passwordPropertieView.addSubview(passwordLabel)
-        passwordPropertieView.addSubview(passwordTextField)
-        
-        rightViewForLoginTF.addSubview(eyeLoginButton)
-        rightViewForPassworTF.addSubview(eyePasswordButton)
+        passwordContrainterView.addSubview(passwordLabel)
+        passwordContrainterView.addSubview(passwordTextField)
     }
     
     private func setupConstraints() {
-        loginPropertieView.snp.makeConstraints { make in
+        loginContrainterView.snp.makeConstraints { make in
             make.height.equalTo(70)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(120)
         }
         
-        passwordPropertieView.snp.makeConstraints { make in
+        passwordContrainterView.snp.makeConstraints { make in
             make.height.equalTo(70)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.top.equalTo(loginPropertieView.snp.bottom).offset(12)
+            make.top.equalTo(loginContrainterView.snp.bottom).offset(12)
         }
         
         loginLabel.snp.makeConstraints { make in
@@ -215,7 +201,7 @@ final class LoginView: UIView {
         }
         
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordPropertieView.snp.bottom).offset(24)
+            make.top.equalTo(passwordContrainterView.snp.bottom).offset(24)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.height.equalTo(57)
@@ -262,13 +248,24 @@ final class LoginView: UIView {
     }
     
     private func setupCustomTextField(with placeholder: String) -> UITextField {
-        let customTF = UITextField().createCustomTextField(placeholder: placeholder)
+        let customTF = UITextField()
+            .createCustomTextField(placeholder: placeholder)
         customTF.layer.cornerRadius = 13
         customTF.layer.borderColor = UIColor.systemGray5.cgColor
         customTF.layer.borderWidth = 1
         customTF.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
         customTF.isSecureTextEntry = false
         return customTF
+    }
+    
+    private func createRightViewForTF() -> UIView {
+        var rightView = UIView()
+        rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
+        
+        let eyeButton = createEyeButton()
+        rightView.addSubview(eyeButton)
+        
+        return rightView
     }
     
     private func createEyeButton() -> UIButton {

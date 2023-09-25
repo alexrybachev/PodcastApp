@@ -26,7 +26,7 @@
 		0A125D492AC0D2BD0006EACA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D482AC0D2BD0006EACA /* RealmSwift */; };
 		3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */; };
 		3C74A4CF2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4CE2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift */; };
-		3C74A4D12AC1CE5B00CDEEAA /* CreateAccauntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D02AC1CE5B00CDEEAA /* CreateAccauntView.swift */; };
+		3C74A4D12AC1CE5B00CDEEAA /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */; };
 		3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */; };
 		3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */; };
 		3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */; };
@@ -50,7 +50,7 @@
 		0A125D3D2AC0CAB90006EACA /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3C74A4CE2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccauntViewController.swift; sourceTree = "<group>"; };
-		3C74A4D02AC1CE5B00CDEEAA /* CreateAccauntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccauntView.swift; sourceTree = "<group>"; };
+		3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -397,7 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */,
-				3C74A4D02AC1CE5B00CDEEAA /* CreateAccauntView.swift */,
+				3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 				3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
-				3C74A4D12AC1CE5B00CDEEAA /* CreateAccauntView.swift in Sources */,
+				3C74A4D12AC1CE5B00CDEEAA /* CreateAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@ import UIKit
 final class CreateAccauntViewController: UIViewController {
     
     // MARK: - Private Properties
-    private let createAccView = CreateAccauntView()
+    private let createAccView = CreateAccountView()
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
