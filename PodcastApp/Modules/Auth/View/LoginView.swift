@@ -114,6 +114,14 @@ final class LoginView: UIView {
         return googleButton
     }()
     
+    lazy var registerButton: UIButton = {
+        var registerButton = UIButton(type: .system)
+        registerButton.setTitle("Register", for: .normal)
+        registerButton.tintColor = #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        return registerButton
+    }()
+    
     // MARK: - Other Properties
     lazy var continueLabel: UILabel = {
         var contLabel = UILabel()
@@ -133,6 +141,19 @@ final class LoginView: UIView {
         var rightView = UIView()
         rightView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
         return rightView
+    }()
+    
+    lazy var noAccauntLabel: UILabel = {
+        var accLabel = UILabel()
+        accLabel.text = "Don't have an account yet?"
+        accLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
+        accLabel.font = UIFont.systemFont(ofSize: 13)
+        return accLabel
+    }()
+    
+    lazy var registerView: UIView = {
+        var registerView = UIView()
+        return registerView
     }()
     
     // MARK: -  Init
@@ -187,6 +208,12 @@ final class LoginView: UIView {
         self.addSubview(leftLineView)
         self.addSubview(rightLineView)
         self.addSubview(googleButton)
+        self.addSubview(registerView)
+        
+        registerView.addSubview(noAccauntLabel)
+        registerView.addSubview(registerButton)
+//        self.addSubview(noAccauntLabel)
+//        self.addSubview(registerButton)
         
         loginPropertieView.addSubview(loginLabel)
         loginPropertieView.addSubview(loginTextField)
@@ -203,7 +230,7 @@ final class LoginView: UIView {
             make.height.equalTo(70)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(140)
+            make.top.equalToSuperview().offset(120)
         }
         
         passwordPropertieView.snp.makeConstraints { make in
@@ -268,6 +295,22 @@ final class LoginView: UIView {
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)
+        }
+        
+        registerView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-50)
+            make.height.equalTo(20)
+            make.width.equalTo(220)
+        }
+        
+        noAccauntLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+        }
+        
+        registerButton.snp.makeConstraints { make in
+            make.left.equalTo(noAccauntLabel.snp.right).offset(2)
+            make.height.equalTo(noAccauntLabel.snp.height)
         }
     }
     
