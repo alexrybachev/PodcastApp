@@ -6,11 +6,26 @@
 //
 
 import UIKit
+import SnapKit
 
-class AuthViewController: UIViewController {
-
+final class AuthViewController: UIViewController {
+    
+    // MARK: - Private Properties
+    private let loginView = LoginView()
+    
+    // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(loginView)
+        setupConcstaints()
     }
-
+    
+    // MARK: - Private Actions
+    
+    // MARK: - Private Methods
+    private func setupConcstaints() {
+        loginView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 }
