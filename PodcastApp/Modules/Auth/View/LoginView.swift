@@ -216,7 +216,7 @@ final class LoginView: UIView {
         }
         
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(continueView.snp.bottom).offset(60)
+            make.top.equalTo(continueView.snp.bottom).offset(45)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)
