@@ -9,15 +9,6 @@ import UIKit
 
 final class LoginView: UIView {
     
-    // MARK: - Main StackView
-    private lazy var mainStackView: UIStackView = {
-        var mainStackView = UIStackView()
-        mainStackView.backgroundColor = .green
-        mainStackView.axis = .vertical
-        mainStackView.distribution = .fillEqually
-        return mainStackView
-    }()
-    
     // MARK: - Login Properties
     private lazy var loginPropertieView: UIView = {
         var loginPropertieView = UIView()
@@ -39,6 +30,11 @@ final class LoginView: UIView {
         
         rightViewForTF.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         return rightViewForTF
+    }()
+    
+    lazy var eyeLoginButton: UIButton = {
+        var eyeLoginButton = createEyeButton()
+        return eyeLoginButton
     }()
     
     // MARK: - Password Properties
@@ -64,11 +60,6 @@ final class LoginView: UIView {
         return rightViewForTF
     }()
     
-    lazy var eyeLoginButton: UIButton = {
-       var eyeLoginButton = createEyeButton()
-        return eyeLoginButton
-    }()
-    
     lazy var eyePasswordButton: UIButton = {
         var eyePassButton = createEyeButton()
         return eyePassButton
@@ -83,6 +74,9 @@ final class LoginView: UIView {
         loginTextField.rightView = rightViewForLoginTF
         loginTextField.rightViewMode = .always
         
+        passwordTextField.rightView = rightViewForPassworTF
+        passwordTextField.rightViewMode = .always
+        
         setupConstraints()
     }
     
@@ -92,9 +86,9 @@ final class LoginView: UIView {
     
     // MARK: - Private Actions
     @objc func toggleTextVisibility(_ sender: UIButton) {
-        if let textFIeld = sender.superview?.superview as? UITextField {
-            textFIeld.isSecureTextEntry.toggle()
-            let image = loginTextField.isSecureTextEntry
+        if let textField = sender.superview?.superview as? UITextField {
+            textField.isSecureTextEntry.toggle()
+            let image = textField.isSecureTextEntry
             ? UIImage(systemName: "eye.slash.fill")
             : UIImage(systemName: "eye.fill")
             sender.setImage(image, for: .normal)
@@ -104,25 +98,31 @@ final class LoginView: UIView {
     // MARK: - Private Methods
     private func addViews() {
         self.addSubview(loginPropertieView)
+        self.addSubview(passwordPropertieView)
         
         loginPropertieView.addSubview(loginLabel)
         loginPropertieView.addSubview(loginTextField)
         
+        passwordPropertieView.addSubview(passwordLabel)
+        passwordPropertieView.addSubview(passwordTextField)
+        
         rightViewForLoginTF.addSubview(eyeLoginButton)
+        rightViewForPassworTF.addSubview(eyePasswordButton)
     }
+    
     private func setupConstraints() {
-        //        mainStackView.snp.makeConstraints { make in
-        //            make.top.equalToSuperview().offset(140)
-        //            make.left.equalToSuperview().offset(16)
-        //            make.right.equalToSuperview().offset(-16)
-        //            make.height.equalTo(180)
-        //        }
-        //
         loginPropertieView.snp.makeConstraints { make in
             make.height.equalTo(70)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(140)
+        }
+        
+        passwordPropertieView.snp.makeConstraints { make in
+            make.height.equalTo(70)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.top.equalTo(loginPropertieView.snp.bottom).offset(10)
         }
         
         loginLabel.snp.makeConstraints { make in
@@ -132,6 +132,18 @@ final class LoginView: UIView {
         
         loginTextField.snp.makeConstraints { make in
             make.top.equalTo(loginLabel.snp.bottom).offset(5)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        passwordLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordLabel.snp.bottom).offset(5)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
