@@ -9,7 +9,21 @@ import Foundation
 import UIKit
 
 extension UITextField {
-//    func createCustomTextField() -> UITextField {
-//        
-//    }
+    func createCustomTextField(placeholder: String) -> UITextField {
+        let customTF = UITextField()
+
+        // устанавливаем цвет текста в placeholder
+        let placeholderText = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        customTF.attributedPlaceholder = placeholderText
+        
+        // создаем отступ от левого края textField
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 40))
+        customTF.leftView = leftView
+        customTF.leftViewMode = .always
+        
+        return customTF
+    }
 }

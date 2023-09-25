@@ -34,22 +34,9 @@ final class CreateAccauntView: UIView {
     
     lazy var emailTextField: UITextField = {
         let customTF = UITextField()
+            .createCustomTextField(placeholder: "Enter you email address")
         customTF.layer.cornerRadius = 20
         customTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
-        customTF.isSecureTextEntry = false
-        
-        // устанавливаем цвет текста в placeholder
-        let placeholderText = NSAttributedString(
-            string: "Enter you email address",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
-        customTF.attributedPlaceholder = placeholderText
-        
-        // создаем отступ от левого края textField
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 40))
-        customTF.leftView = leftView
-        customTF.leftViewMode = .always
-        
         return customTF
     }()
     
@@ -113,7 +100,6 @@ final class CreateAccauntView: UIView {
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         return registerButton
     }()
-    
     
     // MARK: - Init
     override init(frame: CGRect) {

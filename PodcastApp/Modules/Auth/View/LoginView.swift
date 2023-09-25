@@ -288,25 +288,12 @@ final class LoginView: UIView {
     }
     
     private func setupCustomTextField(with placeholder: String) -> UITextField {
-        let customTF = UITextField()
+        let customTF = UITextField().createCustomTextField(placeholder: placeholder)
         customTF.layer.cornerRadius = 13
         customTF.layer.borderColor = UIColor.systemGray5.cgColor
         customTF.layer.borderWidth = 1
         customTF.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
         customTF.isSecureTextEntry = false
-        
-        // устанавливаем цвет текста в placeholder
-        let placeholderText = NSAttributedString(
-            string: placeholder,
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        )
-        customTF.attributedPlaceholder = placeholderText
-        
-        // создаем отступ от левого края textField
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 40))
-        customTF.leftView = leftView
-        customTF.leftViewMode = .always
-        
         return customTF
     }
     
