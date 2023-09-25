@@ -99,21 +99,9 @@ final class LoginView: UIView {
     }()
     
     // MARK: - Other Properties
-    private lazy var continueLabel: UILabel = {
-        var contLabel = setupCustomLabel(text: "Or continue with", fontSize: 14)
-        return contLabel
-    }()
-    
-    private lazy var leftLineView: UIView = {
-        var leftView = UIView()
-        leftView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-        return leftView
-    }()
-    
-    private lazy var rightLineView: UIView = {
-        var rightView = UIView()
-        rightView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-        return rightView
+    private lazy var continueView: UIView = {
+        var contView = UIView().createCustomView()
+        return contView
     }()
     
     private lazy var noAccauntLabel: UILabel = {
@@ -170,9 +158,7 @@ final class LoginView: UIView {
         self.addSubview(loginPropertieView)
         self.addSubview(passwordPropertieView)
         self.addSubview(loginButton)
-        self.addSubview(continueLabel)
-        self.addSubview(leftLineView)
-        self.addSubview(rightLineView)
+        self.addSubview(continueView)
         self.addSubview(googleButton)
         self.addSubview(registerView)
         
@@ -235,27 +221,15 @@ final class LoginView: UIView {
             make.height.equalTo(57)
         }
         
-        continueLabel.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(50)
+        continueView.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(38)
             make.centerX.equalToSuperview()
-        }
-        
-        leftLineView.snp.makeConstraints { make in
-            make.right.equalTo(continueLabel.snp.left).offset(-10)
-            make.top.equalTo(continueLabel.snp.top).offset(7)
-            make.height.equalTo(1.3)
-            make.width.equalTo(62)
-        }
-        
-        rightLineView.snp.makeConstraints { make in
-            make.left.equalTo(continueLabel.snp.right).offset(10)
-            make.top.equalTo(continueLabel.snp.top).offset(7)
-            make.height.equalTo(1.3)
-            make.width.equalTo(62)
+            make.height.equalTo(30)
+            make.width.equalTo(300)
         }
         
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(continueLabel.snp.bottom).offset(60)
+            make.top.equalTo(continueView.snp.bottom).offset(60)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)

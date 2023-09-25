@@ -11,7 +11,7 @@ import UIKit
 extension UITextField {
     func createCustomTextField(placeholder: String) -> UITextField {
         let customTF = UITextField()
-
+        
         // устанавливаем цвет текста в placeholder
         let placeholderText = NSAttributedString(
             string: placeholder,
