@@ -76,6 +76,27 @@ final class LoginView: UIView {
         return logButton
     }()
     
+    // MARK: - Other Properties
+    lazy var continueLabel: UILabel = {
+        var contLabel = UILabel()
+        contLabel.text = "Or continue with"
+        contLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
+        contLabel.font = UIFont.systemFont(ofSize: 14)
+        return contLabel
+    }()
+    
+    lazy var leftLineView: UIView = {
+        var leftView = UIView()
+        leftView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
+        return leftView
+    }()
+    
+    lazy var rightLineView: UIView = {
+        var rightView = UIView()
+        rightView.backgroundColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
+        return rightView
+    }()
+    
     // MARK: -  Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -111,6 +132,9 @@ final class LoginView: UIView {
         self.addSubview(loginPropertieView)
         self.addSubview(passwordPropertieView)
         self.addSubview(loginButton)
+        self.addSubview(continueLabel)
+        self.addSubview(leftLineView)
+        self.addSubview(rightLineView)
         
         loginPropertieView.addSubview(loginLabel)
         loginPropertieView.addSubview(loginTextField)
@@ -166,6 +190,25 @@ final class LoginView: UIView {
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.height.equalTo(57)
+        }
+        
+        continueLabel.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(45)
+            make.centerX.equalToSuperview()
+        }
+        
+        leftLineView.snp.makeConstraints { make in
+            make.right.equalTo(continueLabel.snp.left).offset(-10)
+            make.top.equalTo(continueLabel.snp.top).offset(7)
+            make.height.equalTo(1.3)
+            make.width.equalTo(62)
+        }
+        
+        rightLineView.snp.makeConstraints { make in
+            make.left.equalTo(continueLabel.snp.right).offset(10)
+            make.top.equalTo(continueLabel.snp.top).offset(7)
+            make.height.equalTo(1.3)
+            make.width.equalTo(62)
         }
     }
     
