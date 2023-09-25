@@ -43,7 +43,6 @@ extension UIButton {
         }
         
         return googleButton
-        
     }
     
     func createDefaultButton(text: String, cornerRadius: Int) -> UIButton {

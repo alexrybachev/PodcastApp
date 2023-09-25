@@ -117,7 +117,8 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private Actions
-    @objc func toggleTextVisibility(_ sender: UIButton) {
+    // метод для скрытия текста в момент печати
+    @objc private func toggleTextVisibility(_ sender: UIButton) {
         if let textField = sender.superview?.superview as? UITextField {
             textField.isSecureTextEntry.toggle()
             let image = textField.isSecureTextEntry
@@ -127,15 +128,15 @@ final class LoginView: UIView {
         }
     }
     
-    // методы для нажатия на кнопку googleButton
-    @objc func buttonPressed() {
+    // методы для эффекта нажатия на кнопку googleButton
+    @objc private func buttonPressed() {
         UIView.animate(withDuration: 0.1, animations: {
             // Уменьшаем прозрачность при нажатии
             self.googleButton.alpha = 1.0
         })
     }
     
-    @objc func buttonReleased() {
+    @objc private func buttonReleased() {
         UIView.animate(withDuration: 0.1, animations: {
             // Устанавливаем обратно исходную прозрачность при отпускании
             self.googleButton.alpha = 0.5
@@ -239,6 +240,7 @@ final class LoginView: UIView {
     }
     
     // MARK: - Create UI Methods
+    // метод для создания label
     private func setupCustomLabel(text: String, fontSize: Int) -> UILabel {
         let customLabel = UILabel()
         customLabel.text = text
@@ -247,6 +249,7 @@ final class LoginView: UIView {
         return customLabel
     }
     
+    // метод для создания textField
     private func setupCustomTextField(with placeholder: String) -> UITextField {
         let customTF = UITextField()
             .createCustomTextField(placeholder: placeholder)
@@ -258,8 +261,12 @@ final class LoginView: UIView {
         return customTF
     }
     
+    /*
+     Метот для создания view которое помещаемся справа в textField, чтобы сделать
+     отступ
+     */
     private func createRightViewForTF() -> UIView {
-        var rightView = UIView()
+        let rightView = UIView()
         rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         
         let eyeButton = createEyeButton()
@@ -268,6 +275,7 @@ final class LoginView: UIView {
         return rightView
     }
     
+    // метод для создания кнопки глаза для textField
     private func createEyeButton() -> UIButton {
         let bustomEyeButton = UIButton(type: .custom)
         bustomEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)

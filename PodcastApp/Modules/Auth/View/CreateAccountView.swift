@@ -32,7 +32,7 @@ final class CreateAccountView: UIView {
         return emailLabel
     }()
     
-    lazy var emailTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         let customTF = UITextField()
             .createCustomTextField(placeholder: "Enter your email address")
         customTF.layer.cornerRadius = 20
@@ -40,13 +40,13 @@ final class CreateAccountView: UIView {
         return customTF
     }()
     
-    lazy var continueButton: UIButton = {
+    private lazy var continueButton: UIButton = {
         var contButton = UIButton(type: .system)
             .createDefaultButton(text: "Continue with Email", cornerRadius: 25)
         return contButton
     }()
     
-    lazy var googleButton: UIButton = {
+    private lazy var googleButton: UIButton = {
         var googleButton = UIButton().createGoogleButton()
         googleButton.addTarget(
             self,
@@ -101,14 +101,14 @@ final class CreateAccountView: UIView {
     
     // MARK: - Private Actions
     // методы для нажатия на кнопку googleButton
-    @objc func buttonPressed() {
+    @objc private func buttonPressed() {
         UIView.animate(withDuration: 0.1, animations: {
             // Уменьшаем прозрачность при нажатии
             self.googleButton.alpha = 1.0
         })
     }
     
-    @objc func buttonReleased() {
+    @objc private func buttonReleased() {
         UIView.animate(withDuration: 0.1, animations: {
             // Устанавливаем обратно исходную прозрачность при отпускании
             self.googleButton.alpha = 0.5
