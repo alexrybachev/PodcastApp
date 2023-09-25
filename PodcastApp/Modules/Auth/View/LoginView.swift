@@ -71,47 +71,12 @@ final class LoginView: UIView {
     // MARK: - Button Properties
     private lazy var loginButton: UIButton = {
         var logButton = UIButton(type: .system)
-        logButton.setTitle("Log In", for: .normal)
-        logButton.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
-        logButton.layer.cornerRadius = 24
-        logButton.tintColor = .white
-        logButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            .createDefaultButton(text: "Log In", cornerRadius: 24)
         return logButton
     }()
     
     private lazy var googleButton: UIButton = {
-        var googleButton = UIButton(type: .custom)
-        googleButton.layer.borderColor = UIColor.black.cgColor
-        googleButton.layer.borderWidth = 1
-        googleButton.layer.cornerRadius = 24
-        
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "google")
-        imageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        imageView.contentMode = .scaleAspectFit
-        
-        let label = UILabel()
-        label.text = "Continue with Google"
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        
-        googleButton.addSubview(imageView)
-        googleButton.addSubview(label)
-        
-        imageView.snp.makeConstraints { make in
-            make.right.equalTo(label.snp.left).offset(-10)
-            make.centerY.equalTo(googleButton.snp.centerY)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
-        }
-        
-        label.snp.makeConstraints { make in
-            make.leading.equalTo(imageView.snp.trailing).offset(10)
-            make.trailing.equalTo(googleButton.snp.trailing).offset(-60)
-            make.centerY.equalTo(googleButton.snp.centerY)
-        }
-        
+        var googleButton = UIButton().createGoogleButton()
         googleButton.addTarget(
             self,
             action: #selector(buttonPressed),
@@ -135,7 +100,7 @@ final class LoginView: UIView {
     
     // MARK: - Other Properties
     private lazy var continueLabel: UILabel = {
-        var contLabel = setupCustomLabel(text: "Or cintinue with", fontSize: 14)
+        var contLabel = setupCustomLabel(text: "Or continue with", fontSize: 14)
         return contLabel
     }()
     

@@ -25,6 +25,10 @@
 		0A125D472AC0D2BD0006EACA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D462AC0D2BD0006EACA /* Realm */; };
 		0A125D492AC0D2BD0006EACA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D482AC0D2BD0006EACA /* RealmSwift */; };
 		3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */; };
+		3C74A4CF2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4CE2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift */; };
+		3C74A4D12AC1CE5B00CDEEAA /* CreateAccauntView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D02AC1CE5B00CDEEAA /* CreateAccauntView.swift */; };
+		3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */; };
+		3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,10 @@
 		0A125D3A2AC0CA230006EACA /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0A125D3D2AC0CAB90006EACA /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3C74A4CE2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccauntViewController.swift; sourceTree = "<group>"; };
+		3C74A4D02AC1CE5B00CDEEAA /* CreateAccauntView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccauntView.swift; sourceTree = "<group>"; };
+		3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +173,8 @@
 		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */,
+				3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */,
 				0A125D382AC0CA230006EACA /* Model */,
 				0A125D3B2AC0CA230006EACA /* View */,
 				0A125D392AC0CA230006EACA /* Controller */,
@@ -375,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				0A125D3A2AC0CA230006EACA /* AuthViewController.swift */,
+				3C74A4CE2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -383,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */,
+				3C74A4D02AC1CE5B00CDEEAA /* CreateAccauntView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -469,8 +481,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
+				3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */,
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
+				3C74A4CF2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
 				0A125D332AC0CA0A0006EACA /* SearchViewController.swift in Sources */,
@@ -480,6 +495,7 @@
 				3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
+				3C74A4D12AC1CE5B00CDEEAA /* CreateAccauntView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
