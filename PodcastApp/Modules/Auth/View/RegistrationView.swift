@@ -48,6 +48,7 @@ final class RegistrationView: UIView {
             text: "Enter your password",
             fontSize: UIFont.systemFont(ofSize: 14)
         )
+        
         return passwordLabel
     }()
     
@@ -89,6 +90,18 @@ final class RegistrationView: UIView {
             placeholder: "Enter your password"
         )
         setupTextField(passwordTF)
+        passwordTF.isSecureTextEntry = true
+        passwordTF.rightView = UIView.createViewForTF()
+        passwordTF.rightViewMode = .always
+        
+        let eyeButton = UIButton.createEyeButton()
+        eyeButton.addTarget(
+            self,
+            action: #selector(toggleTextVisibility),
+            for: .touchUpInside
+        )
+        eyeButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        passwordTF.rightView?.addSubview(eyeButton)
         return passwordTF
     }()
     
@@ -97,6 +110,19 @@ final class RegistrationView: UIView {
             placeholder: "Enter your password"
         )
         setupTextField(confirmPasswordTF)
+        confirmPasswordTF.isSecureTextEntry = true
+        confirmPasswordTF.rightView = UIView.createViewForTF()
+        confirmPasswordTF.rightViewMode = .always
+        
+        let eyeButton = UIButton.createEyeButton()
+        eyeButton.addTarget(
+            self,
+            action: #selector(toggleTextVisibility),
+            for: .touchUpInside
+        )
+        eyeButton.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        
+        confirmPasswordTF.rightView?.addSubview(eyeButton)
         return confirmPasswordTF
     }()
     
@@ -112,8 +138,18 @@ final class RegistrationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private Methods
+    // MARK: - Private Actions
+    @objc private func toggleTextVisibility(_ sender: UIButton) {
+        if let textField = sender.superview?.superview as? UITextField {
+            textField.isSecureTextEntry.toggle()
+            let image = textField.isSecureTextEntry
+            ? UIImage(systemName: "eye.slash.fill")
+            : UIImage(systemName: "eye.fill")
+            sender.setImage(image, for: .normal)
+        }
+    }
     
+    // MARK: - Private Methods
     private func addViews() {
         self.addSubview(welcomeLabel)
         self.addSubview(firstNameLabel)
