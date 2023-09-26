@@ -35,16 +35,16 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var emailTextField: UITextField = {
-        let customTF = UITextField
-            .createCustomTextField(placeholder: "Enter your email address")
+        let customTF = UITextField.createCustomTextField(
+            placeholder: "Enter your email address"
+        )
         customTF.layer.cornerRadius = 20
         customTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
         return customTF
     }()
     
     private lazy var continueButton: UIButton = {
-        var contButton = UIButton
-            .createDefaultButton(text: "Continue with Email", cornerRadius: 25)
+        var contButton = UIButton.createDefaultButton(text: "Continue with Email")
         return contButton
     }()
     

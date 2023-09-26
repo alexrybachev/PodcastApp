@@ -53,11 +53,11 @@ extension UIButton {
         return registerButton
     }
     
-    static func createDefaultButton(text: String, cornerRadius: Int) -> UIButton {
+    static func createDefaultButton(text: String) -> UIButton {
         let logButton = UIButton(type: .system)
         logButton.setTitle(text, for: .normal)
         logButton.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
-        logButton.layer.cornerRadius = CGFloat(cornerRadius)
+        logButton.layer.cornerRadius = 25
         logButton.tintColor = .white
         logButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         

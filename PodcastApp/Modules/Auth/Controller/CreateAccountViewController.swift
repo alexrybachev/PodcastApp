@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CreateAccauntViewController: UIViewController {
+final class CreateAccountViewController: UIViewController {
     
     // MARK: - Private Properties
     private let createAccView = CreateAccountView()

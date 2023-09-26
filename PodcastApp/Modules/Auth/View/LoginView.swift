@@ -39,7 +39,7 @@ final class LoginView: UIView {
     
     // MARK: - Button Properties
     private lazy var loginButton: UIButton = {
-        var logButton = UIButton.createDefaultButton(text: "Log In", cornerRadius: 27)
+        var logButton = UIButton.createDefaultButton(text: "Log In")
         return logButton
     }()
     

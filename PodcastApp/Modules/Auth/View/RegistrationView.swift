@@ -130,8 +130,7 @@ final class RegistrationView: UIView {
     // MARK: - UI Properties (Buttons)
     private lazy var signUpButton: UIButton = {
         var signUpButton = UIButton.createDefaultButton(
-            text: "Sign Up",
-            cornerRadius: 24
+            text: "Sign Up"
         )
         return signUpButton
     }()
