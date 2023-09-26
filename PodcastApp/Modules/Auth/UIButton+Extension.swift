@@ -44,15 +44,15 @@ extension UIButton {
         
         return googleButton
     }
-    
-    static func createPurpleLoginButton() -> UIButton {
-        let registerButton = UIButton(type: .system)
-        registerButton.setTitle("Login", for: .normal)
-        registerButton.tintColor = #colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        return registerButton
+
+    static func createAuthButton(title: String, font: UIFont, color: UIColor) -> UIButton {
+        let authButton = UIButton(type: .system)
+        authButton.setTitle(title, for: .normal)
+        authButton.tintColor = color
+        authButton.titleLabel?.font = font
+        return authButton
     }
-    
+  
     static func createDefaultButton(text: String) -> UIButton {
         let logButton = UIButton(type: .system)
         logButton.setTitle(text, for: .normal)
@@ -60,14 +60,8 @@ extension UIButton {
         logButton.layer.cornerRadius = 25
         logButton.tintColor = .white
         logButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        
-//        logButton.snp.makeConstraints { make in
-//            make.height.equalTo(56)
-//        }
         return logButton
     }
-    
-    
     
     // метод для создания кнопки глаза для textField
     static func createEyeButton() -> UIButton {

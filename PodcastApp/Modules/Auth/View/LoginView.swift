@@ -66,27 +66,9 @@ final class LoginView: UIView {
         return contView
     }()
     
-    private lazy var registerStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 1
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        
-        var accountStatusLabel = UILabel.setupCustomLabel(
-            text: "Don't have an account yet?",
-            fontSize: UIFont.systemFont(ofSize: 13)
-        )
-        
-        var registerButton = UIButton(type: .system)
-        registerButton.setTitle("Register", for: .normal)
-        registerButton.tintColor = #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        
-        stackView.addArrangedSubview(accountStatusLabel)
-        stackView.addArrangedSubview(registerButton)
-        
-        return stackView
+    private lazy var registerStackView: AuthStackView = {
+        var registerSV = AuthStackView(authType: .register)
+        return registerSV
     }()
     
     // MARK: -  Init
@@ -94,16 +76,18 @@ final class LoginView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         
-        addSubviews(loginLabel,
-                    loginTextField,
-                    passwordLabel,
-                    passwordTextField,
-                    loginButton,
-                    continueView,
-                    googleButton,
-                    registerStackView
+        UIView.addSubviews(
+            mainView: self,
+            subviews: loginLabel,
+                      loginTextField,
+                      passwordLabel,
+                      passwordTextField,
+                      loginButton,
+                      continueView,
+                      googleButton,
+                      registerStackView
         )
-        
+ 
         setupConstraints()
     }
     
@@ -141,12 +125,6 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private Methods
-    private func addSubviews(_ views: UIView...) {
-        views.forEach { subview in
-            self.addSubview(subview)
-        }
-    }
-    
     private func setupConstraints() {
         loginLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(120)

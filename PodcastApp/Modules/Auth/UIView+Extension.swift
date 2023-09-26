@@ -53,4 +53,10 @@ extension UIView {
         rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
         return rightView
     }
+    
+    static func addSubviews(mainView: UIView, subviews: UIView...) {
+        subviews.forEach { subview in
+            mainView.addSubview(subview)
+        }
+    }
 }

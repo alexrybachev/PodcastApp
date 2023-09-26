@@ -33,6 +33,7 @@
 		3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */; };
 		3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */; };
 		3C74A4DD2AC2C3C400CDEEAA /* UILabel+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */; };
+		3C74A4DF2AC3503300CDEEAA /* AuthStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extenstion.swift"; sourceTree = "<group>"; };
+		3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,6 +406,7 @@
 		0A125D3B2AC0CA230006EACA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */,
 				3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */,
 				3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */,
 				3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */,
@@ -502,6 +505,7 @@
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
 				3C74A4CF2AC1CE1A00CDEEAA /* CreateAccountViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
+				3C74A4DF2AC3503300CDEEAA /* AuthStackView.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
 				3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */,
 				0A125D332AC0CA0A0006EACA /* SearchViewController.swift in Sources */,

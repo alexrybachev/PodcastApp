@@ -68,28 +68,10 @@ final class CreateAccountView: UIView {
         return contView
     }()
     
-    private lazy var loginStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 1
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        
-        var accountStatusLabel = UILabel.setupCustomLabel(
-            text: "Already have an account?",
-            fontSize: UIFont.systemFont(ofSize: 16)
-        )
-        
-        accountStatusLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-        
-        var loginButton = UIButton.createPurpleLoginButton()
-        
-        stackView.addArrangedSubview(accountStatusLabel)
-        stackView.addArrangedSubview(loginButton)
-        
-        return stackView
+    private lazy var loginStackView: AuthStackView = {
+        var loginSV = AuthStackView(authType: .login)
+        return loginSV
     }()
-    
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -123,12 +105,16 @@ final class CreateAccountView: UIView {
     private func addViews() {
         self.addSubview(mainView)
         self.addSubview(welcomeLabel)
-        mainView.addSubview(emailLabel)
-        mainView.addSubview(emailTextField)
-        mainView.addSubview(continueButton)
-        mainView.addSubview(googleButton)
-        mainView.addSubview(continueView)
-        mainView.addSubview(loginStackView)
+        
+        UIView.addSubviews(
+            mainView: mainView,
+            subviews: emailLabel,
+            emailTextField,
+            continueButton,
+            googleButton,
+            continueView,
+            loginStackView
+        )
     }
     
     private func setupConstraints() {
