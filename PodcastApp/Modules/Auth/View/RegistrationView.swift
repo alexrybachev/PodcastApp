@@ -64,8 +64,7 @@ final class RegistrationView: UIView {
         var firstNameTF = UITextField.createCustomTextField(
             placeholder: "Enter your first name"
         )
-        firstNameTF.layer.cornerRadius = 20
-        firstNameTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        setupTextField(firstNameTF)
         return firstNameTF
     }()
     
@@ -73,36 +72,32 @@ final class RegistrationView: UIView {
         var lastNameTF = UITextField.createCustomTextField(
             placeholder: "Enter your last name"
         )
-        lastNameTF.layer.cornerRadius = 20
-        lastNameTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        setupTextField(lastNameTF)
         return lastNameTF
     }()
     
     private lazy var emailTextField: UITextField = {
-        var emailTextField = UITextField.createCustomTextField(
+        var emailTF = UITextField.createCustomTextField(
             placeholder: "Enter your email"
         )
-        emailTextField.layer.cornerRadius = 20
-        emailTextField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
-        return emailTextField
+        setupTextField(emailTF)
+        return emailTF
     }()
     
     private lazy var passwordTextField: UITextField = {
-        var passwordTextField = UITextField.createCustomTextField(
+        var passwordTF = UITextField.createCustomTextField(
             placeholder: "Enter your password"
         )
-        passwordTextField.layer.cornerRadius = 20
-        passwordTextField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
-        return passwordTextField
+        setupTextField(passwordTF)
+        return passwordTF
     }()
     
     private lazy var confirmPasswordTextField: UITextField = {
-        var confirmPasswordTextField = UITextField.createCustomTextField(
+        var confirmPasswordTF = UITextField.createCustomTextField(
             placeholder: "Enter your password"
         )
-        confirmPasswordTextField.layer.cornerRadius = 20
-        confirmPasswordTextField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
-        return confirmPasswordTextField
+        setupTextField(confirmPasswordTF)
+        return confirmPasswordTF
     }()
     
     // MARK: - Init
@@ -198,11 +193,10 @@ final class RegistrationView: UIView {
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(52)
         }
-        
-        
-        
-        
-        
-        
+    }
+    
+    private func setupTextField(_ textField: UITextField) {
+        textField.layer.cornerRadius = 20
+        textField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
     }
 }
