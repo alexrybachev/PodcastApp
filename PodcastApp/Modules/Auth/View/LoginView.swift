@@ -28,7 +28,7 @@ final class LoginView: UIView {
         loginTF.rightView = UIView.createViewForTF()
         loginTF.rightViewMode = .always
         
-        let eyeButton = UIButton().createEyeButton()
+        let eyeButton = UIButton.createEyeButton()
         eyeButton.addTarget(
             self,
             action: #selector(toggleTextVisibility),
@@ -58,7 +58,7 @@ final class LoginView: UIView {
         paswordTF.rightView = UIView.createViewForTF()
         paswordTF.rightViewMode = .always
         
-        let eyeButton = UIButton().createEyeButton()
+        let eyeButton = UIButton.createEyeButton()
         eyeButton.addTarget(
             self,
             action: #selector(toggleTextVisibility),

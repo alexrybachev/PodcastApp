@@ -56,7 +56,7 @@ extension UIButton {
     }
     
     // метод для создания кнопки глаза для textField
-    func createEyeButton() -> UIButton {
+    static func createEyeButton() -> UIButton {
         let bustomEyeButton = UIButton(type: .custom)
         bustomEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
         bustomEyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
