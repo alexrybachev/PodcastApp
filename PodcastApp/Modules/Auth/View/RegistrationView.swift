@@ -10,10 +10,6 @@ import UIKit
 final class RegistrationView: UIView {
     
     // MARK: - UI Properties
-//    private lazy var firstNameLabel: UILabel = {
-//        var firstNameLabel = UILabel()
-//        return UILabel
-//    }()
     
     // MARK: - Init
     override init(frame: CGRect) {

@@ -18,17 +18,19 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var welcomeLabel: UILabel = {
-        var welcomeLabel = UILabel()
-        welcomeLabel.text = "Create account"
+        var welcomeLabel = UILabel.setupCustomLabel(
+            text: "Create account",
+            fontSize: UIFont.boldSystemFont(ofSize: 24)
+        )
         welcomeLabel.textColor = .white
-        welcomeLabel.font = UIFont.boldSystemFont(ofSize: 24)
         return welcomeLabel
     }()
     
     private lazy var emailLabel: UILabel = {
-        var emailLabel = UILabel()
-        emailLabel.text = "Email"
-        emailLabel.textColor = #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
+        var emailLabel = UILabel.setupCustomLabel(
+            text: "Email",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
         return emailLabel
     }()
     
@@ -72,10 +74,11 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var signInStatusLabel: UILabel = {
-        var signInStatusLabel = UILabel()
-        signInStatusLabel.text = "Already have an account?"
+        var signInStatusLabel = UILabel.setupCustomLabel(
+            text: "Already have an account?",
+            fontSize: UIFont.systemFont(ofSize: 16)
+        )
         signInStatusLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-        signInStatusLabel.font = UIFont.systemFont(ofSize: 16)
         return signInStatusLabel
     }()
     
@@ -170,7 +173,7 @@ final class CreateAccountView: UIView {
         }
         
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(continueView.snp.bottom).offset(38)
+            make.top.equalTo(continueView.snp.bottom).offset(35)
             make.left.equalToSuperview().offset(25)
             make.right.equalToSuperview().offset(-25)
             make.height.equalTo(56)

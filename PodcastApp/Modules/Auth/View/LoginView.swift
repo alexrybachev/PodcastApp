@@ -16,7 +16,10 @@ final class LoginView: UIView {
     }()
     
     private lazy var loginLabel: UILabel = {
-        var loginLabel = UILabel.setupCustomLabel(text: "Enter Login", fontSize: 16)
+        var loginLabel = UILabel.setupCustomLabel(
+            text: "Enter Login",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
         return loginLabel
     }()
     
@@ -39,7 +42,10 @@ final class LoginView: UIView {
     }()
     
     private lazy var passwordLabel: UILabel = {
-        var passwordLabel = UILabel.setupCustomLabel(text: "Password", fontSize: 16)
+        var passwordLabel = UILabel.setupCustomLabel(
+            text: "Password",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
         return passwordLabel
     }()
     
@@ -94,7 +100,7 @@ final class LoginView: UIView {
     private lazy var noAccauntLabel: UILabel = {
         var accLabel = UILabel.setupCustomLabel(
             text: "Don't have an account yet?",
-            fontSize: 13
+            fontSize: UIFont.systemFont(ofSize: 13)
         )
         return accLabel
     }()
