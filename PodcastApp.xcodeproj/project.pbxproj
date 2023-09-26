@@ -32,6 +32,7 @@
 		3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */; };
 		3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */; };
 		3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */; };
+		3C74A4DD2AC2C3C400CDEEAA /* UILabel+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extenstion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */,
 				3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */,
 				3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */,
+				3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */,
 				0A125D382AC0CA230006EACA /* Model */,
 				0A125D3B2AC0CA230006EACA /* View */,
 				0A125D392AC0CA230006EACA /* Controller */,
@@ -491,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */,
+				3C74A4DD2AC2C3C400CDEEAA /* UILabel+Extenstion.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
 				3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */,
 				3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */,

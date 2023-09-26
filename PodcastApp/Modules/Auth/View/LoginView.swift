@@ -16,7 +16,7 @@ final class LoginView: UIView {
     }()
     
     private lazy var loginLabel: UILabel = {
-        var loginLabel = setupCustomLabel(text: "Enter Login", fontSize: 16)
+        var loginLabel = UILabel.setupCustomLabel(text: "Enter Login", fontSize: 16)
         return loginLabel
     }()
     
@@ -39,7 +39,7 @@ final class LoginView: UIView {
     }()
     
     private lazy var passwordLabel: UILabel = {
-        var passwordLabel = setupCustomLabel(text: "Password", fontSize: 16)
+        var passwordLabel = UILabel.setupCustomLabel(text: "Password", fontSize: 16)
         return passwordLabel
     }()
     
@@ -63,7 +63,7 @@ final class LoginView: UIView {
     }()
     
     private lazy var googleButton: UIButton = {
-        var googleButton = UIButton().createGoogleButton()
+        var googleButton = UIButton.createGoogleButton()
         googleButton.addTarget(
             self,
             action: #selector(buttonPressed),
@@ -87,12 +87,12 @@ final class LoginView: UIView {
     
     // MARK: - Other Properties
     private lazy var continueView: UIView = {
-        var contView = UIView().createCustomView()
+        var contView = UIView.createCustomView()
         return contView
     }()
     
     private lazy var noAccauntLabel: UILabel = {
-        var accLabel = setupCustomLabel(
+        var accLabel = UILabel.setupCustomLabel(
             text: "Don't have an account yet?",
             fontSize: 13
         )
@@ -240,18 +240,9 @@ final class LoginView: UIView {
     }
     
     // MARK: - Create UI Methods
-    // метод для создания label
-    private func setupCustomLabel(text: String, fontSize: Int) -> UILabel {
-        let customLabel = UILabel()
-        customLabel.text = text
-        customLabel.textColor = #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
-        customLabel.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
-        return customLabel
-    }
-    
     // метод для создания textField
     private func setupCustomTextField(with placeholder: String) -> UITextField {
-        let customTF = UITextField()
+        let customTF = UITextField
             .createCustomTextField(placeholder: placeholder)
         customTF.layer.cornerRadius = 13
         customTF.layer.borderColor = UIColor.systemGray5.cgColor

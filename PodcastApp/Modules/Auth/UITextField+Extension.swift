@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UITextField {
-    func createCustomTextField(placeholder: String) -> UITextField {
+    static func createCustomTextField(placeholder: String) -> UITextField {
         let customTF = UITextField()
         
         // устанавливаем цвет текста в placeholder

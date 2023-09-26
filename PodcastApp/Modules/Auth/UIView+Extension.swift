@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func createCustomView() -> UIView {
+    static func createCustomView() -> UIView {
         let contView = UIView()
         
         let contWithLabel = UILabel()

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    func createGoogleButton() -> UIButton {
+    static func createGoogleButton() -> UIButton {
         let googleButton = UIButton(type: .custom)
         googleButton.layer.borderColor = UIColor.black.cgColor
         googleButton.layer.borderWidth = 1

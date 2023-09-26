@@ -33,7 +33,7 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var emailTextField: UITextField = {
-        let customTF = UITextField()
+        let customTF = UITextField
             .createCustomTextField(placeholder: "Enter your email address")
         customTF.layer.cornerRadius = 20
         customTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
@@ -47,7 +47,7 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var googleButton: UIButton = {
-        var googleButton = UIButton().createGoogleButton()
+        var googleButton = UIButton.createGoogleButton()
         googleButton.addTarget(
             self,
             action: #selector(buttonPressed),
@@ -62,7 +62,7 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var continueView: UIView = {
-        var contView = UIView().createCustomView()
+        var contView = UIView.createCustomView()
         return contView
     }()
     
