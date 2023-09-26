@@ -10,11 +10,6 @@ import UIKit
 final class LoginView: UIView {
     
     // MARK: - Login Properties
-    private lazy var loginContrainterView: UIView = {
-        var loginPropertieView = UIView()
-        return loginPropertieView
-    }()
-    
     private lazy var loginLabel: UILabel = {
         var loginLabel = UILabel.setupCustomLabel(
             text: "Enter Login",
@@ -25,26 +20,10 @@ final class LoginView: UIView {
     
     lazy var loginTextField: UITextField = {
         var loginTF = setupCustomTextField(with: "Login")
-        loginTF.rightView = UIView.createViewForTF()
-        loginTF.rightViewMode = .always
-        
-        let eyeButton = UIButton.createEyeButton()
-        eyeButton.addTarget(
-            self,
-            action: #selector(toggleTextVisibility),
-            for: .touchUpInside
-        )
-        
-        loginTF.rightView?.addSubview(eyeButton)
         return loginTF
     }()
     
     // MARK: - Password Properties
-    private lazy var passwordContrainterView: UIView = {
-        var passwordPropView = UIView()
-        return passwordPropView
-    }()
-    
     private lazy var passwordLabel: UILabel = {
         var passwordLabel = UILabel.setupCustomLabel(
             text: "Password",
@@ -55,34 +34,24 @@ final class LoginView: UIView {
     
     lazy var passwordTextField: UITextField = {
         var paswordTF = setupCustomTextField(with: "Password")
-        paswordTF.rightView = UIView.createViewForTF()
-        paswordTF.rightViewMode = .always
-        
-        let eyeButton = UIButton.createEyeButton()
-        eyeButton.addTarget(
-            self,
-            action: #selector(toggleTextVisibility),
-            for: .touchUpInside
-        )
-        
-        paswordTF.rightView?.addSubview(eyeButton)
         return paswordTF
     }()
     
     // MARK: - Button Properties
     private lazy var loginButton: UIButton = {
-        var logButton = UIButton(type: .system)
-            .createDefaultButton(text: "Log In", cornerRadius: 24)
+        var logButton = UIButton.createDefaultButton(text: "Log In", cornerRadius: 27)
         return logButton
     }()
     
     private lazy var googleButton: UIButton = {
         var googleButton = UIButton.createGoogleButton()
+        
         googleButton.addTarget(
             self,
             action: #selector(buttonPressed),
             for: .touchUpInside
         )
+        
         googleButton.addTarget(
             self,
             action: #selector(buttonReleased),
@@ -91,38 +60,50 @@ final class LoginView: UIView {
         return googleButton
     }()
     
-    private lazy var registerButton: UIButton = {
-        var registerButton = UIButton(type: .system)
-        registerButton.setTitle("Register", for: .normal)
-        registerButton.tintColor = #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-        return registerButton
-    }()
-    
     // MARK: - Other Properties
     private lazy var continueView: UIView = {
         var contView = UIView.createCustomView()
         return contView
     }()
     
-    private lazy var noAccauntLabel: UILabel = {
-        var accLabel = UILabel.setupCustomLabel(
+    private lazy var registerStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 1
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        
+        var accountStatusLabel = UILabel.setupCustomLabel(
             text: "Don't have an account yet?",
             fontSize: UIFont.systemFont(ofSize: 13)
         )
-        return accLabel
-    }()
-    
-    private lazy var registerView: UIView = {
-        var registerView = UIView()
-        return registerView
+        
+        var registerButton = UIButton(type: .system)
+        registerButton.setTitle("Register", for: .normal)
+        registerButton.tintColor = #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        
+        stackView.addArrangedSubview(accountStatusLabel)
+        stackView.addArrangedSubview(registerButton)
+        
+        return stackView
     }()
     
     // MARK: -  Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        addViews()
+        
+        addSubviews(loginLabel,
+                    loginTextField,
+                    passwordLabel,
+                    passwordTextField,
+                    loginButton,
+                    continueView,
+                    googleButton,
+                    registerStackView
+        )
+        
         setupConstraints()
     }
     
@@ -135,9 +116,11 @@ final class LoginView: UIView {
     @objc private func toggleTextVisibility(_ sender: UIButton) {
         if let textField = sender.superview?.superview as? UITextField {
             textField.isSecureTextEntry.toggle()
+            
             let image = textField.isSecureTextEntry
             ? UIImage(systemName: "eye.slash.fill")
             : UIImage(systemName: "eye.fill")
+            
             sender.setImage(image, for: .normal)
         }
     }
@@ -158,98 +141,63 @@ final class LoginView: UIView {
     }
     
     // MARK: - Private Methods
-    private func addViews() {
-        self.addSubview(loginContrainterView)
-        self.addSubview(passwordContrainterView)
-        self.addSubview(loginButton)
-        self.addSubview(continueView)
-        self.addSubview(googleButton)
-        self.addSubview(registerView)
-        
-        registerView.addSubview(noAccauntLabel)
-        registerView.addSubview(registerButton)
-        
-        loginContrainterView.addSubview(loginLabel)
-        loginContrainterView.addSubview(loginTextField)
-        
-        passwordContrainterView.addSubview(passwordLabel)
-        passwordContrainterView.addSubview(passwordTextField)
+    private func addSubviews(_ views: UIView...) {
+        views.forEach { subview in
+            self.addSubview(subview)
+        }
     }
     
     private func setupConstraints() {
-        loginContrainterView.snp.makeConstraints { make in
-            make.height.equalTo(70)
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(120)
-        }
-        
-        passwordContrainterView.snp.makeConstraints { make in
-            make.height.equalTo(70)
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
-            make.top.equalTo(loginContrainterView.snp.bottom).offset(12)
-        }
         
         loginLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
+            make.top.equalToSuperview().offset(120)
+            make.left.equalToSuperview().offset(16)
         }
         
         loginTextField.snp.makeConstraints { make in
             make.top.equalTo(loginLabel.snp.bottom).offset(5)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.height.equalTo(45)
         }
         
         passwordLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
+            make.top.equalTo(loginTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(16)
         }
         
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordLabel.snp.bottom).offset(5)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.height.equalTo(45)
         }
         
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordContrainterView.snp.bottom).offset(24)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.height.equalTo(56)
         }
         
         continueView.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(38)
+            make.top.equalTo(loginButton.snp.bottom).offset(45)
             make.centerX.equalToSuperview()
-            make.height.equalTo(30)
             make.width.equalTo(300)
         }
         
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(continueView.snp.bottom).offset(45)
+            make.top.equalTo(continueView.snp.bottom).offset(65)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)
         }
         
-        registerView.snp.makeConstraints { make in
+        registerStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-50)
             make.height.equalTo(20)
             make.width.equalTo(220)
-        }
-        
-        noAccauntLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-        }
-        
-        registerButton.snp.makeConstraints { make in
-            make.left.equalTo(noAccauntLabel.snp.right).offset(2)
-            make.height.equalTo(noAccauntLabel.snp.height)
         }
     }
     
@@ -263,6 +211,19 @@ final class LoginView: UIView {
         customTF.layer.borderWidth = 1
         customTF.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
         customTF.isSecureTextEntry = false
+        
+        customTF.rightView = UIView.createViewForTF()
+        customTF.rightViewMode = .always
+        
+        let eyeButton = UIButton.createEyeButton()
+        eyeButton.addTarget(
+            self,
+            action: #selector(toggleTextVisibility),
+            for: .touchUpInside
+        )
+        
+        customTF.rightView?.addSubview(eyeButton)
+        
         return customTF
     }
 }

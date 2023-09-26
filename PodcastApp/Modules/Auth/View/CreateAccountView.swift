@@ -43,7 +43,7 @@ final class CreateAccountView: UIView {
     }()
     
     private lazy var continueButton: UIButton = {
-        var contButton = UIButton(type: .system)
+        var contButton = UIButton
             .createDefaultButton(text: "Continue with Email", cornerRadius: 25)
         return contButton
     }()

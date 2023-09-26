@@ -53,7 +53,7 @@ extension UIButton {
         return registerButton
     }
     
-    func createDefaultButton(text: String, cornerRadius: Int) -> UIButton {
+    static func createDefaultButton(text: String, cornerRadius: Int) -> UIButton {
         let logButton = UIButton(type: .system)
         logButton.setTitle(text, for: .normal)
         logButton.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
