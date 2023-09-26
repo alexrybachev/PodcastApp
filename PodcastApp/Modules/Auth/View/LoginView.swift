@@ -219,7 +219,7 @@ final class LoginView: UIView {
             make.top.equalTo(passwordContrainterView.snp.bottom).offset(24)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.height.equalTo(57)
+            make.height.equalTo(56)
         }
         
         continueView.snp.makeConstraints { make in

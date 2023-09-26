@@ -24,6 +24,7 @@ final class RegistrationView: UIView {
             text: "First Name",
             fontSize: UIFont.systemFont(ofSize: 14)
         )
+
         return firstNameLabel
     }()
     
@@ -37,7 +38,7 @@ final class RegistrationView: UIView {
     
     private lazy var emailLabel: UILabel = {
         var emailLabel = UILabel.setupCustomLabel(
-            text: "Enter your email",
+            text: "Email",
             fontSize: UIFont.systemFont(ofSize: 14)
         )
         return emailLabel
@@ -45,7 +46,7 @@ final class RegistrationView: UIView {
     
     private lazy var passwordLabel: UILabel = {
         var passwordLabel = UILabel.setupCustomLabel(
-            text: "Enter your password",
+            text: "Password",
             fontSize: UIFont.systemFont(ofSize: 14)
         )
         
@@ -54,7 +55,7 @@ final class RegistrationView: UIView {
     
     private lazy var confirmPasswordLabel: UILabel = {
         var confirmPasswordLabel = UILabel.setupCustomLabel(
-            text: "Enter your password",
+            text: "Confirm Password",
             fontSize: UIFont.systemFont(ofSize: 14)
         )
         return confirmPasswordLabel
@@ -126,6 +127,37 @@ final class RegistrationView: UIView {
         return confirmPasswordTF
     }()
     
+    // MARK: - UI Properties (Buttons)
+    private lazy var signUpButton: UIButton = {
+        var signUpButton = UIButton().createDefaultButton(
+            text: "Sign Up",
+            cornerRadius: 24
+        )
+        return signUpButton
+    }()
+    
+    // MARK: - Other UI Properties
+    private lazy var accountView: UIView = {
+        var accountView = UIView()
+        accountView.addSubview(signInStatusLabel)
+        accountView.addSubview(loginButton)
+        return accountView
+    }()
+    
+    private lazy var signInStatusLabel: UILabel = {
+        var signInStatusLabel = UILabel.setupCustomLabel(
+            text: "Already have an account?",
+            fontSize: UIFont.systemFont(ofSize: 16)
+        )
+        signInStatusLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
+        return signInStatusLabel
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        var registerButton = UIButton.createPurpleLoginButton()
+        return registerButton
+    }()
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -162,74 +194,201 @@ final class RegistrationView: UIView {
         self.addSubview(passwordTextField)
         self.addSubview(confirmPasswordLabel)
         self.addSubview(confirmPasswordTextField)
+        self.addSubview(signUpButton)
+        self.addSubview(signInStatusLabel)
+        self.addSubview(loginButton)
+        self.addSubview(accountView)
     }
     
     private func setupConstraints() {
         welcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(35)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(25)
             make.centerX.equalToSuperview()
         }
-        
+
         firstNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(welcomeLabel.snp.bottom).offset(62)
+            make.top.equalTo(welcomeLabel.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(24)
         }
-        
+
         firstNameTextField.snp.makeConstraints { make in
             make.top.equalTo(firstNameLabel.snp.bottom).offset(7)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(52)
+            make.bottom.equalTo(lastNameLabel.snp.top).offset(-10)
+            make.height.equalTo(45)
         }
-        
+
         lastNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstNameTextField.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(24)
         }
-        
+
         lastNameTextField.snp.makeConstraints { make in
             make.top.equalTo(lastNameLabel.snp.bottom).offset(7)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(52)
+            make.bottom.equalTo(emailLabel.snp.top).offset(-10)
+            make.height.equalTo(45)
         }
-        
+
         emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(lastNameTextField.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(24)
         }
-        
+
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(emailLabel.snp.bottom).offset(7)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(52)
+            make.bottom.equalTo(passwordLabel.snp.top).offset(-10)
+            make.height.equalTo(45)
         }
-        
+
         passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(24)
         }
-        
+
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordLabel.snp.bottom).offset(7)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(52)
+            make.bottom.equalTo(confirmPasswordLabel.snp.top).offset(-10)
+            make.height.equalTo(45)
         }
-        
+
         confirmPasswordLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(24)
         }
-        
+
         confirmPasswordTextField.snp.makeConstraints { make in
             make.top.equalTo(confirmPasswordLabel.snp.bottom).offset(7)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(52)
+            make.bottom.equalTo(signUpButton.snp.top).offset(-18)
+            make.height.equalTo(45)
+        }
+
+        signUpButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(50)
+        }
+
+        accountView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+//            make.top.equalTo(signUpButton.snp.bottom).offset(40)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-50)
+//            make.height.equalTo(20)
+            make.width.equalTo(220)
+        }
+
+        signInStatusLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+        }
+
+        loginButton.snp.makeConstraints { make in
+            make.left.equalTo(signInStatusLabel.snp.right).offset(2)
+            make.height.equalTo(signInStatusLabel.snp.height)
         }
     }
+
+    
+//    private func setupConstraints() {
+//        welcomeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(25)
+//            make.centerX.equalToSuperview()
+//            make.height.equalTo(24)
+//        }
+//
+//        firstNameLabel.snp.makeConstraints { make in
+//            make.top.equalTo(welcomeLabel.snp.bottom).offset(25)
+//            make.left.equalToSuperview().offset(24)
+//            make.height.equalTo(14)
+//        }
+//
+//        firstNameTextField.snp.makeConstraints { make in
+//            make.top.equalTo(firstNameLabel.snp.bottom).offset(7)
+//            make.left.equalToSuperview().offset(24)
+//            make.right.equalToSuperview().offset(-24)
+//            make.height.equalTo(52)
+//        }
+//
+//        lastNameLabel.snp.makeConstraints { make in
+//            make.top.equalTo(firstNameTextField.snp.bottom).offset(10)
+//            make.left.equalToSuperview().offset(24)
+//            make.height.equalTo(14)
+//        }
+//
+//        lastNameTextField.snp.makeConstraints { make in
+//            make.top.equalTo(lastNameLabel.snp.bottom).offset(7)
+//            make.left.equalToSuperview().offset(24)
+//            make.right.equalToSuperview().offset(-24)
+//            make.height.equalTo(52)
+//        }
+//
+//        emailLabel.snp.makeConstraints { make in
+//            make.top.equalTo(lastNameTextField.snp.bottom).offset(10)
+//            make.left.equalToSuperview().offset(24)
+//            make.height.equalTo(14)
+//        }
+//
+//        emailTextField.snp.makeConstraints { make in
+//            make.top.equalTo(emailLabel.snp.bottom).offset(7)
+//            make.left.equalToSuperview().offset(24)
+//            make.right.equalToSuperview().offset(-24)
+//            make.height.equalTo(52)
+//        }
+//
+//        passwordLabel.snp.makeConstraints { make in
+//            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+//            make.left.equalToSuperview().offset(24)
+//            make.height.equalTo(14)
+//        }
+//
+//        passwordTextField.snp.makeConstraints { make in
+//            make.top.equalTo(passwordLabel.snp.bottom).offset(7)
+//            make.left.equalToSuperview().offset(24)
+//            make.right.equalToSuperview().offset(-24)
+//            make.height.equalTo(52)
+//        }
+//
+//        confirmPasswordLabel.snp.makeConstraints { make in
+//            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
+//            make.left.equalToSuperview().offset(24)
+//            make.height.equalTo(14)
+//        }
+//
+//        confirmPasswordTextField.snp.makeConstraints { make in
+//            make.top.equalTo(confirmPasswordLabel.snp.bottom).offset(7)
+//            make.left.equalToSuperview().offset(24)
+//            make.right.equalToSuperview().offset(-24)
+//            make.height.equalTo(52)
+//        }
+//
+//        signUpButton.snp.makeConstraints { make in
+////            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(24)
+//            make.left.equalToSuperview().offset(24)
+//            make.right.equalToSuperview().offset(-24)
+//            make.height.equalTo(56)
+//        }
+//
+//        accountView.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(signUpButton.snp.bottom).offset(20)
+//            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-20)
+//            make.height.equalTo(20)
+//            make.width.equalTo(220)
+//        }
+//
+//        signInStatusLabel.snp.makeConstraints { make in
+//            make.left.equalToSuperview()
+//            
+//        }
+//
+//        loginButton.snp.makeConstraints { make in
+//            make.left.equalTo(signInStatusLabel.snp.right).offset(2)
+//            make.height.equalTo(signInStatusLabel.snp.height)
+//        }
+//    }
     
     private func setupTextField(_ textField: UITextField) {
         textField.layer.cornerRadius = 20
