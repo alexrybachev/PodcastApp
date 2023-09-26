@@ -54,4 +54,13 @@ extension UIButton {
         logButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return logButton
     }
+    
+    // метод для создания кнопки глаза для textField
+    func createEyeButton() -> UIButton {
+        let bustomEyeButton = UIButton(type: .custom)
+        bustomEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        bustomEyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
+        bustomEyeButton.tintColor = #colorLiteral(red: 0.6980392337, green: 0.6980391741, blue: 0.6980391741, alpha: 1)
+        return bustomEyeButton
+    }
 }

@@ -9,7 +9,101 @@ import UIKit
 
 final class RegistrationView: UIView {
     
-    // MARK: - UI Properties
+    // MARK: - UI Properties (Labels)
+    private lazy var welcomeLabel: UILabel = {
+        var welcomeLabel = UILabel.setupCustomLabel(
+            text: "Complete your account",
+            fontSize: UIFont.boldSystemFont(ofSize: 24)
+        )
+        welcomeLabel.textColor = .black
+        return welcomeLabel
+    }()
+    
+    private lazy var firstNameLabel: UILabel = {
+        var firstNameLabel = UILabel.setupCustomLabel(
+            text: "First Name",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
+        return firstNameLabel
+    }()
+    
+    private lazy var lastNameLabel: UILabel = {
+        var lastNameLabel = UILabel.setupCustomLabel(
+            text: "Last Name",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
+        return lastNameLabel
+    }()
+    
+    private lazy var emailLabel: UILabel = {
+        var emailLabel = UILabel.setupCustomLabel(
+            text: "Enter your email",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
+        return emailLabel
+    }()
+    
+    private lazy var passwordLabel: UILabel = {
+        var passwordLabel = UILabel.setupCustomLabel(
+            text: "Enter your password",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
+        return passwordLabel
+    }()
+    
+    private lazy var confirmPasswordLabel: UILabel = {
+        var confirmPasswordLabel = UILabel.setupCustomLabel(
+            text: "Enter your password",
+            fontSize: UIFont.systemFont(ofSize: 14)
+        )
+        return confirmPasswordLabel
+    }()
+    
+    // MARK: - UI Properties (TextFIelds)
+    private lazy var firstNameTextField: UITextField = {
+        var firstNameTF = UITextField.createCustomTextField(
+            placeholder: "Enter your first name"
+        )
+        firstNameTF.layer.cornerRadius = 20
+        firstNameTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        return firstNameTF
+    }()
+    
+    private lazy var lastNameTextField: UITextField = {
+        var lastNameTF = UITextField.createCustomTextField(
+            placeholder: "Enter your last name"
+        )
+        lastNameTF.layer.cornerRadius = 20
+        lastNameTF.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        return lastNameTF
+    }()
+    
+    private lazy var emailTextField: UITextField = {
+        var emailTextField = UITextField.createCustomTextField(
+            placeholder: "Enter your email"
+        )
+        emailTextField.layer.cornerRadius = 20
+        emailTextField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        return emailTextField
+    }()
+    
+    private lazy var passwordTextField: UITextField = {
+        var passwordTextField = UITextField.createCustomTextField(
+            placeholder: "Enter your password"
+        )
+        passwordTextField.layer.cornerRadius = 20
+        passwordTextField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        return passwordTextField
+    }()
+    
+    private lazy var confirmPasswordTextField: UITextField = {
+        var confirmPasswordTextField = UITextField.createCustomTextField(
+            placeholder: "Enter your password"
+        )
+        confirmPasswordTextField.layer.cornerRadius = 20
+        confirmPasswordTextField.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        return confirmPasswordTextField
+    }()
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -26,10 +120,89 @@ final class RegistrationView: UIView {
     // MARK: - Private Methods
     
     private func addViews() {
-        
+        self.addSubview(welcomeLabel)
+        self.addSubview(firstNameLabel)
+        self.addSubview(firstNameTextField)
+        self.addSubview(lastNameLabel)
+        self.addSubview(lastNameTextField)
+        self.addSubview(emailLabel)
+        self.addSubview(emailTextField)
+        self.addSubview(passwordLabel)
+        self.addSubview(passwordTextField)
+        self.addSubview(confirmPasswordLabel)
+        self.addSubview(confirmPasswordTextField)
     }
     
     private func setupConstraints() {
+        welcomeLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(35)
+            make.centerX.equalToSuperview()
+        }
+        
+        firstNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(welcomeLabel.snp.bottom).offset(62)
+            make.left.equalToSuperview().offset(24)
+        }
+        
+        firstNameTextField.snp.makeConstraints { make in
+            make.top.equalTo(firstNameLabel.snp.bottom).offset(7)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(52)
+        }
+        
+        lastNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(firstNameTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(24)
+        }
+        
+        lastNameTextField.snp.makeConstraints { make in
+            make.top.equalTo(lastNameLabel.snp.bottom).offset(7)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(52)
+        }
+        
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(lastNameTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(24)
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailLabel.snp.bottom).offset(7)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(52)
+        }
+        
+        passwordLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(24)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordLabel.snp.bottom).offset(7)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(52)
+        }
+        
+        confirmPasswordLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
+            make.left.equalToSuperview().offset(24)
+        }
+        
+        confirmPasswordTextField.snp.makeConstraints { make in
+            make.top.equalTo(confirmPasswordLabel.snp.bottom).offset(7)
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(52)
+        }
+        
+        
+        
+        
+        
         
     }
 }

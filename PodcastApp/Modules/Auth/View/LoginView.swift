@@ -25,14 +25,18 @@ final class LoginView: UIView {
     
     lazy var loginTextField: UITextField = {
         var loginTF = setupCustomTextField(with: "Login")
-        loginTF.rightView = rightViewForLoginTF
+        loginTF.rightView = UIView.createViewForTF()
         loginTF.rightViewMode = .always
+        
+        let eyeButton = UIButton().createEyeButton()
+        eyeButton.addTarget(
+            self,
+            action: #selector(toggleTextVisibility),
+            for: .touchUpInside
+        )
+        
+        loginTF.rightView?.addSubview(eyeButton)
         return loginTF
-    }()
-    
-    private lazy var rightViewForLoginTF: UIView = {
-        var rightViewForTF = createRightViewForTF()
-        return rightViewForTF
     }()
     
     // MARK: - Password Properties
@@ -50,15 +54,19 @@ final class LoginView: UIView {
     }()
     
     lazy var passwordTextField: UITextField = {
-        var passwordTF = setupCustomTextField(with: "Password")
-        passwordTF.rightView = rightViewForPassworTF
-        passwordTF.rightViewMode = .always
-        return passwordTF
-    }()
-    
-    private lazy var rightViewForPassworTF: UIView = {
-        var rightViewForTF = createRightViewForTF()
-        return rightViewForTF
+        var paswordTF = setupCustomTextField(with: "Password")
+        paswordTF.rightView = UIView.createViewForTF()
+        paswordTF.rightViewMode = .always
+        
+        let eyeButton = UIButton().createEyeButton()
+        eyeButton.addTarget(
+            self,
+            action: #selector(toggleTextVisibility),
+            for: .touchUpInside
+        )
+        
+        paswordTF.rightView?.addSubview(eyeButton)
+        return paswordTF
     }()
     
     // MARK: - Button Properties
@@ -256,33 +264,5 @@ final class LoginView: UIView {
         customTF.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
         customTF.isSecureTextEntry = false
         return customTF
-    }
-    
-    /*
-     Метот для создания view которое помещаемся справа в textField, чтобы сделать
-     отступ
-     */
-    private func createRightViewForTF() -> UIView {
-        let rightView = UIView()
-        rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
-        
-        let eyeButton = createEyeButton()
-        rightView.addSubview(eyeButton)
-        
-        return rightView
-    }
-    
-    // метод для создания кнопки глаза для textField
-    private func createEyeButton() -> UIButton {
-        let bustomEyeButton = UIButton(type: .custom)
-        bustomEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
-        bustomEyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
-        bustomEyeButton.tintColor = #colorLiteral(red: 0.6980392337, green: 0.6980391741, blue: 0.6980391741, alpha: 1)
-        bustomEyeButton.addTarget(
-            self,
-            action: #selector(toggleTextVisibility),
-            for: .touchUpInside
-        )
-        return bustomEyeButton
     }
 }
