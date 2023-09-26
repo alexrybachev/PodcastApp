@@ -18,9 +18,21 @@ final class AuthViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(loginView)
         setupConcstaints()
+        
+        loginView.registerStackView.actionButton.addTarget(
+            self,
+            action: #selector(registerButtonDidTapped),
+            for: .touchUpInside)
     }
     
     // MARK: - Private Actions
+    // переход на экран createAccountVC
+    @objc private func registerButtonDidTapped() {
+        let createAccVC = CreateAccountViewController()
+//        createAccVC.modalPresentationStyle = .fullScreen
+//        showDetailViewController(createAccVC, sender: nil)
+        navigationController?.pushViewController(createAccVC, animated: true)
+    }
     
     // MARK: - Private Methods
     private func setupConcstaints() {

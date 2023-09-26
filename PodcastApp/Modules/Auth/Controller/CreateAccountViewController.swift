@@ -17,6 +17,20 @@ final class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(createAccView)
         setupConstraints()
+        navigationItem.hidesBackButton = true
+        
+        createAccView.continueButton.addTarget(
+            self,
+            action: #selector(continueButtonDidTapped),
+            for: .touchUpInside
+        )
+    }
+    
+    // MARK: - Private Actions
+    @objc private func continueButtonDidTapped() {
+        
+        let registrVC = RegistrationViewController()
+        navigationController?.pushViewController(registrVC, animated: true)
     }
     
     // MARK: - Private Methods

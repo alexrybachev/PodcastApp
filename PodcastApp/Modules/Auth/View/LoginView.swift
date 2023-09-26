@@ -66,7 +66,7 @@ final class LoginView: UIView {
         return contView
     }()
     
-    private lazy var registerStackView: AuthStackView = {
+    lazy var registerStackView: AuthStackView = {
         var registerSV = AuthStackView(authType: .register)
         return registerSV
     }()

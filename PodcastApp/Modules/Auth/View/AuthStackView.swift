@@ -20,6 +20,7 @@ class AuthStackView: UIStackView {
     
     // MARK: - Public Properties
     var authType: AuthType!
+    var actionButton = UIButton()
     
     // MARK: - Init
     init(authType: AuthType) {
@@ -41,14 +42,15 @@ class AuthStackView: UIStackView {
         
         let infoLabel = UILabel.setupCustomLabel(
             text: authType.isLogin ? "Don't have an account yet?" : "Already have an account?",
-            fontSize: UIFont.systemFont(ofSize: authType.isLogin ? 13 : 16)
+            fontSize: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13)
         )
         
-        let actionButton = UIButton.createAuthButton(
-            title: authType.isLogin ? "Register" : "Login",
-            font: UIFont.systemFont(ofSize: authType.isLogin ? 13 : 16),
-            color: authType.isLogin ? #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1) : #colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1)
+        actionButton = UIButton.createAuthButton(
+            title: authType.isLogin ? "Login" : "Register",
+            font: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13),
+            color: authType.isLogin ? #colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1): #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
         )
+   
         
         self.addArrangedSubview(infoLabel)
         self.addArrangedSubview(actionButton)

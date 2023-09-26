@@ -43,7 +43,7 @@ final class CreateAccountView: UIView {
         return customTF
     }()
     
-    private lazy var continueButton: UIButton = {
+    lazy var continueButton: UIButton = {
         var contButton = UIButton.createDefaultButton(text: "Continue with Email")
         return contButton
     }()
