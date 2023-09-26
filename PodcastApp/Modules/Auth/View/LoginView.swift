@@ -148,7 +148,6 @@ final class LoginView: UIView {
     }
     
     private func setupConstraints() {
-        
         loginLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(120)
             make.left.equalToSuperview().offset(16)
@@ -196,8 +195,6 @@ final class LoginView: UIView {
         registerStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-50)
-            make.height.equalTo(20)
-            make.width.equalTo(220)
         }
     }
     

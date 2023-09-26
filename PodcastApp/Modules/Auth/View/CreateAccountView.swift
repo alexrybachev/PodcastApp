@@ -68,27 +68,28 @@ final class CreateAccountView: UIView {
         return contView
     }()
     
-    private lazy var accountView: UIView = {
-        var accountView = UIView()
-        return accountView
-    }()
-    
-    private lazy var signInStatusLabel: UILabel = {
-        var signInStatusLabel = UILabel.setupCustomLabel(
+    private lazy var loginStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 1
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        
+        var accountStatusLabel = UILabel.setupCustomLabel(
             text: "Already have an account?",
             fontSize: UIFont.systemFont(ofSize: 16)
         )
-        signInStatusLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-        return signInStatusLabel
+        
+        accountStatusLabel.textColor = #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
+        
+        var loginButton = UIButton.createPurpleLoginButton()
+        
+        stackView.addArrangedSubview(accountStatusLabel)
+        stackView.addArrangedSubview(loginButton)
+        
+        return stackView
     }()
     
-    private lazy var loginButton: UIButton = {
-        var registerButton = UIButton(type: .system)
-        registerButton.setTitle("Login", for: .normal)
-        registerButton.tintColor = #colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        return registerButton
-    }()
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -127,10 +128,7 @@ final class CreateAccountView: UIView {
         mainView.addSubview(continueButton)
         mainView.addSubview(googleButton)
         mainView.addSubview(continueView)
-        mainView.addSubview(accountView)
-        
-        accountView.addSubview(signInStatusLabel)
-        accountView.addSubview(loginButton)
+        mainView.addSubview(loginStackView)
     }
     
     private func setupConstraints() {
@@ -166,33 +164,22 @@ final class CreateAccountView: UIView {
         }
         
         continueView.snp.makeConstraints { make in
-            make.top.equalTo(continueButton.snp.bottom).offset(38)
+            make.top.equalTo(continueButton.snp.bottom).offset(32)
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
             make.width.equalTo(300)
         }
         
         googleButton.snp.makeConstraints { make in
-            make.top.equalTo(continueView.snp.bottom).offset(35)
+            make.top.equalTo(continueView.snp.bottom).offset(32)
             make.left.equalToSuperview().offset(25)
             make.right.equalToSuperview().offset(-25)
             make.height.equalTo(56)
         }
         
-        accountView.snp.makeConstraints { make in
+        loginStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-50)
-            make.height.equalTo(20)
-            make.width.equalTo(220)
-        }
-        
-        signInStatusLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-        }
-        
-        loginButton.snp.makeConstraints { make in
-            make.left.equalTo(signInStatusLabel.snp.right).offset(2)
-            make.height.equalTo(signInStatusLabel.snp.height)
         }
     }
 }
