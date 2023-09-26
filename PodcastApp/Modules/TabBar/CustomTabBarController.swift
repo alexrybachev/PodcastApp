@@ -12,7 +12,7 @@ class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setControllers()
-       
+        setAppearance()
     }
     
     private func setControllers() {
@@ -38,6 +38,11 @@ class CustomTabBarController: UITabBarController {
         favoritesVC,
         settingsVC
         ]
+    }
+    
+    private func setAppearance() {
+        view.backgroundColor = .systemBackground
+        tabBar.backgroundColor = .systemGray6
     }
 
 }
