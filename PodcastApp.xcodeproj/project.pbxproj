@@ -30,6 +30,8 @@
 		3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */; };
 		3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */; };
 		3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */; };
+		3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */; };
+		3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +393,7 @@
 			children = (
 				0A125D3A2AC0CA230006EACA /* AuthViewController.swift */,
 				3C74A4CE2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift */,
+				3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 			children = (
 				3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */,
 				3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */,
+				3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -487,11 +493,13 @@
 				3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
 				3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */,
+				3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */,
 				3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */,
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
 				3C74A4CF2AC1CE1A00CDEEAA /* CreateAccauntViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
+				3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */,
 				0A125D332AC0CA0A0006EACA /* SearchViewController.swift in Sources */,
 				0A125D352AC0CA0A0006EACA /* HomeViewController.swift in Sources */,
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
