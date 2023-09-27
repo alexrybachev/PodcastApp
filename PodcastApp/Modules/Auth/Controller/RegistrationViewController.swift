@@ -15,7 +15,7 @@ final class RegistrationViewController: UIViewController {
         font: UIFont.boldSystemFont(ofSize: 24),
         color: .black
     )
-
+    
     // MARK: - FirstName Properties
     private let firstNameLabel = CustomLabel(
         title: "First Name",
@@ -55,7 +55,7 @@ final class RegistrationViewController: UIViewController {
         )
         lastNameSV.axis = .vertical
         lastNameSV.spacing = 10
-
+        
         return lastNameSV
     }()
     
@@ -77,7 +77,7 @@ final class RegistrationViewController: UIViewController {
         )
         emailSV.axis = .vertical
         emailSV.spacing = 10
-
+        
         return emailSV
     }()
     
@@ -128,7 +128,7 @@ final class RegistrationViewController: UIViewController {
         )
         passSV.axis = .vertical
         passSV.spacing = 10
-
+        
         return passSV
     }()
     

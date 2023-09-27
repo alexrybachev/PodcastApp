@@ -51,18 +51,29 @@ final class AuthViewController: UIViewController {
     
     private lazy var registerStackView: AuthStackView = {
         var registrSV = AuthStackView(authType: .register)
+        registrSV.actionButton.addTarget(
+            self,
+            action: #selector(registerButtonDidTapped),
+            for: .touchUpInside
+        )
         return registrSV
     }()
-
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
         view.backgroundColor = .white
-    
+        
         setupConstraints()
     }
-
+    
+    // MARK: - Private Actions
+    @objc private func registerButtonDidTapped() {
+        let createAccVC = CreateAccountViewController()
+        navigationController?.pushViewController(createAccVC, animated: true)
+    }
+    
     // MARK: - Private Methods
     private func addViews() {
         view.addSubview(loginLabel)

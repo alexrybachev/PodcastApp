@@ -17,7 +17,7 @@ class CustomButton: UIButton {
     
     init(title: String, font: UIFont = UIFont.boldSystemFont(ofSize: 18), buttonType: CustomButtonType, color: UIColor = .white) {
         super.init(frame: .zero)
-
+        
         switch buttonType {
             
         case .blueButton:

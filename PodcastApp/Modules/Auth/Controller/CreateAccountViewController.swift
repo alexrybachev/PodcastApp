@@ -34,10 +34,22 @@ final class CreateAccountViewController: UIViewController {
         border: false
     )
     
-    private let continueButton = CustomButton(
-        title: "Continue with Email",
-        buttonType: .blueButton
-    )
+    private lazy var continueButton: CustomButton = {
+        var contButton = CustomButton(
+            title: "Continue with Email",
+            buttonType: .blueButton
+        )
+        contButton.addTarget(
+            self,
+            action: #selector(continueButtonDidTapped),
+            for: .touchUpInside
+        )
+        return contButton
+    }()
+    //    private let continueButton = CustomButton(
+    //        title: "Continue with Email",
+    //        buttonType: .blueButton
+    //    )
     
     private let continueView = ContinueView()
     
@@ -49,6 +61,10 @@ final class CreateAccountViewController: UIViewController {
     private lazy var loginStackView: AuthStackView = {
         var loginSV = AuthStackView(authType: .login)
         loginSV.actionButton.setTitleColor(#colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1), for: .normal)
+        loginSV.actionButton.addTarget(
+            self, action: #selector(loginButtonDidTapped),
+            for: .touchUpInside
+        )
         return loginSV
     }()
     
@@ -63,6 +79,14 @@ final class CreateAccountViewController: UIViewController {
     }
     
     // MARK: - Private Actions
+    @objc private func loginButtonDidTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func continueButtonDidTapped() {
+        let registerVC = RegistrationViewController()
+        navigationController?.pushViewController(registerVC, animated: true)
+    }
     
     // MARK: - Private Methods
     private func addViews() {
