@@ -9,6 +9,7 @@ import UIKit
 
 class ContinueView: UIView {
     
+    // MARK: - Private Properties
     private lazy var mainLabel: CustomLabel = {
         var customLabel = CustomLabel(
             title: "Or continue with",
@@ -33,9 +34,7 @@ class ContinueView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(mainLabel)
-        self.addSubview(leftView)
-        self.addSubview(rightView)
+        addViews()
         setupConstraints()
     }
     
@@ -44,6 +43,12 @@ class ContinueView: UIView {
     }
     
     // MARK: - Private Methods
+    private func addViews() {
+        self.addSubview(mainLabel)
+        self.addSubview(leftView)
+        self.addSubview(rightView)
+    }
+    
     private func setupConstraints() {
         mainLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
