@@ -114,7 +114,6 @@ final class AuthViewController: UIViewController {
         continueView.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom).offset(45)
             make.centerX.equalToSuperview()
-            make.width.equalTo(300)
         }
         
         googleButton.snp.makeConstraints { make in

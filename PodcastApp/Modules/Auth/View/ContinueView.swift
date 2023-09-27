@@ -12,7 +12,7 @@ class ContinueView: UIView {
     private lazy var mainLabel: CustomLabel = {
         var customLabel = CustomLabel(
             title: "Or continue with",
-            font:  UIFont.systemFont(ofSize: 14),
+            font:  UIFont.boldSystemFont(ofSize: 15),
             color: #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
         )
         return customLabel

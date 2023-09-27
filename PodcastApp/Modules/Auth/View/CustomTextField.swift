@@ -33,7 +33,7 @@ class CustomTextField: UITextField {
         }
         
         self.placeholder = placeholder
-        //        self.backgroundColor = .secondarySystemBackground
+        self.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
         self.layer.cornerRadius = 13
         self.returnKeyType = .done
         self.autocorrectionType = .no
@@ -58,10 +58,12 @@ class CustomTextField: UITextField {
             rightView.addSubview(customEyeButton)
             self.rightView = rightView
             self.rightViewMode = .always
+        } else {
+            self.layer.cornerRadius = 25
         }
         
         self.leftViewMode = .always
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: self.frame.size.height))
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.size.height))
     }
     
     required init?(coder: NSCoder) {

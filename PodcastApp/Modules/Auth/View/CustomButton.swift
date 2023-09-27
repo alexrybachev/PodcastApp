@@ -15,7 +15,7 @@ class CustomButton: UIButton {
         case smallButton
     }
     
-    init(title: String, font: UIFont, buttonType: CustomButtonType, color: UIColor = .white) {
+    init(title: String, font: UIFont = UIFont.boldSystemFont(ofSize: 18), buttonType: CustomButtonType, color: UIColor = .white) {
         super.init(frame: .zero)
 
         switch buttonType {
@@ -23,7 +23,7 @@ class CustomButton: UIButton {
         case .blueButton:
             self.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
             self.layer.cornerRadius = 25
-            self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            self.titleLabel?.font = font
             self.setTitle(title, for: .normal)
             
         case .googleButton:
@@ -39,7 +39,7 @@ class CustomButton: UIButton {
             let label = UILabel()
             label.text = title
             label.textColor = .black
-            label.font = UIFont.boldSystemFont(ofSize: 18)
+            label.font = font
             label.textAlignment = .center
             
             self.addSubview(imageView)
