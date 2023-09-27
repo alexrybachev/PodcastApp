@@ -159,9 +159,22 @@ final class RegistrationViewController: UIViewController {
         setupTextFields()
     }
     
+    // MARK: - Override Methods
+    // метод для скрытия клавиатуры по тапу на экран
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     // MARK: - Private Actions
     @objc private func loginButtonDidTapped() {
-        
+        //возвращаемся на экран AuthViewController
+        if let authVC = navigationController?.viewControllers.first as? AuthViewController {
+            // очищаем текст в AuthViewController при переходе
+            authVC.loginField.text = ""
+            authVC.passwordField.text = ""
+            navigationController?.popToViewController(authVC, animated: true)
+        }
     }
     
     // MARK: - Private methods

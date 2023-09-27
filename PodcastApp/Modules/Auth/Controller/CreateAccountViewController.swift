@@ -46,7 +46,7 @@ final class CreateAccountViewController: UIViewController {
         )
         return contButton
     }()
-
+    
     private let continueView = ContinueView()
     
     private let googleButton = CustomButton(
@@ -75,8 +75,20 @@ final class CreateAccountViewController: UIViewController {
         navigationItem.hidesBackButton = true
     }
     
+    // MARK: - Override Methods
+    // метод для скрытия клавиатуры по тапу на экран
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     // MARK: - Private Actions
     @objc private func loginButtonDidTapped() {
+        // очищаем textField в AuthViewController при возврате на экран
+        if let authVC = navigationController?.viewControllers.first as? AuthViewController {
+            authVC.loginField.text = ""
+            authVC.passwordField.text = ""
+        }
         navigationController?.popViewController(animated: true)
     }
     

@@ -17,7 +17,7 @@ final class AuthViewController: UIViewController {
         color: #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
     )
     
-    private let loginField = CustomTextField(
+    let loginField = CustomTextField(
         fieldType: .withEyeButton,
         placeholder: "Login",
         border: true
@@ -29,7 +29,7 @@ final class AuthViewController: UIViewController {
         color: #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
     )
     
-    private let passwordField = CustomTextField(
+    let passwordField = CustomTextField(
         fieldType: .withEyeButton,
         placeholder: "Password",
         border: true
