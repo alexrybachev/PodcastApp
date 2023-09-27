@@ -9,13 +9,16 @@ import UIKit
 
 class CustomTextField: UITextField {
     
+    // MARK: - Enum
     enum CustomTextFieldType {
         case withEyeButton
         case withoutEyeButton
     }
     
+    // MARK: - Private Properties
     private let authFieldType: CustomTextFieldType
     
+    // MARK: - Init
     init(fieldType: CustomTextFieldType, placeholder: String, border: Bool) {
         self.authFieldType = fieldType
         super.init(frame: .zero)

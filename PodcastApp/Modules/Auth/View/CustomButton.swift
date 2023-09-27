@@ -9,12 +9,14 @@ import UIKit
 
 class CustomButton: UIButton {
     
+    // MARK: - Enum
     enum CustomButtonType {
         case blueButton
         case googleButton
         case smallButton
     }
     
+    // MARK: - Init
     init(title: String, font: UIFont = UIFont.boldSystemFont(ofSize: 18), buttonType: CustomButtonType, color: UIColor = .white) {
         super.init(frame: .zero)
         
@@ -58,7 +60,6 @@ class CustomButton: UIButton {
                 make.centerY.equalTo(self.snp.centerY)
             }
             
-            
         case .smallButton:
             self.titleLabel?.font = font
             self.setTitle(title, for: .normal)
@@ -69,5 +70,4 @@ class CustomButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
