@@ -24,15 +24,8 @@
 		0A125D442AC0D26C0006EACA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D432AC0D26C0006EACA /* SnapKit */; };
 		0A125D472AC0D2BD0006EACA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D462AC0D2BD0006EACA /* Realm */; };
 		0A125D492AC0D2BD0006EACA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D482AC0D2BD0006EACA /* RealmSwift */; };
-		3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */; };
 		3C74A4CF2AC1CE1A00CDEEAA /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4CE2AC1CE1A00CDEEAA /* CreateAccountViewController.swift */; };
-		3C74A4D12AC1CE5B00CDEEAA /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */; };
-		3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */; };
-		3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */; };
-		3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */; };
 		3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */; };
-		3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */; };
-		3C74A4DD2AC2C3C400CDEEAA /* UILabel+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */; };
 		3C74A4DF2AC3503300CDEEAA /* AuthStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */; };
 		3C74A4E12AC4171B00CDEEAA /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4E02AC4171B00CDEEAA /* CustomLabel.swift */; };
 		3C74A4E32AC41C1F00CDEEAA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4E22AC41C1F00CDEEAA /* CustomTextField.swift */; };
@@ -56,15 +49,8 @@
 		0A125D2F2AC0CA0A0006EACA /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		0A125D3A2AC0CA230006EACA /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0A125D3D2AC0CAB90006EACA /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3C74A4CE2AC1CE1A00CDEEAA /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
-		3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
-		3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3C74A4D82AC2BFF400CDEEAA /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extenstion.swift"; sourceTree = "<group>"; };
 		3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStackView.swift; sourceTree = "<group>"; };
 		3C74A4E02AC4171B00CDEEAA /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		3C74A4E22AC41C1F00CDEEAA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -191,10 +177,6 @@
 		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				3C74A4D22AC1D6FB00CDEEAA /* UIButton+Extension.swift */,
-				3C74A4D42AC1DA2D00CDEEAA /* UITextField+Extension.swift */,
-				3C74A4D62AC2092300CDEEAA /* UIView+Extension.swift */,
-				3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */,
 				0A125D382AC0CA230006EACA /* Model */,
 				0A125D3B2AC0CA230006EACA /* View */,
 				0A125D392AC0CA230006EACA /* Controller */,
@@ -415,9 +397,6 @@
 			isa = PBXGroup;
 			children = (
 				3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */,
-				3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */,
-				3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */,
-				3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */,
 				3C74A4E02AC4171B00CDEEAA /* CustomLabel.swift */,
 				3C74A4E22AC41C1F00CDEEAA /* CustomTextField.swift */,
 				3C74A4E42AC4259300CDEEAA /* CustomButton.swift */,
@@ -508,12 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C74A4D52AC1DA2D00CDEEAA /* UITextField+Extension.swift in Sources */,
-				3C74A4DD2AC2C3C400CDEEAA /* UILabel+Extenstion.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
-				3C74A4D72AC2092300CDEEAA /* UIView+Extension.swift in Sources */,
-				3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */,
-				3C74A4D32AC1D6FB00CDEEAA /* UIButton+Extension.swift in Sources */,
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
 				3C74A4CF2AC1CE1A00CDEEAA /* CreateAccountViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
@@ -528,10 +502,8 @@
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 				3C74A4E52AC4259300CDEEAA /* CustomButton.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
-				3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
-				3C74A4D12AC1CE5B00CDEEAA /* CreateAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
