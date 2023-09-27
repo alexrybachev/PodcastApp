@@ -34,6 +34,10 @@
 		3C74A4DB2AC2C04200CDEEAA /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */; };
 		3C74A4DD2AC2C3C400CDEEAA /* UILabel+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */; };
 		3C74A4DF2AC3503300CDEEAA /* AuthStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */; };
+		3C74A4E12AC4171B00CDEEAA /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4E02AC4171B00CDEEAA /* CustomLabel.swift */; };
+		3C74A4E32AC41C1F00CDEEAA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4E22AC41C1F00CDEEAA /* CustomTextField.swift */; };
+		3C74A4E52AC4259300CDEEAA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4E42AC4259300CDEEAA /* CustomButton.swift */; };
+		3C74A4E72AC42B6300CDEEAA /* ContinueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C74A4E62AC42B6300CDEEAA /* ContinueView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +66,10 @@
 		3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		3C74A4DC2AC2C3C400CDEEAA /* UILabel+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extenstion.swift"; sourceTree = "<group>"; };
 		3C74A4DE2AC3503300CDEEAA /* AuthStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStackView.swift; sourceTree = "<group>"; };
+		3C74A4E02AC4171B00CDEEAA /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		3C74A4E22AC41C1F00CDEEAA /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		3C74A4E42AC4259300CDEEAA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		3C74A4E62AC42B6300CDEEAA /* ContinueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +418,10 @@
 				3C74A4CC2AC173BA00CDEEAA /* LoginView.swift */,
 				3C74A4D02AC1CE5B00CDEEAA /* CreateAccountView.swift */,
 				3C74A4DA2AC2C04200CDEEAA /* RegistrationView.swift */,
+				3C74A4E02AC4171B00CDEEAA /* CustomLabel.swift */,
+				3C74A4E22AC41C1F00CDEEAA /* CustomTextField.swift */,
+				3C74A4E42AC4259300CDEEAA /* CustomButton.swift */,
+				3C74A4E62AC42B6300CDEEAA /* ContinueView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -506,11 +518,15 @@
 				3C74A4CF2AC1CE1A00CDEEAA /* CreateAccountViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
 				3C74A4DF2AC3503300CDEEAA /* AuthStackView.swift in Sources */,
+				3C74A4E12AC4171B00CDEEAA /* CustomLabel.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
+				3C74A4E32AC41C1F00CDEEAA /* CustomTextField.swift in Sources */,
+				3C74A4E72AC42B6300CDEEAA /* ContinueView.swift in Sources */,
 				3C74A4D92AC2BFF500CDEEAA /* RegistrationViewController.swift in Sources */,
 				0A125D332AC0CA0A0006EACA /* SearchViewController.swift in Sources */,
 				0A125D352AC0CA0A0006EACA /* HomeViewController.swift in Sources */,
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
+				3C74A4E52AC4259300CDEEAA /* CustomButton.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
 				3C74A4CD2AC173BA00CDEEAA /* LoginView.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
