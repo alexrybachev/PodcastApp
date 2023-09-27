@@ -13,14 +13,16 @@ class PopularCategoryCell: UICollectionViewCell {
     
     //MARK: - UI Elements
     
-    let headerLabel: UILabel = {
-        let label = UILabel()
+    let headerLabel: PaddledLabel = {
+        let label = PaddledLabel()
         label.textColor = .black
         label.text = "Category"
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         label.minimumScaleFactor = 0.1
         label.adjustsFontSizeToFitWidth = true
+        label.paddingLeft = 8
+        label.paddingRight = 8
         return label
     }()
     

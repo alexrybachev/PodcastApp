@@ -30,6 +30,7 @@
 		28D432992AC1F6F20059D161 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432982AC1F6F20059D161 /* HomeView.swift */; };
 		28D4329B2AC1F9CB0059D161 /* PopularCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4329A2AC1F9CB0059D161 /* PopularCategoryCell.swift */; };
 		28D4329E2AC1F9FC0059D161 /* HomeViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4329D2AC1F9FC0059D161 /* HomeViewSectionHeader.swift */; };
+		28D432A02AC419300059D161 /* UILabel + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4329F2AC419300059D161 /* UILabel + Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		28D432982AC1F6F20059D161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		28D4329A2AC1F9CB0059D161 /* PopularCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryCell.swift; sourceTree = "<group>"; };
 		28D4329D2AC1F9FC0059D161 /* HomeViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSectionHeader.swift; sourceTree = "<group>"; };
+		28D4329F2AC419300059D161 /* UILabel + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UILabel + Ext.swift"; path = "PodcastApp/Extensions/UILabel + Ext.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0B7B492AC0AC8100C1D17B /* App */,
-				0A0B7B522AC0B04600C1D17B /* Extensions */,
+				28D432A12AC419570059D161 /* Extensions */,
 				0A0B7B4B2AC0AE3800C1D17B /* Modules */,
 				0A0B7B4A2AC0ADAC00C1D17B /* SupportingFiles */,
 			);
@@ -163,13 +165,6 @@
 				0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0A0B7B522AC0B04600C1D17B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
@@ -418,6 +413,14 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		28D432A12AC419570059D161 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				28D4329F2AC419300059D161 /* UILabel + Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -508,6 +511,7 @@
 				0A125D332AC0CA0A0006EACA /* SearchViewController.swift in Sources */,
 				28D432932AC164B30059D161 /* PodcastHomeViewCell.swift in Sources */,
 				0A125D352AC0CA0A0006EACA /* HomeViewController.swift in Sources */,
+				28D432A02AC419300059D161 /* UILabel + Ext.swift in Sources */,
 				28D4329E2AC1F9FC0059D161 /* HomeViewSectionHeader.swift in Sources */,
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
