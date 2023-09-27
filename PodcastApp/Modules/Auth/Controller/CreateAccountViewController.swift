@@ -46,11 +46,7 @@ final class CreateAccountViewController: UIViewController {
         )
         return contButton
     }()
-    //    private let continueButton = CustomButton(
-    //        title: "Continue with Email",
-    //        buttonType: .blueButton
-    //    )
-    
+
     private let continueView = ContinueView()
     
     private let googleButton = CustomButton(
@@ -75,6 +71,7 @@ final class CreateAccountViewController: UIViewController {
         addViews()
         setupConstraints()
         
+        emailField.delegate = self
         navigationItem.hidesBackButton = true
     }
     
@@ -148,5 +145,12 @@ final class CreateAccountViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
+    }
+}
+
+extension CreateAccountViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
 }

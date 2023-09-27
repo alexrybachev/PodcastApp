@@ -141,6 +141,11 @@ final class RegistrationViewController: UIViewController {
         var loginSV = AuthStackView(authType: .login)
         loginSV.actionButton.setTitleColor(#colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1), for: .normal
         )
+        loginSV.actionButton.addTarget(
+            self,
+            action: #selector(loginButtonDidTapped),
+            for: .touchUpInside
+        )
         return loginSV
     }()
     
@@ -151,6 +156,12 @@ final class RegistrationViewController: UIViewController {
         view.backgroundColor = .white
         addViews()
         setupConstraints()
+        setupTextFields()
+    }
+    
+    // MARK: - Private Actions
+    @objc private func loginButtonDidTapped() {
+        
     }
     
     // MARK: - Private methods
@@ -169,7 +180,6 @@ final class RegistrationViewController: UIViewController {
         welcomeLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.centerX.equalToSuperview()
-            
         }
         
         firstNameStackView.snp.makeConstraints { make in
@@ -235,5 +245,21 @@ final class RegistrationViewController: UIViewController {
             make.height.equalTo(45)
         }
     }
+    
+    private func setupTextFields() {
+        firstNameField.delegate = self
+        lastNameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
+        confirmPasswordField.delegate = self
+    }
 }
+
+extension RegistrationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+}
+
 

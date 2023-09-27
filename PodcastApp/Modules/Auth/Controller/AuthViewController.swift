@@ -71,6 +71,13 @@ final class AuthViewController: UIViewController {
         passwordField.delegate = self
     }
     
+    // MARK: - Override Methods
+    // метод для скрытия клавиатуры по тапу на экран
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     // MARK: - Private Actions
     @objc private func registerButtonDidTapped() {
         let createAccVC = CreateAccountViewController()
@@ -143,8 +150,8 @@ final class AuthViewController: UIViewController {
 // MARK: - UITextFieldDelegate
 extension AuthViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.endEditing(true)
-            return true
-        }
+        textField.endEditing(true)
+        return true
+    }
 }
 
