@@ -8,20 +8,6 @@
 import UIKit
 
 class PaddledLabel: UILabel {
-    //    private let contentInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-    //
-    //    override func drawText(in rect: CGRect) {
-    //        let insetsRect = rect.inset(by: contentInsets)
-    //        let textRect = super.textRect(forBounds: insetsRect, limitedToNumberOfLines: numberOfLines)
-    //        super.drawText(in: textRect)
-    //    }
-    //
-    //    override var intrinsicContentSize: CGSize {
-    //        var size = super.intrinsicContentSize
-    //        size.width += contentInsets.left + contentInsets.right
-    //        size.height += contentInsets.top + contentInsets.bottom
-    //        return size
-    //    }
     
     var textEdgeInsets = UIEdgeInsets.zero {
         didSet { invalidateIntrinsicContentSize() }

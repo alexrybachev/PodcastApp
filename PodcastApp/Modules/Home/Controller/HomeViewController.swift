@@ -55,7 +55,8 @@ extension HomeViewController: UICollectionViewDataSource {
         case 1:
             categories.count
         default:
-            podcasts[section].podcasts.count
+//            podcasts[section].podcasts.count
+            20
         }
     }
     
@@ -71,8 +72,8 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PodcastHomeViewCell.cellID, for: indexPath) as! PodcastHomeViewCell
-            let podcastInfo = podcasts[indexPath.section].podcasts[indexPath.item]
-            cell.configureCell(podcastInfo)
+//            let podcastInfo = podcasts[indexPath.section].podcasts[indexPath.item]
+//            cell.configureCell(podcastInfo)
             return cell
         }
     }
@@ -150,7 +151,7 @@ extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 12, trailing: 0)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(200)) // absolute(72)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)) // absolute(72)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
     
         let section = NSCollectionLayoutSection(group: group)
