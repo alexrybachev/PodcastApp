@@ -15,17 +15,14 @@ class CustomButton: UIButton {
         case smallButton
     }
     
-    init(title: String,font: UIFont, buttonType: CustomButtonType) {
+    init(title: String, font: UIFont, buttonType: CustomButtonType, color: UIColor = .white) {
         super.init(frame: .zero)
-        
-   
-        
+
         switch buttonType {
             
         case .blueButton:
             self.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
             self.layer.cornerRadius = 25
-            self.tintColor = .white
             self.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             self.setTitle(title, for: .normal)
             
@@ -65,6 +62,7 @@ class CustomButton: UIButton {
         case .smallButton:
             self.titleLabel?.font = font
             self.setTitle(title, for: .normal)
+            self.setTitleColor(color, for: .normal)
         }
     }
     

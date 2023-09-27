@@ -41,6 +41,7 @@ final class AuthViewController: UIViewController {
         buttonType: .blueButton
     )
     
+    
     private let continueView = ContinueView()
     
     private let googleButton = CustomButton(
@@ -49,8 +50,11 @@ final class AuthViewController: UIViewController {
         buttonType: .googleButton
     )
     
-    
-    
+    private lazy var registerStackView: AuthStackView = {
+        var registrSV = AuthStackView(authType: .register)
+        return registrSV
+    }()
+
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +62,7 @@ final class AuthViewController: UIViewController {
         view.backgroundColor = .white
     
         setupConstraints()
-        continueView.backgroundColor = .red
+  
     }
     
     // MARK: - Private Actions
@@ -72,6 +76,7 @@ final class AuthViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(continueView)
         view.addSubview(googleButton)
+        view.addSubview(registerStackView)
     }
     
     private func setupConstraints() {
@@ -117,6 +122,11 @@ final class AuthViewController: UIViewController {
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
             make.height.equalTo(56)
+        }
+        
+        registerStackView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
         
     }

@@ -40,17 +40,20 @@ class AuthStackView: UIStackView {
         self.alignment = .fill
         self.distribution = .fill
         
-        let infoLabel = UILabel.setupCustomLabel(
-            text: authType.isLogin ? "Don't have an account yet?" : "Already have an account?",
-            fontSize: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13)
+        let infoLabel = CustomLabel(
+            title: authType.isLogin ? "Don't have an account yet?" : "Already have an account?",
+            font: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13),
+            color: authType.isLogin ? #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1) : #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
+            
         )
         
-        actionButton = UIButton.createAuthButton(
+        
+        actionButton = CustomButton(
             title: authType.isLogin ? "Login" : "Register",
             font: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13),
-            color: authType.isLogin ? #colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1): #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
+            buttonType: .smallButton,
+            color: #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
         )
-   
         
         self.addArrangedSubview(infoLabel)
         self.addArrangedSubview(actionButton)
