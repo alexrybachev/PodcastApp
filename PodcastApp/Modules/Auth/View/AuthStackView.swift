@@ -44,7 +44,6 @@ class AuthStackView: UIStackView {
             title: authType.isLogin ? "Already have an account?" : "Don't have an account yet?",
             font: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13),
             color: authType.isLogin ? #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1) : #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
-            
         )
         
         actionButton = CustomButton(

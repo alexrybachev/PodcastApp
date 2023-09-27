@@ -23,6 +23,16 @@ class CustomTextField: UITextField {
         self.authFieldType = fieldType
         super.init(frame: .zero)
         
+        self.placeholder = placeholder
+        self.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        self.layer.cornerRadius = 13
+        self.returnKeyType = .done
+        self.autocorrectionType = .no
+        self.autocapitalizationType = .none
+        
+        self.leftViewMode = .always
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.size.height))
+        
         if border {
             self.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
             self.layer.borderWidth = 1
@@ -35,15 +45,9 @@ class CustomTextField: UITextField {
             self.attributedPlaceholder = placeholderText
         }
         
-        self.placeholder = placeholder
-        self.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
-        self.layer.cornerRadius = 13
-        self.returnKeyType = .done
-        self.autocorrectionType = .no
-        self.autocapitalizationType = .none
-        
-        if fieldType == .withEyeButton {
+        switch fieldType {
             
+        case .withEyeButton:
             let rightView = UIView()
             rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
             
@@ -61,12 +65,9 @@ class CustomTextField: UITextField {
             rightView.addSubview(customEyeButton)
             self.rightView = rightView
             self.rightViewMode = .always
-        } else {
+        case .withoutEyeButton:
             self.layer.cornerRadius = 25
         }
-        
-        self.leftViewMode = .always
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.size.height))
     }
     
     required init?(coder: NSCoder) {
@@ -85,5 +86,4 @@ class CustomTextField: UITextField {
             sender.setImage(image, for: .normal)
         }
     }
-    
 }
