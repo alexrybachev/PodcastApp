@@ -24,7 +24,7 @@ final class CustomTextField: UITextField {
         super.init(frame: .zero)
         
         self.placeholder = placeholder
-        self.backgroundColor = #colorLiteral(red: 0.964484036, green: 0.9729270339, blue: 0.9972267747, alpha: 1)
+        self.backgroundColor = UIColor.textFieldColorTwo
         self.layer.cornerRadius = 13
         self.returnKeyType = .done
         self.autocorrectionType = .no
@@ -39,11 +39,11 @@ final class CustomTextField: UITextField {
         if border {
             self.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
             self.layer.borderWidth = 1
-            self.backgroundColor = #colorLiteral(red: 0.984313786, green: 0.984313786, blue: 0.9843136668, alpha: 1)
+            self.backgroundColor = UIColor.textFieldColorOne
             
             let placeholderText = NSAttributedString(
                 string: placeholder,
-                attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)]
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: 0.61, green: 0.64, blue: 0.67, alpha: 1.00)]
             )
             self.attributedPlaceholder = placeholderText
         }

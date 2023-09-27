@@ -13,8 +13,7 @@ final class AuthViewController: UIViewController {
     // MARK: - UI Components
     private let loginLabel = CustomLabel(
         title: "Enter login",
-        font: UIFont.systemFont(ofSize: 15),
-        color: #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
+        font: UIFont.systemFont(ofSize: 15)
     )
     
     let loginField = CustomTextField(
@@ -25,8 +24,7 @@ final class AuthViewController: UIViewController {
     
     private let passwordLabel = CustomLabel(
         title: "Password",
-        font: UIFont.systemFont(ofSize: 15),
-        color: #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1)
+        font: UIFont.systemFont(ofSize: 15)
     )
     
     let passwordField = CustomTextField(

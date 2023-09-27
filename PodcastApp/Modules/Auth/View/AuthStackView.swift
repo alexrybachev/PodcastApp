@@ -50,7 +50,7 @@ final class AuthStackView: UIStackView {
             title: authType.isLogin ? "Login" : "Register",
             font: UIFont.systemFont(ofSize: authType.isLogin ? 16 : 13),
             buttonType: .smallButton,
-            color: #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
+            color: authType.isLogin ? UIColor.customPurple : UIColor.customGreen
         )
         
         self.addArrangedSubview(infoLabel)

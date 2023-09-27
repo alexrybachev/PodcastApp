@@ -23,7 +23,7 @@ final class CustomButton: UIButton {
         switch buttonType {
             
         case .blueButton:
-            self.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+            self.backgroundColor = UIColor.customBlue
             self.layer.cornerRadius = 25
             self.titleLabel?.font = font
             self.setTitle(title, for: .normal)

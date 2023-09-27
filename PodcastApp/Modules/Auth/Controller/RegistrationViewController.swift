@@ -16,11 +16,23 @@ final class RegistrationViewController: UIViewController {
         color: .black
     )
     
-    // MARK: - FirstName Properties
-    private let firstNameLabel = CustomLabel(
-        title: "First Name",
-        color: #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
+    private let signUpButton = CustomButton(
+        title: "Sign Up",
+        buttonType: .blueButton
     )
+    
+    private lazy var loginStackView: AuthStackView = {
+        var loginSV = AuthStackView(authType: .login)
+        loginSV.actionButton.addTarget(
+            self,
+            action: #selector(loginButtonDidTapped),
+            for: .touchUpInside
+        )
+        return loginSV
+    }()
+    
+    // MARK: - FirstName Properties
+    private let firstNameLabel = CustomLabel(title: "First Name")
     
     private let firstNameField = CustomTextField(
         fieldType: .withoutEyeButton,
@@ -38,10 +50,7 @@ final class RegistrationViewController: UIViewController {
     }()
     
     // MARK: - LastName Properties
-    private let lastNameLabel = CustomLabel(
-        title: "Last Name",
-        color: #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
-    )
+    private let lastNameLabel = CustomLabel(title: "Last Name")
     
     private let lastNameField = CustomTextField(
         fieldType: .withoutEyeButton,
@@ -59,10 +68,7 @@ final class RegistrationViewController: UIViewController {
     }()
     
     // MARK: - Email Properties
-    private let emailLabel = CustomLabel(
-        title: "E-mail",
-        color: #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
-    )
+    private let emailLabel = CustomLabel(title: "E-mail")
     
     private let emailField = CustomTextField(
         fieldType: .withoutEyeButton,
@@ -80,10 +86,7 @@ final class RegistrationViewController: UIViewController {
     }()
     
     // MARK: - Password Properties
-    private let passwordLabel = CustomLabel(
-        title: "Password",
-        color: #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
-    )
+    private let passwordLabel = CustomLabel(title: "Password")
     
     private lazy var passwordField: CustomTextField = {
         var passField = CustomTextField(
@@ -105,10 +108,7 @@ final class RegistrationViewController: UIViewController {
     }()
     
     // MARK: - ConfirmPassword Properties
-    private let confirmPasswordLabel = CustomLabel(
-        title: "Confirm Password",
-        color: #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
-    )
+    private let confirmPasswordLabel = CustomLabel(title: "Confirm Password")
     
     private lazy var confirmPasswordField: CustomTextField = {
         var passField = CustomTextField(
@@ -126,26 +126,9 @@ final class RegistrationViewController: UIViewController {
         )
         passSV.axis = .vertical
         passSV.spacing = 10
-        
         return passSV
     }()
     
-    private let signUpButton = CustomButton(
-        title: "Sign Up",
-        buttonType: .blueButton
-    )
-    
-    private lazy var loginStackView: AuthStackView = {
-        var loginSV = AuthStackView(authType: .login)
-        loginSV.actionButton.setTitleColor(#colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1), for: .normal
-        )
-        loginSV.actionButton.addTarget(
-            self,
-            action: #selector(loginButtonDidTapped),
-            for: .touchUpInside
-        )
-        return loginSV
-    }()
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {

@@ -24,8 +24,7 @@ final class CreateAccountViewController: UIViewController {
     }()
     
     private let emailLabel = CustomLabel(
-        title: "Email",
-        color: #colorLiteral(red: 0.4713656902, green: 0.5105890036, blue: 0.5429269075, alpha: 1)
+        title: "Email"
     )
     
     private let emailField = CustomTextField(
@@ -56,7 +55,6 @@ final class CreateAccountViewController: UIViewController {
     
     private lazy var loginStackView: AuthStackView = {
         var loginSV = AuthStackView(authType: .login)
-        loginSV.actionButton.setTitleColor(#colorLiteral(red: 0.3171662092, green: 0.3071304858, blue: 0.7139448524, alpha: 1), for: .normal)
         loginSV.actionButton.addTarget(
             self, action: #selector(loginButtonDidTapped),
             for: .touchUpInside
@@ -67,7 +65,7 @@ final class CreateAccountViewController: UIViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+        view.backgroundColor = UIColor.customBlue
         addViews()
         setupConstraints()
         
