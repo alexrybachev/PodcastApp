@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomTextField: UITextField {
+final class CustomTextField: UITextField {
     
     // MARK: - Enum
     enum CustomTextFieldType {
@@ -31,7 +31,10 @@ class CustomTextField: UITextField {
         self.autocapitalizationType = .none
         
         self.leftViewMode = .always
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.size.height))
+        self.leftView = UIView(frame: CGRect(
+            x: 0, y: 0, width: 15,
+            height: self.frame.size.height)
+        )
         
         if border {
             self.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)

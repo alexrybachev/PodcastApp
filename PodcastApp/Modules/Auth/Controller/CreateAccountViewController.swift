@@ -160,6 +160,7 @@ final class CreateAccountViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension CreateAccountViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

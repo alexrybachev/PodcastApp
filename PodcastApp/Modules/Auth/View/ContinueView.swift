@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContinueView: UIView {
+final class ContinueView: UIView {
     
     // MARK: - Private Properties
     private lazy var mainLabel: CustomLabel = {

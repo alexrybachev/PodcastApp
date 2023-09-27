@@ -55,7 +55,6 @@ final class RegistrationViewController: UIViewController {
         )
         lastNameSV.axis = .vertical
         lastNameSV.spacing = 10
-        
         return lastNameSV
     }()
     
@@ -77,7 +76,6 @@ final class RegistrationViewController: UIViewController {
         )
         emailSV.axis = .vertical
         emailSV.spacing = 10
-        
         return emailSV
     }()
     
@@ -268,6 +266,7 @@ final class RegistrationViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

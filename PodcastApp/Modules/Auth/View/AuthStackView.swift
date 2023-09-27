@@ -16,7 +16,7 @@ enum AuthType: String {
     }
 }
 
-class AuthStackView: UIStackView {
+final class AuthStackView: UIStackView {
     
     // MARK: - Public Properties
     var authType: AuthType!

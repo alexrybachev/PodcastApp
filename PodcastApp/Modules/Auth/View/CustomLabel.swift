@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomLabel: UILabel {
+final class CustomLabel: UILabel {
     
     // MARK: - Init
     init(title: String, font: UIFont = UIFont.systemFont(ofSize: 15), color: UIColor) {
