@@ -66,6 +66,9 @@ final class AuthViewController: UIViewController {
         view.backgroundColor = .white
         
         setupConstraints()
+        
+        loginField.delegate = self
+        passwordField.delegate = self
     }
     
     // MARK: - Private Actions
@@ -137,4 +140,11 @@ final class AuthViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
+extension AuthViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.endEditing(true)
+            return true
+        }
+}
 
