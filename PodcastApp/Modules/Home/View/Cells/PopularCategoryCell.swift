@@ -17,11 +17,10 @@ class PopularCategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .black
         label.text = "Category"
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
         label.minimumScaleFactor = 0.1
         label.adjustsFontSizeToFitWidth = true
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -41,8 +40,14 @@ class PopularCategoryCell: UICollectionViewCell {
     
     private func setHierarchy() {
         contentView.addSubview(headerLabel)
-        contentView.backgroundColor = .purple
+        contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         contentView.layer.cornerRadius = 10
+        
+        contentView.layer.shadowColor = UIColor.gray.cgColor
+        contentView.layer.shadowRadius = 4
+        contentView.layer.shadowOpacity = 0.3
+        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+
     }
     
     private func setConstraints() {
@@ -52,4 +57,9 @@ class PopularCategoryCell: UICollectionViewCell {
         }
     }
     
+    // MARK: - Configure
+    
+    func configureCell(_ title: String) {
+        headerLabel.text = title
+    }
 }

@@ -87,13 +87,20 @@ class CategoryHomeViewCell: UICollectionViewCell {
         categoryTitle.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
 //            make.top.equalTo(categotyView.snp.top).inset(8)
-            make.leading.trailing.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview().inset(14)
         }
         
         categorySubtitle.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(8)
-            make.top.equalTo(categoryTitle.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(14)
+            make.top.equalTo(categoryTitle.snp.bottom).offset(8)
         }
+    }
+    
+    // MARK: - Configure
+    
+    func configureCell(_ podcast: PodcastCategory) {
+        categoryTitle.text = podcast.category
+        categorySubtitle.text = "\(podcast.podcasts.count) Podcast"
     }
     
 }

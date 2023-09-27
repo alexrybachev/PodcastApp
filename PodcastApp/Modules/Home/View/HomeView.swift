@@ -98,8 +98,8 @@ class HomeView: UIView {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(userAvatar.snp.bottom).offset(30)
-            make.leading.equalToSuperview().inset(20)
-            make.trailing.equalToSuperview().inset(20)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }

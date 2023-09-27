@@ -10,6 +10,9 @@ import SnapKit
 
 class HomeViewController: UIViewController {
     
+    private let podcasts = HomeModule.getData()
+    private let categories = HomeModule.getCategories()
+    
     private let homeView = HomeView()
     
     // MARK: - Initial
@@ -46,19 +49,30 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        switch section {
+        case 0:
+            podcasts.count
+        case 1:
+            categories.count
+        default:
+            podcasts[section].podcasts.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryHomeViewCell.cellID, for: indexPath) as! CategoryHomeViewCell
+            cell.configureCell(podcasts[indexPath.item])
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCategoryCell.cellID, for: indexPath) as! PopularCategoryCell
+            cell.configureCell(categories[indexPath.item])
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PodcastHomeViewCell.cellID, for: indexPath) as! PodcastHomeViewCell
+            let podcastInfo = podcasts[indexPath.section].podcasts[indexPath.item]
+            cell.configureCell(podcastInfo)
             return cell
         }
     }
@@ -107,21 +121,26 @@ extension HomeViewController {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                         elementKind: UICollectionView.elementKindSectionHeader,
                                                                         alignment: .top)
+        
         section.boundarySupplementaryItems = [sectionHeader]
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         
         return section
     }
     
     private func createSecondSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(20), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16)
+//        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12)
+//        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .fixed(20), bottom: .none)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25), heightDimension: .absolute(40))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(20), heightDimension: .absolute(36))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .fixed(10), bottom: .none)
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        section.contentInsets = NSDirectionalEdgeInsets(top: 24, leading: 20, bottom: 24, trailing: 20)
                 
         return section
     }
@@ -137,7 +156,7 @@ extension HomeViewController {
         let section = NSCollectionLayoutSection(group: group)
 //        section.orthogonalScrollingBehavior = .paging
         
-        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         
         return section
     }

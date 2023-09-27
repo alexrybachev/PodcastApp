@@ -107,5 +107,10 @@ class PodcastHomeViewCell: UICollectionViewCell {
         
     }
     
+    // MARK: - Configure
     
+    func configureCell(_ podcast: PodcastInfo) {
+        podcastLabel.text = podcast.name
+        authorLabel.text = podcast.author
+    }
 }
