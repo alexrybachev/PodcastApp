@@ -61,11 +61,8 @@ final class AuthViewController: UIViewController {
         view.backgroundColor = .white
     
         setupConstraints()
-  
     }
-    
-    // MARK: - Private Actions
-    
+
     // MARK: - Private Methods
     private func addViews() {
         view.addSubview(loginLabel)
@@ -126,7 +123,6 @@ final class AuthViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
-        
     }
 }
 
