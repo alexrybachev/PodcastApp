@@ -46,7 +46,7 @@ class AuthStackView: UIStackView {
             color: authType.isLogin ? #colorLiteral(red: 0.4863581657, green: 0.4862256646, blue: 0.4821705818, alpha: 1) : #colorLiteral(red: 0.4235294461, green: 0.4235294461, blue: 0.4235294461, alpha: 1)
             
         )
-        
+ 
         
         actionButton = CustomButton(
             title: authType.isLogin ? "Login" : "Register",
@@ -54,6 +54,8 @@ class AuthStackView: UIStackView {
             buttonType: .smallButton,
             color: #colorLiteral(red: 0.7093204856, green: 0.7974258065, blue: 0.3607985973, alpha: 1)
         )
+        
+
         
         self.addArrangedSubview(infoLabel)
         self.addArrangedSubview(actionButton)

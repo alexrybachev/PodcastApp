@@ -15,7 +15,7 @@ final class RegistrationViewController: UIViewController {
         font: UIFont.boldSystemFont(ofSize: 24),
         color: .black
     )
-    
+
     // MARK: - FirstName Properties
     private let firstNameLabel = CustomLabel(
         title: "First Name",
@@ -34,9 +34,6 @@ final class RegistrationViewController: UIViewController {
         )
         firstNameSV.axis = .vertical
         firstNameSV.spacing = 10
-        firstNameField.snp.makeConstraints { make in
-            make.height.equalTo(45)
-        }
         return firstNameSV
     }()
     
@@ -58,9 +55,7 @@ final class RegistrationViewController: UIViewController {
         )
         lastNameSV.axis = .vertical
         lastNameSV.spacing = 10
-        lastNameField.snp.makeConstraints { make in
-            make.height.equalTo(45)
-        }
+
         return lastNameSV
     }()
     
@@ -82,9 +77,7 @@ final class RegistrationViewController: UIViewController {
         )
         emailSV.axis = .vertical
         emailSV.spacing = 10
-        emailField.snp.makeConstraints { make in
-            make.height.equalTo(45)
-        }
+
         return emailSV
     }()
     
@@ -110,9 +103,6 @@ final class RegistrationViewController: UIViewController {
         )
         passwordSV.axis = .vertical
         passwordSV.spacing = 10
-        passwordField.snp.makeConstraints { make in
-            make.height.equalTo(45)
-        }
         return passwordSV
     }()
     
@@ -138,9 +128,7 @@ final class RegistrationViewController: UIViewController {
         )
         passSV.axis = .vertical
         passSV.spacing = 10
-        confirmPasswordField.snp.makeConstraints { make in
-            make.height.equalTo(45)
-        }
+
         return passSV
     }()
     
@@ -179,15 +167,15 @@ final class RegistrationViewController: UIViewController {
     
     private func setupConstraints() {
         welcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(25)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.centerX.equalToSuperview()
+            
         }
         
         firstNameStackView.snp.makeConstraints { make in
-            make.top.equalTo(welcomeLabel.snp.bottom).offset(40)
+            make.top.equalTo(welcomeLabel.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            //            make.height.equalTo(60)
         }
         
         lastNameStackView.snp.makeConstraints { make in
@@ -218,12 +206,33 @@ final class RegistrationViewController: UIViewController {
             make.top.equalTo(confirmPasswordStackView.snp.bottom).offset(18)
             make.left.equalToSuperview().offset(24)
             make.right.equalToSuperview().offset(-24)
-            make.height.equalTo(50)
+            make.height.equalTo(56)
         }
         
         loginStackView.snp.makeConstraints { make in
+            make.top.equalTo(signUpButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-30)
+        }
+        
+        firstNameField.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+        
+        lastNameField.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+        
+        emailField.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+        
+        passwordField.snp.makeConstraints { make in
+            make.height.equalTo(45)
+        }
+        
+        confirmPasswordField.snp.makeConstraints { make in
+            make.height.equalTo(45)
         }
     }
 }
