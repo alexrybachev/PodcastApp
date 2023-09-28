@@ -137,6 +137,11 @@ final class RegistrationViewController: UIViewController {
         addViews()
         setupConstraints()
         setupTextFields()
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(loginButtonDidTapped)
+        )
+        loginLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Override Methods

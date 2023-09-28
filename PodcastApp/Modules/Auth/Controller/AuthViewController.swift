@@ -67,7 +67,10 @@ final class AuthViewController: UIViewController {
         loginField.delegate = self
         passwordField.delegate = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(registerButtonDidTapped))
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(registerButtonDidTapped)
+        )
         registerLabel.addGestureRecognizer(tapGesture)
     }
     

@@ -71,6 +71,11 @@ final class CreateAccountViewController: UIViewController {
         
         emailField.delegate = self
         navigationItem.hidesBackButton = true
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(loginButtonDidTapped)
+        )
+        loginLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Override Methods
