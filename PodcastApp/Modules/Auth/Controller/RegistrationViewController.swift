@@ -129,7 +129,6 @@ final class RegistrationViewController: UIViewController {
         return passSV
     }()
     
-    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
