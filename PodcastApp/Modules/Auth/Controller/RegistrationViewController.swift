@@ -109,6 +109,7 @@ final class RegistrationViewController: UIViewController {
             systemName: "eye.slash.fill"), for: .normal)
         passField.isSecureTextEntry = true
         passField.layer.cornerRadius = 25
+        passField.textContentType = .oneTimeCode
         return passField
     }()
     
@@ -134,6 +135,7 @@ final class RegistrationViewController: UIViewController {
             systemName: "eye.slash.fill"), for: .normal)
         passField.isSecureTextEntry = true
         passField.layer.cornerRadius = 25
+        passField.textContentType = .oneTimeCode
         return passField
     }()
     
