@@ -172,6 +172,7 @@
 		0A0B7B522AC0B04600C1D17B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3C94C4C92AC4CD0000F7FD83 /* AuthColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -179,7 +180,6 @@
 		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				3C94C4C92AC4CD0000F7FD83 /* AuthColor.swift */,
 				0A125D382AC0CA230006EACA /* Model */,
 				0A125D3B2AC0CA230006EACA /* View */,
 				0A125D392AC0CA230006EACA /* Controller */,

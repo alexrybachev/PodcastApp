@@ -10,26 +10,26 @@ import UIKit
 
 extension UIColor {
     static var customBlue: UIColor {
-        UIColor(red: 0.16, green: 0.51, blue: 0.95, alpha: 1)
+        UIColor(named: "CustomBlueColor") ?? .clear
     }
     
     static var customPurple: UIColor {
-        UIColor(red: 0.32, green: 0.31, blue: 0.71, alpha: 1.00)
+        UIColor(named: "CustomPurpleColor") ?? .clear
     }
     
     static var customGreen: UIColor {
-        UIColor(red: 0.71, green: 0.8, blue: 0.36, alpha: 1)
+        UIColor(named: "CustomGreenColor") ?? .clear
     }
     
     static var customLabelColor: UIColor {
-        UIColor(red: 0.47, green: 0.51, blue: 0.54, alpha: 1.00)
+        UIColor(named: "CustomLabelColor") ?? .clear
     }
     
     static var textFieldColorOne: UIColor {
-        UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
+        UIColor(named: "TextFieldColorOne") ?? .clear
     }
     
     static var textFieldColorTwo: UIColor {
-        UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.00)
+        UIColor(named: "TextFieldColorTwo") ?? .clear
     }
 }
