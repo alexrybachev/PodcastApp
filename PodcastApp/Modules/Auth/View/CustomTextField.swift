@@ -36,17 +36,17 @@ final class CustomTextField: UITextField {
             x: 0, y: 0, width: 15,
             height: self.frame.size.height)
         )
+        let placeholderText = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderColor]
+        )
+        self.attributedPlaceholder = placeholderText
+        
         
         if border {
             self.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
             self.layer.borderWidth = 1
             self.backgroundColor = UIColor.textFieldColorOne
-            
-            let placeholderText = NSAttributedString(
-                string: placeholder,
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.placeholderColor]
-            )
-            self.attributedPlaceholder = placeholderText
         }
         
         switch fieldType {
@@ -55,7 +55,7 @@ final class CustomTextField: UITextField {
             let rightView = UIView()
             rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
             
-          
+            
             customEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
             customEyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
             customEyeButton.tintColor = UIColor.systemGray2

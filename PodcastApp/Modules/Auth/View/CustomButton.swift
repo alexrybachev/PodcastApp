@@ -25,7 +25,7 @@ final class CustomButton: UIButton {
         case .blueButton:
             self.backgroundColor = UIColor.customBlue
             self.layer.cornerRadius = 25
-            self.titleLabel?.font = font
+            self.titleLabel?.font = UIFont.custome(name: .plusJakartaSans600, size: 17)
             self.setTitle(title, for: .normal)
             
         case .googleButton:
@@ -41,7 +41,7 @@ final class CustomButton: UIButton {
             let label = UILabel()
             label.text = title
             label.textColor = .black
-            label.font = font
+            label.font = UIFont.custome(name: .plusJakartaSans600, size: 16)
             label.textAlignment = .center
             
             self.addSubview(imageView)

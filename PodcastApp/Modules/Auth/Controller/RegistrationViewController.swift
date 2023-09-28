@@ -237,13 +237,13 @@ final class RegistrationViewController: UIViewController {
         }
         
         // Если все проверки пройдены, регистрируем пользователя
-//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-//            if let currentError = error {
-//                print(currentError)
-//            } else {
-//                print("User was successfully registered")
-//            }
-//        }
+        //        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+        //            if let currentError = error {
+        //                print(currentError)
+        //            } else {
+        //                print("User was successfully registered")
+        //            }
+        //        }
     }
     
     // MARK: - Private methods

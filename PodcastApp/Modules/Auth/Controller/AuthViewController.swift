@@ -52,13 +52,7 @@ final class AuthViewController: UIViewController {
         
         return logButton
     }()
-    
-//    private let loginButton = CustomButton(
-//        title: "Login",
-//        font: UIFont.boldSystemFont(ofSize: 18),
-//        buttonType: .blueButton
-//    )
-    
+
     private let continueView = ContinueView()
     
     private let googleButton = CustomButton(
