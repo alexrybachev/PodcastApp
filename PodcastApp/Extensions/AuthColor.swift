@@ -32,4 +32,8 @@ extension UIColor {
     static var textFieldColorTwo: UIColor {
         UIColor(named: "TextFieldColorTwo") ?? .clear
     }
+    
+    static var placeholderColor: UIColor {
+        UIColor(named: "PlaceholderColor") ?? .clear
+    }
 }
