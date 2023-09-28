@@ -31,6 +31,8 @@
 		0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */; };
 		0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */; };
 		84FEC5882AC4832900EF47A5 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */; };
+		84FEC58A2AC493E300EF47A5 /* ChannelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC5892AC493E300EF47A5 /* ChannelViewCell.swift */; };
+		84FEC58C2AC5EE6600EF47A5 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC58B2AC5EE6600EF47A5 /* Source.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
 		84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
+		84FEC5892AC493E300EF47A5 /* ChannelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewCell.swift; sourceTree = "<group>"; };
+		84FEC58B2AC5EE6600EF47A5 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +430,8 @@
 		84FEC5842AC482C400EF47A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84FEC5892AC493E300EF47A5 /* ChannelViewCell.swift */,
+				84FEC58B2AC5EE6600EF47A5 /* Source.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -532,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FEC58A2AC493E300EF47A5 /* ChannelViewCell.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
@@ -541,6 +548,7 @@
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
+				84FEC58C2AC5EE6600EF47A5 /* Source.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				84FEC5882AC4832900EF47A5 /* ChannelViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
