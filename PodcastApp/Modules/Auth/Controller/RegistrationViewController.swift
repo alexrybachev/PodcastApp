@@ -6,8 +6,12 @@
 //
 
 import UIKit
+//import FirebaseAuth
 
 final class RegistrationViewController: UIViewController {
+    
+    // MARK: - Public Properties
+    var selectedEmail: String?
     
     // MARK: - Private UI Properties
     private let welcomeLabel = CustomLabel(
@@ -16,10 +20,18 @@ final class RegistrationViewController: UIViewController {
         color: .black
     )
     
-    private let signUpButton = CustomButton(
-        title: "Sign Up",
-        buttonType: .blueButton
-    )
+    private lazy var signUpButton: CustomButton = {
+        var signButton = CustomButton(
+            title: "Sign Up",
+            buttonType: .blueButton
+        )
+        signButton.addTarget(
+            self,
+            action: #selector(signUpButtonDidTapped),
+            for: .touchUpInside
+        )
+        return signButton
+    }()
     
     private let loginLabel: UILabel = {
         let loginLabel = AuthLabel(
@@ -29,7 +41,6 @@ final class RegistrationViewController: UIViewController {
         )
         return loginLabel
     }()
-
     
     // MARK: - FirstName Properties
     private let firstNameLabel = CustomLabel(title: "First Name")
@@ -70,7 +81,7 @@ final class RegistrationViewController: UIViewController {
     // MARK: - Email Properties
     private let emailLabel = CustomLabel(title: "E-mail")
     
-    private let emailField = CustomTextField(
+    private var emailField = CustomTextField(
         fieldType: .withoutEyeButton,
         placeholder: "Enter you email",
         border: false
@@ -94,6 +105,9 @@ final class RegistrationViewController: UIViewController {
             placeholder: "Enter you password",
             border: false
         )
+        passField.customEyeButton.setImage(UIImage(
+            systemName: "eye.slash.fill"), for: .normal)
+        passField.isSecureTextEntry = true
         passField.layer.cornerRadius = 25
         return passField
     }()
@@ -116,6 +130,9 @@ final class RegistrationViewController: UIViewController {
             placeholder: "Enter you password",
             border: false
         )
+        passField.customEyeButton.setImage(UIImage(
+            systemName: "eye.slash.fill"), for: .normal)
+        passField.isSecureTextEntry = true
         passField.layer.cornerRadius = 25
         return passField
     }()
@@ -137,11 +154,11 @@ final class RegistrationViewController: UIViewController {
         addViews()
         setupConstraints()
         setupTextFields()
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(loginButtonDidTapped)
-        )
-        loginLabel.addGestureRecognizer(tapGesture)
+        addTapGesture()
+        addObservers()
+        
+        //принимаем почту с экрана СreateAccountVC
+        emailField.text = selectedEmail
     }
     
     // MARK: - Override Methods
@@ -162,7 +179,99 @@ final class RegistrationViewController: UIViewController {
         }
     }
     
+    // регистрация пользовался и проверка всех textFields
+    @objc private func signUpButtonDidTapped() {
+        let textFieldsToCheck = [firstNameField, lastNameField, emailField, passwordField, confirmPasswordField]
+        
+        var isAllFieldsValid = true
+        
+        for textField in textFieldsToCheck {
+            if let text = textField.text, text.isEmpty {
+                // Если поле не заполнено, устанавливаем красную границу
+                textField.layer.borderColor = UIColor.red.cgColor
+                textField.layer.borderWidth = 1.0
+                isAllFieldsValid = false
+            } else {
+                // Если поле не пустое, сбрасываем границу (или устанавливаем стандартный стиль)
+                textField.layer.borderWidth = 0.0
+            }
+        }
+        
+        if !isAllFieldsValid {
+            // Остановка регистрации, если не все поля заполнены
+            return
+        }
+        
+        let password = passwordField.text ?? ""
+        let confirmPassword = confirmPasswordField.text ?? ""
+        let email = emailField.text ?? ""
+        
+        // Проверка совпадения паролей
+        if password != confirmPassword {
+            passwordField.layer.borderColor = UIColor.red.cgColor
+            passwordField.layer.borderWidth = 1.0
+            confirmPasswordField.layer.borderColor = UIColor.red.cgColor
+            confirmPasswordField.layer.borderWidth = 1.0
+            return
+        } else {
+            passwordField.layer.borderWidth = 0.0
+            confirmPasswordField.layer.borderWidth = 0.0
+        }
+        
+        // Проверка длины пароля
+        if password.count < 6 {
+            passwordField.layer.borderColor = UIColor.red.cgColor
+            passwordField.layer.borderWidth = 1.0
+            return
+        } else {
+            passwordField.layer.borderWidth = 0.0
+        }
+        
+        // Проверка наличия "@" в email
+        if !email.contains("@") {
+            emailField.layer.borderColor = UIColor.red.cgColor
+            emailField.layer.borderWidth = 1.0
+            return
+        } else {
+            emailField.layer.borderWidth = 0.0
+        }
+        
+        // Если все проверки пройдены, регистрируем пользователя
+//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+//            if let currentError = error {
+//                print(currentError)
+//            } else {
+//                print("User was successfully registered")
+//            }
+//        }
+    }
+    
     // MARK: - Private methods
+    // поднимаем view когда выезжает клавиатура
+    private func addObservers() {
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            queue: nil) { _ in
+                self.view.frame.origin.y = -200
+            }
+        
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            queue: nil) { _ in
+                self.view.frame.origin.y = 0
+            }
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(loginButtonDidTapped)
+        )
+        loginLabel.addGestureRecognizer(tapGesture)
+    }
+    
     private func addViews() {
         view.addSubview(welcomeLabel)
         view.addSubview(firstNameStackView)
@@ -260,5 +369,3 @@ extension RegistrationViewController: UITextFieldDelegate {
         return true
     }
 }
-
-

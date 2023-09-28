@@ -17,6 +17,7 @@ final class CustomTextField: UITextField {
     
     // MARK: - Private Properties
     private let authFieldType: CustomTextFieldType
+    let customEyeButton = UIButton(type: .custom)
     
     // MARK: - Init
     init(fieldType: CustomTextFieldType, placeholder: String, border: Bool) {
@@ -54,7 +55,7 @@ final class CustomTextField: UITextField {
             let rightView = UIView()
             rightView.frame = CGRect(x: 0, y: 0, width: 50, height: 40)
             
-            let customEyeButton = UIButton(type: .custom)
+          
             customEyeButton.setImage(UIImage(systemName: "eye.fill"), for: .normal)
             customEyeButton.frame = CGRect(x: 10, y: 10, width: 23, height: 20)
             customEyeButton.tintColor = UIColor.systemGray2

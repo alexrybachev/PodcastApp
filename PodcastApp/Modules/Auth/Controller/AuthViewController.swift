@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+import UIKit
+import SnapKit
+//import FirebaseAuth
+
 final class AuthViewController: UIViewController {
     
     // MARK: - UI Components
@@ -33,11 +37,27 @@ final class AuthViewController: UIViewController {
         border: true
     )
     
-    private let loginButton = CustomButton(
-        title: "Login",
-        font: UIFont.boldSystemFont(ofSize: 18),
-        buttonType: .blueButton
-    )
+    private lazy var loginButton: CustomButton = {
+        var logButton = CustomButton(
+            title: "Login",
+            font: UIFont.boldSystemFont(ofSize: 18),
+            buttonType: .blueButton
+        )
+        
+//        logButton.addTarget(
+//            self,
+//            action: #selector(loginButtonDidTapped),
+//            for: .touchUpInside
+//        )
+        
+        return logButton
+    }()
+    
+//    private let loginButton = CustomButton(
+//        title: "Login",
+//        font: UIFont.boldSystemFont(ofSize: 18),
+//        buttonType: .blueButton
+//    )
     
     private let continueView = ContinueView()
     
@@ -46,7 +66,7 @@ final class AuthViewController: UIViewController {
         font: UIFont.boldSystemFont(ofSize: 18),
         buttonType: .googleButton
     )
-
+    
     private let registerLabel: UILabel = {
         let infoLabel = AuthLabel(
             title: "Don't have an account yet? Register",
@@ -55,7 +75,7 @@ final class AuthViewController: UIViewController {
         )
         return infoLabel
     }()
-        
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,8 +105,22 @@ final class AuthViewController: UIViewController {
     @objc private func registerButtonDidTapped() {
         let createAccVC = CreateAccountViewController()
         navigationController?.pushViewController(createAccVC, animated: true)
-//        print("YES")
     }
+    
+//    @objc private func loginButtonDidTapped() {
+//        if let email = loginField.text, let password = passwordField.text {
+//            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+//                if let currentError = error {
+//                    print(currentError)
+//                } else {
+//                    print("You login successfully")
+//                    self.loginField.text = ""
+//                    self.passwordField.text = ""
+//                }
+//            }
+//        }
+//
+//    }
     
     // MARK: - Private Methods
     private func addViews() {
@@ -158,4 +192,3 @@ extension AuthViewController: UITextFieldDelegate {
         return true
     }
 }
-

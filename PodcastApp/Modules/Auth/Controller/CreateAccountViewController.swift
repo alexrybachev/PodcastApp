@@ -61,6 +61,16 @@ final class CreateAccountViewController: UIViewController {
         )
         return loginLabel
     }()
+    
+    private lazy var errorLabel: UILabel = {
+        var errorLabel = CustomLabel(
+            title: "Enter your email",
+            color: .systemRed
+        )
+        errorLabel.isHidden = true
+        return errorLabel
+        
+    }()
 
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -96,8 +106,17 @@ final class CreateAccountViewController: UIViewController {
     }
     
     @objc private func continueButtonDidTapped() {
-        let registerVC = RegistrationViewController()
-        navigationController?.pushViewController(registerVC, animated: true)
+        // если emailTF не пустой, то делаем переход
+        if emailField.text != "" {
+            let registerVC = RegistrationViewController()
+            registerVC.selectedEmail = emailField.text
+            navigationController?.pushViewController(registerVC, animated: true)
+            // скрываем ошибку
+            errorLabel.isHidden = true
+        } else {
+            // если пустой, то показываем ошибку
+            errorLabel.isHidden = false
+        }
     }
     
     // MARK: - Private Methods
@@ -110,6 +129,7 @@ final class CreateAccountViewController: UIViewController {
         whiteView.addSubview(continueView)
         whiteView.addSubview(googleButton)
         whiteView.addSubview(loginLabel)
+        whiteView.addSubview(errorLabel)
     }
     
     private func setupConstraints() {
@@ -137,8 +157,13 @@ final class CreateAccountViewController: UIViewController {
             make.height.equalTo(60)
         }
         
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailField.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(emailField.snp.bottom).offset(32)
+            make.top.equalTo(errorLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(25)
             make.right.equalToSuperview().offset(-25)
             make.height.equalTo(56)
