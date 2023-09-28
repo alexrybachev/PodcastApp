@@ -67,5 +67,12 @@ class HomeViewSectionHeader: UICollectionReusableView {
         }
     }
     
+    // MARK: - Public methods
+    
+    func configureHeader(with title: String, and isButtonHidden: Bool = true) {
+        titleLabel.text = title
+        seeAllButton.isHidden = isButtonHidden
+    }
+    
 }
 
