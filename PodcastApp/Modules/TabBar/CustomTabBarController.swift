@@ -46,7 +46,7 @@ class CustomTabBarController: UITabBarController {
     
     private func setAppearance() {
         view.backgroundColor = .systemBackground
-        //tabBar.backgroundColor = .systemGray6
+        let cornerRadius: CGFloat = 20
         let positionOnX: CGFloat = 24
         let positionOnY: CGFloat = 12
         let width = tabBar.bounds.width - positionOnX * 2
@@ -54,9 +54,16 @@ class CustomTabBarController: UITabBarController {
         let shapeLayer = CAShapeLayer()
         let path = UIBezierPath(
             roundedRect: CGRect(x: positionOnX, y: tabBar.bounds.minY - positionOnY * 1.5 , width: width, height: height),
-                                cornerRadius: 20)
+                                cornerRadius: cornerRadius)
         shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor.systemGray6.cgColor
+        shapeLayer.fillColor = UIColor.systemBackground.cgColor
+        //add shadow
+        shapeLayer.shadowColor = UIColor.black.cgColor
+        shapeLayer.shadowRadius = cornerRadius
+        shapeLayer.shadowOpacity = 0.15
+        shapeLayer.shadowOffset = CGSize(width: positionOnY, height: positionOnY)
+        shapeLayer.shadowPath = path.cgPath
+        //add custom layer
         tabBar.layer.insertSublayer(shapeLayer, at: 0)
         tabBar.itemPositioning = .fill
         
