@@ -103,8 +103,12 @@ final class AuthViewController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let currentError = error {
                     print(currentError)
+                    self.loginField.layer.borderColor = UIColor.red.cgColor
+                    self.passwordField.layer.borderColor = UIColor.red.cgColor
                 } else {
                     print("You login successfully")
+                    self.loginField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
+                    self.passwordField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
                     self.loginField.text = ""
                     self.passwordField.text = ""
                 }
