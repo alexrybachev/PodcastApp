@@ -30,6 +30,7 @@
 		0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */; };
 		0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */; };
 		0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */; };
+		84FEC5882AC4832900EF47A5 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
 		0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
+		84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		0A0B7B4B2AC0AE3800C1D17B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				84FEC5832AC482AC00EF47A5 /* Channel */,
 				0A0B7B532AC0B0A800C1D17B /* Auth */,
 				0A0B7B4C2AC0AE4A00C1D17B /* Onboarding */,
 				0A125D232AC0CA0A0006EACA /* Home */,
@@ -410,6 +413,38 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		84FEC5832AC482AC00EF47A5 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				84FEC5842AC482C400EF47A5 /* Model */,
+				84FEC5852AC482CD00EF47A5 /* View */,
+				84FEC5862AC482DD00EF47A5 /* Controller */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		84FEC5842AC482C400EF47A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84FEC5852AC482CD00EF47A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84FEC5862AC482DD00EF47A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -507,6 +542,7 @@
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
+				84FEC5882AC4832900EF47A5 /* ChannelViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
