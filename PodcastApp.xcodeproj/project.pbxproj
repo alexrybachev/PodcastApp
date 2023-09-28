@@ -37,6 +37,9 @@
 		0AC0B4B62AC5779100252B8B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4B02AC5779100252B8B /* HomeView.swift */; };
 		0AC0B4B72AC5779100252B8B /* HomeViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4B22AC5779100252B8B /* HomeViewSectionHeader.swift */; };
 		0AC0B4B92AC577C800252B8B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4B82AC577C800252B8B /* HomeViewController.swift */; };
+		28D432A62AC5A1F20059D161 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432A52AC5A1F20059D161 /* SearchView.swift */; };
+		28D432A92AC5A21B0059D161 /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432A82AC5A21B0059D161 /* SearchViewCell.swift */; };
+		28D432AB2AC5A2300059D161 /* SearchResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432AA2AC5A2300059D161 /* SearchResultViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		0AC0B4B02AC5779100252B8B /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0AC0B4B22AC5779100252B8B /* HomeViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewSectionHeader.swift; sourceTree = "<group>"; };
 		0AC0B4B82AC577C800252B8B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		28D432A52AC5A1F20059D161 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		28D432A82AC5A21B0059D161 /* SearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
+		28D432AA2AC5A2300059D161 /* SearchResultViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,8 +240,8 @@
 		0A125D192AC0CA0A0006EACA /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				0A125D1C2AC0CA0A0006EACA /* Model */,
-				0A125D1D2AC0CA0A0006EACA /* View */,
+				28D432A32AC5A1CE0059D161 /* Model */,
+				28D432A42AC5A1D80059D161 /* View */,
 				0A125D1A2AC0CA0A0006EACA /* Controller */,
 			);
 			path = Search;
@@ -247,20 +253,6 @@
 				0A125D1B2AC0CA0A0006EACA /* SearchViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0A125D1C2AC0CA0A0006EACA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0A125D1D2AC0CA0A0006EACA /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		0A125D1E2AC0CA0A0006EACA /* Favorites */ = {
@@ -447,6 +439,31 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		28D432A32AC5A1CE0059D161 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		28D432A42AC5A1D80059D161 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28D432A52AC5A1F20059D161 /* SearchView.swift */,
+				28D432A72AC5A1F80059D161 /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		28D432A72AC5A1F80059D161 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				28D432A82AC5A21B0059D161 /* SearchViewCell.swift */,
+				28D432AA2AC5A2300059D161 /* SearchResultViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,6 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AC0B4A92AC5776B00252B8B /* UILabel + Ext.swift in Sources */,
+				28D432A62AC5A1F20059D161 /* SearchView.swift in Sources */,
 				0AC0B4B42AC5779100252B8B /* PodcastHomeViewCell.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
@@ -549,6 +567,8 @@
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
 				0AC0B4AB2AC5778000252B8B /* HomeModel.swift in Sources */,
+				28D432AB2AC5A2300059D161 /* SearchResultViewCell.swift in Sources */,
+				28D432A92AC5A21B0059D161 /* SearchViewCell.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,

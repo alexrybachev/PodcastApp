@@ -22,20 +22,6 @@ class HomeViewController: UIViewController {
         view = homeView
         homeView.transferDelegates(dataSource: self, delegate: self)
         homeView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
-//        setHierarchy()
-//        setConstraints()
-    }
-    
-    // MARK: - Setup UI
-    
-    private func setHierarchy() {
-//        view.addSubview(homeView)
-    }
-    
-    private func setConstraints() {
-//        homeView.snp.makeConstraints { make in
-//            make.edges.equalTo(view.safeAreaLayoutGuide)
-//        }
     }
     
 }
