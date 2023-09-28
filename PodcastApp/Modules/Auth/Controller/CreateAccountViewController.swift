@@ -70,7 +70,7 @@ final class CreateAccountViewController: UIViewController {
         errorLabel.isHidden = true
         return errorLabel
     }()
-
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()

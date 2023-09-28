@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import FirebaseAuth
+import FirebaseAuth
 
 final class RegistrationViewController: UIViewController {
     
@@ -236,14 +236,14 @@ final class RegistrationViewController: UIViewController {
             emailField.layer.borderWidth = 0.0
         }
         
-        // Если все проверки пройдены, регистрируем пользователя
-        //        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-        //            if let currentError = error {
-        //                print(currentError)
-        //            } else {
-        //                print("User was successfully registered")
-        //            }
-        //        }
+        //         Если все проверки пройдены, регистрируем пользователя
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let currentError = error {
+                print(currentError)
+            } else {
+                print("User was successfully registered")
+            }
+        }
     }
     
     // MARK: - Private methods

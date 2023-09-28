@@ -7,10 +7,7 @@
 
 import UIKit
 import SnapKit
-
-import UIKit
-import SnapKit
-//import FirebaseAuth
+import FirebaseAuth
 
 final class AuthViewController: UIViewController {
     
@@ -44,15 +41,15 @@ final class AuthViewController: UIViewController {
             buttonType: .blueButton
         )
         
-//        logButton.addTarget(
-//            self,
-//            action: #selector(loginButtonDidTapped),
-//            for: .touchUpInside
-//        )
+        logButton.addTarget(
+            self,
+            action: #selector(loginButtonDidTapped),
+            for: .touchUpInside
+        )
         
         return logButton
     }()
-
+    
     private let continueView = ContinueView()
     
     private let googleButton = CustomButton(
@@ -101,20 +98,19 @@ final class AuthViewController: UIViewController {
         navigationController?.pushViewController(createAccVC, animated: true)
     }
     
-//    @objc private func loginButtonDidTapped() {
-//        if let email = loginField.text, let password = passwordField.text {
-//            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-//                if let currentError = error {
-//                    print(currentError)
-//                } else {
-//                    print("You login successfully")
-//                    self.loginField.text = ""
-//                    self.passwordField.text = ""
-//                }
-//            }
-//        }
-//
-//    }
+    @objc private func loginButtonDidTapped() {
+        if let email = loginField.text, let password = passwordField.text {
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                if let currentError = error {
+                    print(currentError)
+                } else {
+                    print("You login successfully")
+                    self.loginField.text = ""
+                    self.passwordField.text = ""
+                }
+            }
+        }
+    }
     
     // MARK: - Private Methods
     private func addViews() {
