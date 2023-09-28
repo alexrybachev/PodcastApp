@@ -21,15 +21,15 @@ final class RegistrationViewController: UIViewController {
         buttonType: .blueButton
     )
     
-    private lazy var loginStackView: AuthStackView = {
-        var loginSV = AuthStackView(authType: .login)
-        loginSV.actionButton.addTarget(
-            self,
-            action: #selector(loginButtonDidTapped),
-            for: .touchUpInside
+    private let loginLabel: UILabel = {
+        let loginLabel = AuthLabel(
+            title: "Already have an account? Login",
+            activeString: "Login",
+            font: .medium
         )
-        return loginSV
+        return loginLabel
     }()
+
     
     // MARK: - FirstName Properties
     private let firstNameLabel = CustomLabel(title: "First Name")
@@ -166,7 +166,7 @@ final class RegistrationViewController: UIViewController {
         view.addSubview(passwordStackView)
         view.addSubview(confirmPasswordStackView)
         view.addSubview(signUpButton)
-        view.addSubview(loginStackView)
+        view.addSubview(loginLabel)
     }
     
     private func setupConstraints() {
@@ -212,7 +212,7 @@ final class RegistrationViewController: UIViewController {
             make.height.equalTo(56)
         }
         
-        loginStackView.snp.makeConstraints { make in
+        loginLabel.snp.makeConstraints { make in
             make.top.equalTo(signUpButton.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-30)

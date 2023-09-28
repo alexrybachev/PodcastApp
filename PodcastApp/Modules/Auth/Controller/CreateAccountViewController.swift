@@ -53,15 +53,15 @@ final class CreateAccountViewController: UIViewController {
         buttonType: .googleButton
     )
     
-    private lazy var loginStackView: AuthStackView = {
-        var loginSV = AuthStackView(authType: .login)
-        loginSV.actionButton.addTarget(
-            self, action: #selector(loginButtonDidTapped),
-            for: .touchUpInside
+    private let loginLabel: UILabel = {
+        let loginLabel = AuthLabel(
+            title: "Already have an account? Login",
+            activeString: "Login",
+            font: .medium
         )
-        return loginSV
+        return loginLabel
     }()
-    
+
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +104,7 @@ final class CreateAccountViewController: UIViewController {
         whiteView.addSubview(continueButton)
         whiteView.addSubview(continueView)
         whiteView.addSubview(googleButton)
-        whiteView.addSubview(loginStackView)
+        whiteView.addSubview(loginLabel)
     }
     
     private func setupConstraints() {
@@ -151,7 +151,7 @@ final class CreateAccountViewController: UIViewController {
             make.height.equalTo(56)
         }
         
-        loginStackView.snp.makeConstraints { make in
+        loginLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }

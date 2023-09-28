@@ -46,17 +46,16 @@ final class AuthViewController: UIViewController {
         font: UIFont.boldSystemFont(ofSize: 18),
         buttonType: .googleButton
     )
-    
-    private lazy var registerStackView: AuthStackView = {
-        var registrSV = AuthStackView(authType: .register)
-        registrSV.actionButton.addTarget(
-            self,
-            action: #selector(registerButtonDidTapped),
-            for: .touchUpInside
+
+    private let registerLabel: UILabel = {
+        let infoLabel = AuthLabel(
+            title: "Don't have an account yet? Register",
+            activeString: "Register",
+            font: .small
         )
-        return registrSV
+        return infoLabel
     }()
-    
+        
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +66,9 @@ final class AuthViewController: UIViewController {
         
         loginField.delegate = self
         passwordField.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(registerButtonDidTapped))
+        registerLabel.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Override Methods
@@ -80,6 +82,7 @@ final class AuthViewController: UIViewController {
     @objc private func registerButtonDidTapped() {
         let createAccVC = CreateAccountViewController()
         navigationController?.pushViewController(createAccVC, animated: true)
+//        print("YES")
     }
     
     // MARK: - Private Methods
@@ -91,7 +94,7 @@ final class AuthViewController: UIViewController {
         view.addSubview(loginButton)
         view.addSubview(continueView)
         view.addSubview(googleButton)
-        view.addSubview(registerStackView)
+        view.addSubview(registerLabel)
     }
     
     private func setupConstraints() {
@@ -138,7 +141,7 @@ final class AuthViewController: UIViewController {
             make.height.equalTo(56)
         }
         
-        registerStackView.snp.makeConstraints { make in
+        registerLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-50)
         }
