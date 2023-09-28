@@ -24,12 +24,13 @@
 		0A125D442AC0D26C0006EACA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D432AC0D26C0006EACA /* SnapKit */; };
 		0A125D472AC0D2BD0006EACA /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D462AC0D2BD0006EACA /* Realm */; };
 		0A125D492AC0D2BD0006EACA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A125D482AC0D2BD0006EACA /* RealmSwift */; };
-		0A125D4C2AC2139E0006EACA /* manrope-medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D4A2AC2139E0006EACA /* manrope-medium.ttf */; };
-		0A125D4D2AC2139E0006EACA /* manrope-light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D4B2AC2139E0006EACA /* manrope-light.ttf */; };
-		0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A125D4F2AC214850006EACA /* UIFont+Extension.swift */; };
-		0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */; };
-		0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */; };
-		0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */; };
+		28D432932AC164B30059D161 /* PodcastHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432922AC164B30059D161 /* PodcastHomeViewCell.swift */; };
+		28D432952AC1683A0059D161 /* CategoryHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432942AC1683A0059D161 /* CategoryHomeViewCell.swift */; };
+		28D432972AC1F25B0059D161 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432962AC1F25B0059D161 /* HomeModel.swift */; };
+		28D432992AC1F6F20059D161 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D432982AC1F6F20059D161 /* HomeView.swift */; };
+		28D4329B2AC1F9CB0059D161 /* PopularCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4329A2AC1F9CB0059D161 /* PopularCategoryCell.swift */; };
+		28D4329E2AC1F9FC0059D161 /* HomeViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4329D2AC1F9FC0059D161 /* HomeViewSectionHeader.swift */; };
+		28D432A02AC419300059D161 /* UILabel + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4329F2AC419300059D161 /* UILabel + Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,12 +49,13 @@
 		0A125D2F2AC0CA0A0006EACA /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		0A125D3A2AC0CA230006EACA /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0A125D3D2AC0CAB90006EACA /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		0A125D4A2AC2139E0006EACA /* manrope-medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "manrope-medium.ttf"; sourceTree = "<group>"; };
-		0A125D4B2AC2139E0006EACA /* manrope-light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "manrope-light.ttf"; sourceTree = "<group>"; };
-		0A125D4F2AC214850006EACA /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
-		0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
+		28D432922AC164B30059D161 /* PodcastHomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastHomeViewCell.swift; sourceTree = "<group>"; };
+		28D432942AC1683A0059D161 /* CategoryHomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHomeViewCell.swift; sourceTree = "<group>"; };
+		28D432962AC1F25B0059D161 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		28D432982AC1F6F20059D161 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		28D4329A2AC1F9CB0059D161 /* PopularCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCategoryCell.swift; sourceTree = "<group>"; };
+		28D4329D2AC1F9FC0059D161 /* HomeViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewSectionHeader.swift; sourceTree = "<group>"; };
+		28D4329F2AC419300059D161 /* UILabel + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UILabel + Ext.swift"; path = "PodcastApp/Extensions/UILabel + Ext.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +113,6 @@
 		0A0B7B4A2AC0ADAC00C1D17B /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				0A125D4E2AC214470006EACA /* Fonts */,
 				0A0B7B3E2AC0ABDC00C1D17B /* Assets.xcassets */,
 				0A0B7B402AC0ABDC00C1D17B /* LaunchScreen.storyboard */,
 				0A0B7B432AC0ABDC00C1D17B /* Info.plist */,
@@ -164,14 +165,6 @@
 				0A0B7B502AC0AEB100C1D17B /* OnboardingViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0A0B7B522AC0B04600C1D17B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				0A125D4F2AC214850006EACA /* UIFont+Extension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
@@ -402,16 +395,30 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		0A125D4E2AC214470006EACA /* Fonts */ = {
+		28D432912AC164930059D161 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */,
-				0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */,
-				0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */,
-				0A125D4B2AC2139E0006EACA /* manrope-light.ttf */,
-				0A125D4A2AC2139E0006EACA /* manrope-medium.ttf */,
+				28D432942AC1683A0059D161 /* CategoryHomeViewCell.swift */,
+				28D4329A2AC1F9CB0059D161 /* PopularCategoryCell.swift */,
+				28D432922AC164B30059D161 /* PodcastHomeViewCell.swift */,
 			);
-			path = Fonts;
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		28D4329C2AC1F9E30059D161 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				28D4329D2AC1F9FC0059D161 /* HomeViewSectionHeader.swift */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		28D432A12AC419570059D161 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				28D4329F2AC419300059D161 /* UILabel + Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,11 +492,6 @@
 			files = (
 				0A125D132AC0C8B30006EACA /* README.md in Resources */,
 				0A0B7B422AC0ABDC00C1D17B /* LaunchScreen.storyboard in Resources */,
-				0A125D4D2AC2139E0006EACA /* manrope-light.ttf in Resources */,
-				0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */,
-				0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */,
-				0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */,
-				0A125D4C2AC2139E0006EACA /* manrope-medium.ttf in Resources */,
 				0A0B7B3F2AC0ABDC00C1D17B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,7 +519,7 @@
 				28D432972AC1F25B0059D161 /* HomeModel.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
-				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
+				28D432952AC1683A0059D161 /* CategoryHomeViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
