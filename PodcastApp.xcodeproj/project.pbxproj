@@ -30,7 +30,8 @@
 		0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */; };
 		0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */; };
 		0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */; };
-		E8FF7B9D2AC6C3CA00987144 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FF7B9C2AC6C3CA00987144 /* File.swift */; };
+		E8FF7B9F2AC7024300987144 /* FavoriteViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FF7B9E2AC7024300987144 /* FavoriteViewCell.swift */; };
+		E8FF7BA12AC7108800987144 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FF7BA02AC7108800987144 /* ChannelModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +56,8 @@
 		0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
 		0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
-		E8FF7B9C2AC6C3CA00987144 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = PodcastApp/Modules/Favorites/File.swift; sourceTree = SOURCE_ROOT; };
+		E8FF7B9E2AC7024300987144 /* FavoriteViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteViewCell.swift; path = PodcastApp/Modules/Favorites/FavoriteViewCell.swift; sourceTree = SOURCE_ROOT; };
+		E8FF7BA02AC7108800987144 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChannelModel.swift; path = PodcastApp/Modules/Favorites/ChannelModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,7 +273,7 @@
 		0A125D212AC0CA0A0006EACA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E8FF7B9C2AC6C3CA00987144 /* File.swift */,
+				E8FF7BA02AC7108800987144 /* ChannelModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,6 +281,7 @@
 		0A125D222AC0CA0A0006EACA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E8FF7B9E2AC7024300987144 /* FavoriteViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -501,14 +504,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
-				E8FF7B9D2AC6C3CA00987144 /* File.swift in Sources */,
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
 				0A125D332AC0CA0A0006EACA /* SearchViewController.swift in Sources */,
 				0A125D352AC0CA0A0006EACA /* HomeViewController.swift in Sources */,
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
+				E8FF7BA12AC7108800987144 /* ChannelModel.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
+				E8FF7B9F2AC7024300987144 /* FavoriteViewCell.swift in Sources */,
 				0A125D3C2AC0CA230006EACA /* AuthViewController.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,

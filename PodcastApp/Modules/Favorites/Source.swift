@@ -13,7 +13,7 @@ struct Track {
     let numberOfEpisodes: String
 }
 
-struct TrackSource {
+struct Source {
     static func makeTracks() -> [Track] {
         [
             .init(title: "Tuhan mengapa dia berbeda", image: UIImage(named: "ellipses")!, numberOfEpisodes: "15 Eps"),
