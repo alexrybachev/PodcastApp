@@ -15,9 +15,7 @@ import GoogleSignInSwift
 class FirebaseManager {
     static let shared = FirebaseManager()
     
-    private init() {
-        // Приватный инициализатор для синглтона
-    }
+    private init() {}
     
     // Метод для входа пользователя
     func signIn(withEmail email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
@@ -50,13 +48,6 @@ class FirebaseManager {
             guard let user = signResult?.user else {return}
             guard let idToken = user.idToken else { return }
             let accessToken = user.accessToken
-//            guard let user = signResult?.user,
-//                  let idToken = user.idToken,
-//                  let accessToken = user.accessToken
-//            else {
-//                completion(.failure(NSError(domain: "FirebaseManager", code: 1, userInfo: [NSLocalizedDescriptionKey: "Google sign-in result missing user information"])))
-//                return
-//            }
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
             
@@ -88,7 +79,15 @@ class FirebaseManager {
         }
     }
     
-    
+    // метод для выхода пользователя из аккаунта
+    func logOut(completion: @escaping (Result<Void, Error>) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion(.success(()))
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
 }
 
 
