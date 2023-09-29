@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import GoogleSignIn
-import FirebaseAuth
-import FirebaseCore
 
 final class CreateAccountViewController: UIViewController {
     
@@ -63,10 +60,6 @@ final class CreateAccountViewController: UIViewController {
         )
         return googleButton
     }()
-//    private let googleButton = CustomButton(
-//        title: "Continue with Google",
-//        buttonType: .googleButton
-//    )
     
     private let loginLabel: UILabel = {
         let loginLabel = AuthLabel(
@@ -112,30 +105,15 @@ final class CreateAccountViewController: UIViewController {
     // MARK: - Private Actions
     
     @objc private func googleButtonDidTapped() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        
-        let config = GIDConfiguration(clientID: clientID)
-        
-        GIDSignIn.sharedInstance.configuration = config
-        
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signResult, error in
-                    
-            if let error = error {
-                print(error.localizedDescription)
-               return
+        FirebaseManager.shared.signInWithGoogle(
+            presentingViewController: self) { result in
+                switch result {
+                case .success(_):
+                    print("Successfully")
+                case .failure(let error):
+                    print(error)
+                }
             }
-                    
-             guard let user = signResult?.user,
-                   let idToken = user.idToken else { return }
-             
-             let accessToken = user.accessToken
-                    
-             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
-
-            Auth.auth().signIn(with: credential) { authResult, error in
-                   print("Sucessfull")
-            }
-        }
     }
     
     @objc private func loginButtonDidTapped() {

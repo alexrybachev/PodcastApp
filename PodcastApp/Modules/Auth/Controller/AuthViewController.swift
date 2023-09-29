@@ -7,10 +7,6 @@
 
 import UIKit
 import SnapKit
-import FirebaseAuth
-import FirebaseCore
-import GoogleSignIn
-import GoogleSignInSwift
 
 final class AuthViewController: UIViewController {
     
@@ -57,10 +53,10 @@ final class AuthViewController: UIViewController {
     
     private lazy var googleButton: CustomButton = {
         var googleButton = CustomButton(
-                    title: "Continue with Google",
-                    font: UIFont.boldSystemFont(ofSize: 18),
-                    buttonType: .googleButton
-                )
+            title: "Continue with Google",
+            font: UIFont.boldSystemFont(ofSize: 18),
+            buttonType: .googleButton
+        )
         googleButton.addTarget(
             self,
             action: #selector(googleButtonDidTapped),
@@ -69,11 +65,6 @@ final class AuthViewController: UIViewController {
         
         return googleButton
     }()
-//    private let googleButton = CustomButton(
-//        title: "Continue with Google",
-//        font: UIFont.boldSystemFont(ofSize: 18),
-//        buttonType: .googleButton
-//    )
     
     private let registerLabel: UILabel = {
         let infoLabel = AuthLabel(
@@ -110,33 +101,17 @@ final class AuthViewController: UIViewController {
     }
     
     // MARK: - Private Actions
-
     // вход в приложение через аккаунт гугл
     @objc private func googleButtonDidTapped() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        
-        let config = GIDConfiguration(clientID: clientID)
-        
-        GIDSignIn.sharedInstance.configuration = config
-        
-        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signResult, error in
-                    
-            if let error = error {
-                print(error.localizedDescription)
-               return
+        FirebaseManager.shared.signInWithGoogle(
+            presentingViewController: self) { result in
+                switch result {
+                case .success(_):
+                    print("Successfully")
+                case .failure(let error):
+                    print(error)
+                }
             }
-                    
-             guard let user = signResult?.user,
-                   let idToken = user.idToken else { return }
-             
-             let accessToken = user.accessToken
-                    
-             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
-
-            Auth.auth().signIn(with: credential) { authResult, error in
-                   print("Sucessfull")
-            }
-        }
     }
     
     @objc private func registerButtonDidTapped() {
@@ -146,17 +121,18 @@ final class AuthViewController: UIViewController {
     
     @objc private func loginButtonDidTapped() {
         if let email = loginField.text, let password = passwordField.text {
-            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                if let currentError = error {
-                    print(currentError)
-                    self.loginField.layer.borderColor = UIColor.red.cgColor
-                    self.passwordField.layer.borderColor = UIColor.red.cgColor
-                } else {
+            FirebaseManager.shared.signIn(withEmail: email, password: password) { result in
+                switch result {
+                case .success(_):
                     print("You login successfully")
                     self.loginField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
                     self.passwordField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
                     self.loginField.text = ""
                     self.passwordField.text = ""
+                case .failure(let error):
+                    print(error)
+                    self.loginField.layer.borderColor = UIColor.red.cgColor
+                    self.passwordField.layer.borderColor = UIColor.red.cgColor
                 }
             }
         }

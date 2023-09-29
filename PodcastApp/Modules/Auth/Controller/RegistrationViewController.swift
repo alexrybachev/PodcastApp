@@ -238,12 +238,14 @@ final class RegistrationViewController: UIViewController {
             emailField.layer.borderWidth = 0.0
         }
         
-        //         Если все проверки пройдены, регистрируем пользователя
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let currentError = error {
-                print(currentError)
-            } else {
+        // Если все проверки пройдены, регистрируем пользователя
+        FirebaseManager.shared.createUser(withEmail: email, password: password) { result in
+            switch result {
+                
+            case .success(_):
                 print("User was successfully registered")
+            case .failure(let error):
+                print(error)
             }
         }
     }
@@ -266,6 +268,7 @@ final class RegistrationViewController: UIViewController {
             }
     }
     
+    // отбратотка нажания на loginLabel
     private func addTapGesture() {
         let tapGesture = UITapGestureRecognizer(
             target: self,

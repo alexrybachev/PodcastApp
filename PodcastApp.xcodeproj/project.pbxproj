@@ -52,6 +52,7 @@
 		3CC2F0832AC6BF78009D3018 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC2F0822AC6BF78009D3018 /* GoogleSignInSwift */; };
 		3CC2F0852AC6C0DD009D3018 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F0842AC6C0DC009D3018 /* GoogleService-Info.plist */; };
 		3CC2F0872AC6C3AE009D3018 /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0862AC6C3AE009D3018 /* GoogleButton.swift */; };
+		3CC2F08A2AC6F8DC009D3018 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0892AC6F8DC009D3018 /* FirebaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		0AC0B4C82AC5F7D000252B8B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		3CC2F0842AC6C0DC009D3018 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3CC2F0862AC6C3AE009D3018 /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
+		3CC2F0892AC6F8DC009D3018 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 		0A0B7B532AC0B0A800C1D17B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				3CC2F0882AC6F8C9009D3018 /* Services */,
 				0A125D382AC0CA230006EACA /* Model */,
 				0A125D3B2AC0CA230006EACA /* View */,
 				0A125D392AC0CA230006EACA /* Controller */,
@@ -487,6 +490,14 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
+		3CC2F0882AC6F8C9009D3018 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3CC2F0892AC6F8DC009D3018 /* FirebaseManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -598,6 +609,7 @@
 				0AC0B4B52AC5779100252B8B /* CategoryHomeViewCell.swift in Sources */,
 				0AC0B4B32AC5779100252B8B /* PopularCategoryCell.swift in Sources */,
 				0AC0B4C22AC5F7B200252B8B /* CustomTextField.swift in Sources */,
+				3CC2F08A2AC6F8DC009D3018 /* FirebaseManager.swift in Sources */,
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 				0AC0B4CA2AC5F7D000252B8B /* AuthViewController.swift in Sources */,
 				0AC0B4CB2AC5F7D000252B8B /* CreateAccountViewController.swift in Sources */,
