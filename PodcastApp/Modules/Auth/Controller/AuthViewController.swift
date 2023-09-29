@@ -8,6 +8,9 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
+import FirebaseCore
+import GoogleSignIn
+import GoogleSignInSwift
 
 final class AuthViewController: UIViewController {
     
@@ -52,11 +55,25 @@ final class AuthViewController: UIViewController {
     
     private let continueView = ContinueView()
     
-    private let googleButton = CustomButton(
-        title: "Continue with Google",
-        font: UIFont.boldSystemFont(ofSize: 18),
-        buttonType: .googleButton
-    )
+    private lazy var googleButton: CustomButton = {
+        var googleButton = CustomButton(
+                    title: "Continue with Google",
+                    font: UIFont.boldSystemFont(ofSize: 18),
+                    buttonType: .googleButton
+                )
+        googleButton.addTarget(
+            self,
+            action: #selector(googleButtonDidTapped),
+            for: .touchUpInside
+        )
+        
+        return googleButton
+    }()
+//    private let googleButton = CustomButton(
+//        title: "Continue with Google",
+//        font: UIFont.boldSystemFont(ofSize: 18),
+//        buttonType: .googleButton
+//    )
     
     private let registerLabel: UILabel = {
         let infoLabel = AuthLabel(
@@ -93,6 +110,35 @@ final class AuthViewController: UIViewController {
     }
     
     // MARK: - Private Actions
+
+    // вход в приложение через аккаунт гугл
+    @objc private func googleButtonDidTapped() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.configuration = config
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { signResult, error in
+                    
+            if let error = error {
+                print(error.localizedDescription)
+               return
+            }
+                    
+             guard let user = signResult?.user,
+                   let idToken = user.idToken else { return }
+             
+             let accessToken = user.accessToken
+                    
+             let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+
+            Auth.auth().signIn(with: credential) { authResult, error in
+                   print("Sucessfull")
+            }
+        }
+    }
+    
     @objc private func registerButtonDidTapped() {
         let createAccVC = CreateAccountViewController()
         navigationController?.pushViewController(createAccVC, animated: true)
