@@ -56,6 +56,9 @@
 		0AC0B4DD2AC6154600252B8B /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4D92AC6154600252B8B /* SearchViewCell.swift */; };
 		0AC0B4DE2AC6154600252B8B /* SearchResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4DA2AC6154600252B8B /* SearchResultViewCell.swift */; };
 		0AC0B4DF2AC6154600252B8B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4DB2AC6154600252B8B /* SearchView.swift */; };
+		84755EA12AC8D542007C5B4C /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84755EA02AC8D542007C5B4C /* ChannelViewController.swift */; };
+		84755EA32AC8D573007C5B4C /* ChannelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84755EA22AC8D573007C5B4C /* ChannelViewCell.swift */; };
+		84755EA52AC8D59A007C5B4C /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84755EA42AC8D59A007C5B4C /* Source.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +109,9 @@
 		0AC0B4D92AC6154600252B8B /* SearchViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
 		0AC0B4DA2AC6154600252B8B /* SearchResultViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewCell.swift; sourceTree = "<group>"; };
 		0AC0B4DB2AC6154600252B8B /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		84755EA02AC8D542007C5B4C /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
+		84755EA22AC8D573007C5B4C /* ChannelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewCell.swift; sourceTree = "<group>"; };
+		84755EA42AC8D59A007C5B4C /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +182,7 @@
 		0A0B7B4B2AC0AE3800C1D17B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				84755E9C2AC8D4E1007C5B4C /* Channel */,
 				0AC0B4CC2AC602F300252B8B /* TabBar */,
 				0A0B7B532AC0B0A800C1D17B /* Auth */,
 				0A0B7B4C2AC0AE4A00C1D17B /* Onboarding */,
@@ -528,6 +535,40 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		84755E9C2AC8D4E1007C5B4C /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				84755E9F2AC8D523007C5B4C /* View */,
+				84755E9E2AC8D507007C5B4C /* Model */,
+				84755E9D2AC8D4EE007C5B4C /* Controller */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
+		84755E9D2AC8D4EE007C5B4C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84755EA02AC8D542007C5B4C /* ChannelViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		84755E9E2AC8D507007C5B4C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84755EA22AC8D573007C5B4C /* ChannelViewCell.swift */,
+				84755EA42AC8D59A007C5B4C /* Source.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84755E9F2AC8D523007C5B4C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -617,16 +658,19 @@
 			files = (
 				0AC0B4A92AC5776B00252B8B /* UILabel + Ext.swift in Sources */,
 				0AC0B4BB2AC5F79800252B8B /* AuthColor.swift in Sources */,
+				84755EA12AC8D542007C5B4C /* ChannelViewController.swift in Sources */,
 				0A56F1102AC7F75200740A92 /* PodcastModel.swift in Sources */,
 				0A56F1142AC7F78A00740A92 /* HomeViewController.swift in Sources */,
 				0A0B7B362AC0ABDA00C1D17B /* AppDelegate.swift in Sources */,
 				0AC0B4C12AC5F7B200252B8B /* ContinueView.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
+				84755EA52AC8D59A007C5B4C /* Source.swift in Sources */,
 				0AC0B4DD2AC6154600252B8B /* SearchViewCell.swift in Sources */,
 				0AC0B4C52AC5F7B200252B8B /* CustomLabel.swift in Sources */,
 				0AC0B4DF2AC6154600252B8B /* SearchView.swift in Sources */,
 				0A56F1122AC7F75200740A92 /* EndPoint.swift in Sources */,
 				0AC0B4B62AC5779100252B8B /* HomeView.swift in Sources */,
+				84755EA32AC8D573007C5B4C /* ChannelViewCell.swift in Sources */,
 				0A56F1092AC7EB3F00740A92 /* AppSeettingsMAnager.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
 				0A9596772AC8A7C3003F87CE /* ChannelModel.swift in Sources */,
