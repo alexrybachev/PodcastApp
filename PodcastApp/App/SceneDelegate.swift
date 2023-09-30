@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
         let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
-        window?.rootViewController = startVC
+        window?.rootViewController = OnboardingViewController()
         window?.makeKeyAndVisible()
         
     }
