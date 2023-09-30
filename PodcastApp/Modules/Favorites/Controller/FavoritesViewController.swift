@@ -7,7 +7,6 @@ class FavoritesViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
-//        tableView.backgroundColor = .red.withAlphaComponent(0.5)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -29,6 +28,12 @@ class FavoritesViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(favouriteChanelsTableView)
+
+        }
+    
+    private func setupNavigationBar() {
+        self.navigationItem.title = "Favorites"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     private func setupTableView() {
@@ -42,10 +47,7 @@ class FavoritesViewController: UIViewController {
         favouriteChanelsTableView.estimatedRowHeight = 48
     }
 
-    private func setupNavigationBar() {
-        self.navigationItem.title = "Favorites"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-    }
+    
 }
 
 

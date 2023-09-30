@@ -79,9 +79,6 @@ class FavouriteChannelCell: UITableViewCell {
     private func setupCell() {
         contentView.backgroundColor = .white
         self.addSubview(favChannelImageView)
-//        self.addSubview(favChanelTitleLabel)
-//        self.addSubview(episodesNumberLabel)
-//        episodesNumberLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         self.addSubview(stackView)
         stackView.addArrangedSubview(favChannelTitleLabel)
         stackView.addArrangedSubview(episodesNumberLabel)
@@ -112,13 +109,10 @@ extension FavouriteChannelCell {
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
 
-//            favChanelTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-//            favChanelTitleLabel.leadingAnchor.constraint(equalTo: favChanelImageView.trailingAnchor, constant: 15),
-//            favChanelTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
-//
-//            episodesNumberLabel.leadingAnchor.constraint(equalTo: favChanelTitleLabel.leadingAnchor),
-//            episodesNumberLabel.topAnchor.constraint(equalTo: favChanelTitleLabel.bottomAnchor, constant: 4),
-//            episodesNumberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+            favChannelTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            favChannelTitleLabel.leadingAnchor.constraint(equalTo: favChannelImageView.trailingAnchor, constant: 15),
+            favChannelTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
+
             
 
         ]
