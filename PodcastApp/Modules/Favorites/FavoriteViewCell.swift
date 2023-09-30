@@ -8,15 +8,13 @@
 
 import UIKit
 
-protocol Reusable {
-    static var reuseIdentifier: String { get }
-}
-
 class FavouriteChannelCell: UITableViewCell {
-
+    
+    static var reuseID = String(describing: FavouriteChannelCell.self)
+    
     var channel: ChannelModel?
-
-// MARK: - User Interface
+    
+    // MARK: - User Interface
     
     private let favChannelImageView: UIImageView = {
         let imageView = UIImageView()
@@ -28,103 +26,75 @@ class FavouriteChannelCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     private lazy var favChannelTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = UIFont(name: "manrope-medium", size: 14)
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .custome(name: .manrope700, size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var episodesNumberLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 1
         label.textColor = .darkGray
-        label.font = UIFont(name: "manrope-light", size: 12)
+        label.font = .custome(name: .manrope400, size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .leading
-        stackView.spacing = CGFloat(5)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-
-
-
-// MARK: - cell initialization
+    
+    
+    // MARK: - cell initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupCell()
         self.setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func prepareForReuse() {
         self.channel = nil
     }
-
+    
+    //MARK: - Methods
+    
     private func setupCell() {
         contentView.backgroundColor = .white
-        self.addSubview(favChannelImageView)
-        self.addSubview(stackView)
-        stackView.addArrangedSubview(favChannelTitleLabel)
-        stackView.addArrangedSubview(episodesNumberLabel)
+        contentView.addSubview(favChannelImageView)
+        contentView.addSubview(favChannelTitleLabel)
+        contentView.addSubview(episodesNumberLabel)
     }
-
+    
     func setup(withChanel chanel: ChannelModel) {
         favChannelImageView.image = UIImage(named: chanel.imageName)
         favChannelTitleLabel.text = chanel.channelName
         episodesNumberLabel.text = "\(chanel.numberOfEpisodes) Eps"
     }
-
-}
-
-extension FavouriteChannelCell {
-
+    
     private func setupConstraints() {
-
-        let constraints: [NSLayoutConstraint] = [
-
-            self.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
-
-            favChannelImageView.heightAnchor.constraint(equalToConstant: 48),
-            favChannelImageView.widthAnchor.constraint(equalToConstant: 48),
-            favChannelImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 47),
-            favChannelImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-
-            stackView.leadingAnchor.constraint(equalTo: favChannelImageView.trailingAnchor, constant: 15),
-            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
-
-            favChannelTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-            favChannelTitleLabel.leadingAnchor.constraint(equalTo: favChannelImageView.trailingAnchor, constant: 15),
-            favChannelTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
-
-            
-
-        ]
-
-        NSLayoutConstraint.activate(constraints)
+        
+        favChannelImageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(47)
+            make.height.width.equalTo(48)
+            make.centerY.equalToSuperview()
+        }
+        
+        favChannelTitleLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(47)
+            make.leading.equalTo(favChannelImageView.snp.trailing).inset(-15)
+            make.top.equalToSuperview().inset(8)
+        }
+        
+        episodesNumberLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(favChannelTitleLabel)
+            make.top.equalTo(favChannelTitleLabel.snp.bottom).inset(-4)
+            make.bottom.equalToSuperview().inset(8)
+        }
     }
-}
-
-extension FavouriteChannelCell: Reusable {
-    static var reuseIdentifier: String {
-        return String(describing: self)
-    }
-
-
 }
