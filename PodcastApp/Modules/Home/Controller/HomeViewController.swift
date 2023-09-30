@@ -15,13 +15,19 @@ class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
     
+    private var podcastsData: SearchedResult?
+    
+    
     // MARK: - Initial
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view = homeView
         homeView.transferDelegates(dataSource: self, delegate: self)
         homeView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
+        
+        fetchData()
     }
     
 }
@@ -41,8 +47,8 @@ extension HomeViewController: UICollectionViewDataSource {
         case 1:
             return categories.count
         default:
-//            podcasts[section].podcasts.count
-            return 20
+            return podcastsData?.feeds?.count ?? 0
+            //            return 20
         }
     }
     
@@ -58,8 +64,8 @@ extension HomeViewController: UICollectionViewDataSource {
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PodcastHomeViewCell.cellID, for: indexPath) as! PodcastHomeViewCell
-//            let podcastInfo = podcasts[indexPath.section].podcasts[indexPath.item]
-//            cell.configureCell(podcastInfo)
+            let podcast = podcastsData?.feeds?[indexPath.item]
+            cell.configureCell(podcast)
             return cell
         }
     }
@@ -118,8 +124,6 @@ extension HomeViewController {
     private func createSecondSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(20), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12)
-//        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .fixed(20), bottom: .none)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(20), heightDimension: .absolute(36))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -133,16 +137,14 @@ extension HomeViewController {
     }
     
     private func createThirdSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84)) // fractionalHeight(1)
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(84))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 12, trailing: 0)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)) // absolute(72)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(96))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(8))
     
         let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .paging
-        
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         
         return section
@@ -158,3 +160,20 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - Networking
+
+extension HomeViewController {
+    
+    private func fetchData() {
+        NetworkManager.shared.fetchTrendingPodcast { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.podcastsData = data
+                self?.homeView.reloadCollectionView()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+}
