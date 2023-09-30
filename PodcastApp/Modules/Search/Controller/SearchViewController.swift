@@ -193,7 +193,9 @@ extension SearchViewController: UISearchBarDelegate {
         print(#function)
         searchBar.text = nil
         print("возвращаем compitional layout")
+        searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
         print("перезагружаем коллекцию")
+        searchView.reloadCollectionView()
         searchBar.resignFirstResponder()
     }
     

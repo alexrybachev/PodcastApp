@@ -49,6 +49,10 @@
 		0AC0B4DD2AC6154600252B8B /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4D92AC6154600252B8B /* SearchViewCell.swift */; };
 		0AC0B4DE2AC6154600252B8B /* SearchResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4DA2AC6154600252B8B /* SearchResultViewCell.swift */; };
 		0AC0B4DF2AC6154600252B8B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4DB2AC6154600252B8B /* SearchView.swift */; };
+		28197A7F2AC7550400DB629B /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28197A7E2AC7550400DB629B /* API.swift */; };
+		28197A812AC7555400DB629B /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28197A802AC7555400DB629B /* EndPoint.swift */; };
+		28197A832AC755C600DB629B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28197A822AC755C600DB629B /* NetworkManager.swift */; };
+		28197A852AC7560900DB629B /* PodcastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28197A842AC7560900DB629B /* PodcastModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +96,10 @@
 		0AC0B4D92AC6154600252B8B /* SearchViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
 		0AC0B4DA2AC6154600252B8B /* SearchResultViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewCell.swift; sourceTree = "<group>"; };
 		0AC0B4DB2AC6154600252B8B /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		28197A7E2AC7550400DB629B /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		28197A802AC7555400DB629B /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		28197A822AC755C600DB629B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		28197A842AC7560900DB629B /* PodcastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 				0A0B7B522AC0B04600C1D17B /* Extensions */,
 				0A0B7B4B2AC0AE3800C1D17B /* Modules */,
 				0A0B7B4A2AC0ADAC00C1D17B /* SupportingFiles */,
+				28197A7D2AC754D000DB629B /* NetworkManager */,
 			);
 			path = PodcastApp;
 			sourceTree = "<group>";
@@ -499,6 +508,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		28197A7D2AC754D000DB629B /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				28197A842AC7560900DB629B /* PodcastModel.swift */,
+				28197A7E2AC7550400DB629B /* API.swift */,
+				28197A802AC7555400DB629B /* EndPoint.swift */,
+				28197A822AC755C600DB629B /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -594,12 +614,15 @@
 				0A125D342AC0CA0A0006EACA /* FavoritesViewController.swift in Sources */,
 				0AC0B4C12AC5F7B200252B8B /* ContinueView.swift in Sources */,
 				0A0B7B382AC0ABDA00C1D17B /* SceneDelegate.swift in Sources */,
+				28197A852AC7560900DB629B /* PodcastModel.swift in Sources */,
 				0AC0B4DD2AC6154600252B8B /* SearchViewCell.swift in Sources */,
 				0AC0B4C52AC5F7B200252B8B /* CustomLabel.swift in Sources */,
+				28197A812AC7555400DB629B /* EndPoint.swift in Sources */,
 				0AC0B4DF2AC6154600252B8B /* SearchView.swift in Sources */,
 				0AC0B4B62AC5779100252B8B /* HomeView.swift in Sources */,
 				0A125D362AC0CA0A0006EACA /* PlayingNowViewController.swift in Sources */,
 				0AC0B4B52AC5779100252B8B /* CategoryHomeViewCell.swift in Sources */,
+				28197A832AC755C600DB629B /* NetworkManager.swift in Sources */,
 				0AC0B4B32AC5779100252B8B /* PopularCategoryCell.swift in Sources */,
 				0AC0B4D02AC6151600252B8B /* HomeViewController.swift in Sources */,
 				0AC0B4C22AC5F7B200252B8B /* CustomTextField.swift in Sources */,
@@ -609,6 +632,7 @@
 				0AC0B4CA2AC5F7D000252B8B /* AuthViewController.swift in Sources */,
 				0AC0B4CB2AC5F7D000252B8B /* CreateAccountViewController.swift in Sources */,
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
+				28197A7F2AC7550400DB629B /* API.swift in Sources */,
 				0AC0B4C92AC5F7D000252B8B /* RegistrationViewController.swift in Sources */,
 				0AC0B4AB2AC5778000252B8B /* HomeModel.swift in Sources */,
 				0AC0B4C32AC5F7B200252B8B /* CustomButton.swift in Sources */,
