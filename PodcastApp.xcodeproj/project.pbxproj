@@ -51,7 +51,6 @@
 		3CC2F0812AC6BF78009D3018 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC2F0802AC6BF78009D3018 /* GoogleSignIn */; };
 		3CC2F0832AC6BF78009D3018 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3CC2F0822AC6BF78009D3018 /* GoogleSignInSwift */; };
 		3CC2F0852AC6C0DD009D3018 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F0842AC6C0DC009D3018 /* GoogleService-Info.plist */; };
-		3CC2F0872AC6C3AE009D3018 /* GoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0862AC6C3AE009D3018 /* GoogleButton.swift */; };
 		3CC2F08A2AC6F8DC009D3018 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0892AC6F8DC009D3018 /* FirebaseManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +92,6 @@
 		0AC0B4C72AC5F7CF00252B8B /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0AC0B4C82AC5F7D000252B8B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		3CC2F0842AC6C0DC009D3018 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3CC2F0862AC6C3AE009D3018 /* GoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleButton.swift; sourceTree = "<group>"; };
 		3CC2F0892AC6F8DC009D3018 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -453,7 +451,6 @@
 				0AC0B4BF2AC5F7B200252B8B /* AuthLabel.swift */,
 				0AC0B4BC2AC5F7B200252B8B /* ContinueView.swift */,
 				0AC0B4BE2AC5F7B200252B8B /* CustomButton.swift */,
-				3CC2F0862AC6C3AE009D3018 /* GoogleButton.swift */,
 				0AC0B4C02AC5F7B200252B8B /* CustomLabel.swift */,
 				0AC0B4BD2AC5F7B200252B8B /* CustomTextField.swift */,
 			);
@@ -616,7 +613,6 @@
 				0A125D3E2AC0CAB90006EACA /* AccountSettingsViewController.swift in Sources */,
 				0AC0B4C92AC5F7D000252B8B /* RegistrationViewController.swift in Sources */,
 				0AC0B4AB2AC5778000252B8B /* HomeModel.swift in Sources */,
-				3CC2F0872AC6C3AE009D3018 /* GoogleButton.swift in Sources */,
 				0AC0B4C32AC5F7B200252B8B /* CustomButton.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
