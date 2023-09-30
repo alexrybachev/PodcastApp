@@ -17,21 +17,21 @@ class ChannelViewCell: UITableViewCell {
     
     let nameEpizode: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = UIFont(name: "manrope-medium", size: 14)
         label.textColor = .black
         return label
     }()
     
     let totalTimeEpizodeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = UIFont(name: "manrope-medium", size: 14)
         label.textColor = .black
         return label
     }()
     
     let numberOfEpizode: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = UIFont(name: "manrope-medium", size: 14)
         label.textColor = .lightGray
         return label
     }()
@@ -44,6 +44,13 @@ class ChannelViewCell: UITableViewCell {
         return label
     }()
     
+    let backgroundCellView:UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.9434495568, green: 0.9541783929, blue: 0.9908102155, alpha: 1)
+        view.layer.cornerRadius = 72/4
+        return view
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style , reuseIdentifier: reuseIdentifier)
@@ -54,35 +61,59 @@ class ChannelViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let margins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        contentView.frame = contentView.frame.inset(by: margins)
+    }
+    
     private func setupCell(){
-        addSubview(imageEpizode)
-        addSubview(nameEpizode)
-        addSubview(totalTimeEpizodeLabel)
-        addSubview(numberOfEpizode)
-        addSubview(separateLabel)
-                
-        imageEpizode.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(8)
-            make.left.equalToSuperview().offset(8)
+        contentView.addSubview(backgroundCellView)
+        contentView.addSubview(imageEpizode)
+        contentView.addSubview(nameEpizode)
+        contentView.addSubview(totalTimeEpizodeLabel)
+        contentView.addSubview(numberOfEpizode)
+        contentView.addSubview(separateLabel)
+        
+        
+//        contentView.backgroundColor = #colorLiteral(red: 0.9434495568, green: 0.9541783929, blue: 0.9908102155, alpha: 1)
+//        contentView.layer.cornerRadius = 72/4
+//        
+//        contentView.snp.makeConstraints { make in
+//            make.leading.equalToSuperview().offset(32)
+//            make.trailing.equalToSuperview().inset(32)
+//            make.height.equalTo(72)
+//        }
+        
+        backgroundCellView.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top)
+            make.leading.equalTo(contentView.snp.leading).offset(32)
+            make.trailing.equalTo(contentView.snp.trailing).inset(32)
+            make.bottom.equalTo(contentView.snp.bottom)
+        }
+        
+        imageEpizode.snp.makeConstraints { make in
+            make.centerY.equalTo(backgroundCellView.snp.centerY)
+            make.leading.equalTo(backgroundCellView.snp.leading).offset(8)
             make.width.height.equalTo(56)
         }
         
-        nameEpizode.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(15)
-            make.centerX.equalToSuperview()
+        nameEpizode.snp.makeConstraints { make in
+            make.top.equalTo(backgroundCellView.snp.top).offset(15)
+            make.leading.equalTo(imageEpizode.snp.trailing).offset(19)
         }
         
-        numberOfEpizode.snp.makeConstraints { (make) in
+        numberOfEpizode.snp.makeConstraints { make in
             make.top.equalTo(nameEpizode.snp.bottom).offset(5)
             make.leading.equalTo(nameEpizode.snp.leading)
         }
         
-        separateLabel.snp.makeConstraints { (make) in
+        separateLabel.snp.makeConstraints { make in
             make.top.equalTo(numberOfEpizode.snp.top)
             make.leading.equalTo(numberOfEpizode.snp.trailing).offset(5)
         }
         
-        totalTimeEpizodeLabel.snp.makeConstraints { (make) in
+        totalTimeEpizodeLabel.snp.makeConstraints { make in
             make.top.equalTo(numberOfEpizode.snp.top)
             make.leading.equalTo(separateLabel.snp.trailing).offset(5)
         }

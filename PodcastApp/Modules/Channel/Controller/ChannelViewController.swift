@@ -20,7 +20,7 @@ class ChannelViewController: UIViewController {
     
     private let imageChanel: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .cyan
+        image.backgroundColor = UIColor(red: 0.68, green: 0.89, blue: 0.95, alpha: 1)
         image.layer.cornerRadius = 84/4
         return image
     }()
@@ -67,7 +67,7 @@ class ChannelViewController: UIViewController {
         makeConstraints()
         
         tableView.register(ChannelViewCell.self, forCellReuseIdentifier: "ChannelViewCell")
-        tableView.rowHeight = 72
+//        tableView.rowHeight = 72
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -79,10 +79,12 @@ class ChannelViewController: UIViewController {
         view.addSubview(numberEpizodesLabel)
         view.addSubview(startLabel)
         view.addSubview(tableView)
+        
+        tableView.separatorStyle = .none
     }
     
     private func makeConstraints(){
-        titleLabel.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
             make.centerX.equalToSuperview()
         }
@@ -127,6 +129,10 @@ extension ChannelViewController: UITableViewDataSource{
         let cell = ChannelViewCell()
         cell.configure(channel: channel[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        88
     }
 }
 
