@@ -33,20 +33,39 @@ final class AuthViewController: UIViewController {
         border: true
     )
     
-    private let loginButton = CustomButton(
-        title: "Login",
-        font: UIFont.boldSystemFont(ofSize: 18),
-        buttonType: .blueButton
-    )
+    private lazy var loginButton: CustomButton = {
+        var logButton = CustomButton(
+            title: "Login",
+            font: UIFont.boldSystemFont(ofSize: 18),
+            buttonType: .blueButton
+        )
+        
+        logButton.addTarget(
+            self,
+            action: #selector(loginButtonDidTapped),
+            for: .touchUpInside
+        )
+        
+        return logButton
+    }()
     
     private let continueView = ContinueView()
     
-    private let googleButton = CustomButton(
-        title: "Continue with Google",
-        font: UIFont.boldSystemFont(ofSize: 18),
-        buttonType: .googleButton
-    )
-
+    private lazy var googleButton: CustomButton = {
+        var googleButton = CustomButton(
+            title: "Continue with Google",
+            font: UIFont.boldSystemFont(ofSize: 18),
+            buttonType: .googleButton
+        )
+        googleButton.addTarget(
+            self,
+            action: #selector(googleButtonDidTapped),
+            for: .touchUpInside
+        )
+        
+        return googleButton
+    }()
+    
     private let registerLabel: UILabel = {
         let infoLabel = AuthLabel(
             title: "Don't have an account yet? Register",
@@ -55,7 +74,7 @@ final class AuthViewController: UIViewController {
         )
         return infoLabel
     }()
-        
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,10 +101,41 @@ final class AuthViewController: UIViewController {
     }
     
     // MARK: - Private Actions
+    // вход в приложение через аккаунт гугл
+    @objc private func googleButtonDidTapped() {
+        FirebaseManager.shared.signInWithGoogle(
+            presentingViewController: self) { result in
+                switch result {
+                case .success(_):
+                    print("Successfully")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
     @objc private func registerButtonDidTapped() {
         let createAccVC = CreateAccountViewController()
         navigationController?.pushViewController(createAccVC, animated: true)
-//        print("YES")
+    }
+    
+    @objc private func loginButtonDidTapped() {
+        if let email = loginField.text, let password = passwordField.text {
+            FirebaseManager.shared.signIn(withEmail: email, password: password) { result in
+                switch result {
+                case .success(_):
+                    print("You login successfully")
+                    self.loginField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
+                    self.passwordField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
+                    self.loginField.text = ""
+                    self.passwordField.text = ""
+                case .failure(let error):
+                    print(error)
+                    self.loginField.layer.borderColor = UIColor.red.cgColor
+                    self.passwordField.layer.borderColor = UIColor.red.cgColor
+                }
+            }
+        }
     }
     
     // MARK: - Private Methods
@@ -158,4 +208,3 @@ extension AuthViewController: UITextFieldDelegate {
         return true
     }
 }
-

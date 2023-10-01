@@ -48,10 +48,18 @@ final class CreateAccountViewController: UIViewController {
     
     private let continueView = ContinueView()
     
-    private let googleButton = CustomButton(
-        title: "Continue with Google",
-        buttonType: .googleButton
-    )
+    private lazy var googleButton: CustomButton = {
+        var googleButton = CustomButton(
+            title: "Continue with Google",
+            buttonType: .googleButton
+        )
+        googleButton.addTarget(
+            self,
+            action: #selector(googleButtonDidTapped),
+            for: .touchUpInside
+        )
+        return googleButton
+    }()
     
     private let loginLabel: UILabel = {
         let loginLabel = AuthLabel(
@@ -61,7 +69,16 @@ final class CreateAccountViewController: UIViewController {
         )
         return loginLabel
     }()
-
+    
+    private lazy var errorLabel: UILabel = {
+        var errorLabel = CustomLabel(
+            title: "Enter your email",
+            color: .systemRed
+        )
+        errorLabel.isHidden = true
+        return errorLabel
+    }()
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +103,19 @@ final class CreateAccountViewController: UIViewController {
     }
     
     // MARK: - Private Actions
+    
+    @objc private func googleButtonDidTapped() {
+        FirebaseManager.shared.signInWithGoogle(
+            presentingViewController: self) { result in
+                switch result {
+                case .success(_):
+                    print("Successfully")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
     @objc private func loginButtonDidTapped() {
         // очищаем textField в AuthViewController при возврате на экран
         if let authVC = navigationController?.viewControllers.first as? AuthViewController {
@@ -96,8 +126,17 @@ final class CreateAccountViewController: UIViewController {
     }
     
     @objc private func continueButtonDidTapped() {
-        let registerVC = RegistrationViewController()
-        navigationController?.pushViewController(registerVC, animated: true)
+        // если emailTF не пустой, то делаем переход
+        if emailField.text != "" {
+            let registerVC = RegistrationViewController()
+            registerVC.selectedEmail = emailField.text
+            navigationController?.pushViewController(registerVC, animated: true)
+            // скрываем ошибку
+            errorLabel.isHidden = true
+        } else {
+            // если пустой, то показываем ошибку
+            errorLabel.isHidden = false
+        }
     }
     
     // MARK: - Private Methods
@@ -110,6 +149,7 @@ final class CreateAccountViewController: UIViewController {
         whiteView.addSubview(continueView)
         whiteView.addSubview(googleButton)
         whiteView.addSubview(loginLabel)
+        whiteView.addSubview(errorLabel)
     }
     
     private func setupConstraints() {
@@ -137,8 +177,13 @@ final class CreateAccountViewController: UIViewController {
             make.height.equalTo(60)
         }
         
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailField.snp.bottom).offset(10)
+            make.centerX.equalToSuperview()
+        }
+        
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(emailField.snp.bottom).offset(32)
+            make.top.equalTo(errorLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(25)
             make.right.equalToSuperview().offset(-25)
             make.height.equalTo(56)

@@ -21,7 +21,7 @@ final class AuthLabel: UILabel {
         textColor = UIColor.customLabelColor
         self.font = (font == .small)
         ? UIFont.systemFont(ofSize: 13)
-        : UIFont.boldSystemFont(ofSize: 14)
+        : UIFont.custome(name: .plusJakartaSans600, size: 14)
         
         let attributedText = NSMutableAttributedString(string: title)
         let range = (title as NSString).range(of: activeString)
