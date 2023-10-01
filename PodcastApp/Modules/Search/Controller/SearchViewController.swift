@@ -20,6 +20,8 @@ class SearchViewController: UIViewController {
     private let searchView = SearchView()
     
     private var isSearched = false
+    
+    private var categoryList: SearchedResult?
 
     // MARK: - Initial
     
@@ -29,6 +31,11 @@ class SearchViewController: UIViewController {
         searchView.transferDelegates(dataSource: self, delegate: self)
         searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
         searchView.transferSearchBarDelegate(delegate: self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchCategoryList()
     }
 
 }
@@ -42,7 +49,12 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        20
+        switch section {
+        case 0:
+            return 20
+        default:
+            return categoryList?.count ?? 10
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -50,11 +62,10 @@ extension SearchViewController: UICollectionViewDataSource {
         switch isSearched {
         case false:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchViewCell.cellID, for: indexPath) as! SearchViewCell
-            
+            cell.configureCell(categoryList?.feeds?[indexPath.item])
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultViewCell.cellID, for: indexPath) as! SearchResultViewCell
-            
             return cell
         }
     }
@@ -203,6 +214,24 @@ extension SearchViewController: UISearchBarDelegate {
         print(#function)
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
+    }
+    
+}
+
+// MARK: - Networking
+
+extension SearchViewController {
+    
+    private func fetchCategoryList() {
+        NetworkManager.shared.fetchCategoryList { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.categoryList = data
+                self?.searchView.reloadCollectionView()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }

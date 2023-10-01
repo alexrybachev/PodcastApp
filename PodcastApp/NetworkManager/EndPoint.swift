@@ -9,11 +9,14 @@ import Foundation
 
 enum EndPoint {
     case getTrendingPodcast
+    case getCategoryList
     
     var path: String {
         switch self {
         case .getTrendingPodcast:
             return "/api/1.0/podcasts/trending"
+        case .getCategoryList:
+            return "/api/1.0/categories/list"
         }
     }
 }
