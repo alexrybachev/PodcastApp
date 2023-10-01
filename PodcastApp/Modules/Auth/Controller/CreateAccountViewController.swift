@@ -110,6 +110,11 @@ final class CreateAccountViewController: UIViewController {
                 switch result {
                 case .success(_):
                     print("Successfully")
+                    //navigation to next screen
+                    let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
+                    let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
+                    startVC.modalPresentationStyle = .fullScreen
+                    self.present(startVC, animated: true)
                 case .failure(let error):
                     print(error)
                 }

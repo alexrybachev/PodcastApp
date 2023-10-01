@@ -129,6 +129,11 @@ final class AuthViewController: UIViewController {
                     self.passwordField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
                     self.loginField.text = ""
                     self.passwordField.text = ""
+                    //navigation to next screen
+                    let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
+                    let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
+                    startVC.modalPresentationStyle = .fullScreen
+                    self.present(startVC, animated: true)
                 case .failure(let error):
                     print(error)
                     self.loginField.layer.borderColor = UIColor.red.cgColor

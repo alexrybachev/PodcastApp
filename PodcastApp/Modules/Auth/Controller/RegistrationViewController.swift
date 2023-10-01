@@ -244,6 +244,11 @@ final class RegistrationViewController: UIViewController {
                 
             case .success(_):
                 print("User was successfully registered")
+                //navigation to next screen
+                let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
+                let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
+                startVC.modalPresentationStyle = .fullScreen
+                self.present(startVC, animated: true)
             case .failure(let error):
                 print(error)
             }
