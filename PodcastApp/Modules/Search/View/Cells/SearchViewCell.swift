@@ -50,8 +50,8 @@ class SearchViewCell: UICollectionViewCell {
     
     // MARK: - Configure Cell
     
-    func configureCell(_ title: String) {
-        
+    func configureCell(_ podcast: Podcast?) {
+        title.text = podcast?.name
     }
     
 }

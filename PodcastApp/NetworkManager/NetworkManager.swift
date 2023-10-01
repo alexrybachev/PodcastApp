@@ -93,4 +93,11 @@ extension NetworkManager {
         makeTask(for: request, completion: completion)
     }
     
+    // Запрос списка категорий
+    func fetchCategoryList(completion: @escaping (Result<SearchedResult, NetworkError>) -> Void) {
+        guard let url = createURL(for: .getCategoryList) else { return }
+        let request = getRequest(url)
+        makeTask(for: request, completion: completion)
+    }
+    
 }
