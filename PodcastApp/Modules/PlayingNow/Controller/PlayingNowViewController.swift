@@ -66,8 +66,6 @@ extension PlayingNowViewController: UICollectionViewDataSource {
         cell.configureView(with: colors[indexPath.row])
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
