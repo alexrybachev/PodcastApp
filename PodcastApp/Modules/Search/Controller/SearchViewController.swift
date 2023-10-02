@@ -63,9 +63,11 @@ extension SearchViewController: UICollectionViewDataSource {
         case false:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchViewCell.cellID, for: indexPath) as! SearchViewCell
             cell.configureCell(categoryList?.feeds?[indexPath.item])
+            cell.contentView.backgroundColor = UIColor.random
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultViewCell.cellID, for: indexPath) as! SearchResultViewCell
+            cell.contentView.backgroundColor = UIColor.random
             return cell
         }
     }
@@ -105,7 +107,7 @@ extension SearchViewController {
     private func createFirstSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.48), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -128,13 +130,16 @@ extension SearchViewController {
     private func createSecondSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+//        item.edgeSpacing = .init(leading: .fixed(8), top: .none, trailing: .fixed(8), bottom: .none)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(16))
-        group.interItemSpacing = .fixed(16)
+//        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(16))
+//        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(16)
         
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(60))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
@@ -154,9 +159,10 @@ extension SearchViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(16))
-        group.interItemSpacing = .fixed(16)
+//        group.interItemSpacing = .fixed(16)
         
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
         
         return UICollectionViewCompositionalLayout(section: section)
     }

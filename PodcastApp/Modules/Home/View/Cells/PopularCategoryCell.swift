@@ -17,7 +17,7 @@ class PopularCategoryCell: UICollectionViewCell {
         let label = PaddledLabel()
         label.textColor = .black
         label.text = "Category"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = .custome(name: .manrope400, size: 16)
         label.textAlignment = .center
         label.minimumScaleFactor = 0.1
         label.adjustsFontSizeToFitWidth = true
@@ -44,12 +44,6 @@ class PopularCategoryCell: UICollectionViewCell {
         contentView.addSubview(headerLabel)
         contentView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         contentView.layer.cornerRadius = 10
-        
-        contentView.layer.shadowColor = UIColor.gray.cgColor
-        contentView.layer.shadowRadius = 4
-        contentView.layer.shadowOpacity = 0.3
-        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
-
     }
     
     private func setConstraints() {
@@ -63,5 +57,21 @@ class PopularCategoryCell: UICollectionViewCell {
     
     func configureCell(_ title: String) {
         headerLabel.text = title
+    }
+    
+    func selectCell() {
+        headerLabel.font = .custome(name: .manrope700, size: 16)
+        contentView.layer.shadowColor = UIColor.gray.cgColor
+        contentView.layer.shadowRadius = 4
+        contentView.layer.shadowOpacity = 0.3
+        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+    }
+    
+    func deselectCell() {
+        headerLabel.font = .custome(name: .manrope400, size: 16)
+        contentView.layer.shadowColor = UIColor.clear.cgColor
+        contentView.layer.shadowRadius = 0
+        contentView.layer.shadowOpacity = 0
+        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
 }

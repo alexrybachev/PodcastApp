@@ -14,14 +14,14 @@ class HomeView: UIView {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Abigael Amaniah"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = .custome(name: .manrope700, size: 16)
         return label
     }()
     
     private lazy var userSloganLabel: UILabel = {
         let label = UILabel()
         label.text = "Love, life and chill"
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = .custome(name: .manrope400, size: 14)
         label.textColor = .lightGray
         return label
     }()
@@ -122,6 +122,10 @@ extension HomeView {
     
     public func reloadCollectionView() {
         collectionView.reloadData()
+    }
+    
+    public func reloadSection(for indexSection: Int) {
+        collectionView.reloadSections(IndexSet(integer: indexSection))
     }
     
 }

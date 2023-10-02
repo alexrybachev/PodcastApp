@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CategoryHomeViewCell: UICollectionViewCell {
     
@@ -15,6 +16,7 @@ class CategoryHomeViewCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "noimage")
         return imageView
     }()
     
@@ -33,7 +35,7 @@ class CategoryHomeViewCell: UICollectionViewCell {
     private lazy var categoryTitle: UILabel = {
         let label = UILabel()
         label.text = "categoryTitle"
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = .custome(name: .manrope700, size: 12)
         label.textColor = .black
         return label
     }()
@@ -41,7 +43,7 @@ class CategoryHomeViewCell: UICollectionViewCell {
     private lazy var categorySubtitle: UILabel = {
         let label = UILabel()
         label.text = "categorySubtitle"
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.font = .custome(name: .manrope400, size: 12)
         label.textColor = .lightGray
         return label
     }()
@@ -98,9 +100,17 @@ class CategoryHomeViewCell: UICollectionViewCell {
     
     // MARK: - Configure
     
-    func configureCell(_ podcast: PodcastCategory) {
-        categoryTitle.text = podcast.category
-        categorySubtitle.text = "\(podcast.podcasts.count) Podcast"
+    func configureCell(with title: String, for category: SearchedResult?) {
+        categoryTitle.text = title
+        categorySubtitle.text = "\(category?.count ?? 0) Podcasts"
+        
+        guard let imageURL = category?.feeds?.first?.image else { return }
+        let cache = ImageCache.default
+        cache.diskStorage.config.expiration = .seconds(1)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: URL(string: imageURL), placeholder: nil, options: [.processor(processor),                                           .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+        
     }
     
 }
