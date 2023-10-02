@@ -9,6 +9,8 @@ import UIKit
 
 class ChannelViewCell: UITableViewCell {
     
+    static var reuseID = String(describing: ChannelViewCell.self)
+    
     let imageEpizode: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 56/4
@@ -17,21 +19,22 @@ class ChannelViewCell: UITableViewCell {
     
     let nameEpizode: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "manrope-medium", size: 14)
+        label.font = .custome(name: .manrope700, size: 14)
+        label.numberOfLines = 0
         label.textColor = .black
         return label
     }()
     
     let totalTimeEpizodeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "manrope-medium", size: 14)
+        label.font = .custome(name: .manrope700, size: 14)
         label.textColor = .black
         return label
     }()
     
     let numberOfEpizode: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "manrope-medium", size: 14)
+        label.font = .custome(name: .manrope700, size: 14)
         label.textColor = .lightGray
         return label
     }()
@@ -39,7 +42,7 @@ class ChannelViewCell: UITableViewCell {
     let separateLabel: UILabel = {
         let label = UILabel()
         label.text = " | "
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = .custome(name: .manrope700, size: 14)
         label.textColor = .lightGray
         return label
     }()
@@ -47,7 +50,6 @@ class ChannelViewCell: UITableViewCell {
     let backgroundCellView:UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9434495568, green: 0.9541783929, blue: 0.9908102155, alpha: 1)
-        view.layer.cornerRadius = 72/4
         return view
     }()
     
@@ -75,22 +77,14 @@ class ChannelViewCell: UITableViewCell {
         contentView.addSubview(numberOfEpizode)
         contentView.addSubview(separateLabel)
         
-        
-//        contentView.backgroundColor = #colorLiteral(red: 0.9434495568, green: 0.9541783929, blue: 0.9908102155, alpha: 1)
-//        contentView.layer.cornerRadius = 72/4
-//
-//        contentView.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(32)
-//            make.trailing.equalToSuperview().inset(32)
-//            make.height.equalTo(72)
-//        }
-        
         backgroundCellView.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top)
             make.leading.equalTo(contentView.snp.leading).offset(32)
             make.trailing.equalTo(contentView.snp.trailing).inset(32)
             make.bottom.equalTo(contentView.snp.bottom)
         }
+        
+        backgroundCellView.layer.cornerRadius = backgroundCellView.frame.size.height / 4
         
         imageEpizode.snp.makeConstraints { make in
             make.centerY.equalTo(backgroundCellView.snp.centerY)
@@ -101,6 +95,7 @@ class ChannelViewCell: UITableViewCell {
         nameEpizode.snp.makeConstraints { make in
             make.top.equalTo(backgroundCellView.snp.top).offset(15)
             make.leading.equalTo(imageEpizode.snp.trailing).offset(19)
+            make.trailing.equalTo(backgroundCellView.snp.trailing).inset(19)
         }
         
         numberOfEpizode.snp.makeConstraints { make in
@@ -117,6 +112,8 @@ class ChannelViewCell: UITableViewCell {
             make.top.equalTo(numberOfEpizode.snp.top)
             make.leading.equalTo(separateLabel.snp.trailing).offset(5)
         }
+        
+        backgroundCellView.layer.cornerRadius = backgroundCellView.frame.size.height / 4
     }
     
     func configure(channel: Channel){
