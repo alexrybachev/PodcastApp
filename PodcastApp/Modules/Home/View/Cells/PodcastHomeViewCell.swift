@@ -16,6 +16,7 @@ class PodcastHomeViewCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = UIImage(named: "noimage")
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         imageView.backgroundColor = #colorLiteral(red: 0.5890501738, green: 0.8443468809, blue: 0.9490881562, alpha: 1)
@@ -86,9 +87,7 @@ class PodcastHomeViewCell: UICollectionViewCell {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(podcastLabel)
         stackView.addArrangedSubview(authorLabel)
-        
-//        contentView.addSubview(podcastLabel)
-//        contentView.addSubview(authorLabel)
+    
         contentView.addSubview(podcastSubLabel)
         
     }
@@ -114,25 +113,10 @@ class PodcastHomeViewCell: UICollectionViewCell {
             make.trailing.equalTo(likeButton.snp.leading).offset(-12)
         }
         
-//        podcastLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(12)
-//            make.leading.equalTo(imageView.snp.trailing).offset(12)
-////            make.trailing.equalTo(authorLabel.snp.leading).offset(-12)
-//            make.width.equalTo((contentView.frame.width - 105) / 2)
-//        }
-//        
-//        authorLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(12)
-////            make.leading.equalTo(podcastLabel.snp.trailing).offset(12)
-//            make.trailing.equalTo(likeButton.snp.leading).offset(-12)
-//            make.width.equalTo((contentView.frame.width - 105) / 2)
-//        }
-        
         podcastSubLabel.snp.makeConstraints { make in
             make.leading.equalTo(imageView.snp.trailing).offset(12)
-//            make.top.equalTo(podcastLabel.snp.bottom).offset(12)
             make.top.equalTo(stackView.snp.bottom).offset(12)
-            make.trailing.equalToSuperview()
+            make.trailing.equalTo(likeButton.snp.leading).offset(-12)
             make.bottom.equalToSuperview().inset(12)
         }
         

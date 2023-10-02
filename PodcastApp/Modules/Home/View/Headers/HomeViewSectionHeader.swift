@@ -17,23 +17,17 @@ class HomeViewSectionHeader: UICollectionReusableView {
         let label = UILabel()
         label.text = "Category"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = .custome(name: .manrope700, size: 16)
         return label
     }()
     
     private lazy var seeAllButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("See all", for: .normal)
-        
         let button = UIButton(type: .system)
         var config = UIButton.Configuration.plain()
         config.title = "See all"
-//        config.image = UIImage(systemName: "arrow.right")
-//        config.imagePlacement = .trailing
         config.baseForegroundColor = .gray
         button.configuration = config
         button.setTitleColor(.black, for: .normal)
-//        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     

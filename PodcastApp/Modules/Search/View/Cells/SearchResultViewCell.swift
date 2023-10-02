@@ -23,14 +23,14 @@ class SearchResultViewCell: UICollectionViewCell {
     private lazy var podcastLabel: UILabel = {
         let label = UILabel()
         label.text = "podcastLabel"
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = .custome(name: .manrope700, size: 14)
         return label
     }()
     
     private lazy var podcastSubLabel: UILabel = {
         let label = UILabel()
         label.text = "podcastSubLabel"
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.font = .custome(name: .manrope400, size: 12)
         return label
     }()
     

@@ -14,7 +14,7 @@ class SearchViewCell: UICollectionViewCell {
     private lazy var title: UILabel = {
         let label = UILabel()
         label.text = "test"
-        label.font = .custome(name: .manrope400, size: 14)
+        label.font = .custome(name: .manrope700, size: 14)
         label.textAlignment = .center
         label.textColor = .white
         return label
@@ -52,6 +52,7 @@ class SearchViewCell: UICollectionViewCell {
     
     func configureCell(_ podcast: Podcast?) {
         title.text = podcast?.name
+//        contentView.backgroundColor = UIColor.random
     }
     
 }

@@ -22,15 +22,41 @@ struct NetworkManager {
     private init() {}
     
     /// Метод создает URL
-    private func createURL(for endPoint: EndPoint, with query: String? = nil) -> URL? {
+    private func createURL(for endPoint: EndPoint, with query: String?) -> URL? {
         var components = URLComponents()
         components.scheme = API.scheme
         components.host = API.host
         components.path = endPoint.path
         
-//        components.queryItems =
+        components.queryItems = makeParameters(for: endPoint, with: query).compactMap {
+            URLQueryItem(name: $0.key, value: $0.value)
+        }
+        
+        print("URL: \(components.url)")
         
         return components.url
+    }
+    
+    /// Метод по созданию параметров
+    private func makeParameters(for endPoint: EndPoint, with query: String?) -> [String: String] {
+        var parameters: [String: String] = [:]
+        
+        switch endPoint {
+        case .getTrendingPodcast:
+            if query != nil {
+                let formattedQuery = query?.replacingOccurrences(of: " ", with: ",") // формат должен быть cat=News,Religion,Sport
+                parameters["cat"] = formattedQuery
+            }
+        case .searchPodcasts:
+            if query != nil {
+                let formattedQuery = query?.replacingOccurrences(of: " ", with: "+") // формат должен быть cat=Funny+School
+                parameters["q"] = formattedQuery
+            }
+        default: // getCategoryList
+            break
+        }
+        
+        return parameters
     }
     
     /// Метод создает REQUEST
@@ -86,16 +112,65 @@ struct NetworkManager {
 
 extension NetworkManager {
     
-    // Запрос трендовых подкастов
-    func fetchTrendingPodcast(completion: @escaping (Result<SearchedResult, NetworkError>) -> Void) {
-        guard let url = createURL(for: .getTrendingPodcast) else { return }
+    /// Запрос трендовых подкастов
+    func fetchTrendingPodcast(for category: String? = nil, completion: @escaping (Result<SearchedResult, NetworkError>) -> Void) {
+        guard let url = createURL(for: .getTrendingPodcast, with: category) else { return }
         let request = getRequest(url)
         makeTask(for: request, completion: completion)
     }
     
-    // Запрос списка категорий
+    /// Запрос трендовых подкастов по нескольким категориям
+    func fetchGroupTrendingPodcast(for categories: [String], completion: @escaping (Result<[SearchedResult], NetworkError>) -> Void) {
+        let dispatchGroup = DispatchGroup()
+        var searchResult: [SearchedResult] = []
+        
+        for category in categories {
+            dispatchGroup.enter()
+            guard let url = createURL(for: .getTrendingPodcast, with: category) else { return }
+            let request = getRequest(url)
+
+            URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    completion(.failure(.transportError(error)))
+                    dispatchGroup.leave()
+                    return
+                }
+                
+                guard let data = data else {
+                    completion(.failure(.noData))
+                    dispatchGroup.leave()
+                    return
+                }
+                
+                do {
+                    let decodeData = try JSONDecoder().decode(SearchedResult.self, from: data)
+                    searchResult.append(decodeData)
+                    dispatchGroup.leave()
+                } catch {
+                    completion(.failure(.decodingError(error)))
+                    dispatchGroup.leave()
+                }
+                
+            }.resume()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(.success(searchResult))
+        }
+        
+    }
+    
+    /// Запрос списка категорий
     func fetchCategoryList(completion: @escaping (Result<SearchedResult, NetworkError>) -> Void) {
-        guard let url = createURL(for: .getCategoryList) else { return }
+        guard let url = createURL(for: .getCategoryList, with: nil) else { return }
+        let request = getRequest(url)
+        makeTask(for: request, completion: completion)
+    }
+    
+    #warning("ДОРАБОТАТЬ!!!!")
+    /// Поиск подкастов по ключевым словам
+    func searchPodcasts(with query: String, completion: @escaping (Result<SearchedResult, NetworkError>) -> Void) {
+        guard let url = createURL(for: .getCategoryList, with: nil) else { return }
         let request = getRequest(url)
         makeTask(for: request, completion: completion)
     }

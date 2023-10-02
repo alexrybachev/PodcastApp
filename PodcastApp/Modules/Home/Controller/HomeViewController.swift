@@ -10,13 +10,12 @@ import SnapKit
 
 class HomeViewController: UIViewController {
     
-    private let podcasts = HomeModule.getData()
-    private let categories = HomeModule.getCategories()
-    
     private let homeView = HomeView()
     
-    private var podcastsData: SearchedResult?
+    private var podcastsFirstData: [SearchedResult]?
+    private var podcastsSecondData: SearchedResult?
     
+    private var selectedIndexPath = IndexPath(item: 0, section: 1)
     
     // MARK: - Initial
     
@@ -27,7 +26,8 @@ class HomeViewController: UIViewController {
         homeView.transferDelegates(dataSource: self, delegate: self)
         homeView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
         
-        fetchData()
+        fetchFirstPodcastsData(for: CategoryList.getFirstCategoryList())
+        fetchSecondPodcastsData()
     }
     
 }
@@ -43,12 +43,11 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-           return podcasts.count
+           return CategoryList.getFirstCategoryList().count
         case 1:
-            return categories.count
+            return CategoryList.getSecondCategoryList().count
         default:
-            return podcastsData?.feeds?.count ?? 0
-            //            return 20
+            return podcastsSecondData?.feeds?.count ?? 0
         }
     }
     
@@ -56,15 +55,20 @@ extension HomeViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryHomeViewCell.cellID, for: indexPath) as! CategoryHomeViewCell
-            cell.configureCell(podcasts[indexPath.item])
+            let title = CategoryList.getFirstCategoryList()[indexPath.item]
+            let category = podcastsFirstData?[indexPath.item]
+            cell.configureCell(with: title, for: category)
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCategoryCell.cellID, for: indexPath) as! PopularCategoryCell
+            let categories = CategoryList.getSecondCategoryList()
             cell.configureCell(categories[indexPath.item])
+            cell.isSelected = indexPath == selectedIndexPath
+            cell.isSelected ? cell.selectCell() : cell.deselectCell()
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PodcastHomeViewCell.cellID, for: indexPath) as! PodcastHomeViewCell
-            let podcast = podcastsData?.feeds?[indexPath.item]
+            let podcast = podcastsSecondData?.feeds?[indexPath.item]
             cell.configureCell(podcast)
             return cell
         }
@@ -156,7 +160,28 @@ extension HomeViewController {
 extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("section: \(indexPath.section) - item: \(indexPath.item)")
+        if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
+            selectedIndexPath = indexPath
+            cell.selectCell()
+                        
+            if indexPath.item == 0 {
+                fetchSecondPodcastsData()
+            } else {
+                let category = CategoryList.getSecondCategoryList()[indexPath.item]
+                fetchSecondPodcastsData(for: category)
+            }
+
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
+                cell.deselectCell()
+//                homeView.reloadSection(for: indexPath)
+//                collectionView.reloadSections(IndexSet(integer: 2))
+            }
+        }
     }
 }
 
@@ -164,12 +189,24 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController {
     
-    private func fetchData() {
-        NetworkManager.shared.fetchTrendingPodcast { [weak self] result in
+    private func fetchFirstPodcastsData(for categories: [String]) {
+        NetworkManager.shared.fetchGroupTrendingPodcast(for: categories) { result in
             switch result {
             case .success(let data):
-                self?.podcastsData = data
-                self?.homeView.reloadCollectionView()
+                self.podcastsFirstData = data
+                self.homeView.reloadSection(for: 0)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchSecondPodcastsData(for category: String? = nil) {
+        NetworkManager.shared.fetchTrendingPodcast(for: category) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.podcastsSecondData = data
+                self?.homeView.reloadSection(for: 2)
             case .failure(let error):
                 print(error)
             }
