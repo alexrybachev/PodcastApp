@@ -7,27 +7,34 @@
 
 import UIKit
 
-class ImageCell: UICollectionViewCell {
+final class ImageCell: UICollectionViewCell {
     
-    var imageView = UIImageView() {
+    // MARK: - Private UI Properties
+    private var imageView = UIImageView() {
         didSet {
             imageView.layer.cornerRadius = imageView.frame.height / 2
         }
     }
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
+    public func configure(with imageName: String) {
+        imageView.image = UIImage(named: imageName)
+    }
+    
+    // MARK: - Private Methods
     private func setupConstraints() {
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -35,9 +42,5 @@ class ImageCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-20)
             make.bottom.equalToSuperview().offset(-20)
         }
-    }
-    
-    func configure(with imageName: String) {
-        imageView.image = UIImage(named: imageName)
     }
 }

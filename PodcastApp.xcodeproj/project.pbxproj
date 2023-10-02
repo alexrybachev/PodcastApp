@@ -56,6 +56,7 @@
 		0AC0B4DF2AC6154600252B8B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4DB2AC6154600252B8B /* SearchView.swift */; };
 		3CC2F0922AC8852F009D3018 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0912AC8852F009D3018 /* ImageCell.swift */; };
 		3CC2F0942AC8990E009D3018 /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0932AC8990E009D3018 /* Slide.swift */; };
+		3CC2F0972ACABD58009D3018 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0962ACABD58009D3018 /* OnboardingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		0AC0B4DB2AC6154600252B8B /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		3CC2F0912AC8852F009D3018 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		3CC2F0932AC8990E009D3018 /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
+		3CC2F0962ACABD58009D3018 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +212,8 @@
 		0A0B7B4E2AC0AE7200C1D17B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3CC2F0912AC8852F009D3018 /* ImageCell.swift */,
+				3CC2F0962ACABD58009D3018 /* OnboardingView.swift */,
+				3CC2F0952ACABCFB009D3018 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -528,6 +531,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		3CC2F0952ACABCFB009D3018 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3CC2F0912AC8852F009D3018 /* ImageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -639,6 +650,7 @@
 				0AC0B4D22AC6152E00252B8B /* HomeViewSectionHeader.swift in Sources */,
 				0A0B7B512AC0AEB100C1D17B /* OnboardingViewController.swift in Sources */,
 				0A56F10F2AC7F75200740A92 /* NetworkManager.swift in Sources */,
+				3CC2F0972ACABD58009D3018 /* OnboardingView.swift in Sources */,
 				0AC0B4DE2AC6154600252B8B /* SearchResultViewCell.swift in Sources */,
 				0AC0B4CA2AC5F7D000252B8B /* AuthViewController.swift in Sources */,
 				0AC0B4CB2AC5F7D000252B8B /* CreateAccountViewController.swift in Sources */,
