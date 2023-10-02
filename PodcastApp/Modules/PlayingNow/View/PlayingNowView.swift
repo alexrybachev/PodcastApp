@@ -25,17 +25,18 @@ final class PlayingNowView: UIView {
     private lazy var songNameLabel: UILabel = {
         var songName = UILabel()
         songName.text = "Baby Pesut Ups 56"
-        songName.textColor = .black
+        songName.textColor = #colorLiteral(red: 0.2606227994, green: 0.2478592694, blue: 0.3162897527, alpha: 1)
+        songName.font = UIFont.custome(name: .manrope700, size: 16)
         return songName
     }()
     
     private lazy var songAuthorLabel: UILabel = {
         var songLabel = UILabel()
         songLabel.text = "Dr Oi om hean"
-        songLabel.textColor = .systemGray2
+        songLabel.textColor = #colorLiteral(red: 0.6377889514, green: 0.6319634914, blue: 0.6845200658, alpha: 1)
+        songLabel.font = UIFont.custome(name: .manrope400, size: 14)
         return songLabel
     }()
-    
     
     private lazy var durationStackView: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: [
@@ -66,6 +67,13 @@ final class PlayingNowView: UIView {
     
     private lazy var durationSlider: UISlider = {
         var durSlider = UISlider()
+        durSlider.minimumTrackTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+        durSlider.maximumTrackTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+        durSlider.thumbTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+        
+        let thumbImage = UIImage(named: "thumb")
+        durSlider.setThumbImage(thumbImage, for: .normal)
+        durSlider.setThumbImage(thumbImage, for: .highlighted)
         return durSlider
     }()
     
