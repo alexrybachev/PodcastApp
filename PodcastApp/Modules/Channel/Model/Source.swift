@@ -26,7 +26,7 @@ struct Color{
 struct Source {
     static func makeChanel() -> [Channel]{
         [
-            .init(name: "Between love and career", image: Color.randomColor(), numberOfEpizode: "56 Eps", totalTime: "56:38"),
+            .init(name: "Between love and career  and many many more text on next row", image: Color.randomColor(), numberOfEpizode: "56 Eps", totalTime: "56:38"),
             .init(name: "The powerful way to move on", image: Color.randomColor(), numberOfEpizode: "55 Eps", totalTime: "58:40"),
             .init(name: "Monkey love makes me curious", image: Color.randomColor(), numberOfEpizode: "54 Eps", totalTime: "1:40:40"),
             .init(name: "My love is blocked by Covid-19", image: Color.randomColor(), numberOfEpizode: "53 Eps", totalTime: "1:45:20"),

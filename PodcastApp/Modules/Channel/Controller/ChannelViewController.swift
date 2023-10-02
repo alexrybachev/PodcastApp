@@ -55,6 +55,7 @@ class ChannelViewController: UIViewController {
         let element = UITableView()
         element.register(ChannelViewCell.self, forCellReuseIdentifier: "ChannelViewCell")
         element.separatorStyle = .none
+        element.estimatedRowHeight = 88
         return element
     }()
     //MARK: - Life c

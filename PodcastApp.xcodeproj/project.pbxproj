@@ -562,8 +562,8 @@
 		84755E9C2AC8D4E1007C5B4C /* Channel */ = {
 			isa = PBXGroup;
 			children = (
-				84755E9F2AC8D523007C5B4C /* View */,
 				84755E9E2AC8D507007C5B4C /* Model */,
+				84755E9F2AC8D523007C5B4C /* View */,
 				84755E9D2AC8D4EE007C5B4C /* Controller */,
 			);
 			path = Channel;
@@ -580,7 +580,6 @@
 		84755E9E2AC8D507007C5B4C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				84755EA22AC8D573007C5B4C /* ChannelViewCell.swift */,
 				84755EA42AC8D59A007C5B4C /* Source.swift */,
 			);
 			path = Model;
@@ -589,6 +588,7 @@
 		84755E9F2AC8D523007C5B4C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84755EA22AC8D573007C5B4C /* ChannelViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
