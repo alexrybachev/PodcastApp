@@ -8,6 +8,11 @@
 import UIKit
 
 final class PlayingNowViewController: UIViewController {
+    
+    // MARK: - Private UI Properties
+    private let playingNowView = PlayingNowView()
+    
+    private let colors = [UIColor.red, UIColor.green, UIColor.brown, UIColor.blue]
 
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -16,6 +21,7 @@ final class PlayingNowViewController: UIViewController {
         addViews()
         setupConstraints()
         setupNavigationBar()
+        playingNowView.transferDelegates(dataSource: self, delegate: self)
     }
     
     // MARK: - Private Actions
@@ -24,10 +30,12 @@ final class PlayingNowViewController: UIViewController {
     }
     // MARK: - Privaet Methods
     private func addViews() {
-        
+        view.addSubview(playingNowView)
     }
     private func setupConstraints() {
-        
+        playingNowView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     private func setupNavigationBar() {
@@ -44,4 +52,39 @@ final class PlayingNowViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = rightBarButton
     }
+}
+
+// MARK: - UICollectionViewDataSource
+extension PlayingNowViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SongImageCell else { return  UICollectionViewCell()  }
+        
+        cell.configureView(with: colors[indexPath.row])
+        return cell
+    }
+    
+    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension PlayingNowViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+          collectionView.frame.size
+
+      }
+
+      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+          0
+
+      }
+}
+
+// MARK: - UICollectionViewDelegate
+extension PlayingNowViewController: UICollectionViewDelegate {
+    
 }
