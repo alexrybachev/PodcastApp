@@ -27,11 +27,17 @@ final class AuthViewController: UIViewController {
         font: UIFont.systemFont(ofSize: 15)
     )
     
-    let passwordField = CustomTextField(
-        fieldType: .withEyeButton,
-        placeholder: "Password",
-        border: true
-    )
+    lazy var passwordField: CustomTextField = {
+        var passTF = CustomTextField(
+            fieldType: .withEyeButton,
+            placeholder: "Password",
+            border: true
+        )
+        passTF.customEyeButton.setImage(UIImage(
+            systemName: "eye.slash.fill"), for: .normal)
+        passTF.isSecureTextEntry = true
+        return passTF
+    }()
     
     private lazy var loginButton: CustomButton = {
         var logButton = CustomButton(
@@ -78,19 +84,11 @@ final class AuthViewController: UIViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         addViews()
-        view.backgroundColor = .white
-        
         setupConstraints()
-        
-        loginField.delegate = self
-        passwordField.delegate = self
-        
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(registerButtonDidTapped)
-        )
-        registerLabel.addGestureRecognizer(tapGesture)
+        setupDelegates()
+        addTapGesture()
     }
     
     // MARK: - Override Methods
@@ -108,6 +106,8 @@ final class AuthViewController: UIViewController {
                 switch result {
                 case .success(_):
                     print("Successfully")
+                    //navigation to next screen
+                    self.navigateToHomeScreen()
                 case .failure(let error):
                     print(error)
                 }
@@ -130,10 +130,7 @@ final class AuthViewController: UIViewController {
                     self.loginField.text = ""
                     self.passwordField.text = ""
                     //navigation to next screen
-                    let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
-                    let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
-                    startVC.modalPresentationStyle = .fullScreen
-                    self.present(startVC, animated: true)
+                    self.navigateToHomeScreen()
                 case .failure(let error):
                     print(error)
                     self.loginField.layer.borderColor = UIColor.red.cgColor
@@ -143,7 +140,30 @@ final class AuthViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation
+    private func navigateToHomeScreen() {
+        let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
+        let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
+        startVC.modalPresentationStyle = .fullScreen
+        self.present(startVC, animated: true)
+    }
+    
+    
     // MARK: - Private Methods
+    private func setupDelegates() {
+        loginField.delegate = self
+        passwordField.delegate = self
+        
+    }
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(registerButtonDidTapped)
+        )
+        registerLabel.addGestureRecognizer(tapGesture)
+    }
+    
     private func addViews() {
         view.addSubview(loginLabel)
         view.addSubview(loginField)

@@ -87,7 +87,7 @@ extension OnboardingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "cell",
+                withReuseIdentifier: ImageCell.reuseID,
                 for: indexPath) as? ImageCell
         else {
             return UICollectionViewCell()

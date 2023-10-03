@@ -9,6 +9,9 @@ import UIKit
 
 final class ImageCell: UICollectionViewCell {
     
+    // MARK: - Publc UI Properties
+    static let reuseID = String(describing: ImageCell.self)
+    
     // MARK: - Private UI Properties
     private var imageView = UIImageView() {
         didSet {

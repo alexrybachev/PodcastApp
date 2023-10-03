@@ -83,16 +83,12 @@ final class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.customBlue
-        addViews()
-        setupConstraints()
-        
         emailField.delegate = self
         navigationItem.hidesBackButton = true
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(loginButtonDidTapped)
-        )
-        loginLabel.addGestureRecognizer(tapGesture)
+        
+        addViews()
+        setupConstraints()
+        addTapGesture()
     }
     
     // MARK: - Override Methods
@@ -103,7 +99,6 @@ final class CreateAccountViewController: UIViewController {
     }
     
     // MARK: - Private Actions
-    
     @objc private func googleButtonDidTapped() {
         FirebaseManager.shared.signInWithGoogle(
             presentingViewController: self) { result in
@@ -145,6 +140,15 @@ final class CreateAccountViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(loginButtonDidTapped)
+        )
+        loginLabel.addGestureRecognizer(tapGesture)
+    }
+    
     private func addViews() {
         view.addSubview(welcomeLabel)
         view.addSubview(whiteView)
