@@ -102,6 +102,15 @@ struct PodcastEpisode: Codable {
     
     let feedId: Int?
     let feedLanguage: String?
+    
+    var formattedTime: String {
+        guard let duration = duration else { return "00:00:00" }
+        let hours = duration / 3600
+        let minutes = (duration % 3600) / 60
+        let seconds = (duration % 3600 ) % 60
+        
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
 }
 
 

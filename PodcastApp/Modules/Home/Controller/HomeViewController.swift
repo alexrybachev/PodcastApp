@@ -174,10 +174,8 @@ extension HomeViewController: UICollectionViewDelegate {
         if indexPath.section == 2 {
             print("переход на экран Cannel")
             let podcast = podcastsSecondData?.feeds?[indexPath.item]
-            let channelVC = ChannelViewController()
-//            self.navigationController?.pushViewController(channelVC, animated: true)
-            channelVC.modalPresentationStyle = .fullScreen
-            self.present(channelVC, animated: true)
+            let channelVC = ChannelViewController(podcast: podcast)
+            navigationController?.pushViewController(channelVC, animated: true)
         }
     }
     

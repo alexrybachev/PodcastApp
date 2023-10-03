@@ -6,25 +6,31 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ChannelViewCell: UITableViewCell {
     
     static var reuseID = String(describing: ChannelViewCell.self)
     
-    let backgroundCellView:UIView = {
+    // MARK: - UI Elements
+    
+    private lazy var background: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.9434495568, green: 0.9541783929, blue: 0.9908102155, alpha: 1)
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
         return view
     }()
     
-    let imageEpizode: UIImageView = {
+    private lazy var imageEpizode: UIImageView = {
         let image = UIImageView()
+        image.backgroundColor = #colorLiteral(red: 0.6847735047, green: 0.8535647988, blue: 0.9940004945, alpha: 1)
         image.layer.cornerRadius = 56/4
+        image.clipsToBounds = true
         return image
     }()
     
-    let nameEpizode: UILabel = {
+    private lazy var nameEpizode: UILabel = {
         let label = UILabel()
         label.font = .custome(name: .manrope700, size: 14)
         label.numberOfLines = 0
@@ -32,30 +38,15 @@ class ChannelViewCell: UITableViewCell {
         return label
     }()
     
-    let totalTimeEpizodeLabel: UILabel = {
+    private lazy var epizodeSubtitle: UILabel = {
         let label = UILabel()
-        label.font = .custome(name: .manrope700, size: 14)
-        label.textColor = .lightGray
+        label.font = .custome(name: .manrope400, size: 14)
+        label.textColor = .gray
+        label.textAlignment = .left
         return label
     }()
     
-    let numberOfEpizode: UILabel = {
-        let label = UILabel()
-        label.font = .custome(name: .manrope700, size: 14)
-        label.textColor = .lightGray
-        return label
-    }()
-    
-    let separateLabel: UILabel = {
-        let label = UILabel()
-        label.text = " | "
-        label.font = .custome(name: .manrope700, size: 14)
-        label.textColor = .lightGray
-        return label
-    }()
-    
-    
-    
+ // MARK: - Initial
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style , reuseIdentifier: reuseIdentifier)
@@ -66,61 +57,60 @@ class ChannelViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        let margins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-//        contentView.frame = contentView.frame.inset(by: margins)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameEpizode.text = nil
+        epizodeSubtitle.text = nil
     }
     
+    // MARK: - Setup UI
+    
     private func setupCell(){
-        contentView.addSubview(backgroundCellView)
-        contentView.addSubview(imageEpizode)
-        contentView.addSubview(nameEpizode)
-        contentView.addSubview(totalTimeEpizodeLabel)
-        contentView.addSubview(numberOfEpizode)
-        contentView.addSubview(separateLabel)
         
-        backgroundCellView.snp.makeConstraints { make in
+        contentView.addSubview(background)
+        
+        background.addSubview(imageEpizode)
+        background.addSubview(nameEpizode)
+        background.addSubview(epizodeSubtitle)
+
+        background.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
             make.top.bottom.equalToSuperview().inset(8)
-            make.leading.trailing.equalToSuperview().inset(32)
         }
         
-        
-        
         imageEpizode.snp.makeConstraints { make in
-            make.centerY.equalTo(backgroundCellView)
-            make.leading.equalTo(backgroundCellView).offset(8)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(8)
             make.width.height.equalTo(56)
         }
         
         nameEpizode.snp.makeConstraints { make in
-            make.top.equalTo(backgroundCellView.snp.top).offset(15)
-            make.leading.equalTo(imageEpizode.snp.trailing).inset(-19)
-            make.trailing.equalTo(backgroundCellView).inset(16)
+            make.top.equalToSuperview().inset(15)
+            make.leading.equalTo(imageEpizode.snp.trailing).offset(19)
+            make.trailing.equalToSuperview().inset(16)
         }
         
-        totalTimeEpizodeLabel.snp.makeConstraints { make in
+        epizodeSubtitle.snp.makeConstraints { make in
             make.top.equalTo(nameEpizode.snp.bottom).offset(5)
-            make.leading.equalTo(nameEpizode)
-            make.bottom.equalTo(backgroundCellView).inset(14)
-        }
-        
-        separateLabel.snp.makeConstraints { make in
-            make.top.equalTo(totalTimeEpizodeLabel)
-            make.leading.equalTo(totalTimeEpizodeLabel.snp.trailing).offset(5)
-        }
-        
-        numberOfEpizode.snp.makeConstraints { make in
-            make.top.equalTo(totalTimeEpizodeLabel)
-            make.leading.equalTo(separateLabel.snp.trailing).offset(5)
+            make.leading.equalTo(imageEpizode.snp.trailing).offset(19)
+            make.trailing.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview().inset(14)
         }
         
     }
     
-    func configure(channel: Channel){
-        nameEpizode.text = channel.name
-        totalTimeEpizodeLabel.text = channel.totalTime
-        numberOfEpizode.text = channel.numberOfEpizode
-        imageEpizode.backgroundColor = channel.image
+    // MARK: - Configure cell
+    
+    func configureCell(for episode: PodcastEpisode?) {
+        nameEpizode.text = episode?.title
+        epizodeSubtitle.text = "\(episode?.formattedTime ?? "00:00:00")  •  \(episode?.episode ?? 0) Eps"
+        
+        guard let imageURL = episode?.feedImage else { return }
+        let cache = ImageCache.default
+        cache.diskStorage.config.expiration = .seconds(1)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+        imageEpizode.kf.indicatorType = .activity
+        imageEpizode.kf.setImage(with: URL(string: imageURL), placeholder: nil, options: [.processor(processor),
+                                                                                          .cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
 }
