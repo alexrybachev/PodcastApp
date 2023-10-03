@@ -7,21 +7,15 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ChannelViewController: UIViewController {
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Channel"
-        label.font = .custome(name: .manrope700, size: 16)
-        label.textColor = .black
-        return label
-    }()
     
     private let imageChanel: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = UIColor(red: 0.68, green: 0.89, blue: 0.95, alpha: 1)
         image.layer.cornerRadius = 84/4
+        image.clipsToBounds = true
         return image
     }()
     
@@ -36,7 +30,7 @@ class ChannelViewController: UIViewController {
     private let numberEpizodesLabel: UILabel = {
         let label = UILabel()
         label.text = "56 Eps | Dr. Oi om jean"
-        label.font = .custome(name: .manrope700, size: 16)
+        label.font = .custome(name: .manrope400, size: 16)
         label.textColor = .lightGray
         return label
     }()
@@ -44,33 +38,56 @@ class ChannelViewController: UIViewController {
     private let startLabel: UILabel = {
         let label = UILabel()
         label.text = "All Episode"
-        label.font = .custome(name: .manrope700, size: 16)
+        label.font = .custome(name: .manrope400, size: 16)
         label.textColor = .black
         return label
     }()
     
-    var channel = Source.makeChanel()
+//    var channel = Source.makeChanel()
     
-    let tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let element = UITableView()
-        element.register(ChannelViewCell.self, forCellReuseIdentifier: "ChannelViewCell")
+        element.register(ChannelViewCell.self, forCellReuseIdentifier: ChannelViewCell.reuseID)
         element.separatorStyle = .none
+        element.rowHeight = UITableView.automaticDimension
         element.estimatedRowHeight = 88
+        element.delegate = self
+        element.dataSource = self
         return element
     }()
-    //MARK: - Life c
+    
+    private var podcast: Podcast?
+    private var searchEpisods: SearchEpisods?
+    
+    //MARK: - Life cycle
+    
+    init(podcast: Podcast?) {
+        self.podcast = podcast
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemBackground
+        title = "Channel"
         setupViews()
         makeConstraints()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nameChannelLabel.text = podcast?.title
+        numberEpizodesLabel.text = podcast?.author
+        loadImage()
+        fetchEpisodsForPodcast()
     }
     
     private func setupViews(){
-        view.addSubview(titleLabel)
         view.addSubview(imageChanel)
         view.addSubview(nameChannelLabel)
         view.addSubview(numberEpizodesLabel)
@@ -79,10 +96,6 @@ class ChannelViewController: UIViewController {
     }
     
     private func makeConstraints(){
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.centerX.equalToSuperview()
-        }
         
         imageChanel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(113)
@@ -107,28 +120,59 @@ class ChannelViewController: UIViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(startLabel.snp.bottom).offset(13)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
         }
-    
     }
-    
     
 }
 
+// MARK: - UITableViewDataSource
+
 extension ChannelViewController: UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        channel.count
+        searchEpisods?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ChannelViewCell()
-        cell.configure(channel: channel[indexPath.row])
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelViewCell.reuseID, for: indexPath) as? ChannelViewCell else { return UITableViewCell() }
+        let episode = searchEpisods?.items?[indexPath.row]
+        cell.configureCell(for: episode)
         return cell
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension ChannelViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+    
+}
+
+// MARK: - Networking
+
+extension ChannelViewController {
+    
+    private func loadImage() {
+        guard let imageURL = podcast?.image else { return }
+        let cache = ImageCache.default
+        cache.diskStorage.config.expiration = .seconds(1)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+        imageChanel.kf.indicatorType = .activity
+        imageChanel.kf.setImage(with: URL(string: imageURL), placeholder: nil, options: [.processor(processor),                                           .cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
+    
+    private func fetchEpisodsForPodcast() {
+        NetworkManager.shared.fetchEpisodesForPodcast(with: podcast?.id) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.searchEpisods = data
+                self?.numberEpizodesLabel.text = "\(self?.searchEpisods?.count ?? 0) Eps | \(self?.podcast?.author ?? "")"
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
 }

@@ -12,17 +12,15 @@ enum SearchSection {
     case browseAll
 }
 
-
 class SearchViewController: UIViewController {
-    
-    private let categories = HomeModule.getCategories()
-    
+
     private let searchView = SearchView()
     
+    private var categoryList: SearchedResult?
+    private var searchResult: SearchPodcats?
+
     private var isSearched = false
     
-    private var categoryList: SearchedResult?
-
     // MARK: - Initial
     
     override func viewDidLoad() {
@@ -33,10 +31,10 @@ class SearchViewController: UIViewController {
         searchView.transferSearchBarDelegate(delegate: self)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchCategoryList()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        fetchCategoryList()
+//    }
 
 }
 
@@ -51,9 +49,11 @@ extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 20
+            return isSearched
+            ? (searchResult?.feeds?.count ?? 0)
+            : CategoryList.getAllCategories().count
         default:
-            return categoryList?.count ?? 10
+            return CategoryList.getAllCategories().count
         }
     }
     
@@ -62,12 +62,13 @@ extension SearchViewController: UICollectionViewDataSource {
         switch isSearched {
         case false:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchViewCell.cellID, for: indexPath) as! SearchViewCell
-            cell.configureCell(categoryList?.feeds?[indexPath.item])
+            cell.configureCell(CategoryList.getAllCategories()[indexPath.item])
             cell.contentView.backgroundColor = UIColor.random
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultViewCell.cellID, for: indexPath) as! SearchResultViewCell
-            cell.contentView.backgroundColor = UIColor.random
+            let podcast = searchResult?.feeds?[indexPath.item]
+            cell.configureCell(podcast)
             return cell
         }
     }
@@ -158,7 +159,7 @@ extension SearchViewController {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(16))
+//        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(8))
 //        group.interItemSpacing = .fixed(16)
         
         let section = NSCollectionLayoutSection(group: group)
@@ -184,12 +185,12 @@ extension SearchViewController: UICollectionViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print(#function)
+//        print(#function)
         searchBar.showsCancelButton = true
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(#function)
+//        print(#function)
         if searchText.isEmpty {
             searchBar.resignFirstResponder()
         }
@@ -198,22 +199,23 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
         if let searchText = searchBar.text, !searchText.isEmpty {
-            print("меняем composition layout")
-            searchView.setupCompositionalLayout(layout: createSearchResultCompositionalLaypout())
-            print("перезагружаем коллекцию")
-            searchView.reloadCollectionView()
+            isSearched.toggle()
+            fetchSearchResult(for: searchText)
+            searchView.setupCompositionalLayout(layout: createSearchResultCompositionalLaypout()) // меняем composition layout
             searchBar.resignFirstResponder()
         }
+        searchView.reloadCollectionView() // перезагружаем коллекцию
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print(#function)
-        searchBar.text = nil
-        print("возвращаем compitional layout")
-        searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
-        print("перезагружаем коллекцию")
-        searchView.reloadCollectionView()
-        searchBar.resignFirstResponder()
+        if isSearched {
+            isSearched.toggle()
+            searchBar.text = nil
+            searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout()) // возвращаем compitional layout
+            searchBar.resignFirstResponder()
+        }
+        searchView.reloadCollectionView() // перезагружаем коллекцию
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -228,11 +230,24 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController {
     
-    private func fetchCategoryList() {
-        NetworkManager.shared.fetchCategoryList { [weak self] result in
+//    private func fetchCategoryList() {
+//        NetworkManager.shared.fetchCategoryList { [weak self] result in
+//            switch result {
+//            case .success(let data):
+//                self?.categoryList = data
+//                self?.searchView.reloadCollectionView()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+    
+    private func fetchSearchResult(for searchText: String) {
+        NetworkManager.shared.searchPodcasts(with: searchText) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.categoryList = data
+                self?.searchResult = data
+                print("searchResult: \(data)")
                 self?.searchView.reloadCollectionView()
             case .failure(let error):
                 print(error)

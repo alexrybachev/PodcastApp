@@ -52,7 +52,10 @@ class SearchViewCell: UICollectionViewCell {
     
     func configureCell(_ podcast: Podcast?) {
         title.text = podcast?.name
-//        contentView.backgroundColor = UIColor.random
+    }
+    
+    func configureCell(_ title: String) {
+        self.title.text = title
     }
     
 }
