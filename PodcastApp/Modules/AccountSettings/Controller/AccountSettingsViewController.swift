@@ -12,6 +12,8 @@ struct ButtonsParams {
     var size: CGSize
     var radius: CGFloat
     var color: UIColor
+    var image: String
+    var title: String
 }
 
 struct TextParameters {
@@ -57,7 +59,6 @@ class AccountSettingsViewController: UIViewController {
     private lazy var imageProfile = AccountSettingsViewController.makeImage(
         parameters: imageParameters
     )
-    
     private let editButtonParameters = ButtonsParams(
         size:
             CGSize(
@@ -66,12 +67,13 @@ class AccountSettingsViewController: UIViewController {
             ),
         radius:
             32/2,
-        color: .blue
+        color: .blue,
+        image: "",
+        title: ""
     )
     private lazy var editButton = AccountSettingsViewController.makeButtonEdit(
         params: editButtonParameters
     )
-    
     private let verticalStack = AccountSettingsViewController.makeStackVertical()
     private let textFirstParam = TextParameters(
         font: UIFont(name: "Arial-BoldMT", size: 12)!,
@@ -109,7 +111,6 @@ class AccountSettingsViewController: UIViewController {
     private lazy var lastNameTextField = AccountSettingsViewController.makeTextField(
         parameters: textFieldParametersLast
     )
-
     private let textThirdParam = TextParameters(
         font: UIFont(name: "Arial-BoldMT", size: 12)!,
         text: "E-mail"
@@ -141,7 +142,7 @@ class AccountSettingsViewController: UIViewController {
             height: 52
         ),
         radius: 52/2,
-        placeholder: "24 february 1996"
+        placeholder: "dd MMMM yy"
     )
     private lazy var dateTextField = AccountSettingsViewController.makeTextField(
         parameters: textFieldParametersDate
@@ -157,6 +158,7 @@ class AccountSettingsViewController: UIViewController {
     private lazy var imageViewCalendar = AccountSettingsViewController.makeImage(
         parameters: imageCalendar
     )
+    private lazy var datePiker = UIDatePicker()
     private let textFivethParam = TextParameters(
         font: UIFont(name: "Arial-BoldMT", size: 12)!,
         text: "Gender"
@@ -172,13 +174,15 @@ class AccountSettingsViewController: UIViewController {
             ),
         radius:
             15,
-        color: .gray
+        color: .gray,
+        image: "",
+        title: ""
     )
     private lazy var saveChangeButton = AccountSettingsViewController.makeButton(
         params: saveButton
     )
     private lazy var horisontalStack = AccountSettingsViewController.makeStackHorisontal()
-    private let male_femaleButton = ButtonsParams(
+    private let maleButtonParams = ButtonsParams(
         size:
             CGSize(
                 width: 156,
@@ -186,19 +190,88 @@ class AccountSettingsViewController: UIViewController {
             ),
         radius:
             48/2,
-        color: .gray
+        color: .gray,
+        image: "checkmark.circle.fill",
+        title: "Male"
     )
-    private lazy var maleButton = AccountSettingsViewController.makeButtonMale(
-        params: male_femaleButton
+    private lazy var maleButton = AccountSettingsViewController.makeButtonImage(
+        params: maleButtonParams
     )
-    private lazy var femaleButton = AccountSettingsViewController.makeButtonFemale(
-        params: male_femaleButton
+    private let femaleButtonParams = ButtonsParams(
+        size:
+            CGSize(
+                width: 156,
+                height: 48
+            ),
+        radius:
+            48/2,
+        color: .gray,
+        image: "checkmark.circle",
+        title: "Female"
     )
+    private lazy var femaleButton = AccountSettingsViewController.makeButtonImage(
+        params: femaleButtonParams
+    )
+    private lazy var blur = AccountSettingsViewController.makeBlur()
+    private lazy var alertView = AccountSettingsViewController.makeView()
+    private let alertTextParam = TextParameters(
+        font: UIFont(name: "Arial-BoldMT", size: 20)!,
+        text: "Change your picture"
+    )
+    private lazy var alertLable = AccountSettingsViewController.makeLable(
+        params: alertTextParam
+    )
+    private lazy var verticalStackAlert = AccountSettingsViewController.makeStackVertical()
+    private let fotoButtonParams = ButtonsParams(
+        size:
+            CGSize(
+                width: 296,
+                height: 60
+            ),
+        radius:
+            8,
+        color: .gray,
+        image: "",
+        title: "Take a foto"
+    )
+    private lazy var fotoButton = AccountSettingsViewController.makeButtonImage(
+        params: fotoButtonParams
+    )
+    private let chooseButtonParams = ButtonsParams(
+        size:
+            CGSize(
+                width: 296,
+                height: 60
+            ),
+        radius:
+            8,
+        color: .gray,
+        image: "",
+        title: "Choose from you file"
+    )
+    private lazy var chooseButton = AccountSettingsViewController.makeButtonImage(
+        params: chooseButtonParams
+    )
+    private let deleteButtonParams = ButtonsParams(
+        size:
+            CGSize(
+                width: 296,
+                height: 60
+            ),
+        radius:
+            8,
+        color: .gray,
+        image: "",
+        title: "Delete photo"
+    )
+    private lazy var deleteButton = AccountSettingsViewController.makeButtonImage(
+        params: deleteButtonParams
+    )
+    
     
     //MARK: - init(_:)
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addViews(
             views:
                 scrollView
@@ -238,26 +311,36 @@ class AccountSettingsViewController: UIViewController {
             saveChangeButton
         )
         
-        horisontalStack.addViewInStack(stack: horisontalStack, views: maleButton, femaleButton)
+        horisontalStack.addViewInStack(
+            stack: horisontalStack,
+            views: maleButton,
+            femaleButton
+            )
+        view.addSubview(alertView)
+        alertView.addSubview(alertLable)
+        alertView.addSubview(verticalStackAlert)
+        verticalStackAlert.addViewInStack(stack: verticalStackAlert, views: fotoButton, chooseButton, deleteButton)
+        
+        
         //подписка на делегатный метод
         nameTextField.delegate = self
         lastNameTextField.delegate = self
         emailTextField.delegate = self
-        
-        editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
-        maleButton.addTarget(self, action: #selector(maleButtonPressed), for: .touchUpInside)
-        femaleButton.addTarget(self, action: #selector(femaleButtonPressed), for: .touchUpInside)
-        saveChangeButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        //установка значений по умолчанию
+        setAlertParams()
+        setTargets()
     }
     
     
-    //MARK: - Life Cycle
+    //MARK: - Life Cycle func
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        setPickerParams()
         setupConstraints()
     }
     
-    //MARK: - private funcs
+    //MARK: - func set constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -361,18 +444,53 @@ class AccountSettingsViewController: UIViewController {
         
         maleButton.snp.makeConstraints { make in
             make.bottom.top.equalTo(horisontalStack).offset(0)
-            make.width.equalTo(male_femaleButton.size.width)
-            make.height.equalTo(male_femaleButton.size.height)
+            make.width.equalTo(maleButtonParams.size.width)
+            make.height.equalTo(maleButtonParams.size.height)
         }
         
         femaleButton.snp.makeConstraints { make in
             make.bottom.top.equalTo(horisontalStack).offset(0)
-            make.width.equalTo(male_femaleButton.size.width)
-            make.height.equalTo(male_femaleButton.size.height)
+            make.width.equalTo(femaleButtonParams.size.width)
+            make.height.equalTo(femaleButtonParams.size.height)
+        }
+        
+        alertView.snp.makeConstraints { make in
+            make.centerXWithinMargins.equalTo(self.view)
+            make.top.equalTo(self.view).offset(180)
+            make.width.equalTo(328)
+            make.height.equalTo(340)
+        }
+        
+        alertLable.snp.makeConstraints { make in
+            make.centerXWithinMargins.equalTo(alertView)
+            make.top.equalTo(alertView).offset(20)
+        }
+        
+        verticalStackAlert.snp.makeConstraints { make in
+            make.leading.bottom.trailing.equalTo(alertView).offset(0)
+            make.top.equalTo(alertLable.snp_bottomMargin).offset(10)
+        }
+        
+        fotoButton.snp.makeConstraints { make in
+            make.centerXWithinMargins.equalTo(verticalStack)
+            make.width.equalTo(fotoButtonParams.size.width)
+            make.height.equalTo(fotoButtonParams.size.height)
+        }
+        chooseButton.snp.makeConstraints { make in
+            make.centerXWithinMargins.equalTo(verticalStack)
+            make.width.equalTo(chooseButtonParams.size.width)
+            make.height.equalTo(chooseButtonParams.size.height)
+        }
+        deleteButton.snp.makeConstraints { make in
+            make.centerXWithinMargins.equalTo(verticalStack)
+            make.width.equalTo(deleteButtonParams.size.width)
+            make.height.equalTo(deleteButtonParams.size.height)
         }
         
     }
     
+    
+    //MARK: - @objct func
     @objc func maleButtonPressed() {
         print("Нажат")
     }
@@ -382,18 +500,65 @@ class AccountSettingsViewController: UIViewController {
     }
     
     @objc func editButtonPressed() {
-        print("Редактируем")
+        view.addSubview(blur)
+        blur.frame = view.bounds
+        view.addSubview(alertView)
+        alertView.isHidden = !alertView.isHidden
     }
+    
     
     @objc func saveButtonPressed() {
         print("Сохраняем")
     }
     
+    @objc func setDateCalendar(datePiker: UIDatePicker) {
+        dateTextField.text = formatDate(date: datePiker.date)
+        view.endEditing(true)
+    }
     
+    @objc func doneClicked(){
+        dateTextField.text = formatDate(date: datePiker.date)
+        view.endEditing(true)
+    }
+    
+    
+    //MARK: - private func
+    private func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        return formatter.string(from: date)
+    }
+    
+    private func setAlertParams(){
+        alertView.backgroundColor = .white
+        alertView.isHidden = true
+    }
+    
+    private func setPickerParams(){
+        datePiker.datePickerMode = .date
+        datePiker.frame.size = CGSize(width: 0, height: 300)
+        datePiker.preferredDatePickerStyle = .wheels
+        datePiker.maximumDate = Date()
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneClicked))
+        toolbar.setItems([doneButton], animated: true)
+        dateTextField.inputView = datePiker
+        dateTextField.inputAccessoryView = toolbar
+    }
+    
+    private func setTargets(){
+        editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
+        maleButton.addTarget(self, action: #selector(maleButtonPressed), for: .touchUpInside)
+        femaleButton.addTarget(self, action: #selector(femaleButtonPressed), for: .touchUpInside)
+        saveChangeButton.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        datePiker.addTarget(self, action: #selector (setDateCalendar(datePiker:)), for: .valueChanged)
+    }
 }
 
+
+//MARK: - private extension
 private extension AccountSettingsViewController{
-    
     static func makeScrolView(contentSize: CGSize, view: UIView) -> UIScrollView {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .red
@@ -428,7 +593,7 @@ private extension AccountSettingsViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
-
+    
     static func makeButtonEdit(params: ButtonsParams) -> UIButton {
         var configuration = UIButton.Configuration.gray()
         // не масштабируется картнка кастомная
@@ -445,33 +610,13 @@ private extension AccountSettingsViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }
-    //checkmark.circle
-    //checkmark.circle.fill
-    static func makeButtonMale(params: ButtonsParams) -> UIButton {
-        var configuration = UIButton.Configuration.gray()
-
-        configuration.image = UIImage(systemName: "checkmark.circle.fill")
-        configuration.imagePlacement = .leading
-        configuration.imagePadding = 5
-        configuration.title = "Male"
-        configuration.baseBackgroundColor = params.color
-        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 15)
-        let button = UIButton(configuration: configuration)
-        button.layer.cornerRadius = params.radius
-        button.tintColor = .black
-        button.clipsToBounds = true
-        button.layer.borderColor =  UIColor.white.cgColor
-        button.layer.borderWidth = 3
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }
     
-    static func makeButtonFemale(params: ButtonsParams) -> UIButton {
+    static func makeButtonImage(params: ButtonsParams) -> UIButton {
         var configuration = UIButton.Configuration.gray()
-        configuration.image = UIImage(systemName: "checkmark.circle")
+        configuration.image = UIImage(systemName: params.image)
         configuration.imagePlacement = .leading
         configuration.imagePadding = 5
-        configuration.title = "Female"
+        configuration.title = params.title
         configuration.baseBackgroundColor = params.color
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 15)
         let button = UIButton(configuration: configuration)
@@ -552,6 +697,13 @@ private extension AccountSettingsViewController{
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }
+    
+    static func makeBlur() -> UIVisualEffectView {
+        let blur = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        return blurView
+    }
 }
 
 private extension UIView {
@@ -569,6 +721,7 @@ private extension UIView {
 }
 
 
+//MARK: - extension
 extension AccountSettingsViewController: UITextFieldDelegate, UIScrollViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideKeyboard(textfield: textField)
@@ -579,6 +732,7 @@ extension AccountSettingsViewController: UITextFieldDelegate, UIScrollViewDelega
         textfield.resignFirstResponder()
     }
 }
+
 
 
 
