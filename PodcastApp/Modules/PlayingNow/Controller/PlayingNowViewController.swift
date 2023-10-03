@@ -62,8 +62,8 @@ extension PlayingNowViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: SongImageCell.reuseId,
-                for: indexPath) as? SongImageCell
+                withReuseIdentifier: PodcastImageCell.reuseId,
+                for: indexPath) as? PodcastImageCell
         else {
             return  UICollectionViewCell()
         }
@@ -78,10 +78,13 @@ extension PlayingNowViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         collectionView.frame.size
+//        let width = collectionView.frame.size.width - 20
+//        return CGSize(width: width, height: collectionView.frame.size.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         0
+//        10
     }
 }
 

@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class SongImageCell: UICollectionViewCell {
+final class PodcastImageCell: UICollectionViewCell {
     
-    static let reuseId = String(describing: SongImageCell.self)
+    static let reuseId = String(describing: PodcastImageCell.self)
     
     // MARK: - Private UI Properties
     private lazy var mainView: UIView = {

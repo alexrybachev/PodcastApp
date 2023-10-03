@@ -13,13 +13,15 @@ final class PlayingNowView: UIView {
     private var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+//        layout.minimumInteritemSpacing = 10
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         
         let myCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
         myCV.isPagingEnabled = true
         myCV.showsHorizontalScrollIndicator = false
         myCV.register(
-            SongImageCell.self,
-            forCellWithReuseIdentifier: SongImageCell.reuseId
+            PodcastImageCell.self,
+            forCellWithReuseIdentifier: PodcastImageCell.reuseId
         )
         
         return myCV
@@ -95,6 +97,10 @@ final class PlayingNowView: UIView {
             with: "Play",
             color: UIColor.customBlue
         )
+        playButton.addTarget(
+            self,
+            action: #selector(playButtonDidTapped),
+            for: .touchUpInside)
         return playButton
     }()
     
