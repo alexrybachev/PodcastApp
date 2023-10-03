@@ -38,6 +38,7 @@ final class PlayingNowView: UIView {
         return songLabel
     }()
     
+    // MARK: - Duration Properties
     private lazy var durationStackView: UIStackView = {
         var stackView = UIStackView(arrangedSubviews: [
             startDurationLabel,
@@ -65,16 +66,87 @@ final class PlayingNowView: UIView {
         return endLabel
     }()
     
-    private lazy var durationSlider: UISlider = {
-        var durSlider = UISlider()
-        durSlider.minimumTrackTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
-        durSlider.maximumTrackTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
-        durSlider.thumbTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
-        
-        let thumbImage = UIImage(named: "thumb")
-        durSlider.setThumbImage(thumbImage, for: .normal)
-        durSlider.setThumbImage(thumbImage, for: .highlighted)
+    private lazy var durationSlider: CustomSlider = {
+        var durSlider = CustomSlider(trackHeight: 2)
         return durSlider
+    }()
+    
+//    // MARK: - Control Properties
+//    private lazy var controlButtonsStackView: UIStackView = {
+//        var stackView = UIStackView(arrangedSubviews: [
+//            shuffleButton,
+//            backButton,
+//            playButton,
+//            nextButton,
+//            repeatButton
+//        ])
+//
+//        stackView.backgroundColor = .red
+//        stackView.axis = .horizontal
+//        stackView.spacing = 20
+//        stackView.alignment = .fill
+//        stackView.distribution = .fill
+//
+//        return stackView
+//    }()
+    private lazy var controlView: UIView = {
+        var controlView = UIView()
+//        controlView.backgroundColor = .lightGray
+        return controlView
+    }()
+    
+    private lazy var playButton: UIButton = {
+        var playButton = UIButton(type: .system)
+        setupControll(
+            button: playButton,
+            with: "Play",
+            systemImage: false
+        )
+        playButton.tintColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
+
+        return playButton
+    }()
+    
+    private lazy var nextButton: UIButton = {
+        var nextButton = UIButton(type: .system)
+        setupControll(
+            button: nextButton,
+            with: "Next",
+            systemImage: false
+        )
+        return nextButton
+    }()
+    
+    private lazy var backButton: UIButton = {
+        var backButton = UIButton(type: .system)
+        setupControll(
+            button: backButton,
+            with: "Back",
+            systemImage: false
+        )
+        return backButton
+    }()
+    
+    private lazy var shuffleButton: UIButton = {
+        var shuffleButton = UIButton(type: .system)
+        setupControll(
+            button: shuffleButton,
+            with: "Shuffle",
+            systemImage: false
+        )
+        shuffleButton.tintColor = UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
+        return shuffleButton
+    }()
+    
+    private lazy var repeatButton: UIButton = {
+        var repeatButton = UIButton(type: .system)
+        setupControll(
+            button: repeatButton,
+            with: "Repeat1",
+            systemImage: false
+        )
+        repeatButton.tintColor = UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
+        return repeatButton
     }()
     
     // MARK: - Init
@@ -100,6 +172,13 @@ final class PlayingNowView: UIView {
         self.addSubview(songNameLabel)
         self.addSubview(songAuthorLabel)
         self.addSubview(durationStackView)
+        self.addSubview(controlView)
+        controlView.addSubview(playButton)
+        controlView.addSubview(nextButton)
+        controlView.addSubview(backButton)
+        controlView.addSubview(shuffleButton)
+        controlView.addSubview(repeatButton)
+//        self.addSubview(controlButtonsStackView)
     }
     
     private func setupConstraints() {
@@ -119,11 +198,74 @@ final class PlayingNowView: UIView {
             make.top.equalTo(songNameLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
         }
-        
+
         durationStackView.snp.makeConstraints { make in
             make.top.equalTo(songAuthorLabel.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(45)
             make.right.equalToSuperview().offset(-45)
         }
+        
+        controlView.snp.makeConstraints { make in
+            make.top.equalTo(durationStackView.snp.bottom).offset(70)
+            make.left.equalTo(durationStackView.snp.left).offset(15)
+            make.right.equalTo(durationStackView.snp.right).offset(-15)
+            make.height.equalTo(64)
+        }
+        
+        playButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.width.equalTo(64)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.centerY.equalTo(playButton.snp.centerY)
+            make.left.equalTo(playButton.snp.right).offset(32)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+        
+        backButton.snp.makeConstraints { make in
+            make.centerY.equalTo(playButton.snp.centerY)
+            make.right.equalTo(playButton.snp.left).offset(-32)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+        
+        shuffleButton.snp.makeConstraints { make in
+            make.centerY.equalTo(playButton.snp.centerY)
+            make.right.equalTo(backButton.snp.left).offset(-32)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+        
+        repeatButton.snp.makeConstraints { make in
+            make.centerY.equalTo(playButton.snp.centerY)
+            make.left.equalTo(nextButton.snp.right).offset(32)
+            make.width.equalTo(18)
+            make.height.equalTo(18)
+        }
+        
+        
+        //
+//        controlButtonsStackView.snp.makeConstraints { make in
+//            make.top.equalTo(durationStackView.snp.bottom).offset(70)
+//            make.left.equalTo(durationStackView.snp.left).offset(15)
+//            make.right.equalTo(durationStackView.snp.right).offset(-15)
+//            make.height.equalTo(100)
+//        }
+    }
+    
+    private func setupControll(button: UIButton, with imageName: String, systemImage: Bool) {
+        if systemImage {
+            let image = UIImage(systemName: imageName)
+            button.setImage(image, for: .normal)
+        } else {
+            let image = UIImage(named: imageName)
+            button.setImage(image, for: .normal)
+        }
+    
+       
     }
 }
