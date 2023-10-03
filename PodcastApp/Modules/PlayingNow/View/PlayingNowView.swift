@@ -9,6 +9,8 @@ import UIKit
 
 final class PlayingNowView: UIView {
     
+    private let manroeFont = UIFont.custome(name: .manrope400, size: 14)
+    
     // MARK: - Private UI Properties
     private var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -17,25 +19,32 @@ final class PlayingNowView: UIView {
         let myCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
         myCV.isPagingEnabled = true
         myCV.showsHorizontalScrollIndicator = false
-        myCV.register(SongImageCell.self, forCellWithReuseIdentifier: "cell")
+        myCV.register(
+            SongImageCell.self,
+            forCellWithReuseIdentifier: SongImageCell.reuseId
+        )
         
         return myCV
     }()
     
     private lazy var songNameLabel: UILabel = {
-        var songName = UILabel()
-        songName.text = "Baby Pesut Ups 56"
-        songName.textColor = #colorLiteral(red: 0.2606227994, green: 0.2478592694, blue: 0.3162897527, alpha: 1)
-        songName.font = UIFont.custome(name: .manrope700, size: 16)
+        var songName = createLabel(
+            with: "Baby Pesut Ups 56",
+            color: #colorLiteral(red: 0.2606227994, green: 0.2478592694, blue: 0.3162897527, alpha: 1),
+            font: UIFont.custome(name: .manrope700, size: 16)
+            ?? UIFont.systemFont(ofSize: 16)
+        )
         return songName
     }()
     
     private lazy var songAuthorLabel: UILabel = {
-        var songLabel = UILabel()
-        songLabel.text = "Dr Oi om hean"
-        songLabel.textColor = #colorLiteral(red: 0.6377889514, green: 0.6319634914, blue: 0.6845200658, alpha: 1)
-        songLabel.font = UIFont.custome(name: .manrope400, size: 14)
-        return songLabel
+        var songAuthor = createLabel(
+            with: "Dr Oi om hean",
+            color: #colorLiteral(red: 0.6377889514, green: 0.6319634914, blue: 0.6845200658, alpha: 1),
+            font: UIFont.custome(name: .manrope400, size: 14)
+            ?? UIFont.systemFont(ofSize: 14)
+        )
+        return songAuthor
     }()
     
     // MARK: - Duration Properties
@@ -47,51 +56,37 @@ final class PlayingNowView: UIView {
         ])
         stackView.spacing = 10
         stackView.axis = .horizontal
-        
         return stackView
     }()
     
     private lazy var startDurationLabel: UILabel = {
-        var startLabel = UILabel()
-        startLabel.text = "44:30"
-        startLabel.font = UIFont.systemFont(ofSize: 14)
+        var startLabel = createLabel(
+            with: "44:30",
+            color: #colorLiteral(red: 0.2568137348, green: 0.2479013503, blue: 0.3163219392, alpha: 1),
+            font: UIFont.custome(name: .manrope400, size: 14)
+            ?? UIFont.systemFont(ofSize: 14)
+        )
         return startLabel
     }()
     
     private lazy var endDurationLabel: UILabel = {
-        var endLabel = UILabel()
-        endLabel.text = "56:38"
-        endLabel.font = UIFont.systemFont(ofSize: 14)
-        endLabel.textColor = #colorLiteral(red: 0.4809146523, green: 0.4751104116, blue: 0.5276280642, alpha: 1)
+        var endLabel = createLabel(
+            with: "56:38",
+            color: #colorLiteral(red: 0.4809146523, green: 0.4751104116, blue: 0.5276280642, alpha: 1),
+            font: UIFont.custome(name: .manrope400, size: 14)
+            ?? UIFont.systemFont(ofSize: 14)
+        )
         return endLabel
     }()
     
     private lazy var durationSlider: CustomSlider = {
-        var durSlider = CustomSlider(trackHeight: 2)
+        var durSlider = CustomSlider(trackHeight: 1)
         return durSlider
     }()
     
-//    // MARK: - Control Properties
-//    private lazy var controlButtonsStackView: UIStackView = {
-//        var stackView = UIStackView(arrangedSubviews: [
-//            shuffleButton,
-//            backButton,
-//            playButton,
-//            nextButton,
-//            repeatButton
-//        ])
-//
-//        stackView.backgroundColor = .red
-//        stackView.axis = .horizontal
-//        stackView.spacing = 20
-//        stackView.alignment = .fill
-//        stackView.distribution = .fill
-//
-//        return stackView
-//    }()
+    // MARK: - Control Properties
     private lazy var controlView: UIView = {
         var controlView = UIView()
-//        controlView.backgroundColor = .lightGray
         return controlView
     }()
     
@@ -100,10 +95,8 @@ final class PlayingNowView: UIView {
         setupControll(
             button: playButton,
             with: "Play",
-            systemImage: false
+            color: UIColor.customBlue
         )
-        playButton.tintColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
-
         return playButton
     }()
     
@@ -112,7 +105,7 @@ final class PlayingNowView: UIView {
         setupControll(
             button: nextButton,
             with: "Next",
-            systemImage: false
+            color: UIColor.customBlue
         )
         return nextButton
     }()
@@ -122,7 +115,7 @@ final class PlayingNowView: UIView {
         setupControll(
             button: backButton,
             with: "Back",
-            systemImage: false
+            color: UIColor.customBlue
         )
         return backButton
     }()
@@ -132,9 +125,8 @@ final class PlayingNowView: UIView {
         setupControll(
             button: shuffleButton,
             with: "Shuffle",
-            systemImage: false
+            color: UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
         )
-        shuffleButton.tintColor = UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
         return shuffleButton
     }()
     
@@ -143,9 +135,8 @@ final class PlayingNowView: UIView {
         setupControll(
             button: repeatButton,
             with: "Repeat1",
-            systemImage: false
+            color: UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
         )
-        repeatButton.tintColor = UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
         return repeatButton
     }()
     
@@ -178,7 +169,6 @@ final class PlayingNowView: UIView {
         controlView.addSubview(backButton)
         controlView.addSubview(shuffleButton)
         controlView.addSubview(repeatButton)
-//        self.addSubview(controlButtonsStackView)
     }
     
     private func setupConstraints() {
@@ -186,36 +176,37 @@ final class PlayingNowView: UIView {
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(350)
+            make.bottom.equalTo(songNameLabel.snp.top).offset(-30)
         }
         
         songNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(mainCollectionView.snp.bottom).offset(25)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(songAuthorLabel.snp.top).offset(-5)
         }
         
         songAuthorLabel.snp.makeConstraints { make in
-            make.top.equalTo(songNameLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
+            make.bottom.equalTo(durationStackView.snp.top).offset(-30)
         }
-
+        
         durationStackView.snp.makeConstraints { make in
-            make.top.equalTo(songAuthorLabel.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(45)
             make.right.equalToSuperview().offset(-45)
+            make.height.equalTo(40)
+            make.bottom.equalTo(controlView.snp.top).offset(-70)
         }
         
         controlView.snp.makeConstraints { make in
-            make.top.equalTo(durationStackView.snp.bottom).offset(70)
             make.left.equalTo(durationStackView.snp.left).offset(15)
             make.right.equalTo(durationStackView.snp.right).offset(-15)
             make.height.equalTo(64)
+            make.bottom.equalToSuperview().offset(-60)
         }
         
         playButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.height.equalTo(64)
             make.width.equalTo(64)
         }
         
@@ -246,26 +237,20 @@ final class PlayingNowView: UIView {
             make.width.equalTo(18)
             make.height.equalTo(18)
         }
-        
-        
-        //
-//        controlButtonsStackView.snp.makeConstraints { make in
-//            make.top.equalTo(durationStackView.snp.bottom).offset(70)
-//            make.left.equalTo(durationStackView.snp.left).offset(15)
-//            make.right.equalTo(durationStackView.snp.right).offset(-15)
-//            make.height.equalTo(100)
-//        }
     }
     
-    private func setupControll(button: UIButton, with imageName: String, systemImage: Bool) {
-        if systemImage {
-            let image = UIImage(systemName: imageName)
-            button.setImage(image, for: .normal)
-        } else {
-            let image = UIImage(named: imageName)
-            button.setImage(image, for: .normal)
-        }
+    // MARK: Create UI Methods
+    private func setupControll(button: UIButton, with imageName: String, color: UIColor) {
+        let image = UIImage(named: imageName)
+        button.setImage(image, for: .normal)
+        button.tintColor = color
+    }
     
-       
+    private func createLabel(with text: String, color: UIColor, font: UIFont) -> UILabel {
+        let customLabel = UILabel()
+        customLabel.text = text
+        customLabel.textColor = color
+        customLabel.font = font
+        return customLabel
     }
 }

@@ -9,21 +9,20 @@ import UIKit
 
 final class SongImageCell: UICollectionViewCell {
     
-//    private var imageView = UIImageView()
+    static let reuseId = String(describing: SongImageCell.self)
     
+    // MARK: - Private UI Properties
     private lazy var mainView: UIView = {
         var mainView = UIView()
         mainView.layer.cornerRadius = 25
         return mainView
     }()
-  
-
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(mainView)
         setupConstraints()
-//        contentView.addSubview(imageView)
     }
     
     required init?(coder: NSCoder) {
@@ -44,6 +43,4 @@ final class SongImageCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(-40)
         }
     }
-    
-    
 }
