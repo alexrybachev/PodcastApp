@@ -8,9 +8,74 @@
 import UIKit
 
 class ProfileSettingsViewController: UIViewController {
+    
+    private let profileImage: UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = UIColor(red: 0.99, green: 0.83, blue: 0.82, alpha: 1)
+        image.layer.cornerRadius = 48/4
+        return image
+    }()
+    
+    private let nameAndSecondNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Abigael Amaniah"
+        label.font = .custome(name: .manrope700, size: 16)
+        label.textColor = UIColor(red: 0.26, green: 0.25, blue: 0.32, alpha: 1)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let quoteLabel: UILabel = {
+        let element = UILabel()
+        element.text = "Love,life and chill"
+        element.font = .custome(name: .manrope700, size: 12)
+        element.textColor = UIColor(red: 0.64, green: 0.63, blue: 0.69, alpha: 1)
+        element.numberOfLines = 1
+        return element
+    }()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        setupConstraints()
+        self.view.backgroundColor = .white
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    private func setupView(){
+        view.addSubview(profileImage)
+        view.addSubview(nameAndSecondNameLabel)
+        view.addSubview(quoteLabel)
+    }
+    
+    private func setupConstraints(){
+        
+        profileImage.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(56)
+            make.leading.equalToSuperview().offset(32)
+            make.width.height.equalTo(48)
+        }
+        
+        nameAndSecondNameLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(profileImage).offset(1)
+            make.leading.equalTo(profileImage.snp.trailing).offset(16)
+            make.trailing.equalToSuperview().inset(32)
+        }
+        
+        quoteLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameAndSecondNameLabel.snp.bottom).offset(4)
+            make.leading.equalTo(nameAndSecondNameLabel)
+        }
+        
+        
+    
+    }
+    
 
+    
 }

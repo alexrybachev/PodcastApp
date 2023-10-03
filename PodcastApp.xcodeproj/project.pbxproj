@@ -30,6 +30,7 @@
 		0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */; };
 		0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */; };
 		0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */; };
+		84DDBFE12ACB5F2E001F4081 /* ProfileCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDBFE02ACB5F2E001F4081 /* ProfileCustomButton.swift */; };
 		84FEC5882AC4832900EF47A5 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */; };
 		84FEC58A2AC493E300EF47A5 /* ChannelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC5892AC493E300EF47A5 /* ChannelViewCell.swift */; };
 		84FEC58C2AC5EE6600EF47A5 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FEC58B2AC5EE6600EF47A5 /* Source.swift */; };
@@ -57,6 +58,7 @@
 		0A125D512AC2190B0006EACA /* PlusJakartaSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Bold.ttf"; sourceTree = "<group>"; };
 		0A125D522AC2190B0006EACA /* PlusJakartaSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		0A125D532AC2190C0006EACA /* PlusJakartaSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlusJakartaSans-Medium.ttf"; sourceTree = "<group>"; };
+		84DDBFE02ACB5F2E001F4081 /* ProfileCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCustomButton.swift; sourceTree = "<group>"; };
 		84FEC5872AC4832900EF47A5 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		84FEC5892AC493E300EF47A5 /* ChannelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewCell.swift; sourceTree = "<group>"; };
 		84FEC58B2AC5EE6600EF47A5 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 		0A125D312AC0CA0A0006EACA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84DDBFE02ACB5F2E001F4081 /* ProfileCustomButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				84FEC5882AC4832900EF47A5 /* ChannelViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
+				84DDBFE12ACB5F2E001F4081 /* ProfileCustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
