@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileSettingsViewController: UIViewController {
     
+    // MARK: - Properties
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = UIColor(red: 0.99, green: 0.83, blue: 0.82, alpha: 1)
@@ -17,6 +18,7 @@ class ProfileSettingsViewController: UIViewController {
         image.layer.shadowOpacity = 0.4
         image.layer.shadowOffset = CGSize(width: 1, height: 5)
         image.layer.cornerRadius = 12
+        image.clipsToBounds = true
         return image
     }()
     
@@ -55,18 +57,19 @@ class ProfileSettingsViewController: UIViewController {
     
     private let forgetPasswordButton = ProfileCustomButton(nameButton: "Forget Password", image: UIImage(systemName: "lock.open")!)
     
-
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraints()
+        addTargets()
         self.view.backgroundColor = .systemBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+    // MARK: - SetupView
     private func setupView(){
         view.addSubview(profileImage)
         view.addSubview(nameAndSecondNameLabel)
@@ -76,7 +79,15 @@ class ProfileSettingsViewController: UIViewController {
         view.addSubview(forgetPasswordButton)
         view.addSubview(logoutButton)
     }
-    
+    // MARK: - Targets
+    private func addTargets(){
+        accountSettingsButton.addTarget(self, action: #selector(accountSettingsButtonTapped), for: .touchUpInside)
+        changePasswordButton.addTarget(self, action: #selector(changePasswordButtonTapped), for: .touchUpInside)
+        forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordButtonTapped), for: .touchUpInside)
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        
+    }
+    // MARK: - Constraints
     private func setupConstraints(){
         
         profileImage.snp.makeConstraints { (make) in
@@ -125,4 +136,27 @@ class ProfileSettingsViewController: UIViewController {
         
         }
     }
+    // MARK: - Objc Methods
+    @objc private func accountSettingsButtonTapped(){
+//        let vc = AccountSettingsViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+        print("AccountSettingsButtonTapped")
+    
+    }
+    
+    @objc private func changePasswordButtonTapped(){
+        print("ChangePasswordButtonTapped")
+    
+
+    }
+    
+    @objc private func forgetPasswordButtonTapped(){
+        print("ForgetPasswordButtonTapped")
+    }
+    
+    @objc private func logoutButtonTapped(){
+        print("LogoutButtonTapped")
+    }
+    
+
 }

@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileCustomButton:UIButton {
     
+    // MARK: - Properties
     private let bacgrounForSimvols: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 0.93, green: 0.94, blue: 0.99, alpha: 1)
@@ -39,6 +40,8 @@ class ProfileCustomButton:UIButton {
         return image
     }()
     
+    // MARK: - Init
+    
     init(nameButton: String, image: UIImage) {
         super.init(frame: .zero)
         nameButtonLabel.text = nameButton
@@ -46,9 +49,13 @@ class ProfileCustomButton:UIButton {
         setupView()
         setupConstraints()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Setup
+    
     
     private func setupView(){
         addSubview(bacgrounForSimvols)
@@ -56,6 +63,7 @@ class ProfileCustomButton:UIButton {
         addSubview(nameButtonLabel)
         addSubview(arrowImage)
     }
+    // MARK: - Constraints
     
     private func setupConstraints(){
         bacgrounForSimvols.snp.makeConstraints { make in
