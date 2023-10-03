@@ -12,7 +12,7 @@ final class PlayingNowViewController: UIViewController {
     // MARK: - Private UI Properties
     private let playingNowView = PlayingNowView()
     private let colors = [UIColor.red, UIColor.green, UIColor.brown, UIColor.blue]
-
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,14 +75,14 @@ extension PlayingNowViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension PlayingNowViewController: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-          collectionView.frame.size
-      }
-
-      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-          0
-      }
+        collectionView.frame.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        0
+    }
 }
 
 // MARK: - UICollectionViewDelegate

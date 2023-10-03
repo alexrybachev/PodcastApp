@@ -37,10 +37,9 @@ final class CustomSlider: UISlider {
         self.maximumTrackTintColor = #colorLiteral(red: 0.1607843137, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
         
         if let originalThumbImage = UIImage(systemName: "circle.fill") {
-            // Увеличьте размер бегунка (например, в 1.5 раза)
+            // увлечинение бегунка
             let thumbSize = CGSize(width: originalThumbImage.size.width * 0.6, height: originalThumbImage.size.height * 0.6)
             
-            // Создайте измененное изображение с увеличенным размером
             let thumbImage = UIGraphicsImageRenderer(size: thumbSize).image { _ in
                 originalThumbImage.draw(in: CGRect(origin: .zero, size: thumbSize))
             }
