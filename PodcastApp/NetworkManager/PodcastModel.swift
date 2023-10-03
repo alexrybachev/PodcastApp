@@ -25,6 +25,18 @@ struct SearchedResult: Codable {
     //    let count: Int?
 }
 
+
+// ПОИСК ПОДКАСТОВ
+
+struct SearchPodcats: Codable {
+    let status: String?
+    let feeds: [Podcast]?
+    let count: Int?
+    let query: String?
+    let description: String?
+}
+
+
 struct Podcast: Codable {
     // categories
     let name: String?
@@ -60,6 +72,14 @@ struct Podcast: Codable {
 
 // ПОИСК ЭПИЗОДОВ
 
+struct SearchEpisods: Codable {
+    let status: String?
+    let items: [PodcastEpisode]?
+    let count: Int?
+    let query: String?
+    let description: String?
+}
+
 struct PodcastEpisode: Codable {
     let id: Int?
     let title: String?
@@ -83,3 +103,5 @@ struct PodcastEpisode: Codable {
     let feedId: Int?
     let feedLanguage: String?
 }
+
+

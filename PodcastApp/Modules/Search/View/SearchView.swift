@@ -90,6 +90,10 @@ extension SearchView {
         collectionView.reloadData()
     }
     
+    public func reloadSection(for indexSection: Int) {
+        collectionView.reloadSections(IndexSet(integer: indexSection))
+    }
+    
     // Search Bar
     
     public func transferSearchBarDelegate(delegate: UISearchBarDelegate) {

@@ -26,6 +26,24 @@ class PopularCategoryCell: UICollectionViewCell {
         return label
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            super.isSelected = isSelected
+            
+            switch isSelected {
+            case true:
+                headerLabel.font = .custome(name: .manrope700, size: 16)
+                contentView.layer.shadowColor = UIColor.gray.cgColor
+                contentView.layer.shadowRadius = 4
+                contentView.layer.shadowOpacity = 0.3
+                contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+            case false:
+                headerLabel.font = .custome(name: .manrope400, size: 16)
+                contentView.layer.shadowColor = UIColor.clear.cgColor
+            }
+        }
+    }
+    
     //MARK: - LifeCycle
     
     override init(frame: CGRect) {
@@ -36,6 +54,11 @@ class PopularCategoryCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        headerLabel.text = nil
     }
     
     // MARK: - Setup UI
@@ -60,18 +83,15 @@ class PopularCategoryCell: UICollectionViewCell {
     }
     
     func selectCell() {
-        headerLabel.font = .custome(name: .manrope700, size: 16)
-        contentView.layer.shadowColor = UIColor.gray.cgColor
-        contentView.layer.shadowRadius = 4
-        contentView.layer.shadowOpacity = 0.3
-        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+//        headerLabel.font = .custome(name: .manrope700, size: 16)
+//        contentView.layer.shadowColor = UIColor.gray.cgColor
+//        contentView.layer.shadowRadius = 4
+//        contentView.layer.shadowOpacity = 0.3
+//        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
     }
     
     func deselectCell() {
-        headerLabel.font = .custome(name: .manrope400, size: 16)
-        contentView.layer.shadowColor = UIColor.clear.cgColor
-        contentView.layer.shadowRadius = 0
-        contentView.layer.shadowOpacity = 0
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        headerLabel.font = .custome(name: .manrope400, size: 16)
+//        contentView.layer.shadowColor = UIColor.clear.cgColor
     }
 }

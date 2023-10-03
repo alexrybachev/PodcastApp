@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchResultViewCell: UICollectionViewCell {
     
@@ -84,7 +85,17 @@ class SearchResultViewCell: UICollectionViewCell {
     
     // MARK: - Configure
     
-    func configureCell(_ podcast: PodcastInfo) {
-        print("реализовать настройку ячейки")
+    func configureCell(_ podcast: Podcast?) {
+        podcastLabel.text = podcast?.title
+        podcastSubLabel.text = podcast?.categoriesLabel
+        
+        guard let imageURL = podcast?.image else { return }
+        let cache = ImageCache.default
+        cache.diskStorage.config.expiration = .seconds(1)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: URL(string: imageURL), placeholder: nil, options: [.processor(processor),
+                                                                                       .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+        
     }
 }

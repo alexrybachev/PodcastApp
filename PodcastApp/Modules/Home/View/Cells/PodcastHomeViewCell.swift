@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class PodcastHomeViewCell: UICollectionViewCell {
+final class PodcastHomeViewCell: UICollectionViewCell {
     
     static let cellID = String(describing: PodcastHomeViewCell.self)
     
@@ -59,8 +59,11 @@ class PodcastHomeViewCell: UICollectionViewCell {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.tintColor = .gray
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    private var isLiked = false
     
     // MARK: - Initial
     
@@ -135,5 +138,10 @@ class PodcastHomeViewCell: UICollectionViewCell {
         let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: URL(string: url), placeholder: nil, options: [.processor(processor),                                           .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+    }
+    
+    @objc func likeButtonTapped() {
+        isLiked.toggle()
+        likeButton.tintColor = isLiked ? UIColor.red : UIColor.gray
     }
 }

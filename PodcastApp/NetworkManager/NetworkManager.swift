@@ -32,8 +32,6 @@ struct NetworkManager {
             URLQueryItem(name: $0.key, value: $0.value)
         }
         
-        print("URL: \(components.url)")
-        
         return components.url
     }
     
@@ -52,6 +50,11 @@ struct NetworkManager {
                 let formattedQuery = query?.replacingOccurrences(of: " ", with: "+") // формат должен быть cat=Funny+School
                 parameters["q"] = formattedQuery
             }
+        case .getEpisodsForPodcats:
+            if query != nil {
+                parameters["id"] = query
+            }
+            
         default: // getCategoryList
             break
         }
@@ -167,10 +170,16 @@ extension NetworkManager {
         makeTask(for: request, completion: completion)
     }
     
-    #warning("ДОРАБОТАТЬ!!!!")
     /// Поиск подкастов по ключевым словам
-    func searchPodcasts(with query: String, completion: @escaping (Result<SearchedResult, NetworkError>) -> Void) {
-        guard let url = createURL(for: .getCategoryList, with: nil) else { return }
+    func searchPodcasts(with query: String, completion: @escaping (Result<SearchPodcats, NetworkError>) -> Void) {
+        guard let url = createURL(for: .searchPodcasts, with: query) else { return }
+        let request = getRequest(url)
+        makeTask(for: request, completion: completion)
+    }
+    
+    func fetchEpisodesForPodcast(with id: Int?, completion: @escaping (Result<SearchEpisods, NetworkError>) -> Void) {
+        let idString = String(id ?? 0)
+        guard let url = createURL(for: .getEpisodsForPodcats, with: idString) else { return }
         let request = getRequest(url)
         makeTask(for: request, completion: completion)
     }

@@ -16,7 +16,9 @@ class CategoryHomeViewCell: UICollectionViewCell {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "noimage")
+        imageView.backgroundColor = #colorLiteral(red: 0.5743881464, green: 0.8246712685, blue: 0.9251592159, alpha: 1)
+//        imageView.image = UIImage(named: "noimage")
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -44,7 +46,7 @@ class CategoryHomeViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "categorySubtitle"
         label.font = .custome(name: .manrope400, size: 12)
-        label.textColor = .lightGray
+        label.textColor = .black
         return label
     }()
     
@@ -58,6 +60,13 @@ class CategoryHomeViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        categoryTitle.text = nil
+        categorySubtitle.text = nil
     }
     
     
