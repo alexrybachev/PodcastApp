@@ -17,12 +17,12 @@ final class OnboardingView: UIView {
     
     // MARK: - Public Properties
     var currentSlideIndex = 0
-    
+ 
     // MARK: - Public UI Properties
     lazy var skipButton: UIButton = {
         var skipButton = UIButton(type: .system)
         skipButton.setTitle("Skip", for: .normal)
-        skipButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        skipButton.titleLabel?.font = UIFont.custome(name: .manrope700, size: 16)
         skipButton.setTitleColor(.black, for: .normal)
         skipButton.addTarget(
             self,
@@ -36,6 +36,7 @@ final class OnboardingView: UIView {
         var startButton = UIButton(type: .system)
         startButton.setTitle("Get Started", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
+        startButton.titleLabel?.font = UIFont.custome(name: .manrope700, size: 16)
         startButton.backgroundColor = #colorLiteral(red: 0.1589552164, green: 0.5085405111, blue: 0.9443863034, alpha: 1)
         startButton.layer.cornerRadius = 16
         startButton.isHidden = true
@@ -52,7 +53,7 @@ final class OnboardingView: UIView {
         layout.scrollDirection = .horizontal
         
         let myCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        myCV.register(ImageCell.self, forCellWithReuseIdentifier: "cell")
+        myCV.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseID)
         myCV.isPagingEnabled = true
         myCV.showsHorizontalScrollIndicator = false
         myCV.isScrollEnabled = false
@@ -74,7 +75,7 @@ final class OnboardingView: UIView {
         nextButton.setTitleColor(.black, for: .normal)
         nextButton.backgroundColor = #colorLiteral(red: 0.9257928729, green: 0.9576769471, blue: 0.9981418252, alpha: 1)
         nextButton.layer.cornerRadius = 20
-        nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        nextButton.titleLabel?.font = UIFont.custome(name: .manrope700, size: 16)
         nextButton.addTarget(
             self,
             action: #selector(nextButtonDidTapped),
@@ -96,7 +97,7 @@ final class OnboardingView: UIView {
         infoTitle.numberOfLines = 0
         infoTitle.backgroundColor = .clear
         infoTitle.textAlignment = .center
-        infoTitle.font = UIFont.boldSystemFont(ofSize: 23)
+        infoTitle.font = UIFont.custome(name: .manrope700, size: 23)
         return infoTitle
     }()
     
@@ -107,7 +108,7 @@ final class OnboardingView: UIView {
         infoSubtitle.backgroundColor = .clear
         infoSubtitle.numberOfLines = 0
         infoSubtitle.textAlignment = .center
-        infoSubtitle.font = UIFont.boldSystemFont(ofSize: 20)
+        infoSubtitle.font = UIFont.custome(name: .manrope700, size: 20)
         infoSubtitle.textColor = .white
         return infoSubtitle
     }()
@@ -115,7 +116,7 @@ final class OnboardingView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
         addViews()
         setupConstraints()
     }
