@@ -138,7 +138,7 @@ final class PlayingNowView: UIView {
         var repeatButton = UIButton(type: .system)
         setupControll(
             button: repeatButton,
-            with: "Repeat1",
+            with: "Repeat",
             color: UIColor(red: 0.23, green: 0.25, blue: 0.27, alpha: 1.00)
         )
         return repeatButton
@@ -153,6 +153,15 @@ final class PlayingNowView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private Actions
+    @objc private func playButtonDidTapped() {
+        if playButton.currentImage == UIImage(named: "Play") {
+            playButton.setImage(UIImage(named: "Stop"), for: .normal)
+        } else {
+            playButton.setImage(UIImage(named: "Play"), for: .normal)
+        }
     }
     
     // MARK: - Public Methods
