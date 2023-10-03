@@ -12,7 +12,11 @@ class ProfileSettingsViewController: UIViewController {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = UIColor(red: 0.99, green: 0.83, blue: 0.82, alpha: 1)
-        image.layer.cornerRadius = 48/4
+        image.layer.shadowColor = UIColor.black.cgColor
+        image.layer.shadowRadius = 8
+        image.layer.shadowOpacity = 0.4
+        image.layer.shadowOffset = CGSize(width: 1, height: 5)
+        image.layer.cornerRadius = 12
         return image
     }()
     
