@@ -34,13 +34,29 @@ class ProfileSettingsViewController: UIViewController {
         return element
     }()
     
+    private let logoutButton: UIButton = {
+        let element = UIButton()
+        element.setTitle("Log Out", for: .normal)
+        element.titleLabel?.font = .custome(name: .manrope700, size: 16)
+        element.setTitleColor(UIColor(red: 0.16, green: 0.51, blue: 0.95, alpha: 1), for: .normal)
+        element.layer.cornerRadius = 32
+        element.layer.borderWidth = 1
+        element.layer.borderColor = UIColor(red: 0.16, green: 0.51, blue: 0.95, alpha: 1).cgColor
+        return element
+    }()
+    
+    private let accountSettingsButton = ProfileCustomButton(nameButton: "Account Setting", image: UIImage(systemName: "person")!)
+    
+    private let changePasswordButton = ProfileCustomButton(nameButton: "Change Password", image: UIImage(systemName: "checkmark.shield")!)
+    
+    private let forgetPasswordButton = ProfileCustomButton(nameButton: "Forget Password", image: UIImage(systemName: "lock.open")!)
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupConstraints()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +67,10 @@ class ProfileSettingsViewController: UIViewController {
         view.addSubview(profileImage)
         view.addSubview(nameAndSecondNameLabel)
         view.addSubview(quoteLabel)
+        view.addSubview(accountSettingsButton)
+        view.addSubview(changePasswordButton)
+        view.addSubview(forgetPasswordButton)
+        view.addSubview(logoutButton)
     }
     
     private func setupConstraints(){
@@ -72,10 +92,33 @@ class ProfileSettingsViewController: UIViewController {
             make.leading.equalTo(nameAndSecondNameLabel)
         }
         
+        accountSettingsButton.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(32)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(56)
+        }
         
-    
+        changePasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(accountSettingsButton.snp.bottom).offset(1)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(56)
+        }
+        
+        forgetPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(changePasswordButton.snp.bottom).offset(1)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(56)
+        }
+        
+        logoutButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().inset(112)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().inset(25)
+            make.height.equalTo(60)
+        
+        }
     }
-    
-
-    
 }
