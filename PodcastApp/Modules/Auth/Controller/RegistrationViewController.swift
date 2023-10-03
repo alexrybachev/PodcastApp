@@ -159,6 +159,7 @@ final class RegistrationViewController: UIViewController {
         addTapGesture()
         addObservers()
         
+        setupCustomBackButton()
         //принимаем почту с экрана СreateAccountVC
         emailField.text = selectedEmail
     }
@@ -377,5 +378,37 @@ extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         return true
+    }
+}
+
+// MARK: - NavigationBar
+extension RegistrationViewController {
+    private func setupCustomBackButton() {
+
+        let customView = UIView()
+        customView.backgroundColor  = #colorLiteral(red: 0.9215686321, green: 0.9215685725, blue: 0.9215685725, alpha: 1)
+        customView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        customView.layer.cornerRadius = customView.frame.height / 2
+        customView.clipsToBounds = true
+        
+        let arrowImageView = UIImageView(image: UIImage(systemName: "arrow.left"))
+        arrowImageView.tintColor = .black
+        arrowImageView.frame = CGRect(x: 12, y: 12, width: 17, height: 15)
+        
+        customView.addSubview(arrowImageView)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(backButtonDidTapped)
+        )
+        
+        customView.addGestureRecognizer(tapGestureRecognizer)
+        
+        let customBackButton = UIBarButtonItem(customView: customView)
+        navigationItem.leftBarButtonItem = customBackButton
+    }
+    
+    @objc private func backButtonDidTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -16,7 +16,7 @@ class CustomTabBarController: UITabBarController {
     }
     
     private func setControllers() {
-        let homeVC = HomeViewController()
+        let homeVC = UINavigationController(rootViewController: HomeViewController() )
         let homeItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: UIImage(named: "HomeActive"))
         homeItem.imageInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
         homeVC.tabBarItem = homeItem

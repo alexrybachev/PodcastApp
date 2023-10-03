@@ -13,7 +13,7 @@ class ChannelViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Channel"
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = .custome(name: .manrope700, size: 16)
         label.textColor = .black
         return label
     }()
@@ -28,7 +28,7 @@ class ChannelViewController: UIViewController {
     private let nameChannelLabel: UILabel = {
         let label = UILabel()
         label.text = "Baby Pesut Podcast"
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = .custome(name: .manrope700, size: 16)
         label.textColor = .black
         return label
     }()
@@ -36,7 +36,7 @@ class ChannelViewController: UIViewController {
     private let numberEpizodesLabel: UILabel = {
         let label = UILabel()
         label.text = "56 Eps | Dr. Oi om jean"
-        label.font = UIFont(name: "manrope-light", size: 16)
+        label.font = .custome(name: .manrope700, size: 16)
         label.textColor = .lightGray
         return label
     }()
@@ -44,30 +44,27 @@ class ChannelViewController: UIViewController {
     private let startLabel: UILabel = {
         let label = UILabel()
         label.text = "All Episode"
-        label.font = UIFont(name: "manrope-medium", size: 16)
+        label.font = .custome(name: .manrope700, size: 16)
         label.textColor = .black
         return label
     }()
     
     var channel = Source.makeChanel()
     
-    let tableView: UITableView = .init()
-    
-    
-
+    let tableView: UITableView = {
+        let element = UITableView()
+        element.register(ChannelViewCell.self, forCellReuseIdentifier: "ChannelViewCell")
+        element.separatorStyle = .none
+        element.estimatedRowHeight = 88
+        return element
+    }()
+    //MARK: - Life c
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = "Channel"
-//        navigationController?.navigationBar.titleTextAttributes = [
-//            NSAttributedString.Key.foregroundColor: UIColor.black,
-//            NSAttributedString.Key.font: UIFont(name: "manrope-light", size: 16)
-//        ]
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
         setupViews()
         makeConstraints()
         
-        tableView.register(ChannelViewCell.self, forCellReuseIdentifier: "ChannelViewCell")
-//        tableView.rowHeight = 72
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -79,8 +76,6 @@ class ChannelViewController: UIViewController {
         view.addSubview(numberEpizodesLabel)
         view.addSubview(startLabel)
         view.addSubview(tableView)
-        
-        tableView.separatorStyle = .none
     }
     
     private func makeConstraints(){
@@ -130,12 +125,10 @@ extension ChannelViewController: UITableViewDataSource{
         cell.configure(channel: channel[indexPath.row])
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        88
-    }
 }
 
 extension ChannelViewController: UITableViewDelegate{
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
 }
