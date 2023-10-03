@@ -9,8 +9,6 @@ import UIKit
 
 final class PlayingNowView: UIView {
     
-    private let manroeFont = UIFont.custome(name: .manrope400, size: 14)
-    
     // MARK: - Private UI Properties
     private var mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
