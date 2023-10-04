@@ -391,10 +391,10 @@
 		0A125D2C2AC0CA0A0006EACA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3CC2F0A12ACCB146009D3018 /* CustomLayout.swift */,
 				3CC2F0982ACAE8AF009D3018 /* PlayingNowView.swift */,
 				3CC2F09D2ACB265D009D3018 /* CustomSlider.swift */,
 				3CC2F09A2ACAF01B009D3018 /* Cell */,
-				3CC2F0A12ACCB146009D3018 /* CustomLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

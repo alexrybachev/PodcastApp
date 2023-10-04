@@ -9,8 +9,7 @@ import UIKit
 
 final class PlayingNowView: UIView {
     
-    // MARK: - Private UI Properties
-    
+    // MARK: - Public UI Properties
     var itemW: CGFloat {
         return screenWidth * 0.4
     }
@@ -200,7 +199,7 @@ final class PlayingNowView: UIView {
     
     private func setupConstraints() {
         mainCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(30)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalTo(songNameLabel.snp.top).offset(-30)

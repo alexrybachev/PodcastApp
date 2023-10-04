@@ -20,7 +20,6 @@ final class PlayingNowViewController: UIViewController {
         return itemW * 1.45
     }
     
-    
     // MARK: - Private UI Properties
     private let playingNowView = PlayingNowView()
     private let colors = [UIColor.red, UIColor.green, UIColor.brown, UIColor.blue]
