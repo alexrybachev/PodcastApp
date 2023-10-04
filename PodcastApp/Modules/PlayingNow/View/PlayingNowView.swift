@@ -8,42 +8,21 @@
 import UIKit
 
 final class PlayingNowView: UIView {
-    
-//    // MARK: - Public UI Properties
-//    var itemW: CGFloat {
-//        return screenWidth * 0.4
-//    }
-//
-//    var itemH: CGFloat {
-//        return itemW * 1.45
-//    }
-//
-//    let layout = CustomLayout()
+
+    // MARK: - CollectionView Properties
     let layout = CustomCarouselFlowLayout()
     
     lazy var mainCollectionView: UICollectionView = {
-        
     
-      
-        
         let myCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-       
-//        layout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: myCV.frame.size.height)
+
         layout.itemSize = CGSize(width: 279, height: 326)
         layout.sideItemScale = 0.8
         layout.sideItemAlpha = 1.0
         layout.spacingMode = .fixed(spacing: 5.0)
         layout.scrollDirection = .horizontal
         
-
-    
-//        layout.minimumLineSpacing = 50
-//        layout.minimumInteritemSpacing = 50
-//        layout.itemSize.width = itemW
         myCV.collectionViewLayout = layout
-//        myCV.contentInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50)
-//        myCV.contentInsetAdjustmentBehavior = .never
         myCV.showsHorizontalScrollIndicator = false
         myCV.register(
             PodcastImageCell.self,
@@ -175,8 +154,6 @@ final class PlayingNowView: UIView {
         super.init(frame: frame)
         addViews()
         setupConstraints()
-        
-        
     }
     
     required init?(coder: NSCoder) {
