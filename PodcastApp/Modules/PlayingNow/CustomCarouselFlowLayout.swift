@@ -8,16 +8,17 @@
 
 import UIKit
 
-
+// MARK: - Enum
 public enum UPCarouselFlowLayoutSpacingMode {
     case fixed(spacing: CGFloat)
     case overlap(visibleOffset: CGFloat)
 }
 
 
-open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
+class CustomCarouselFlowLayout: UICollectionViewFlowLayout {
     
-    fileprivate struct LayoutState {
+    // MARK: - Private Struct
+    private struct LayoutState {
         var size: CGSize
         var direction: UICollectionView.ScrollDirection
         func isEqual(_ otherState: LayoutState) -> Bool {
@@ -25,14 +26,16 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    @IBInspectable open var sideItemScale: CGFloat = 0.6
-    @IBInspectable open var sideItemAlpha: CGFloat = 0.6
-    @IBInspectable open var sideItemShift: CGFloat = 0.0
-    open var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: 40)
+    // MARK: - Public Properties
+    var sideItemScale: CGFloat = 0.6
+    var sideItemAlpha: CGFloat = 0.6
+    var sideItemShift: CGFloat = 0.0
+    var spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: 40)
     
-    fileprivate var state = LayoutState(size: CGSize.zero, direction: .horizontal)
+    // MARK: - Private Properties
+    private var state = LayoutState(size: CGSize.zero, direction: .horizontal)
     
-    
+    // MARK: - Override Methods
     override open func prepare() {
         super.prepare()
         
@@ -45,14 +48,19 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    fileprivate func setupCollectionView() {
+    override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+    
+    // MARK: - Private Methods
+    private func setupCollectionView() {
         guard let collectionView = self.collectionView else { return }
         if collectionView.decelerationRate != UIScrollView.DecelerationRate.fast {
             collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         }
     }
     
-    fileprivate func updateLayout() {
+    private func updateLayout() {
         guard let collectionView = self.collectionView else { return }
         
         let collectionSize = collectionView.bounds.size
@@ -74,9 +82,7 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
-    }
+   
     
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let superAttributes = super.layoutAttributesForElements(in: rect),

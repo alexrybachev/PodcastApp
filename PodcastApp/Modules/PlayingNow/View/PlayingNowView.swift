@@ -19,7 +19,7 @@ final class PlayingNowView: UIView {
 //    }
 //
 //    let layout = CustomLayout()
-    let layout = UPCarouselFlowLayout()
+    let layout = CustomCarouselFlowLayout()
     
     lazy var mainCollectionView: UICollectionView = {
         
