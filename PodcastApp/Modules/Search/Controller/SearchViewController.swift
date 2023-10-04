@@ -37,6 +37,10 @@ class SearchViewController: UIViewController {
 //        fetchCategoryList()
 //    }
 
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        navigationController?.navigationItem.title = nil
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
