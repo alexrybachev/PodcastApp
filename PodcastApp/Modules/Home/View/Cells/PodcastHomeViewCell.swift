@@ -64,6 +64,7 @@ final class PodcastHomeViewCell: UICollectionViewCell {
     }()
     
     private var isLiked = false
+    private var podcastRealm: PodcastModel!
     
     // MARK: - Initial
     
@@ -132,6 +133,14 @@ final class PodcastHomeViewCell: UICollectionViewCell {
         authorLabel.text = podcast?.author ?? ""
         podcastSubLabel.text = podcast?.categoriesLabel ?? ""
         
+        podcastRealm = PodcastModel(id: podcast?.id ?? 0,
+                                    title: podcast?.title ?? "",
+                                    author: podcast?.author ?? "",
+                                    imageURL: podcast?.image ?? "")
+        
+        isLiked = StorageManager.shared.isSaved(for: podcast?.id ?? 0)
+        likeButton.tintColor = isLiked ? UIColor.red : UIColor.gray
+        
         guard let url = podcast?.image else { return }
         let cache = ImageCache.default
         cache.diskStorage.config.expiration = .seconds(1)
@@ -143,5 +152,10 @@ final class PodcastHomeViewCell: UICollectionViewCell {
     @objc func likeButtonTapped() {
         isLiked.toggle()
         likeButton.tintColor = isLiked ? UIColor.red : UIColor.gray
+        if isLiked {
+            StorageManager.shared.save(podcast: podcastRealm)
+        } else {
+            StorageManager.shared.delete(podcast: podcastRealm)
+        }
     }
 }

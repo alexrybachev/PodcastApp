@@ -148,7 +148,7 @@ extension ChannelViewController: UITableViewDataSource{
 
 // MARK: - UITableViewDelegate
 
-extension ChannelViewController: UITableViewDelegate{
+extension ChannelViewController: UITableViewDelegate {
     
 }
 

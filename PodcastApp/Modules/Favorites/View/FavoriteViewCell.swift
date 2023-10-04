@@ -7,23 +7,29 @@
 
 
 import UIKit
+import Kingfisher
 
 class FavouriteChannelCell: UITableViewCell {
     
     static var reuseID = String(describing: FavouriteChannelCell.self)
     
-    var channel: ChannelModel?
+    // MARK: - UI Elements
     
-    // MARK: - User Interface
+    private lazy var background: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        return view
+    }()
     
-    private let favChannelImageView: UIImageView = {
+    private lazy var favoriteImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
         imageView.backgroundColor = UIColor(
             red: 0.93, green: 0.94, blue: 0.99, alpha: 1.00)
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -32,7 +38,6 @@ class FavouriteChannelCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.font = .custome(name: .manrope700, size: 14)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -42,7 +47,6 @@ class FavouriteChannelCell: UITableViewCell {
         label.numberOfLines = 1
         label.textColor = .darkGray
         label.font = .custome(name: .manrope400, size: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -50,8 +54,8 @@ class FavouriteChannelCell: UITableViewCell {
     // MARK: - cell initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.setupCell()
-        self.setupConstraints()
+        setupCell()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -59,42 +63,59 @@ class FavouriteChannelCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        self.channel = nil
+        super.prepareForReuse()
+        favoriteImageView.image = nil
+        favChannelTitleLabel.text = nil
+        episodesNumberLabel.text = nil
+        
     }
     
     //MARK: - Methods
     
     private func setupCell() {
-        contentView.backgroundColor = .white
-        contentView.addSubview(favChannelImageView)
-        contentView.addSubview(favChannelTitleLabel)
-        contentView.addSubview(episodesNumberLabel)
-    }
-    
-    func setup(withChanel chanel: ChannelModel) {
-        favChannelImageView.image = UIImage(named: chanel.imageName)
-        favChannelTitleLabel.text = chanel.channelName
-        episodesNumberLabel.text = "\(chanel.numberOfEpisodes) Eps"
+        contentView.addSubview(background)
+        background.addSubview(favoriteImageView)
+        background.addSubview(favChannelTitleLabel)
+        background.addSubview(episodesNumberLabel)
     }
     
     private func setupConstraints() {
         
-        favChannelImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(47)
-            make.height.width.equalTo(48)
+        background.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.bottom.equalToSuperview().inset(4)
+        }
+        
+        favoriteImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(8)
+            make.width.height.equalTo(48)
         }
         
         favChannelTitleLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(47)
-            make.leading.equalTo(favChannelImageView.snp.trailing).inset(-15)
-            make.top.equalToSuperview().inset(8)
+            make.top.equalToSuperview().inset(15)
+            make.leading.equalTo(favoriteImageView.snp.trailing).offset(19)
+            make.trailing.equalToSuperview().inset(16)
         }
         
         episodesNumberLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(favChannelTitleLabel)
-            make.top.equalTo(favChannelTitleLabel.snp.bottom).inset(-4)
-            make.bottom.equalToSuperview().inset(8)
+            make.top.equalTo(favChannelTitleLabel.snp.bottom).offset(5)
+            make.leading.equalTo(favoriteImageView.snp.trailing).offset(19)
+            make.trailing.equalToSuperview().inset(15)
+            make.bottom.equalToSuperview().inset(14)
         }
+    }
+    
+    // MARK: - Configure cell
+    
+    func configureCell(for podcast: Podcast) {
+        favChannelTitleLabel.text = podcast.title
+//        episodesNumberLabel.text = "\(chanel.numberOfEpisodes) Eps"
+        
+        let cache = ImageCache.default
+        cache.diskStorage.config.expiration = .seconds(1)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+        favoriteImageView.kf.indicatorType = .activity
+        favoriteImageView.kf.setImage(with: URL(string: podcast.image ?? ""), placeholder: nil, options: [.processor(processor),                                           .cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
 }

@@ -13,7 +13,15 @@ class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         setControllers()
         setAppearance()
+        delegate = self
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        if let tabBarItems = tabBarController?.tabBar.items {
+//            tabBarItems.forEach { $0.title = nil }
+//        }
+//    }
     
     private func setControllers() {
         let homeVC = UINavigationController(rootViewController: HomeViewController())
@@ -36,12 +44,10 @@ class CustomTabBarController: UITabBarController {
         settingsItem.imageInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 30)
         settingsVC.tabBarItem = settingsItem
         
-        viewControllers = [
-        homeVC,
-        searchVC,
-        favoritesVC,
-        settingsVC
-        ]
+        viewControllers = [homeVC,
+                           searchVC,
+                           favoritesVC,
+                           settingsVC]
     }
     
     private func setAppearance() {
@@ -69,4 +75,18 @@ class CustomTabBarController: UITabBarController {
         
     }
 
+}
+
+extension CustomTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        navigationController?.navigationItem.title = nil
+        tabBarController.selectedViewController?.title = nil
+        tabBarController.selectedViewController?.navigationItem.title = nil
+        
+        if let tabBarItems = tabBarController.tabBar.items {
+            tabBarItems.forEach { $0.title = nil }
+        }
+    }
+    
 }

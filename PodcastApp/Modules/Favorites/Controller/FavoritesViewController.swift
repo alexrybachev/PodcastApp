@@ -4,48 +4,53 @@ import SnapKit
 class FavoritesViewController: UIViewController {
     
     // MARK: - User Interface
-    private lazy var favouriteChanelsTableView: UITableView = {
+    private lazy var favouriteTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemBackground
         tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 48
         return tableView
     }()
     
-    
     // MARK: - private properties
     private var favouriteChanels = ChannelModel.makeMockData()
+    
+    private var podcastData: [Podcast] = []
+    
+    // MARK: - Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
         self.setupConstraints()
         self.setupTableView()
+        title = "Favorites"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
     }
     
     // MARK: - Private methodes
     
     private func setupView() {
         view.backgroundColor = .systemBackground
-        view.addSubview(favouriteChanelsTableView)
-        
+        view.addSubview(favouriteTableView)
     }
     
     private func setupTableView() {
-        favouriteChanelsTableView.dataSource = self
-        favouriteChanelsTableView.delegate = self
-        favouriteChanelsTableView.register(
-            FavouriteChannelCell.self,
-            forCellReuseIdentifier: FavouriteChannelCell.reuseID)
-        
-        favouriteChanelsTableView.estimatedRowHeight = 60
+        favouriteTableView.dataSource = self
+        favouriteTableView.delegate = self
+        favouriteTableView.register(FavouriteChannelCell.self,
+                                           forCellReuseIdentifier: FavouriteChannelCell.reuseID)
     }
     
     private func setupConstraints() {
-        
-        favouriteChanelsTableView.snp.makeConstraints { make in
+        favouriteTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
     
 }
@@ -54,12 +59,8 @@ class FavoritesViewController: UIViewController {
 // MARK: - table protocols
 extension FavoritesViewController: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favouriteChanels.count
+        podcastData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,14 +69,46 @@ extension FavoritesViewController: UITableViewDataSource {
             withIdentifier: FavouriteChannelCell.reuseID,
             for: indexPath) as? FavouriteChannelCell else { return  .init()}
         
-        let favChanel = self.favouriteChanels[indexPath.row]
-        cell.setup(withChanel: favChanel)
+        let podcast = podcastData[indexPath.row]
+        cell.configureCell(for: podcast)
         return cell
     }
 }
 
 extension FavoritesViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let podcast = podcastData[indexPath.row]
+        let channelVC = ChannelViewController(podcast: podcast)
+        navigationController?.pushViewController(channelVC, animated: true)
     }
 }
+
+// MARK: - Realm
+
+extension FavoritesViewController {
+    
+    private func fetchData() {
+        podcastData = []
+        StorageManager.shared.read { [weak self] result in
+            result.forEach { podcastModel in
+                let podcast = Podcast(name: nil,
+                                      id: podcastModel.id,
+                                      title: podcastModel.title,
+                                      description: nil,
+                                      author: podcastModel.author,
+                                      image: podcastModel.imageURL,
+                                      artwork: podcastModel.imageURL,
+                                      url: nil,
+                                      itunesId: nil,
+                                      trendScore: nil,
+                                      language: nil,
+                                      categories: nil)
+                
+                self?.podcastData.append(podcast)
+            }
+            self?.favouriteTableView.reloadData()
+        }
+    }
+}
+
