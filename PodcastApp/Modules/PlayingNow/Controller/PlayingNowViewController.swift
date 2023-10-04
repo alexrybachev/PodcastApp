@@ -10,7 +10,7 @@ import UIKit
 final class PlayingNowViewController: UIViewController {
     
     // MARK: - Private Properties
-    private var currentPage = 0
+//    private var currentPage = 0
     
     private var pageSize: CGSize {
         let layout = playingNowView.mainCollectionView.collectionViewLayout as! CustomCarouselFlowLayout
@@ -35,41 +35,13 @@ final class PlayingNowViewController: UIViewController {
         setupConstraints()
         setupNavigationBar()
         playingNowView.transferDelegates(dataSource: self, delegate: self)
-        
-        playingNowView.nextButton.addTarget(self, action: #selector(scrollToNextOrPreviousCell), for: .touchUpInside)
-        playingNowView.backButton.addTarget(self, action: #selector(scrollToNextOrPreviousCell), for: .touchUpInside)
+        setupNavigationButton()
     }
     
     // MARK: - Private Actions
-    @objc private func scrollToNextOrPreviousCell(_ sender: UIButton) {
-        let contentOffset = playingNowView.mainCollectionView.contentOffset
-        let cellSize = playingNowView.layout.itemSize
-        let numberOfItems = playingNowView.mainCollectionView.numberOfItems(inSection: 0)
-        let currentItemIndex = Int(round(contentOffset.x / cellSize.width))
-        var currentIndexPath = IndexPath()
-        
-        if sender == playingNowView.nextButton {
-            if currentItemIndex < numberOfItems - 1 {
-                currentIndexPath = IndexPath(item: currentItemIndex + 1, section: 0)
-            } else {
-                // Если уже на последней ячейке, не изменяем индекс
-                currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
-            }
-        } else {
-            if currentItemIndex > 0 {
-                currentIndexPath = IndexPath(item: currentItemIndex - 1, section: 0)
-            } else {
-                // Если уже на первой ячейке, не изменяем индекс
-                currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
-            }
-        }
-        
-        playingNowView.mainCollectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
-    }
-    
     @objc private func rightBarButtonDidTapped() {
     }
-
+    
     // MARK: - Privaet Methods
     private func addViews() {
         view.addSubview(playingNowView)
@@ -93,6 +65,39 @@ final class PlayingNowViewController: UIViewController {
         
         rightBarButton.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    private func setupNavigationButton() {
+        playingNowView.nextOrBackAction = { [weak self] sender in
+            self?.scrollToNextOrPreviousCell(sender)
+        }
+    }
+    
+    // метод для перехода к следующему или предыдущему item
+    private func scrollToNextOrPreviousCell(_ sender: UIButton) {
+        let contentOffset = playingNowView.mainCollectionView.contentOffset
+        let cellSize = playingNowView.layout.itemSize
+        let numberOfItems = playingNowView.mainCollectionView.numberOfItems(inSection: 0)
+        let currentItemIndex = Int(round(contentOffset.x / cellSize.width))
+        var currentIndexPath = IndexPath()
+        
+        if sender == playingNowView.nextButton {
+            if currentItemIndex < numberOfItems - 1 {
+                currentIndexPath = IndexPath(item: currentItemIndex + 1, section: 0)
+            } else {
+                // Если уже на последней ячейке, не изменяем индекс
+                currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
+            }
+        } else {
+            if currentItemIndex > 0 {
+                currentIndexPath = IndexPath(item: currentItemIndex - 1, section: 0)
+            } else {
+                // Если уже на первой ячейке, не изменяем индекс
+                currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
+            }
+        }
+        
+        playingNowView.mainCollectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
     }
 }
 
@@ -118,9 +123,11 @@ extension PlayingNowViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension PlayingNowViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-        playingNowView.mainCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        
+        playingNowView.mainCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
 }
 
@@ -128,8 +135,14 @@ extension PlayingNowViewController: UICollectionViewDelegate {
 extension PlayingNowViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let layout = playingNowView.mainCollectionView.collectionViewLayout as! CustomCarouselFlowLayout
-        let pageSide = (layout.scrollDirection == .horizontal) ? self.pageSize.width : self.pageSize.height
-        let offset = (layout.scrollDirection == .horizontal) ? scrollView.contentOffset.x : scrollView.contentOffset.y
-        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
+        let pageSide = (layout.scrollDirection == .horizontal)
+        ? self.pageSize.width
+        : self.pageSize.height
+        
+        let offset = (layout.scrollDirection == .horizontal)
+        ? scrollView.contentOffset.x
+        : scrollView.contentOffset.y
+        
+//        currentPage = Int(floor((offset - pageSide / 2) / pageSide) + 1)
     }
 }

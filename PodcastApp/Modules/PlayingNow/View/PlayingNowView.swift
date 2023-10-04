@@ -8,6 +8,10 @@
 import UIKit
 
 final class PlayingNowView: UIView {
+    
+    // MARK: - Closures
+    // замыкание для нажания на кнопку next и back
+    var nextOrBackAction: ((UIButton) -> Void)?
 
     // MARK: - CollectionView Properties
     let layout = CustomCarouselFlowLayout()
@@ -32,7 +36,8 @@ final class PlayingNowView: UIView {
         return myCV
     }()
     
-    private lazy var songNameLabel: UILabel = {
+    // MARK: - Labels
+    private lazy var podcastTitleLabel: UILabel = {
         var songName = createLabel(
             with: "Baby Pesut Ups 56",
             color: #colorLiteral(red: 0.2606227994, green: 0.2478592694, blue: 0.3162897527, alpha: 1),
@@ -42,7 +47,7 @@ final class PlayingNowView: UIView {
         return songName
     }()
     
-    private lazy var songAuthorLabel: UILabel = {
+    private lazy var authorNameLabel: UILabel = {
         var songAuthor = createLabel(
             with: "Dr Oi om hean",
             color: #colorLiteral(red: 0.6377889514, green: 0.6319634914, blue: 0.6845200658, alpha: 1),
@@ -116,6 +121,11 @@ final class PlayingNowView: UIView {
             with: "Next",
             color: UIColor.customBlue
         )
+        nextButton.addTarget(
+            self,
+            action: #selector(nextOrBackButtonDidTapped(_:)),
+            for: .touchUpInside
+        )
         return nextButton
     }()
     
@@ -125,6 +135,11 @@ final class PlayingNowView: UIView {
             button: backButton,
             with: "Back",
             color: UIColor.customBlue
+        )
+        backButton.addTarget(
+            self,
+            action: #selector(nextOrBackButtonDidTapped(_:)),
+            for: .touchUpInside
         )
         return backButton
     }()
@@ -169,6 +184,11 @@ final class PlayingNowView: UIView {
         }
     }
     
+    // метод для отрабатывания кнопки next и back
+    @objc private func nextOrBackButtonDidTapped(_ sender: UIButton) {
+        nextOrBackAction?(sender)
+    }
+    
     // MARK: - Public Methods
     public func transferDelegates(dataSource: UICollectionViewDataSource, delegate: UICollectionViewDelegate) {
         mainCollectionView.dataSource = dataSource
@@ -178,8 +198,8 @@ final class PlayingNowView: UIView {
     // MARK: - Private Methods
     private func addViews() {
         self.addSubview(mainCollectionView)
-        self.addSubview(songNameLabel)
-        self.addSubview(songAuthorLabel)
+        self.addSubview(podcastTitleLabel)
+        self.addSubview(authorNameLabel)
         self.addSubview(durationStackView)
         self.addSubview(controlView)
         controlView.addSubview(playButton)
@@ -194,15 +214,15 @@ final class PlayingNowView: UIView {
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalTo(songNameLabel.snp.top).offset(-30)
+            make.bottom.equalTo(podcastTitleLabel.snp.top).offset(-30)
         }
         
-        songNameLabel.snp.makeConstraints { make in
+        podcastTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(songAuthorLabel.snp.top).offset(-5)
+            make.bottom.equalTo(authorNameLabel.snp.top).offset(-5)
         }
         
-        songAuthorLabel.snp.makeConstraints { make in
+        authorNameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(durationStackView.snp.top).offset(-30)
         }
