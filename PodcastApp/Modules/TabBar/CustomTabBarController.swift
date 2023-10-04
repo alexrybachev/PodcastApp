@@ -16,22 +16,22 @@ class CustomTabBarController: UITabBarController {
     }
     
     private func setControllers() {
-        let homeVC = UINavigationController(rootViewController: HomeViewController() )
+        let homeVC = UINavigationController(rootViewController: HomeViewController())
         let homeItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: UIImage(named: "HomeActive"))
         homeItem.imageInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
         homeVC.tabBarItem = homeItem
         
-        let searchVC = SearchViewController()
+        let searchVC = UINavigationController(rootViewController: SearchViewController())
         let searchItem = UITabBarItem(title: nil, image: UIImage(named: "Search"), selectedImage: UIImage(named: "SearchActive"))
         searchItem.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
         searchVC.tabBarItem = searchItem
         
-        let favoritesVC = FavoritesViewController()
+        let favoritesVC = UINavigationController(rootViewController: FavoritesViewController())
         let favoritesItem = UITabBarItem(title: nil, image: UIImage(named: "Bookmark"), selectedImage: UIImage(named: "BookmarkActive"))
         favoritesItem.imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         favoritesVC.tabBarItem = favoritesItem
         
-        let settingsVC = ProfileSettingsViewController()
+        let settingsVC = UINavigationController(rootViewController: ProfileSettingsViewController())
         let settingsItem = UITabBarItem(title: nil, image: UIImage(named: "Setting"), selectedImage: UIImage(named: "SettingActive"))
         settingsItem.imageInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 30)
         settingsVC.tabBarItem = settingsItem

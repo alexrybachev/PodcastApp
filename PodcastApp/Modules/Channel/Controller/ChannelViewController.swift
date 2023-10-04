@@ -24,6 +24,7 @@ class ChannelViewController: UIViewController {
         label.text = "Baby Pesut Podcast"
         label.font = .custome(name: .manrope700, size: 16)
         label.textColor = .black
+        label.textAlignment = .center
         return label
     }()
     
@@ -32,10 +33,12 @@ class ChannelViewController: UIViewController {
         label.text = "56 Eps | Dr. Oi om jean"
         label.font = .custome(name: .manrope400, size: 16)
         label.textColor = .lightGray
+        label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     
-    private let startLabel: UILabel = {
+    private let headerTableView: UILabel = {
         let label = UILabel()
         label.text = "All Episode"
         label.font = .custome(name: .manrope400, size: 16)
@@ -91,7 +94,7 @@ class ChannelViewController: UIViewController {
         view.addSubview(imageChanel)
         view.addSubview(nameChannelLabel)
         view.addSubview(numberEpizodesLabel)
-        view.addSubview(startLabel)
+        view.addSubview(headerTableView)
         view.addSubview(tableView)
     }
     
@@ -105,21 +108,21 @@ class ChannelViewController: UIViewController {
         
         nameChannelLabel.snp.makeConstraints { make in
             make.top.equalTo(imageChanel.snp.bottom).offset(24)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
         numberEpizodesLabel.snp.makeConstraints { make in
             make.top.equalTo(nameChannelLabel.snp.bottom).offset(4)
-            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
-        startLabel.snp.makeConstraints { make in
+        headerTableView.snp.makeConstraints { make in
             make.top.equalTo(numberEpizodesLabel.snp.bottom).offset(34)
             make.left.equalToSuperview().offset(32)
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(startLabel.snp.bottom).offset(13)
+            make.top.equalTo(headerTableView.snp.bottom).offset(13)
             make.left.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
         }
