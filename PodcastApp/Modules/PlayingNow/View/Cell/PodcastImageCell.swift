@@ -15,6 +15,11 @@ final class PodcastImageCell: UICollectionViewCell {
     private lazy var mainView: UIView = {
         var mainView = UIView()
         mainView.layer.cornerRadius = 25
+        mainView.layer.shadowColor = UIColor.black.cgColor
+        mainView.layer.shadowOpacity = 0.5
+        mainView.layer.shadowOffset = .zero
+        mainView.layer.shadowPath = UIBezierPath(rect: mainView.bounds).cgPath
+        mainView.layer.shouldRasterize = true
         return mainView
     }()
     
@@ -38,6 +43,10 @@ final class PodcastImageCell: UICollectionViewCell {
     private func setupConstraints() {
         mainView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+//            make.top.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//            make.left.equalToSuperview().offset(40)
+//            make.right.equalToSuperview().offset(-40)
         }
     }
 }
