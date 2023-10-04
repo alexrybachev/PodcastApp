@@ -7,7 +7,19 @@
 
 import UIKit
 
+let screenWidth = UIScreen.main.bounds.size.width
+let screenHeight = UIScreen.main.bounds.size.height
+
 final class PlayingNowViewController: UIViewController {
+    
+    var itemW: CGFloat {
+        return screenWidth * 0.4
+    }
+    
+    var itemH: CGFloat {
+        return itemW * 1.45
+    }
+    
     
     // MARK: - Private UI Properties
     private let playingNowView = PlayingNowView()
@@ -21,6 +33,19 @@ final class PlayingNowViewController: UIViewController {
         setupConstraints()
         setupNavigationBar()
         playingNowView.transferDelegates(dataSource: self, delegate: self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let indexPath = IndexPath(item: 1, section: 0)
+        playingNowView.mainCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+        playingNowView.layout.currentPage = indexPath.item
+        playingNowView.layout.previousOffset = playingNowView.layout.updateOffSet(playingNowView.mainCollectionView)
+        
+        if let cell = playingNowView.mainCollectionView.cellForItem(at: indexPath) {
+            transformCell(cell)
+        }
     }
     
     // MARK: - Private Actions
@@ -67,28 +92,68 @@ extension PlayingNowViewController: UICollectionViewDataSource {
         else {
             return  UICollectionViewCell()
         }
-        
         cell.configureView(with: colors[indexPath.row])
         return cell
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension PlayingNowViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        collectionView.frame.size
-//        let width = collectionView.frame.size.width - 20
-//        return CGSize(width: width, height: collectionView.frame.size.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
-//        10
+// MARK: - UICollectionViewDelegate
+extension PlayingNowViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == playingNowView.layout.currentPage {
+            
+        } else {
+            playingNowView.mainCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            playingNowView.layout.currentPage = indexPath.item
+            playingNowView.layout.previousOffset = playingNowView.layout.updateOffSet(playingNowView.mainCollectionView)
+            setupCell()
+        }
     }
 }
 
-// MARK: - UICollectionViewDelegate
-extension PlayingNowViewController: UICollectionViewDelegate {
-    
+// MARK: - UICollectionViewDelegateFlowLayout
+extension PlayingNowViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //        collectionView.frame.size
+        return CGSize(width: itemW, height: itemH)
+        
+    }
 }
+
+// MARK: - UIScrollViewDelegate
+extension PlayingNowViewController {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate {
+            setupCell()
+        }
+    }
+    
+    private func setupCell() {
+        let indexPath = IndexPath(item: playingNowView.layout.currentPage, section: 0)
+        if let cell = playingNowView.mainCollectionView.cellForItem(at: indexPath) {
+            transformCell(cell)
+        }
+    }
+    
+    private func transformCell(_ cell: UICollectionViewCell, isEffect: Bool = true) {
+        if !isEffect {
+            cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            return
+        }
+        
+        UIView.animate(withDuration: 0.2) {
+            cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }
+        
+        for otherCell in playingNowView.mainCollectionView.visibleCells {
+            if let indexPath = playingNowView.mainCollectionView.indexPath(for: otherCell) {
+                if indexPath.item != playingNowView.layout.currentPage {
+                    UIView.animate(withDuration: 0.2) {
+                        otherCell.transform = .identity
+                    }
+                }
+            }
+        }
+    }
+}
+

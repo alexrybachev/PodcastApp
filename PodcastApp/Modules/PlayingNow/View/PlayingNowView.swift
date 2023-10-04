@@ -10,14 +10,28 @@ import UIKit
 final class PlayingNowView: UIView {
     
     // MARK: - Private UI Properties
-    private var mainCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-//        layout.minimumInteritemSpacing = 10
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    
+    var itemW: CGFloat {
+        return screenWidth * 0.4
+    }
+    
+    var itemH: CGFloat {
+        return itemW * 1.45
+    }
+    
+    let layout = CustomLayout()
+    
+    lazy var mainCollectionView: UICollectionView = {
         
-        let myCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        myCV.isPagingEnabled = true
+        let myCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 50
+        layout.minimumInteritemSpacing = 50
+        layout.itemSize.width = itemW
+        myCV.collectionViewLayout = layout
+        myCV.contentInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 50)
+        myCV.contentInsetAdjustmentBehavior = .never
         myCV.showsHorizontalScrollIndicator = false
         myCV.register(
             PodcastImageCell.self,

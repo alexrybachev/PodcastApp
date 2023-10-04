@@ -37,10 +37,7 @@ final class PodcastImageCell: UICollectionViewCell {
     // MARK: - Private Methods
     private func setupConstraints() {
         mainView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview().offset(40)
-            make.right.equalToSuperview().offset(-40)
+            make.edges.equalToSuperview()
         }
     }
 }
