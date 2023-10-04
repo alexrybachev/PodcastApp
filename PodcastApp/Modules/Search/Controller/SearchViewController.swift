@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Search"
         view = searchView
         searchView.transferDelegates(dataSource: self, delegate: self)
         searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
@@ -175,7 +176,22 @@ extension SearchViewController {
 extension SearchViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("section: \(indexPath.section) - item: \(indexPath.item)")
+        switch indexPath.section {
+        case 0:
+            if isSearched {
+                let podcast = searchResult?.feeds?[indexPath.item]
+                let channelVC = ChannelViewController(podcast: podcast)
+                navigationController?.pushViewController(channelVC, animated: true)
+            } else {
+                let category = CategoryList.getAllCategories()[indexPath.item]
+                fetchPodcasts(for: category)
+            }
+        default:
+            if !isSearched {
+                let category = CategoryList.getAllCategories()[indexPath.item]
+                fetchPodcasts(for: category)
+            }
+        }
     }
 }
 
@@ -247,8 +263,20 @@ extension SearchViewController {
             switch result {
             case .success(let data):
                 self?.searchResult = data
-                print("searchResult: \(data)")
                 self?.searchView.reloadCollectionView()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func fetchPodcasts(for category: String) {
+        NetworkManager.shared.fetchTrendingPodcast(for: category) { [weak self] result in
+            switch result {
+            case .success(let data):
+                let podcast = data.feeds?.randomElement()
+                let channelVC = ChannelViewController(podcast: podcast)
+                self?.navigationController?.pushViewController(channelVC, animated: true)
             case .failure(let error):
                 print(error)
             }

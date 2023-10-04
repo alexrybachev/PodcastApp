@@ -160,19 +160,23 @@ extension HomeViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 1, let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
-            selectedIndexPath = indexPath
-            
-            if indexPath.item == 0 {
-                fetchSecondPodcastsData()
-            } else {
-                let category = CategoryList.getSecondCategoryList()[indexPath.item]
-                fetchSecondPodcastsData(for: category)
+        switch indexPath.section {
+        case 0:
+            let podcast = podcastsFirstData?.first?.feeds?[indexPath.item]
+            let channelVC = ChannelViewController(podcast: podcast)
+            navigationController?.pushViewController(channelVC, animated: true)
+        case 1:
+            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
+                selectedIndexPath = indexPath
+                
+                if indexPath.item == 0 {
+                    fetchSecondPodcastsData()
+                } else {
+                    let category = CategoryList.getSecondCategoryList()[indexPath.item]
+                    fetchSecondPodcastsData(for: category)
+                }
             }
-        }
-        
-        if indexPath.section == 2 {
-            print("переход на экран Cannel")
+        default:
             let podcast = podcastsSecondData?.feeds?[indexPath.item]
             let channelVC = ChannelViewController(podcast: podcast)
             navigationController?.pushViewController(channelVC, animated: true)
@@ -180,13 +184,13 @@ extension HomeViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        if indexPath.section == 1 {
-//            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
-//                cell.deselectCell()
-////                homeView.reloadSection(for: indexPath)
-////                collectionView.reloadSections(IndexSet(integer: 2))
-//            }
-//        }
+        //        if indexPath.section == 1 {
+        //            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
+        //                cell.deselectCell()
+        ////                homeView.reloadSection(for: indexPath)
+        ////                collectionView.reloadSections(IndexSet(integer: 2))
+        //            }
+        //        }
     }
 }
 
