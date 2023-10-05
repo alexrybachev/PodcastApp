@@ -67,7 +67,6 @@
 		3CC2F09C2ACAF043009D3018 /* PodcastImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F09B2ACAF042009D3018 /* PodcastImageCell.swift */; };
 		3CC2F09E2ACB265D009D3018 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F09D2ACB265D009D3018 /* CustomSlider.swift */; };
 		3CC2F0C42ACD6A32009D3018 /* CustomCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0C32ACD6A32009D3018 /* CustomCarouselFlowLayout.swift */; };
-		3CC2F0C82ACDB7CE009D3018 /* Грибы.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CC2F0C72ACDB7CE009D3018 /* Грибы.mp3 */; };
 		3CC2F0CB2ACDD4B8009D3018 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0CA2ACDD4B8009D3018 /* PlayerManager.swift */; };
 		3CC2F0CD2ACDE9F9009D3018 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC2F0CC2ACDE9F9009D3018 /* TestModel.swift */; };
 		84755EA12AC8D542007C5B4C /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84755EA02AC8D542007C5B4C /* ChannelViewController.swift */; };
@@ -129,7 +128,6 @@
 		3CC2F09B2ACAF042009D3018 /* PodcastImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastImageCell.swift; sourceTree = "<group>"; };
 		3CC2F09D2ACB265D009D3018 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		3CC2F0C32ACD6A32009D3018 /* CustomCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCarouselFlowLayout.swift; sourceTree = "<group>"; };
-		3CC2F0C72ACDB7CE009D3018 /* Грибы.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Грибы.mp3"; sourceTree = "<group>"; };
 		3CC2F0CA2ACDD4B8009D3018 /* PlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
 		3CC2F0CC2ACDE9F9009D3018 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		84755EA02AC8D542007C5B4C /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 		0A0B7B4A2AC0ADAC00C1D17B /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				3CC2F0C72ACDB7CE009D3018 /* Грибы.mp3 */,
 				0A125D4E2AC214470006EACA /* Fonts */,
 				0A0B7B3E2AC0ABDC00C1D17B /* Assets.xcassets */,
 				0A0B7B402AC0ABDC00C1D17B /* LaunchScreen.storyboard */,
@@ -712,7 +709,6 @@
 				0A125D4D2AC2139E0006EACA /* manrope-light.ttf in Resources */,
 				0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */,
 				0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */,
-				3CC2F0C82ACDB7CE009D3018 /* Грибы.mp3 in Resources */,
 				0A125D552AC2190C0006EACA /* PlusJakartaSans-SemiBold.ttf in Resources */,
 				0A125D4C2AC2139E0006EACA /* manrope-medium.ttf in Resources */,
 				0A0B7B3F2AC0ABDC00C1D17B /* Assets.xcassets in Resources */,

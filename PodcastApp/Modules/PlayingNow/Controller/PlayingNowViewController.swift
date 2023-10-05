@@ -213,8 +213,6 @@ final class PlayingNowViewController: UIViewController {
         if let newAudioURL = URL(string: testArraySongs[currentIndexLastItem].url) {
             stopAndPlayNewAudio(url: newAudioURL)
         }
-        //            playingNowView.playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
-        
         
         playingNowView.mainCollectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
     }
