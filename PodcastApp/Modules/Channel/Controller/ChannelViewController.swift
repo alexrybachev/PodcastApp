@@ -41,7 +41,7 @@ class ChannelViewController: UIViewController {
     private let headerTableView: UILabel = {
         let label = UILabel()
         label.text = "All Episode"
-        label.font = .custome(name: .manrope400, size: 16)
+        label.font = .custome(name: .manrope700, size: 16)
         label.textColor = .black
         return label
     }()

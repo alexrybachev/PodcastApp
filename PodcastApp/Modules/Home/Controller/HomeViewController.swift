@@ -166,7 +166,7 @@ extension HomeViewController: UICollectionViewDelegate {
             let channelVC = ChannelViewController(podcast: podcast)
             navigationController?.pushViewController(channelVC, animated: true)
         case 1:
-            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
+            if let _ = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
                 selectedIndexPath = indexPath
                 
                 if indexPath.item == 0 {
