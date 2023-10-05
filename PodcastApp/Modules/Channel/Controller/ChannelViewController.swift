@@ -77,6 +77,7 @@ class ChannelViewController: UIViewController {
         title = "Channel"
         setupViews()
         makeConstraints()
+       
 
     }
     
@@ -87,6 +88,13 @@ class ChannelViewController: UIViewController {
         numberEpizodesLabel.text = podcast?.author
         loadImage()
         fetchEpisodsForPodcast()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //hide back button text
+        navigationController?.navigationBar.backItem?.title = ""
+               navigationItem.backButtonTitle = ""
     }
     
     private func setupViews(){

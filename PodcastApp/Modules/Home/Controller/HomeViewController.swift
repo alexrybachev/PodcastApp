@@ -30,6 +30,19 @@ class HomeViewController: UIViewController {
         fetchSecondPodcastsData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setNavigationAppearance()
+    }
+    
+    //MARK: - Methods
+    
+    private func setNavigationAppearance() {
+    //set custom arrow for back button
+        let backViewImage = UIImage(named: "ArrowLeft")?.withRenderingMode(.alwaysOriginal)
+        navigationController?.navigationBar.backIndicatorImage = backViewImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
+    }
 }
 
 // MARK: - UICollectionViewDataSource
