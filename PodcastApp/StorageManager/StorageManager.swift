@@ -17,29 +17,6 @@ class StorageManager {
     
     private init() {}
     
-    func saveData<T: Object>(object: T) {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(object)
-            }
-        } catch let error as NSError {
-            print("Error saving data to Realm: \(error.localizedDescription)")
-        }
-        
-    }
-    
-    func fetchData<T: Object>(_ objectType: T.Type) -> Results<T>? {
-        do {
-            let realm = try Realm()
-            let objects = realm.objects(objectType)
-            return objects
-        } catch let error as NSError {
-            print("Error fetching data from Realm: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
     func save(podcast: PodcastModel) {
         try! realm.write {
             realm.add(podcast)
