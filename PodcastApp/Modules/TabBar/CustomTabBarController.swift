@@ -9,20 +9,14 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
 
+//MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setControllers()
         setAppearance()
-        delegate = self
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        if let tabBarItems = tabBarController?.tabBar.items {
-//            tabBarItems.forEach { $0.title = nil }
-//        }
-//    }
-    
+   //MARK: Methods
     private func setControllers() {
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         let homeSelectedImage = UIImage(named: "HomeActive")?.withRenderingMode(.alwaysOriginal)
@@ -80,18 +74,4 @@ class CustomTabBarController: UITabBarController {
         
     }
 
-}
-
-extension CustomTabBarController: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        navigationController?.navigationItem.title = nil
-        tabBarController.selectedViewController?.title = nil
-        tabBarController.selectedViewController?.navigationItem.title = nil
-        
-        if let tabBarItems = tabBarController.tabBar.items {
-            tabBarItems.forEach { $0.title = nil }
-        }
-    }
-    
 }
