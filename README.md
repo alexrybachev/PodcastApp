@@ -1,4 +1,4 @@
-# 🎙️ Podcast app ![version](https://img.shields.io/badge/v1.1-readme%20added-green?link=release)
+# 🎙️ Podcast app ![version](https://img.shields.io/badge/v1.0-release-green?link=release)
 
 ## Challenge3 [(Swift Marathon 8.0)](https://t.me/swiftmarathon) <a href="url"><img src="https://github.com/DmitryLorents/Bomba-Challenge1/blob/dmitry/readmeFix/Bomba-Challenge1/SupportingFiles/Assets.xcassets/ReadmeFiles/swiftMarathon.imageset/swift%20Marathon.jpeg" height="auto" width="30" align="center"></a>
 
@@ -22,10 +22,12 @@
 ## Developers *(team #4)*:
 
 * [DmitryLorents *(teamleader)*](https://github.com/DmitryLorents)
+* [Alex_Sam](https://github.com/alexrybachev)
 * [Kirilloao](https://github.com/Kirilloao)
-* [Eremyonok](https://github.com/Eremyonok)
+* [Elizaveta](https://github.com/Eremyonok)
 * [Privetyanikita](https://github.com/Privetyanikita)
-* [alexrybachev](https://github.com/alexrybachev)
+* [EliseevDmitry](https://github.com/EliseevDmitry)
+
 
 ## Screenshots
 <p align="center">
