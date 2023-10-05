@@ -12,6 +12,8 @@ final class PlayingNowView: UIView {
     // MARK: - Closures
     // замыкание для нажания на кнопку next и back
     var nextOrBackAction: ((UIButton) -> Void)?
+    var playPauseAction: (() -> Void)?
+    var sliderAction: (() -> Void)?
 
     // MARK: - CollectionView Properties
     let layout = CustomCarouselFlowLayout()
@@ -86,11 +88,17 @@ final class PlayingNowView: UIView {
             font: UIFont.custome(name: .manrope400, size: 14)
             ?? UIFont.systemFont(ofSize: 14)
         )
+        
         return endLabel
     }()
     
-    private lazy var durationSlider: CustomSlider = {
+    lazy var durationSlider: CustomSlider = {
         var durSlider = CustomSlider(trackHeight: 1)
+        durSlider.addTarget(
+            self,
+            action: #selector(sliderChangeValue),
+            for: .valueChanged
+        )
         return durSlider
     }()
     
@@ -100,7 +108,7 @@ final class PlayingNowView: UIView {
         return controlView
     }()
     
-    private lazy var playButton: UIButton = {
+    lazy var playPauseButton: UIButton = {
         var playButton = UIButton(type: .system)
         setupControll(
             button: playButton,
@@ -177,16 +185,22 @@ final class PlayingNowView: UIView {
     
     // MARK: - Private Actions
     @objc private func playButtonDidTapped() {
-        if playButton.currentImage == UIImage(named: "Play") {
-            playButton.setImage(UIImage(named: "Stop"), for: .normal)
-        } else {
-            playButton.setImage(UIImage(named: "Play"), for: .normal)
-        }
+//        if playPauseButton.currentImage == UIImage(named: "Play") {
+//            playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
+//        } else {
+//            playPauseButton.setImage(UIImage(named: "Play"), for: .normal)
+//        }
+        
+        playPauseAction?()
     }
     
     // метод для отрабатывания кнопки next и back
     @objc private func nextOrBackButtonDidTapped(_ sender: UIButton) {
         nextOrBackAction?(sender)
+    }
+    
+    @objc private func sliderChangeValue() {
+        sliderAction?()
     }
     
     // MARK: - Public Methods
@@ -202,7 +216,7 @@ final class PlayingNowView: UIView {
         self.addSubview(authorNameLabel)
         self.addSubview(durationStackView)
         self.addSubview(controlView)
-        controlView.addSubview(playButton)
+        controlView.addSubview(playPauseButton)
         controlView.addSubview(nextButton)
         controlView.addSubview(backButton)
         controlView.addSubview(shuffleButton)
@@ -241,7 +255,7 @@ final class PlayingNowView: UIView {
             make.bottom.equalToSuperview().offset(-60)
         }
         
-        playButton.snp.makeConstraints { make in
+        playPauseButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(64)
@@ -249,28 +263,28 @@ final class PlayingNowView: UIView {
         }
         
         nextButton.snp.makeConstraints { make in
-            make.centerY.equalTo(playButton.snp.centerY)
-            make.left.equalTo(playButton.snp.right).offset(32)
+            make.centerY.equalTo(playPauseButton.snp.centerY)
+            make.left.equalTo(playPauseButton.snp.right).offset(32)
             make.width.equalTo(20)
             make.height.equalTo(20)
         }
         
         backButton.snp.makeConstraints { make in
-            make.centerY.equalTo(playButton.snp.centerY)
-            make.right.equalTo(playButton.snp.left).offset(-32)
+            make.centerY.equalTo(playPauseButton.snp.centerY)
+            make.right.equalTo(playPauseButton.snp.left).offset(-32)
             make.width.equalTo(20)
             make.height.equalTo(20)
         }
         
         shuffleButton.snp.makeConstraints { make in
-            make.centerY.equalTo(playButton.snp.centerY)
+            make.centerY.equalTo(playPauseButton.snp.centerY)
             make.right.equalTo(backButton.snp.left).offset(-32)
             make.width.equalTo(20)
             make.height.equalTo(20)
         }
         
         repeatButton.snp.makeConstraints { make in
-            make.centerY.equalTo(playButton.snp.centerY)
+            make.centerY.equalTo(playPauseButton.snp.centerY)
             make.left.equalTo(nextButton.snp.right).offset(32)
             make.width.equalTo(18)
             make.height.equalTo(18)
