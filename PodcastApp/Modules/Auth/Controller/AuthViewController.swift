@@ -143,7 +143,9 @@ final class AuthViewController: UIViewController {
     // MARK: - Navigation
     private func navigateToHomeScreen() {
         let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
-        let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
+        let startVC = isOnboardingCompleted
+        ? UINavigationController(rootViewController: CustomTabBarController() )
+        : OnboardingViewController()
         startVC.modalPresentationStyle = .fullScreen
         self.present(startVC, animated: true)
     }
