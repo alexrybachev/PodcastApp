@@ -152,7 +152,7 @@ final class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Sign Up"
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         addViews()
         setupConstraints()
         setupTextFields()
@@ -390,24 +390,24 @@ extension RegistrationViewController {
         customView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         customView.layer.cornerRadius = customView.frame.height / 2
         customView.clipsToBounds = true
-        
+
         let arrowImageView = UIImageView(image: UIImage(systemName: "arrow.left"))
         arrowImageView.tintColor = .black
         arrowImageView.frame = CGRect(x: 12, y: 12, width: 17, height: 15)
-        
+
         customView.addSubview(arrowImageView)
-        
+
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(backButtonDidTapped)
         )
-        
+
         customView.addGestureRecognizer(tapGestureRecognizer)
-        
+
         let customBackButton = UIBarButtonItem(customView: customView)
         navigationItem.leftBarButtonItem = customBackButton
     }
-    
+
     @objc private func backButtonDidTapped() {
         navigationController?.popViewController(animated: true)
     }

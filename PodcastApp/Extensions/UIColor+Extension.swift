@@ -21,8 +21,8 @@ extension UIColor {
         UIColor(named: "CustomGreenColor") ?? .clear
     }
     
-    static var customLabelColor: UIColor {
-        UIColor(named: "CustomLabelColor") ?? .clear
+    static var grayLabelColor: UIColor {
+        UIColor(named: "GrayLabelColor") ?? .clear
     }
     
     static var textFieldColorOne: UIColor {

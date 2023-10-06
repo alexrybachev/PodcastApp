@@ -76,13 +76,8 @@ final class AccountSettingsViewController: UIViewController {
         params: editButtonParameters
     )
     private let verticalStack = AccountSettingsViewController.makeStackVertical()
-    private let textFirstParam = TextParameters(
-        font: UIFont(name: "Arial-BoldMT", size: 12)!,
-        text: "First Name"
-    )
-    private lazy var firstNameLable = AccountSettingsViewController.makeLable(
-        params: textFirstParam
-    )
+    
+    private var firstNameLable = CustomProfileLabel(title: "First Name")
     private let textFieldParametersFirst = TextFieldParameters(
         size: CGSize(
             width: 327,
@@ -94,13 +89,7 @@ final class AccountSettingsViewController: UIViewController {
     private lazy var firstNameTextField = AccountSettingsViewController.makeTextField(
         parameters: textFieldParametersFirst
     )
-    private let textSecondParam = TextParameters(
-        font: UIFont(name: "Arial-BoldMT", size: 12)!,
-        text: "Last Name"
-    )
-    private lazy var lastNameLable = AccountSettingsViewController.makeLable(
-        params: textSecondParam
-    )
+    private lazy var lastNameLable = CustomProfileLabel(title: "Last Name")
     private let textFieldParametersLast = TextFieldParameters(
         size: CGSize(
             width: 327,
@@ -116,9 +105,7 @@ final class AccountSettingsViewController: UIViewController {
         font: UIFont(name: "Arial-BoldMT", size: 12)!,
         text: "E-mail"
     )
-    private lazy var emailLable = AccountSettingsViewController.makeLable(
-        params: textSecondParam
-    )
+    private lazy var emailLable = CustomProfileLabel(title: "E-mail")
     private let textFieldParametersEmail = TextFieldParameters(
         size: CGSize(
             width: 327,
@@ -130,13 +117,7 @@ final class AccountSettingsViewController: UIViewController {
     private lazy var emailTextField = AccountSettingsViewController.makeTextField(
         parameters: textFieldParametersEmail
     )
-    private let textFourthParam = TextParameters(
-        font: UIFont(name: "Arial-BoldMT", size: 12)!,
-        text: "Date of Birth"
-    )
-    private lazy var dateLable = AccountSettingsViewController.makeLable(
-        params: textFourthParam
-    )
+    private lazy var dateLable = CustomProfileLabel(title: "Date of Birth")
     private let textFieldParametersDate = TextFieldParameters(
         size: CGSize(
             width: 327,
@@ -160,13 +141,7 @@ final class AccountSettingsViewController: UIViewController {
         parameters: imageCalendar
     )
     private lazy var datePiker = UIDatePicker()
-    private let textFivethParam = TextParameters(
-        font: UIFont(name: "Arial-BoldMT", size: 12)!,
-        text: "Gender"
-    )
-    private lazy var genderLable = AccountSettingsViewController.makeLable(
-        params: textFivethParam
-    )
+    private lazy var genderLable = CustomProfileLabel(title: "Gender")
     private let saveButton = ButtonsParams(
         size:
             CGSize(
@@ -269,31 +244,19 @@ final class AccountSettingsViewController: UIViewController {
         params: deleteButtonParams
     )
     
-    
-    //MARK: Life cycle
+//MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addViews(
-            views:
-                scrollView
-        )
+        title = "Profile"
+        view.backgroundColor = .systemBackground
+        view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        imageProfileView.addViews(
-            views:
-                imageProfile,
-            editButton
-        )
-        contentView.addSubview(
-            imageProfileView
-        )
-        imageProfileView.backgroundColor = .cyan //временно
-        contentView.addSubview(
-            verticalStack
-        )
-        verticalStack.addViews(
-            views:
-                firstNameLable,
+        imageProfileView.addViews(views: imageProfile, editButton)
+        contentView.addSubview(imageProfileView)
+        contentView.addSubview(verticalStack)
+        verticalStack.addViews(views:
+            firstNameLable,
             firstNameTextField,
             lastNameLable,
             lastNameTextField,
@@ -304,31 +267,21 @@ final class AccountSettingsViewController: UIViewController {
             genderLable,
             horisontalStack
         )
-        dateTextField.addSubview(
-            imageViewCalendar
-        )
-        contentView.addSubview(
-            saveChangeButton
-        )
+        dateTextField.addSubview(imageViewCalendar)
+        contentView.addSubview(saveChangeButton)
         
-        horisontalStack.addViewInStack(
-            stack: horisontalStack,
-            views: maleButton,
-            femaleButton
-            )
+        horisontalStack.addViewInStack(stack: horisontalStack,views: maleButton,femaleButton)
         view.addSubview(alertView)
         alertView.addSubview(alertLable)
         alertView.addSubview(verticalStackAlert)
         verticalStackAlert.addViewInStack(stack: verticalStackAlert, views: fotoButton, chooseButton, deleteButton)
         
         
-        //подписка на делегатный метод
-        firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-        emailTextField.delegate = self
-        //установка значений по умолчанию
+        
+        setDelegates()
         setAlertParams()
         setTargets()
+        setNavigationAppearance()
     }
     
     
@@ -340,8 +293,24 @@ final class AccountSettingsViewController: UIViewController {
         setupConstraints()
     }
     
-    //MARK: - func set constraints
+    //MARK: - Methods
+    
+    private func setNavigationAppearance() {
+    //set custom arrow for back button
+        let backViewImage = UIImage(named: "ArrowBackBig")?.withRenderingMode(.alwaysOriginal)
+        navigationController?.navigationBar.backIndicatorImage = backViewImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
+        navigationItem.hidesBackButton = true
+    }
+    
+    private func setDelegates() {
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+    }
+    
     private func setupConstraints() {
+        
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -483,7 +452,7 @@ final class AccountSettingsViewController: UIViewController {
     }
     
     
-    //MARK: - @objct func
+    //MARK: - Button actions
     @objc func maleButtonPressed() {
         print("Нажат")
     }
@@ -560,7 +529,6 @@ final class AccountSettingsViewController: UIViewController {
 private extension AccountSettingsViewController{
     static func makeScrolView(contentSize: CGSize, view: UIView) -> UIScrollView {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .red
         scrollView.contentSize = contentSize
         scrollView.frame = view.bounds
         scrollView.isScrollEnabled = true
@@ -571,14 +539,14 @@ private extension AccountSettingsViewController{
     static func  makecontentView(contentSize: CGSize) -> UIView {
         let contentView = UIView()
         contentView.frame.size = contentSize
-        contentView.backgroundColor = .magenta
-        contentView.translatesAutoresizingMaskIntoConstraints = true
+        //contentView.backgroundColor = .magenta
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }
     
     static func makeView() -> UIView {
         let view = UIView()
-        view.backgroundColor = .green
+        //view.backgroundColor = .green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
@@ -642,7 +610,7 @@ private extension AccountSettingsViewController{
         stackVerticalView.axis = .vertical
         stackVerticalView.spacing = 3
         stackVerticalView.alignment = .center
-        stackVerticalView.backgroundColor = .green
+        //stackVerticalView.backgroundColor = .green
         stackVerticalView.translatesAutoresizingMaskIntoConstraints = false
         return stackVerticalView
     }
@@ -653,7 +621,7 @@ private extension AccountSettingsViewController{
         stackVerticalView.spacing = 3
         stackVerticalView.alignment = .center
         stackVerticalView.distribution = .equalCentering
-        stackVerticalView.backgroundColor = .yellow
+        //stackVerticalView.backgroundColor = .yellow
         stackVerticalView.translatesAutoresizingMaskIntoConstraints = false
         return stackVerticalView
     }
@@ -680,7 +648,7 @@ private extension AccountSettingsViewController{
         textField.layer.masksToBounds = true
         textField.layer.borderColor =  UIColor.blue.cgColor
         textField.layer.borderWidth = 1
-        textField.backgroundColor = .white
+        //textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }
@@ -692,7 +660,7 @@ private extension AccountSettingsViewController{
         textField.leftViewMode = .always
         textField.layer.cornerRadius = parameters.radius
         textField.placeholder = parameters.placeholder
-        textField.backgroundColor = .white
+        //textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }

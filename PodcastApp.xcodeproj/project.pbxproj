@@ -31,11 +31,11 @@
 		0A56F1162AC7F7A400740A92 /* PodcastHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56F1152AC7F7A400740A92 /* PodcastHomeViewCell.swift */; };
 		0A56F1182AC7F7C100740A92 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56F1172AC7F7C100740A92 /* SearchViewController.swift */; };
 		0A9198632ACFF8A0000AE132 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91985D2ACFF8A0000AE132 /* AccountSettingsViewController.swift */; };
-		0A9198642ACFF8A0000AE132 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */; };
-		0A9198652ACFF8A0000AE132 /* CastomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9198602ACFF8A0000AE132 /* CastomAlert.swift */; };
-		0A9198662ACFF8A0000AE132 /* Castom_Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9198612ACFF8A0000AE132 /* Castom_Alert.xib */; };
 		0A91986A2AD069E4000AE132 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9198692AD069E4000AE132 /* ProfileManager.swift */; };
 		0A91986D2AD06A8D000AE132 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91986C2AD06A8D000AE132 /* UserModel.swift */; };
+		0A929E6B2AD07FA60050328D /* CustomProfileLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E6A2AD07FA60050328D /* CustomProfileLabel.swift */; };
+		0A929E702AD087DB0050328D /* CastomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E6E2AD087DB0050328D /* CastomAlert.swift */; };
+		0A929E712AD087DB0050328D /* Castom_Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A929E6F2AD087DB0050328D /* Castom_Alert.xib */; };
 		0A94ECCD2AC9894100F0EE63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A94ECCC2AC9894100F0EE63 /* GoogleService-Info.plist */; };
 		0A94ECCF2AC9897300F0EE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94ECCE2AC9897300F0EE63 /* AppDelegate.swift */; };
 		0A94ECDE2AC9898D00F0EE63 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94ECD22AC9898D00F0EE63 /* AuthViewController.swift */; };
@@ -71,7 +71,7 @@
 		0AC0B4B32AC5779100252B8B /* PopularCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4AD2AC5779100252B8B /* PopularCategoryCell.swift */; };
 		0AC0B4B52AC5779100252B8B /* CategoryHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4AF2AC5779100252B8B /* CategoryHomeViewCell.swift */; };
 		0AC0B4B62AC5779100252B8B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4B02AC5779100252B8B /* HomeView.swift */; };
-		0AC0B4BB2AC5F79800252B8B /* AuthColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4BA2AC5F79800252B8B /* AuthColor.swift */; };
+		0AC0B4BB2AC5F79800252B8B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4BA2AC5F79800252B8B /* UIColor+Extension.swift */; };
 		0AC0B4CE2AC602F300252B8B /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4CD2AC602F300252B8B /* CustomTabBarController.swift */; };
 		0AC0B4D22AC6152E00252B8B /* HomeViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4D12AC6152E00252B8B /* HomeViewSectionHeader.swift */; };
 		0AC0B4DD2AC6154600252B8B /* SearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4D92AC6154600252B8B /* SearchViewCell.swift */; };
@@ -110,11 +110,11 @@
 		0A56F1152AC7F7A400740A92 /* PodcastHomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastHomeViewCell.swift; sourceTree = "<group>"; };
 		0A56F1172AC7F7C100740A92 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0A91985D2ACFF8A0000AE132 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		0A9198602ACFF8A0000AE132 /* CastomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastomAlert.swift; sourceTree = "<group>"; };
-		0A9198612ACFF8A0000AE132 /* Castom_Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Castom_Alert.xib; sourceTree = "<group>"; };
 		0A9198692AD069E4000AE132 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		0A91986C2AD06A8D000AE132 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		0A929E6A2AD07FA60050328D /* CustomProfileLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileLabel.swift; sourceTree = "<group>"; };
+		0A929E6E2AD087DB0050328D /* CastomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastomAlert.swift; sourceTree = "<group>"; };
+		0A929E6F2AD087DB0050328D /* Castom_Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Castom_Alert.xib; sourceTree = "<group>"; };
 		0A94ECCC2AC9894100F0EE63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A94ECCE2AC9897300F0EE63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A94ECD22AC9898D00F0EE63 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		0AC0B4AD2AC5779100252B8B /* PopularCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCategoryCell.swift; sourceTree = "<group>"; };
 		0AC0B4AF2AC5779100252B8B /* CategoryHomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHomeViewCell.swift; sourceTree = "<group>"; };
 		0AC0B4B02AC5779100252B8B /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		0AC0B4BA2AC5F79800252B8B /* AuthColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthColor.swift; sourceTree = "<group>"; };
+		0AC0B4BA2AC5F79800252B8B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0AC0B4CD2AC602F300252B8B /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		0AC0B4D12AC6152E00252B8B /* HomeViewSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewSectionHeader.swift; sourceTree = "<group>"; };
 		0AC0B4D92AC6154600252B8B /* SearchViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewCell.swift; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 		0A0B7B522AC0B04600C1D17B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0AC0B4BA2AC5F79800252B8B /* AuthColor.swift */,
+				0AC0B4BA2AC5F79800252B8B /* UIColor+Extension.swift */,
 				0AC0B4A82AC5776B00252B8B /* UILabel + Ext.swift */,
 				0A125D4F2AC214850006EACA /* UIFont+Extension.swift */,
 			);
@@ -273,8 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				0A91985D2ACFF8A0000AE132 /* AccountSettingsViewController.swift */,
-				0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */,
-				0A91985F2ACFF8A0000AE132 /* XIB */,
+				0A929E6C2AD081700050328D /* View */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -406,15 +405,6 @@
 			path = NetworkManager;
 			sourceTree = "<group>";
 		};
-		0A91985F2ACFF8A0000AE132 /* XIB */ = {
-			isa = PBXGroup;
-			children = (
-				0A9198602ACFF8A0000AE132 /* CastomAlert.swift */,
-				0A9198612ACFF8A0000AE132 /* Castom_Alert.xib */,
-			);
-			path = XIB;
-			sourceTree = "<group>";
-		};
 		0A91986B2AD069EB000AE132 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,11 +414,29 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0A929E6C2AD081700050328D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A929E6D2AD087DB0050328D /* XIB */,
+				0A929E6A2AD07FA60050328D /* CustomProfileLabel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A929E6D2AD087DB0050328D /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				0A929E6E2AD087DB0050328D /* CastomAlert.swift */,
+				0A929E6F2AD087DB0050328D /* Castom_Alert.xib */,
+			);
+			name = XIB;
+			path = PodcastApp/Modules/AccountSettings/XIB;
+			sourceTree = SOURCE_ROOT;
+		};
 		0A94ECD02AC9898D00F0EE63 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				0A94ECD12AC9898D00F0EE63 /* Controller */,
-				0A94ECD52AC9898D00F0EE63 /* Model */,
 				0A94ECD62AC9898D00F0EE63 /* View */,
 				0A94ECDC2AC9898D00F0EE63 /* Services */,
 			);
@@ -443,13 +451,6 @@
 				0A94ECD42AC9898D00F0EE63 /* CreateAccountViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0A94ECD52AC9898D00F0EE63 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0A94ECD62AC9898D00F0EE63 /* View */ = {
@@ -753,7 +754,7 @@
 				0A125D132AC0C8B30006EACA /* README.md in Resources */,
 				0A0B7B422AC0ABDC00C1D17B /* LaunchScreen.storyboard in Resources */,
 				0A94ECCD2AC9894100F0EE63 /* GoogleService-Info.plist in Resources */,
-				0A9198662ACFF8A0000AE132 /* Castom_Alert.xib in Resources */,
+				0A929E712AD087DB0050328D /* Castom_Alert.xib in Resources */,
 				0A125D4D2AC2139E0006EACA /* manrope-light.ttf in Resources */,
 				0A125D562AC2190C0006EACA /* PlusJakartaSans-Medium.ttf in Resources */,
 				0A125D542AC2190C0006EACA /* PlusJakartaSans-Bold.ttf in Resources */,
@@ -776,7 +777,7 @@
 				0A94ECE02AC9898D00F0EE63 /* CreateAccountViewController.swift in Sources */,
 				0AC0B4A92AC5776B00252B8B /* UILabel + Ext.swift in Sources */,
 				0A94ECE32AC9898D00F0EE63 /* ContinueView.swift in Sources */,
-				0AC0B4BB2AC5F79800252B8B /* AuthColor.swift in Sources */,
+				0AC0B4BB2AC5F79800252B8B /* UIColor+Extension.swift in Sources */,
 				84755EA12AC8D542007C5B4C /* ChannelViewController.swift in Sources */,
 				0A56F1102AC7F75200740A92 /* PodcastModel.swift in Sources */,
 				0AB04B122ACEDE6B00AFDB88 /* PodcastImageCell.swift in Sources */,
@@ -816,16 +817,16 @@
 				28543E082ACDAB9A008CA99A /* PodcastModelRealm.swift in Sources */,
 				0A9596732AC8A781003F87CE /* FavoritesViewController.swift in Sources */,
 				0A94ECE52AC9898D00F0EE63 /* CustomLabel.swift in Sources */,
-				0A9198642ACFF8A0000AE132 /* AlertViewController.swift in Sources */,
 				0A9596752AC8A7B0003F87CE /* FavoriteViewCell.swift in Sources */,
 				0AA1A3E62ACB340F00AE01A2 /* OnboardingViewController.swift in Sources */,
-				0A9198652ACFF8A0000AE132 /* CastomAlert.swift in Sources */,
 				0AC0B4AB2AC5778000252B8B /* HomeModel.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
 				0A56F1162AC7F7A400740A92 /* PodcastHomeViewCell.swift in Sources */,
 				0AA1A3E72ACB340F00AE01A2 /* Slide.swift in Sources */,
+				0A929E6B2AD07FA60050328D /* CustomProfileLabel.swift in Sources */,
 				0A56F1112AC7F75200740A92 /* API.swift in Sources */,
+				0A929E702AD087DB0050328D /* CastomAlert.swift in Sources */,
 				0AB04B132ACEDE6B00AFDB88 /* PlayingNowView.swift in Sources */,
 				0AC0B4CE2AC602F300252B8B /* CustomTabBarController.swift in Sources */,
 				28EC5DA02AC9F5AF002FFFA8 /* Category.swift in Sources */,
