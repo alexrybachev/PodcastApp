@@ -33,7 +33,8 @@ struct TextFieldParameters {
     var placeholder: String
 }
 
-class AccountSettingsViewController: UIViewController {
+final class AccountSettingsViewController: UIViewController {
+    
     private var contentSize: CGSize {
         CGSize(
             width: view.frame.width,
@@ -90,7 +91,7 @@ class AccountSettingsViewController: UIViewController {
         radius: 52/2,
         placeholder: "Abigael"
     )
-    private lazy var nameTextField = AccountSettingsViewController.makeTextField(
+    private lazy var firstNameTextField = AccountSettingsViewController.makeTextField(
         parameters: textFieldParametersFirst
     )
     private let textSecondParam = TextParameters(
@@ -269,16 +270,15 @@ class AccountSettingsViewController: UIViewController {
     )
     
     
-    //MARK: - init(_:)
+    //MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addViews(
             views:
                 scrollView
         )
-        scrollView.addSubview(
-            contentView
-        )
+        scrollView.addSubview(contentView)
         imageProfileView.addViews(
             views:
                 imageProfile,
@@ -294,7 +294,7 @@ class AccountSettingsViewController: UIViewController {
         verticalStack.addViews(
             views:
                 firstNameLable,
-            nameTextField,
+            firstNameTextField,
             lastNameLable,
             lastNameTextField,
             emailLable,
@@ -323,7 +323,7 @@ class AccountSettingsViewController: UIViewController {
         
         
         //подписка на делегатный метод
-        nameTextField.delegate = self
+        firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         emailTextField.delegate = self
         //установка значений по умолчанию
@@ -372,12 +372,12 @@ class AccountSettingsViewController: UIViewController {
             firstNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
             firstNameLable.topAnchor.constraint(equalTo: verticalStack.topAnchor),
             
-            nameTextField.topAnchor.constraint(equalTo: firstNameLable.bottomAnchor),
-            nameTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            nameTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
-            nameTextField.heightAnchor.constraint(equalToConstant: textFieldParametersFirst.size.height),
+            firstNameTextField.topAnchor.constraint(equalTo: firstNameLable.bottomAnchor),
+            firstNameTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+            firstNameTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
+            firstNameTextField.heightAnchor.constraint(equalToConstant: textFieldParametersFirst.size.height),
             
-            lastNameLable.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
+            lastNameLable.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: 10),
             lastNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
             
             lastNameTextField.topAnchor.constraint(equalTo: lastNameLable.bottomAnchor),
@@ -392,13 +392,6 @@ class AccountSettingsViewController: UIViewController {
             emailTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
             emailTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
             emailTextField.heightAnchor.constraint(equalToConstant: textFieldParametersEmail.size.height),
-            
-            //сделано через SnapKit ниже
-            //            saveChangeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            //            saveChangeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            //            saveChangeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
-            //            saveChangeButton.widthAnchor.constraint(equalToConstant: 327),
-            //            saveChangeButton.heightAnchor.constraint(equalToConstant: 56)
             
         ])
         
@@ -508,7 +501,13 @@ class AccountSettingsViewController: UIViewController {
     
     
     @objc func saveButtonPressed() {
-        print("Сохраняем")
+        let user = UserModel(firstName: firstNameTextField.text,
+                             lastName: lastNameTextField.text,
+                             eMail: emailTextField.text,
+                             dateOfBithday: nil,
+                             gender: Gender.Male,
+                             image: nil)
+        ProfileManager.shared.saveUser(user)
     }
     
     @objc func setDateCalendar(datePiker: UIDatePicker) {
