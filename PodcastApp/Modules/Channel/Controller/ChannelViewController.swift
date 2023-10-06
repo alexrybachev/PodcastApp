@@ -157,6 +157,11 @@ extension ChannelViewController: UITableViewDataSource{
 
 extension ChannelViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let playVC = PlayingNowViewController(podcastEpisode: searchEpisods?.items, author: podcast?.author, index: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(playVC, animated: true)
+    }
 }
 
 // MARK: - Networking
