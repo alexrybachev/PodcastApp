@@ -12,14 +12,22 @@ enum SearchSection {
     case browseAll
 }
 
+protocol CustomSearchBarProtocol: AnyObject {
+    func changeIsSearched()
+}
+
 class SearchViewController: UIViewController {
 
     private let searchView = SearchView()
-    
-    private var categoryList: SearchedResult?
+
     private var searchResult: SearchPodcats?
 
-    private var isSearched = false
+    private var isSearched = false {
+        didSet {
+            searchView.setupSearchBar(for: isSearched)
+            searchView.showCollectionView(for: isSearched)
+        }
+    }
     
     // MARK: - Initial
     
@@ -27,20 +35,15 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         title = "Search"
         view = searchView
+        
+        searchView.showCollectionView(for: isSearched)
+        
         searchView.transferDelegates(dataSource: self, delegate: self)
-        searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
+        searchView.setupOriginalCompositionalLayout(layout: createInitialCompositionalLayout())
+        
         searchView.transferSearchBarDelegate(delegate: self)
+        searchView.transferSBDelegate(delegate: self)
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        fetchCategoryList()
-//    }
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        navigationController?.navigationItem.title = nil
-//    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -128,8 +131,6 @@ extension SearchViewController {
                                                                         alignment: .top)
         
         section.boundarySupplementaryItems = [sectionHeader]
-//        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
-        
         return section
     }
     
@@ -137,12 +138,9 @@ extension SearchViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
-//        item.edgeSpacing = .init(leading: .fixed(8), top: .none, trailing: .fixed(8), bottom: .none)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-//        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(16))
-//        group.interItemSpacing = NSCollectionLayoutSpacing.fixed(16)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 16
@@ -153,7 +151,6 @@ extension SearchViewController {
                                                                         alignment: .top)
         
         section.boundarySupplementaryItems = [sectionHeader]
-                
         return section
     }
     
@@ -164,8 +161,6 @@ extension SearchViewController {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-//        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .none, top: .none, trailing: .none, bottom: .fixed(8))
-//        group.interItemSpacing = .fixed(16)
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 16
@@ -205,43 +200,18 @@ extension SearchViewController: UICollectionViewDelegate {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        print(#function)
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        print(#function)
-        if searchText.isEmpty {
-            searchBar.resignFirstResponder()
+        if !isSearched {
+            isSearched.toggle()
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(#function)
+        searchResult = nil
         if let searchText = searchBar.text, !searchText.isEmpty {
-            isSearched.toggle()
             fetchSearchResult(for: searchText)
-            searchView.setupCompositionalLayout(layout: createSearchResultCompositionalLaypout()) // меняем composition layout
-            searchBar.resignFirstResponder()
         }
-        searchView.reloadCollectionView() // перезагружаем коллекцию
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print(#function)
-        if isSearched {
-            isSearched.toggle()
-            searchBar.text = nil
-            searchView.setupCompositionalLayout(layout: createInitialCompositionalLayout()) // возвращаем compitional layout
-            searchBar.resignFirstResponder()
-        }
-        searchView.reloadCollectionView() // перезагружаем коллекцию
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print(#function)
+        
         searchBar.resignFirstResponder()
-        searchBar.showsCancelButton = false
     }
     
 }
@@ -250,24 +220,13 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController {
     
-//    private func fetchCategoryList() {
-//        NetworkManager.shared.fetchCategoryList { [weak self] result in
-//            switch result {
-//            case .success(let data):
-//                self?.categoryList = data
-//                self?.searchView.reloadCollectionView()
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
-    
     private func fetchSearchResult(for searchText: String) {
         NetworkManager.shared.searchPodcasts(with: searchText) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.searchResult = data
-                self?.searchView.reloadCollectionView()
+                self?.searchView.setupSearchedCompositionalLayout(layout: self?.createSearchResultCompositionalLaypout() ?? UICollectionViewLayout())
+                self?.searchView.reloadSearchedCollectionView()
             case .failure(let error):
                 print(error)
             }
@@ -287,4 +246,18 @@ extension SearchViewController {
         }
     }
     
+}
+
+// MARK: - CustomSearchBarProtocol
+
+extension SearchViewController: CustomSearchBarProtocol {
+    
+    func changeIsSearched() {
+        isSearched.toggle()
+        if !isSearched {
+            searchResult = nil
+            searchView.resignFirstResponderForSearchBar()
+        }
+    }
+
 }
