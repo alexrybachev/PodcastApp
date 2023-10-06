@@ -75,3 +75,17 @@ class CustomTabBarController: UITabBarController {
     }
 
 }
+
+extension CustomTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        navigationController?.navigationItem.title = nil
+        tabBarController.selectedViewController?.title = nil
+        tabBarController.selectedViewController?.navigationItem.title = nil
+        
+        if let tabBarItems = tabBarController.tabBar.items {
+            tabBarItems.forEach { $0.title = nil }
+        }
+    }
+    
+}

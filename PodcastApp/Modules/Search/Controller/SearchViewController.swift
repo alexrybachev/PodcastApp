@@ -44,6 +44,12 @@ class SearchViewController: UIViewController {
         searchView.transferSearchBarDelegate(delegate: self)
         searchView.transferSBDelegate(delegate: self)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //hide label in tabBar
+        title = nil
+    }
 }
 
 // MARK: - UICollectionViewDataSource

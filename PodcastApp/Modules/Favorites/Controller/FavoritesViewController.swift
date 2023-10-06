@@ -33,6 +33,12 @@ class FavoritesViewController: UIViewController {
         fetchData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //hide label in tabBar
+        title = nil
+    }
+    
     // MARK: - Private methodes
     
     private func setupView() {
