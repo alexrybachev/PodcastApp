@@ -14,14 +14,14 @@ final class PlayingNowView: UIView {
     var nextOrBackAction: ((UIButton) -> Void)?
     var playPauseAction: (() -> Void)?
     var sliderAction: (() -> Void)?
-
+    
     // MARK: - CollectionView Properties
     let layout = CustomCarouselFlowLayout()
     
     lazy var mainCollectionView: UICollectionView = {
-    
+        
         let mainCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
-
+        
         layout.itemSize = CGSize(width: 279, height: 326)
         layout.sideItemScale = 0.8
         layout.sideItemAlpha = 1.0
@@ -72,24 +72,29 @@ final class PlayingNowView: UIView {
         return stackView
     }()
     
-     lazy var startDurationLabel: UILabel = {
+    lazy var startDurationLabel: UILabel = {
         var startLabel = createLabel(
-            with: "44:30",
+            with: "00:00",
             color: #colorLiteral(red: 0.2568137348, green: 0.2479013503, blue: 0.3163219392, alpha: 1),
             font: UIFont.custome(name: .manrope400, size: 14)
             ?? UIFont.systemFont(ofSize: 14)
         )
+        startLabel.snp.makeConstraints { make in
+            make.width.equalTo(40)
+        }
         return startLabel
     }()
     
-     lazy var endDurationLabel: UILabel = {
+    lazy var endDurationLabel: UILabel = {
         var endLabel = createLabel(
-            with: "56:38",
+            with: "00:00",
             color: #colorLiteral(red: 0.4809146523, green: 0.4751104116, blue: 0.5276280642, alpha: 1),
             font: UIFont.custome(name: .manrope400, size: 14)
             ?? UIFont.systemFont(ofSize: 14)
         )
-        
+        endLabel.snp.makeConstraints { make in
+            make.width.equalTo(40)
+        }
         return endLabel
     }()
     
@@ -118,7 +123,7 @@ final class PlayingNowView: UIView {
         )
         
         playButton.tintColor = UIColor.customBlue
-
+        
         playButton.addTarget(
             self,
             action: #selector(playButtonDidTapped),

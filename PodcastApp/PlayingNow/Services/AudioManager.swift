@@ -11,15 +11,11 @@ import AVFoundation
 final class AudioManager {
     static let shared = AudioManager()
     
-    var podcasts: [TestModel] = []
-    var currentSongIndex = 0
-    
-    
-    var isPlaying = false
-    var isPause = false
-    
     // MARK: - Private Properties
     private var player: AVPlayer?
+    
+    private(set) var isPlaying = false
+    private(set) var isPause = false
     
     // MARK: - Public Properties
     var currentTime: CMTime {
@@ -32,9 +28,8 @@ final class AudioManager {
         return currentItem
     }
     
-    //    var currentAudioDuration: CMTime? {
-    //        return player?.currentItem?.duration
-    //    }
+    var podcasts: [TestModel] = []
+    var currentSongIndex = 0
     
     // MARK: - Private Init
     private init() {
@@ -60,14 +55,15 @@ final class AudioManager {
     }
     
     func setNextSong() {
-        if podcasts.isEmpty {
+        guard !podcasts.isEmpty else { return }
+        
+        let wasPlaying = isPlaying
+        currentSongIndex += 1
+        
+        if currentSongIndex >= podcasts.count {
+            currentSongIndex = podcasts.count - 1 
+            stopAudio()
             return
-        }
-        
-        let wasPlaying = isPlaying // Сохраняем текущее состояние
-        
-        if currentSongIndex < podcasts.count - 1 {
-            currentSongIndex += 1
         }
         
         player = nil
@@ -75,27 +71,23 @@ final class AudioManager {
         isPause = false
         
         if wasPlaying {
-            playAudio() // Если предыдущая песня играла, начнем воспроизведение новой
+            playAudio()
         }
     }
     
     func setPreviousSong() {
-        if podcasts.isEmpty {
-            return
-        }
+        guard !podcasts.isEmpty else { return }
         
-        let wasPlaying = isPlaying // Сохраняем текущее состояние
+        let wasPlaying = isPlaying
         
-        if currentSongIndex > 0 {
-            currentSongIndex -= 1
-        }
+        currentSongIndex = max(0, currentSongIndex - 1)
         
         player = nil
         isPlaying = false
         isPause = false
         
         if wasPlaying {
-            playAudio() // Если предыдущая песня играла, начнем воспроизведение новой
+            playAudio()
         }
     }
     
@@ -113,12 +105,10 @@ final class AudioManager {
         }
     }
     
-    
     func pauseAudio() {
         isPause = true
         isPlaying = false
         player?.pause()
-        
     }
     
     func resumeAudio() {
@@ -127,16 +117,43 @@ final class AudioManager {
         player?.play()
     }
     
-    func setPodcasts(_ podcasts: [TestModel], index: Int) {
-        self.podcasts = podcasts
-        self.currentSongIndex = index
-    }
-    
     func stopAudio() {
         isPlaying = false
         isPause = false
         player?.pause()
         player?.seek(to: CMTime.zero) // Перемещаемся в начало трека
     }
+    
+    func setPodcasts(_ podcasts: [TestModel], index: Int) {
+        self.podcasts = podcasts
+        self.currentSongIndex = index
+    }
 }
 
+extension AudioManager {
+    func seek(to time: CMTime) {
+        player?.seek(to: time)
+    }
+}
+
+extension AudioManager {
+    // получение длительности подкаста для отобржанения
+    func getDuration(for url: URL, completion: @escaping (CMTime?) -> Void) {
+        let asset = AVAsset(url: url)
+        let durationKey = "duration"
+        
+        // Загружаем метаданные
+        asset.loadValuesAsynchronously(forKeys: [durationKey]) {
+            var error: NSError? = nil
+            let status = asset.statusOfValue(forKey: durationKey, error: &error)
+            switch status {
+            case .loaded:
+                completion(asset.duration)
+            case .failed, .cancelled, .loading, .unknown:
+                completion(nil)
+            @unknown default:
+                completion(nil)
+            }
+        }
+    }
+}
