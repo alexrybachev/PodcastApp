@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
         let startVC = UINavigationController(rootViewController: AuthViewController())
-        window?.rootViewController = PlayingNowViewController()
+        window?.rootViewController = startVC
         window?.makeKeyAndVisible()
         
     }

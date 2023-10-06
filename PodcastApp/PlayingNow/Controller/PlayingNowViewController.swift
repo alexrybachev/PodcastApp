@@ -15,6 +15,7 @@ final class PlayingNowViewController: UIViewController {
     
     // MARK: - AV Properties
     private let player = AudioManager.shared
+    private var podcasts: [PodcastEpisode]?
     
     // MARK: - Private Timers
     private var timer: Timer?
@@ -52,6 +53,16 @@ final class PlayingNowViewController: UIViewController {
         TestModel(color: .yellow, url: "https://www.kozco.com/tech/organfinale.mp3")
     ]
     private var currentIndex = 2
+    
+    // MARK: - Init
+    init(podcastEpisode: [PodcastEpisode]) {
+        self.podcasts = podcastEpisode
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
