@@ -30,7 +30,6 @@
 		0A56F1142AC7F78A00740A92 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56F1132AC7F78900740A92 /* HomeViewController.swift */; };
 		0A56F1162AC7F7A400740A92 /* PodcastHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56F1152AC7F7A400740A92 /* PodcastHomeViewCell.swift */; };
 		0A56F1182AC7F7C100740A92 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A56F1172AC7F7C100740A92 /* SearchViewController.swift */; };
-		0A9198622ACFF8A0000AE132 /* CastomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91985C2ACFF8A0000AE132 /* CastomAlertView.swift */; };
 		0A9198632ACFF8A0000AE132 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91985D2ACFF8A0000AE132 /* AccountSettingsViewController.swift */; };
 		0A9198642ACFF8A0000AE132 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */; };
 		0A9198652ACFF8A0000AE132 /* CastomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9198602ACFF8A0000AE132 /* CastomAlert.swift */; };
@@ -107,7 +106,6 @@
 		0A56F1132AC7F78900740A92 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0A56F1152AC7F7A400740A92 /* PodcastHomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastHomeViewCell.swift; sourceTree = "<group>"; };
 		0A56F1172AC7F7C100740A92 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		0A91985C2ACFF8A0000AE132 /* CastomAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastomAlertView.swift; sourceTree = "<group>"; };
 		0A91985D2ACFF8A0000AE132 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		0A9198602ACFF8A0000AE132 /* CastomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastomAlert.swift; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 			children = (
 				0A91985D2ACFF8A0000AE132 /* AccountSettingsViewController.swift */,
 				0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */,
-				0A91985C2ACFF8A0000AE132 /* CastomAlertView.swift */,
 				0A91985F2ACFF8A0000AE132 /* XIB */,
 			);
 			path = Controller;
@@ -827,7 +824,6 @@
 				0A56F1112AC7F75200740A92 /* API.swift in Sources */,
 				0AB04B132ACEDE6B00AFDB88 /* PlayingNowView.swift in Sources */,
 				0AC0B4CE2AC602F300252B8B /* CustomTabBarController.swift in Sources */,
-				0A9198622ACFF8A0000AE132 /* CastomAlertView.swift in Sources */,
 				28EC5DA02AC9F5AF002FFFA8 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

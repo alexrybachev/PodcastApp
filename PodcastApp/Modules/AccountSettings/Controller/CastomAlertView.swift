@@ -12,7 +12,6 @@ class CastomAlertView: UIView {
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        backgroundColor.
         backgroundColor = UIColor.red.cgColor
     }
 
