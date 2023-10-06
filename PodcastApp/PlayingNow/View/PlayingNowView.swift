@@ -20,7 +20,7 @@ final class PlayingNowView: UIView {
     
     lazy var mainCollectionView: UICollectionView = {
     
-        let myCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let mainCV = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
         layout.itemSize = CGSize(width: 279, height: 326)
         layout.sideItemScale = 0.8
@@ -28,18 +28,19 @@ final class PlayingNowView: UIView {
         layout.spacingMode = .fixed(spacing: 5.0)
         layout.scrollDirection = .horizontal
         
-        myCV.collectionViewLayout = layout
-        myCV.showsHorizontalScrollIndicator = false
-        myCV.register(
+        mainCV.collectionViewLayout = layout
+        mainCV.showsHorizontalScrollIndicator = false
+        mainCV.isScrollEnabled = true
+        mainCV.register(
             PodcastImageCell.self,
             forCellWithReuseIdentifier: PodcastImageCell.reuseId
         )
         
-        return myCV
+        return mainCV
     }()
     
     // MARK: - Labels
-    private lazy var podcastTitleLabel: UILabel = {
+    lazy var podcastTitleLabel: UILabel = {
         var songName = createLabel(
             with: "Baby Pesut Ups 56",
             color: #colorLiteral(red: 0.2606227994, green: 0.2478592694, blue: 0.3162897527, alpha: 1),
@@ -49,7 +50,7 @@ final class PlayingNowView: UIView {
         return songName
     }()
     
-    private lazy var authorNameLabel: UILabel = {
+    lazy var authorNameLabel: UILabel = {
         var songAuthor = createLabel(
             with: "Dr Oi om hean",
             color: #colorLiteral(red: 0.6377889514, green: 0.6319634914, blue: 0.6845200658, alpha: 1),
@@ -71,7 +72,7 @@ final class PlayingNowView: UIView {
         return stackView
     }()
     
-    private lazy var startDurationLabel: UILabel = {
+     lazy var startDurationLabel: UILabel = {
         var startLabel = createLabel(
             with: "44:30",
             color: #colorLiteral(red: 0.2568137348, green: 0.2479013503, blue: 0.3163219392, alpha: 1),
@@ -81,7 +82,7 @@ final class PlayingNowView: UIView {
         return startLabel
     }()
     
-    private lazy var endDurationLabel: UILabel = {
+     lazy var endDurationLabel: UILabel = {
         var endLabel = createLabel(
             with: "56:38",
             color: #colorLiteral(red: 0.4809146523, green: 0.4751104116, blue: 0.5276280642, alpha: 1),
@@ -115,6 +116,9 @@ final class PlayingNowView: UIView {
             with: "Play",
             color: UIColor.customBlue
         )
+        
+        playButton.tintColor = UIColor.customBlue
+
         playButton.addTarget(
             self,
             action: #selector(playButtonDidTapped),
@@ -184,13 +188,8 @@ final class PlayingNowView: UIView {
     }
     
     // MARK: - Private Actions
+    // метод для кнопки playPause
     @objc private func playButtonDidTapped() {
-//        if playPauseButton.currentImage == UIImage(named: "Play") {
-//            playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
-//        } else {
-//            playPauseButton.setImage(UIImage(named: "Play"), for: .normal)
-//        }
-        
         playPauseAction?()
     }
     
@@ -199,6 +198,7 @@ final class PlayingNowView: UIView {
         nextOrBackAction?(sender)
     }
     
+    // метод для изменения значения slider
     @objc private func sliderChangeValue() {
         sliderAction?()
     }

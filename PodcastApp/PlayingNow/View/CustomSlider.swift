@@ -38,7 +38,10 @@ final class CustomSlider: UISlider {
         
         if let originalThumbImage = UIImage(systemName: "circle.fill") {
             // увлечинение бегунка
-            let thumbSize = CGSize(width: originalThumbImage.size.width * 0.6, height: originalThumbImage.size.height * 0.6)
+            let thumbSize = CGSize(
+                width: originalThumbImage.size.width * 0.6,
+                height: originalThumbImage.size.height * 0.6
+            )
             
             let thumbImage = UIGraphicsImageRenderer(size: thumbSize).image { _ in
                 originalThumbImage.draw(in: CGRect(origin: .zero, size: thumbSize))
