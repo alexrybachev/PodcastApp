@@ -34,6 +34,8 @@
 		0A9198642ACFF8A0000AE132 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */; };
 		0A9198652ACFF8A0000AE132 /* CastomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9198602ACFF8A0000AE132 /* CastomAlert.swift */; };
 		0A9198662ACFF8A0000AE132 /* Castom_Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9198612ACFF8A0000AE132 /* Castom_Alert.xib */; };
+		0A91986A2AD069E4000AE132 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9198692AD069E4000AE132 /* ProfileManager.swift */; };
+		0A91986D2AD06A8D000AE132 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A91986C2AD06A8D000AE132 /* UserModel.swift */; };
 		0A94ECCD2AC9894100F0EE63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A94ECCC2AC9894100F0EE63 /* GoogleService-Info.plist */; };
 		0A94ECCF2AC9897300F0EE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94ECCE2AC9897300F0EE63 /* AppDelegate.swift */; };
 		0A94ECDE2AC9898D00F0EE63 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94ECD22AC9898D00F0EE63 /* AuthViewController.swift */; };
@@ -111,6 +113,8 @@
 		0A91985E2ACFF8A0000AE132 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		0A9198602ACFF8A0000AE132 /* CastomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastomAlert.swift; sourceTree = "<group>"; };
 		0A9198612ACFF8A0000AE132 /* Castom_Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Castom_Alert.xib; sourceTree = "<group>"; };
+		0A9198692AD069E4000AE132 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		0A91986C2AD06A8D000AE132 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		0A94ECCC2AC9894100F0EE63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A94ECCE2AC9897300F0EE63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A94ECD22AC9898D00F0EE63 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -259,9 +263,8 @@
 		0A125D142AC0CA0A0006EACA /* AccountSettings */ = {
 			isa = PBXGroup;
 			children = (
-				0A125D172AC0CA0A0006EACA /* Model */,
-				0A125D182AC0CA0A0006EACA /* View */,
 				0A125D152AC0CA0A0006EACA /* Controller */,
+				0A91986B2AD069EB000AE132 /* Model */,
 			);
 			path = AccountSettings;
 			sourceTree = "<group>";
@@ -274,20 +277,6 @@
 				0A91985F2ACFF8A0000AE132 /* XIB */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0A125D172AC0CA0A0006EACA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0A125D182AC0CA0A0006EACA /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		0A125D1E2AC0CA0A0006EACA /* Favorites */ = {
@@ -424,6 +413,15 @@
 				0A9198612ACFF8A0000AE132 /* Castom_Alert.xib */,
 			);
 			path = XIB;
+			sourceTree = "<group>";
+		};
+		0A91986B2AD069EB000AE132 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0A9198692AD069E4000AE132 /* ProfileManager.swift */,
+				0A91986C2AD06A8D000AE132 /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0A94ECD02AC9898D00F0EE63 /* Auth */ = {
@@ -791,6 +789,7 @@
 				0A94ECDF2AC9898D00F0EE63 /* RegistrationViewController.swift in Sources */,
 				0AB04B142ACEDE6B00AFDB88 /* CustomCarouselFlowLayout.swift in Sources */,
 				0AC0B4DD2AC6154600252B8B /* SearchViewCell.swift in Sources */,
+				0A91986D2AD06A8D000AE132 /* UserModel.swift in Sources */,
 				0AB04B152ACEDE6B00AFDB88 /* TestModel.swift in Sources */,
 				0AC0B4DF2AC6154600252B8B /* SearchView.swift in Sources */,
 				0A56F1122AC7F75200740A92 /* EndPoint.swift in Sources */,
@@ -805,6 +804,7 @@
 				0A94ECE62AC9898D00F0EE63 /* FirebaseManager.swift in Sources */,
 				0AC0B4D22AC6152E00252B8B /* HomeViewSectionHeader.swift in Sources */,
 				0AA1A3E82ACB340F00AE01A2 /* ImageCell.swift in Sources */,
+				0A91986A2AD069E4000AE132 /* ProfileManager.swift in Sources */,
 				0AB04B162ACEDE6B00AFDB88 /* PlayerManager.swift in Sources */,
 				0A94ECE42AC9898D00F0EE63 /* CustomTextField.swift in Sources */,
 				0A56F10F2AC7F75200740A92 /* NetworkManager.swift in Sources */,
