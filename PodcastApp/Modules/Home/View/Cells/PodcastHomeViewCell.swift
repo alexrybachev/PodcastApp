@@ -160,9 +160,11 @@ final class PodcastHomeViewCell: UICollectionViewCell {
     @objc func likeButtonTapped() {
         isLiked.toggle()
         likeButton.tintColor = isLiked ? UIColor.red : UIColor.gray
-        if isLiked {
+        
+        switch isLiked {
+        case true:
             StorageManager.shared.save(podcast: podcastRealm)
-        } else {
+        case false:
             StorageManager.shared.delete(podcast: podcastRealm)
         }
     }
