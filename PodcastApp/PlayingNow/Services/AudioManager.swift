@@ -29,7 +29,7 @@ final class AudioManager {
     }
     
     var podcasts: [TestModel] = []
-    var currentSongIndex = 0
+    var currentIndex = 0
     
     // MARK: - Private Init
     private init() {
@@ -45,7 +45,7 @@ final class AudioManager {
     func playAudio() {
         isPlaying = true
         
-        let currentURL = podcasts[currentSongIndex].url
+        let currentURL = podcasts[currentIndex].url
         if let audioURL = URL(string: currentURL) {
             let playerItem = AVPlayerItem(url: audioURL)
             player = AVPlayer(playerItem: playerItem)
@@ -58,10 +58,10 @@ final class AudioManager {
         guard !podcasts.isEmpty else { return }
         
         let wasPlaying = isPlaying
-        currentSongIndex += 1
+        currentIndex += 1
         
-        if currentSongIndex >= podcasts.count {
-            currentSongIndex = podcasts.count - 1 
+        if currentIndex >= podcasts.count {
+            currentIndex = podcasts.count - 1 
             stopAudio()
             return
         }
@@ -80,7 +80,7 @@ final class AudioManager {
         
         let wasPlaying = isPlaying
         
-        currentSongIndex = max(0, currentSongIndex - 1)
+        currentIndex = max(0, currentIndex - 1)
         
         player = nil
         isPlaying = false
@@ -126,7 +126,7 @@ final class AudioManager {
     
     func setPodcasts(_ podcasts: [TestModel], index: Int) {
         self.podcasts = podcasts
-        self.currentSongIndex = index
+        self.currentIndex = index
     }
 }
 

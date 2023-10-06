@@ -55,11 +55,13 @@ final class PlayingNowViewController: UIViewController {
     private var currentIndex = 2
     
     // MARK: - Init
-    init(podcastEpisode: [PodcastEpisode]) {
+    init(podcastEpisode: [PodcastEpisode]?, author: String?, index: Int) {
         self.podcasts = podcastEpisode
+        self.playingNowView.authorNameLabel.text = author
+        self.player.currentIndex = index
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -82,7 +84,7 @@ final class PlayingNowViewController: UIViewController {
         setupNavigationButton()
         
         // настройка кнопки play и pause
-        player.currentSongIndex = currentIndex
+        player.currentIndex = currentIndex
         setupPlayPauseButton()
         
         // устанавливаем длительность подкаста при загрузке экрана
@@ -183,7 +185,7 @@ final class PlayingNowViewController: UIViewController {
         //переключаемся на новую песню
         player.playNextSong()
         
-        let currentIndexPath = IndexPath(row: player.currentSongIndex, section: 0)
+        let currentIndexPath = IndexPath(row: player.currentIndex, section: 0)
         playingNowView.mainCollectionView.scrollToItem(
             at: currentIndexPath,
             at: .centeredHorizontally,
@@ -238,7 +240,7 @@ final class PlayingNowViewController: UIViewController {
                 currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
             }
         }
-
+        
         loadDurationForCurrentTrack()
         updateCurrentTimeLabel()
         updateRemainingTimeLabel()
@@ -299,7 +301,7 @@ final class PlayingNowViewController: UIViewController {
     
     // загрузка длительности трека label
     func loadDurationForCurrentTrack() {
-        guard let url = URL(string: player.podcasts[player.currentSongIndex].url) else { return }
+        guard let url = URL(string: player.podcasts[player.currentIndex].url) else { return }
         AudioManager.shared.getDuration(for: url) { [weak self] (time) in
             DispatchQueue.main.async {
                 if let duration = time {
@@ -381,7 +383,7 @@ extension PlayingNowViewController {
             if let indexPath = playingNowView.mainCollectionView.indexPathForItem(at: visiblePoint) {
                 let currentIndex = indexPath.item
                 
-                player.currentSongIndex = currentIndex
+                player.currentIndex = currentIndex
                 if player.isPlaying {
                     loadDurationForCurrentTrack()
                     player.playAudio()
