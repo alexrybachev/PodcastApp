@@ -76,7 +76,7 @@ final class PlayingNowViewController: UIViewController {
         updateRemainingTimeLabel()
         
         // настройка обновления слайдера
-        //        changeActionTime()
+//                changeActionTime()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,14 +104,17 @@ final class PlayingNowViewController: UIViewController {
         playingNowView.playPauseAction = { [weak self] in
             guard let self = self else { return }
             
-            if AudioManager.shared.isPlaying {
-                AudioManager.shared.pauseAudio()
+            if player.isPlaying {
+                player.pauseAudio()
+                stopUpdatingSlider()
                 self.playingNowView.playPauseButton.setImage(UIImage(named: "Play"), for: .normal)
             } else if AudioManager.shared.isPause {
-                AudioManager.shared.resumeAudio()
+                player.resumeAudio()
+                startUpdatingSlider()
                 self.playingNowView.playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
             } else {
-                AudioManager.shared.playAudio()
+                player.playAudio()
+                startUpdatingSlider()
                 self.playingNowView.playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
             }
         }
@@ -219,13 +222,13 @@ final class PlayingNowViewController: UIViewController {
     }
     
     func updateCurrentTimeLabel() {
-        let currentTimeInSeconds = CMTimeGetSeconds(AudioManager.shared.currentTime)
+        let currentTimeInSeconds = CMTimeGetSeconds(player.currentTime)
         let formattedTime = formatTime(seconds: currentTimeInSeconds)
         playingNowView.startDurationLabel.text = formattedTime
     }
     
     func updateRemainingTimeLabel() {
-        let remainingTimeInSeconds = CMTimeGetSeconds(AudioManager.shared.currentItemDuration) - CMTimeGetSeconds(AudioManager.shared.currentTime)
+        let remainingTimeInSeconds = CMTimeGetSeconds(player.currentItemDuration) - CMTimeGetSeconds(player.currentTime)
         let formattedTime = formatTime(seconds: remainingTimeInSeconds)
         playingNowView.endDurationLabel.text = formattedTime
     }
@@ -322,7 +325,6 @@ extension PlayingNowViewController {
             if let indexPath = playingNowView.mainCollectionView.indexPathForItem(at: visiblePoint) {
                 let currentIndex = indexPath.item
                 
-                let newAudioURL = testArraySongs[currentIndex].url
                 player.currentSongIndex = currentIndex
                 if player.isPlaying {
                     player.playAudio()
