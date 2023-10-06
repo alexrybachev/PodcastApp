@@ -69,7 +69,8 @@ class ProfileSettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    // MARK: - SetupView
+    // MARK: - Methods
+    
     private func setupView(){
         view.addSubview(profileImage)
         view.addSubview(nameAndSecondNameLabel)
@@ -79,7 +80,7 @@ class ProfileSettingsViewController: UIViewController {
         view.addSubview(forgetPasswordButton)
         view.addSubview(logoutButton)
     }
-    // MARK: - Targets
+    
     private func addTargets(){
         accountSettingsButton.addTarget(self, action: #selector(accountSettingsButtonTapped), for: .touchUpInside)
         changePasswordButton.addTarget(self, action: #selector(changePasswordButtonTapped), for: .touchUpInside)
@@ -87,7 +88,7 @@ class ProfileSettingsViewController: UIViewController {
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         
     }
-    // MARK: - Constraints
+    
     private func setupConstraints(){
         
         profileImage.snp.makeConstraints { (make) in
@@ -136,26 +137,32 @@ class ProfileSettingsViewController: UIViewController {
         
         }
     }
-    // MARK: - Objc Methods
-    @objc private func accountSettingsButtonTapped(){
-//        let vc = AccountSettingsViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-        print("AccountSettingsButtonTapped")
+    // MARK: - button actions
     
+    @objc private func accountSettingsButtonTapped(){
+        navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
     }
     
     @objc private func changePasswordButtonTapped(){
-        print("ChangePasswordButtonTapped")
     
 
     }
     
     @objc private func forgetPasswordButtonTapped(){
-        print("ForgetPasswordButtonTapped")
+       
     }
     
     @objc private func logoutButtonTapped(){
-        print("LogoutButtonTapped")
+        
+        FirebaseManager.shared.logOut { result in
+            switch result {
+            case .success(_) :
+                self.dismiss(animated: true)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
     }
     
 
