@@ -21,15 +21,28 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view = homeView
         homeView.transferDelegates(dataSource: self, delegate: self)
         homeView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
         
         fetchFirstPodcastsData(for: CategoryList.getFirstCategoryList())
         fetchSecondPodcastsData()
+        //navigationItem.backButtonTitle = ""
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setNavigationAppearance()
+    }
+    
+    //MARK: - Methods
+    
+    private func setNavigationAppearance() {
+    //set custom arrow for back button
+        let backViewImage = UIImage(named: "ArrowLeft")?.withRenderingMode(.alwaysOriginal)
+        navigationController?.navigationBar.backIndicatorImage = backViewImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -183,15 +196,6 @@ extension HomeViewController: UICollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        //        if indexPath.section == 1 {
-        //            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
-        //                cell.deselectCell()
-        ////                homeView.reloadSection(for: indexPath)
-        ////                collectionView.reloadSections(IndexSet(integer: 2))
-        //            }
-        //        }
-    }
 }
 
 // MARK: - Networking

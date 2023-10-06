@@ -9,38 +9,36 @@ import UIKit
 
 class CustomTabBarController: UITabBarController {
 
+//MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setControllers()
         setAppearance()
-        delegate = self
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        if let tabBarItems = tabBarController?.tabBar.items {
-//            tabBarItems.forEach { $0.title = nil }
-//        }
-//    }
-    
+   //MARK: Methods
     private func setControllers() {
-        let homeVC = UINavigationController(rootViewController: HomeViewController())
-        let homeItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: UIImage(named: "HomeActive"))
+        let homeVC = HomeViewController()
+        let homeSelectedImage = UIImage(named: "HomeActive")?.withRenderingMode(.alwaysOriginal)
+        let homeItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: homeSelectedImage)
         homeItem.imageInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
         homeVC.tabBarItem = homeItem
         
-        let searchVC = UINavigationController(rootViewController: SearchViewController())
-        let searchItem = UITabBarItem(title: nil, image: UIImage(named: "Search"), selectedImage: UIImage(named: "SearchActive"))
+        let searchVC = SearchViewController()
+        let searchSelectedImage =  UIImage(named: "SearchActive")?.withRenderingMode(.alwaysOriginal)
+        let searchItem = UITabBarItem(title: nil, image: UIImage(named: "Search"), selectedImage: searchSelectedImage)
         searchItem.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
         searchVC.tabBarItem = searchItem
         
-        let favoritesVC = UINavigationController(rootViewController: FavoritesViewController())
-        let favoritesItem = UITabBarItem(title: nil, image: UIImage(named: "Bookmark"), selectedImage: UIImage(named: "BookmarkActive"))
+        let favoritesVC = FavoritesViewController()
+        let favoritesSelectedImage = UIImage(named: "BookmarkActive")?.withRenderingMode(.alwaysOriginal)
+        let favoritesItem = UITabBarItem(title: nil, image: UIImage(named: "Bookmark"), selectedImage: favoritesSelectedImage)
         favoritesItem.imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         favoritesVC.tabBarItem = favoritesItem
         
-        let settingsVC = UINavigationController(rootViewController: ProfileSettingsViewController())
-        let settingsItem = UITabBarItem(title: nil, image: UIImage(named: "Setting"), selectedImage: UIImage(named: "SettingActive"))
+        let settingsVC = ProfileSettingsViewController()
+        let settingsSelectedImage = UIImage(named: "SettingActive")?.withRenderingMode(.alwaysOriginal)
+        let settingsItem = UITabBarItem(title: nil, image: UIImage(named: "Setting"), selectedImage: settingsSelectedImage)
         settingsItem.imageInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 30)
         settingsVC.tabBarItem = settingsItem
         
@@ -52,6 +50,7 @@ class CustomTabBarController: UITabBarController {
     
     private func setAppearance() {
         view.backgroundColor = .systemBackground
+        view.tintColor = .clear
         let cornerRadius: CGFloat = 20
         let positionOnX: CGFloat = 24
         let positionOnY: CGFloat = 12
@@ -75,18 +74,4 @@ class CustomTabBarController: UITabBarController {
         
     }
 
-}
-
-extension CustomTabBarController: UITabBarControllerDelegate {
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        navigationController?.navigationItem.title = nil
-        tabBarController.selectedViewController?.title = nil
-        tabBarController.selectedViewController?.navigationItem.title = nil
-        
-        if let tabBarItems = tabBarController.tabBar.items {
-            tabBarItems.forEach { $0.title = nil }
-        }
-    }
-    
 }

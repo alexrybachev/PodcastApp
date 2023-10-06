@@ -46,8 +46,6 @@ class ChannelViewController: UIViewController {
         return label
     }()
     
-//    var channel = Source.makeChanel()
-    
     private lazy var tableView: UITableView = {
         let element = UITableView()
         element.register(ChannelViewCell.self, forCellReuseIdentifier: ChannelViewCell.reuseID)
@@ -79,15 +77,24 @@ class ChannelViewController: UIViewController {
         title = "Channel"
         setupViews()
         makeConstraints()
-
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
         nameChannelLabel.text = podcast?.title
         numberEpizodesLabel.text = podcast?.author
         loadImage()
         fetchEpisodsForPodcast()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //hide back button text
+        navigationController?.navigationBar.backItem?.title = ""
+        navigationItem.backButtonTitle = ""
     }
     
     private func setupViews(){
