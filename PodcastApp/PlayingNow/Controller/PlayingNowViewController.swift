@@ -100,6 +100,8 @@ final class PlayingNowViewController: UIViewController {
     }
     
     // MARK: - Privaet Methods
+    
+    // MARK: - Setup PlayPause
     private func setupPlayPauseButton() {
         playingNowView.playPauseAction = { [weak self] in
             guard let self = self else { return }
@@ -115,6 +117,12 @@ final class PlayingNowViewController: UIViewController {
             } else {
                 player.playAudio()
                 startUpdatingSlider()
+                NotificationCenter.default.addObserver(
+                        self,
+                        selector: #selector(playerDidFinishPlaying),
+                        name: .AVPlayerItemDidPlayToEndTime,
+                        object: nil
+                    )
                 self.playingNowView.playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
             }
         }
@@ -148,6 +156,19 @@ final class PlayingNowViewController: UIViewController {
     private func stopUpdatingSlider() {
         timer?.invalidate()
         timer = nil
+    }
+    
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        stopUpdatingSlider() // останавливаем обновление слайдера
+        player.playNextSong()
+        updateSlider()
+        let currentIndexPath = IndexPath(row: player.currentSongIndex, section: 0)
+        playingNowView.mainCollectionView.scrollToItem(
+            at: currentIndexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
     
     // перемотка
