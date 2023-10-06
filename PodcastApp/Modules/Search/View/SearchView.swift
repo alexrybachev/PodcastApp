@@ -11,15 +11,21 @@ class SearchView: UIView {
     
     // MARK: - UI Elements
     
-    private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-//        searchBar.showsCancelButton = true
+    private lazy var searchBar: CustomSearchBar = {
+        let searchBar = CustomSearchBar()
         searchBar.placeholder = "Podcast, channel or artists"
-        searchBar.searchBarStyle = .minimal
+        searchBar.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         return searchBar
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    private lazy var originalCollectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collection.backgroundColor = .clear
+        collection.showsVerticalScrollIndicator = false
+        return collection
+    }()
+    
+    private lazy var searchedCollectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         collection.backgroundColor = .clear
         collection.showsVerticalScrollIndicator = false
@@ -42,16 +48,18 @@ class SearchView: UIView {
     private func setHierarchy() {
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         addSubview(searchBar)
-        addSubview(collectionView)
         
-        collectionView.register(HomeViewSectionHeader.self,
+        addSubview(originalCollectionView)
+        addSubview(searchedCollectionView)
+        
+        originalCollectionView.register(HomeViewSectionHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: HomeViewSectionHeader.reuseID)
         
-        collectionView.register(SearchViewCell.self,
+        originalCollectionView.register(SearchViewCell.self,
                                 forCellWithReuseIdentifier: SearchViewCell.cellID)
         
-        collectionView.register(SearchResultViewCell.self,
+        searchedCollectionView.register(SearchResultViewCell.self,
                                 forCellWithReuseIdentifier: SearchResultViewCell.cellID)
     }
     
@@ -62,7 +70,13 @@ class SearchView: UIView {
             make.trailing.equalTo(superview?.safeAreaLayoutGuide.snp.trailing ?? self.safeAreaLayoutGuide.snp.trailing).offset(-20)
         }
         
-        collectionView.snp.makeConstraints { make in
+        originalCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.bottom.equalToSuperview()
+        }
+        
+        searchedCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
@@ -75,23 +89,42 @@ class SearchView: UIView {
 
 extension SearchView {
     
-    // Collection View
+    // Collections View
     
-    public func setupCompositionalLayout(layout: UICollectionViewLayout) {
-        collectionView.setCollectionViewLayout(layout, animated: true)
+    public func showCollectionView(for isSearched: Bool) {
+        switch isSearched {
+        case true:
+            originalCollectionView.isHidden = true
+            searchedCollectionView.isHidden = false
+            searchedCollectionView.reloadData()
+        case false:
+            originalCollectionView.isHidden = false
+            searchedCollectionView.isHidden = true
+            originalCollectionView.reloadData()
+        }
+    }
+    
+    public func setupOriginalCompositionalLayout(layout: UICollectionViewLayout) {
+        originalCollectionView.setCollectionViewLayout(layout, animated: true)
+    }
+    
+    public func setupSearchedCompositionalLayout(layout: UICollectionViewLayout) {
+        searchedCollectionView.setCollectionViewLayout(layout, animated: true)
     }
     
     public func transferDelegates(dataSource: UICollectionViewDataSource, delegate: UICollectionViewDelegate) {
-        collectionView.dataSource = dataSource
-        collectionView.delegate = delegate
+        originalCollectionView.dataSource = dataSource
+        originalCollectionView.delegate = delegate
+        searchedCollectionView.dataSource = dataSource
+        searchedCollectionView.delegate = delegate
     }
     
-    public func reloadCollectionView() {
-        collectionView.reloadData()
+    public func reloadOriginalCollectionView() {
+        originalCollectionView.reloadData()
     }
     
-    public func reloadSection(for indexSection: Int) {
-        collectionView.reloadSections(IndexSet(integer: indexSection))
+    public func reloadSearchedCollectionView() {
+        searchedCollectionView.reloadData()
     }
     
     // Search Bar
@@ -100,8 +133,15 @@ extension SearchView {
         searchBar.delegate = delegate
     }
     
-    public func searchBarEditing() {
-        searchBar.showsCancelButton = true
+    public func setupSearchBar(for isSearched: Bool) {
+        searchBar.isSearched = isSearched
     }
     
+    public func transferSBDelegate(delegate: CustomSearchBarProtocol) {
+        searchBar.setupDelegate(delegate: delegate)
+    }
+    
+    public func resignFirstResponderForSearchBar() {
+        searchBar.resignFirstResponder()
+    }
 }
