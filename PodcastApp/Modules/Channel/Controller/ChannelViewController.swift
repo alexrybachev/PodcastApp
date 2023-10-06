@@ -77,8 +77,8 @@ class ChannelViewController: UIViewController {
         title = "Channel"
         setupViews()
         makeConstraints()
-       
-
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +94,7 @@ class ChannelViewController: UIViewController {
         super.viewDidAppear(animated)
         //hide back button text
         navigationController?.navigationBar.backItem?.title = ""
-               navigationItem.backButtonTitle = ""
+        navigationItem.backButtonTitle = ""
     }
     
     private func setupViews(){

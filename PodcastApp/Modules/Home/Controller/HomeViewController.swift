@@ -21,13 +21,13 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view = homeView
         homeView.transferDelegates(dataSource: self, delegate: self)
         homeView.setupCompositionalLayout(layout: createInitialCompositionalLayout())
         
         fetchFirstPodcastsData(for: CategoryList.getFirstCategoryList())
         fetchSecondPodcastsData()
+        //navigationItem.backButtonTitle = ""
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -196,15 +196,6 @@ extension HomeViewController: UICollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        //        if indexPath.section == 1 {
-        //            if let cell = collectionView.cellForItem(at: indexPath) as? PopularCategoryCell {
-        //                cell.deselectCell()
-        ////                homeView.reloadSection(for: indexPath)
-        ////                collectionView.reloadSections(IndexSet(integer: 2))
-        //            }
-        //        }
-    }
 }
 
 // MARK: - Networking

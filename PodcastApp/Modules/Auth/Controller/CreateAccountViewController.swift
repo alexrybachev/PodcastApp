@@ -89,6 +89,16 @@ final class CreateAccountViewController: UIViewController {
         addViews()
         setupConstraints()
         addTapGesture()
+        setNavigationAppearance()
+    }
+    
+    //MARK: - Methods
+    
+    private func setNavigationAppearance() {
+    //set custom arrow for back button
+        let backViewImage = UIImage(named: "ArrowBackBig")?.withRenderingMode(.alwaysOriginal)
+        navigationController?.navigationBar.backIndicatorImage = backViewImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
     }
     
     // MARK: - Override Methods
