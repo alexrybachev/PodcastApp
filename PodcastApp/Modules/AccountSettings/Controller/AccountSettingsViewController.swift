@@ -45,21 +45,16 @@ final class AccountSettingsViewController: UIViewController {
         return view
     }()
     
-//    private lazy var contentView = AccountSettingsViewController.makecontentView(
-//        contentSize: self.contentSize
-//    )
-    private let imageProfileView = AccountSettingsViewController.makeView()
-    private let imageParameters = ImageParameters(
-        size: CGSize(
-            width: 100,
-            height: 100
-        ),
-        image: "face",
-        radiusImage: 50
-    )
-    private lazy var imageProfile = AccountSettingsViewController.makeImage(
-        parameters: imageParameters
-    )
+    private let profileView = UIView()
+
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "face")
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private let editButtonParameters = ButtonsParams(
         size:
             CGSize(
@@ -72,9 +67,18 @@ final class AccountSettingsViewController: UIViewController {
         image: "",
         title: ""
     )
-    private lazy var editButton = AccountSettingsViewController.makeButtonEdit(
-        params: editButtonParameters
-    )
+    private lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "pen"), for: .normal)
+        button.backgroundColor = .blueProfileColor
+        //button.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 10)
+        button.tintColor = .systemBackground
+        button.clipsToBounds = true
+        button.layer.borderColor =  UIColor.systemBackground.cgColor
+        button.layer.borderWidth = 3
+        return button
+    }()
+    
     private let verticalStack = AccountSettingsViewController.makeStackVertical()
     
     private var firstNameLable = CustomProfileLabel(title: "First Name")
@@ -260,20 +264,25 @@ final class AccountSettingsViewController: UIViewController {
     //MARK: - Life Cycle func
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        makeRoundShape()
         setPickerParams()
         setupConstraints()
     }
     
     //MARK: - Methods
     
-    fileprivate func setViews() {
+    private func makeRoundShape() {
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        editButton.layer.cornerRadius = editButton.frame.height / 2
+    }
+    
+    private func setViews() {
         super.viewDidLoad()
         title = "Profile"
         view.backgroundColor = .systemBackground
         view.addSubview(scrollView)
-        imageProfileView.addViews(views: imageProfile, editButton)
-        scrollView.addSubview(imageProfileView)
+        profileView.addViews(views: profileImageView, editButton)
+        scrollView.addSubview(profileView)
         scrollView.addSubview(verticalStack)
         verticalStack.addViews(views:
                                 firstNameLable,
@@ -317,30 +326,23 @@ final class AccountSettingsViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        imageProfileView.snp.makeConstraints { make in
+        profileView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().inset(37)
             make.width.height.equalTo(100)
         }
         
+        profileImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        editButton.snp.makeConstraints { make in
+            make.width.height.equalTo(32)
+            make.bottom.trailing.equalToSuperview()
+        }
+        
         NSLayoutConstraint.activate([
-            
-            
-            imageProfileView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            imageProfileView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 145),
-            imageProfileView.heightAnchor.constraint(equalToConstant: 100),
-            imageProfileView.widthAnchor.constraint(equalToConstant: 105),
-            
-            imageProfile.heightAnchor.constraint(equalToConstant: 100),
-            imageProfile.widthAnchor.constraint(equalToConstant: 100),
-            imageProfile.leadingAnchor.constraint(equalTo: imageProfileView.leadingAnchor),
-            imageProfile.topAnchor.constraint(equalTo: imageProfileView.topAnchor),
-            imageProfile.bottomAnchor.constraint(equalTo: imageProfileView.bottomAnchor),
-            
-            editButton.trailingAnchor.constraint(equalTo: imageProfileView.trailingAnchor),
-            editButton.bottomAnchor.constraint(equalTo: imageProfileView.bottomAnchor),
-            editButton.widthAnchor.constraint(equalToConstant: editButtonParameters.size.width),
-            editButton.heightAnchor.constraint(equalToConstant: editButtonParameters.size.height),
+
             
             verticalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 261),
             verticalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 23),
