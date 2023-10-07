@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setNavigationAppearance()
+        getUser()
     }
     
     //MARK: - Methods
@@ -42,6 +43,11 @@ class HomeViewController: UIViewController {
         let backViewImage = UIImage(named: "ArrowLeft")?.withRenderingMode(.alwaysOriginal)
         navigationController?.navigationBar.backIndicatorImage = backViewImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
+    }
+    
+    private func getUser() {
+        let user = StorageManager.shared.getCurrentUser()
+        homeView.setupUser(user?.firstName, user?.imageURL)
     }
 }
 

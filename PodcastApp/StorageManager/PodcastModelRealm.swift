@@ -12,28 +12,30 @@ enum GenderType: String, PersistableEnum {
     case Male, Female, NoGender
 }
 
-class UserInfo: Object {
+final class UserInfo: Object {
     @Persisted var firstName: String?
     @Persisted var lastName: String?
     @Persisted var eMail = ""
     @Persisted var dateOfBithday: Date?
     @Persisted var gender: GenderType?
+    @Persisted var imageURL: String?
     @Persisted var image: Data?
     
     @Persisted var podcasts = List<PodcastModel>()
     
-    convenience init(firstName: String? = nil, lastName: String? = nil, eMail: String = "", dateOfBithday: Date? = nil, gender: GenderType? = nil, image: Data? = nil) {
+    convenience init(firstName: String? = nil, lastName: String? = nil, eMail: String = "", dateOfBithday: Date? = nil, gender: GenderType? = nil, imageURL: String? = nil, image: Data? = nil) {
         self.init()
         self.firstName = firstName
         self.lastName = lastName
         self.eMail = eMail
         self.dateOfBithday = dateOfBithday
         self.gender = gender
+        self.imageURL = imageURL
         self.image = image
     }
 }
 
-class PodcastModel: Object {
+final class PodcastModel: Object {
     @Persisted var id: Int?
     @Persisted var title: String?
     @Persisted var author: String?

@@ -109,7 +109,9 @@ final class AuthViewController: UIViewController {
                     
                     let email = user.email
                     let userName = user.displayName
-                    StorageManager.shared.checkedUser(for: email, with: userName)
+                    let userImage = user.photoURL
+                    let stringURL = userImage?.absoluteString
+                    StorageManager.shared.checkedUser(for: email, with: userName, and: stringURL)
                     
                     //navigation to next screen
                     self.navigateToHomeScreen()

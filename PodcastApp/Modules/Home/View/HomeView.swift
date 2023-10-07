@@ -7,13 +7,14 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class HomeView: UIView {
     
     // MARK: - UI Elements
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Abigael Amaniah"
+        label.text = ""
         label.font = .custome(name: .manrope700, size: 16)
         return label
     }()
@@ -41,7 +42,6 @@ class HomeView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
-//        collectionView.isScrollEnabled = false
         return collectionView
     }()
     
@@ -110,6 +110,20 @@ class HomeView: UIView {
 // MARK: - Public Methods
 
 extension HomeView {
+    
+    public func setupUser(_ name: String?, _ imageURL: String?) {
+        if let name = name {
+            userNameLabel.text = name
+            
+            guard let url = imageURL else { return }
+            let cache = ImageCache.default
+            cache.diskStorage.config.expiration = .seconds(1)
+            let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+            userAvatar.kf.indicatorType = .activity
+            userAvatar.kf.setImage(with: URL(string: url), placeholder: nil, options: [.processor(processor),
+                                                                                       .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+        }
+    }
     
     public func setupCompositionalLayout(layout: UICollectionViewLayout) {
         collectionView.setCollectionViewLayout(layout, animated: true)

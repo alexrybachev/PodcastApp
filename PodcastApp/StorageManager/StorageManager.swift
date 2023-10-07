@@ -34,18 +34,14 @@ class StorageManager {
         }
     }
     
-    func checkedUser(for email: String?, with userName: String? = nil) {
+    func checkedUser(for email: String?, with userName: String? = nil, and imageURL: String? = nil) {
         if let registerdUser = realm.objects(UserInfo.self).filter("eMail == %@", email ?? "").first {
-            print("user's already registerd!")
             currentUser = registerdUser
         } else {
-            let userInfo = UserInfo(firstName: userName, eMail: email ?? "")
+            let userInfo = UserInfo(firstName: userName, eMail: email ?? "", imageURL: imageURL)
             currentUser = userInfo
             saveUser(userInfo)
-            print("new user saved!")
         }
-        
-        currentUser?.podcasts.forEach({ print(" podcast.id \($0.id)") })
     }
     
     func getCurrentUser() -> UserInfo? {
@@ -79,36 +75,14 @@ class StorageManager {
         try! realm.write {
             currentUser?.podcasts.append(podcast)
         }
-        
-        currentUser?.podcasts.forEach({ print(" podcast.id \($0.id)") })
-        
     }
     
     func delete(podcast: PodcastModel) {
         try! realm.write {
-            
-            print("searched id: \(podcast.id)")
-            
-            currentUser?.podcasts.forEach({ print(" podcast.id \($0.id)") })
-
-            
-            if let index = currentUser?.podcasts.firstIndex(where: { $0.id == podcast.id }) {
-                print("index: \(index)")
-                currentUser?.podcasts.remove(at: index)
-            } else {
-                print("don't find index")
-            }
+            let allUploadingObjects = realm.objects(PodcastModel.self).filter("id == %@", podcast.id ?? 0)
+            realm.delete(allUploadingObjects)
         }
     }
-    
-//    func delete(for idPodcast: Int?) {
-//        try! realm.write {
-//            if let index = currentUser?.podcasts.firstIndex(where: { $0.id }) {
-//                print("index: \(index)")
-//                currentUser?.podcasts.remove(at: index)
-//            }
-//        }
-//    }
     
     func read(completion: @escaping(Results<PodcastModel>) -> Void) {
         favorites = realm.objects(PodcastModel.self)
