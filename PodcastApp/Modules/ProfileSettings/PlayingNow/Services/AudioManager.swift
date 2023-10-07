@@ -8,8 +8,11 @@
 import Foundation
 import AVFoundation
 
+
 final class AudioManager {
     static let shared = AudioManager()
+    
+
     
     // MARK: - Private Properties
     private var player: AVPlayer?
@@ -17,17 +20,25 @@ final class AudioManager {
     private(set) var isPlaying = false
     private(set) var isPause = false
     
+    
     // MARK: - Public Properties
     var currentTime: CMTime {
         guard let currentTime = player?.currentTime() else { return CMTime() }
         return currentTime
     }
     
-    var currentItemDuration: CMTime  {
-        let currentItem = player?.currentItem?.duration ?? CMTime.zero
-        return currentItem
+    var currentItemDuration: CMTime {
+
+        // Если у нас нет playerDuration или он равен CMTime.zero, то используем duration из модели данных
+        guard let seconds = podcasts[currentIndex].duration else { return CMTime.zero }
+        return CMTimeMake(value: Int64(seconds), timescale: 1)
     }
     
+//    var currentItemDuration: CMTime  {
+//        let currentItem = player?.currentItem?.duration ?? CMTime.zero
+//        return currentItem
+//    }
+
     var podcasts: [PodcastEpisode] = []
     var currentIndex = 0
     
@@ -48,51 +59,15 @@ final class AudioManager {
     // MARK: - Public Methods
     func playAudio() {
         isPlaying = true
-        
+
         guard let currentURL = podcasts[currentIndex].enclosureUrl else { return }
+
         if let audioURL = URL(string: currentURL) {
             let playerItem = AVPlayerItem(url: audioURL)
             player = AVPlayer(playerItem: playerItem)
         }
-        
+
         player?.play()
-    }
-    
-    func setNextSong() {
-        guard !podcasts.isEmpty else { return }
-        
-        let wasPlaying = isPlaying
-        currentIndex += 1
-        
-        if currentIndex >= podcasts.count {
-            currentIndex = podcasts.count - 1
-            stopAudio()
-            return
-        }
-        
-        player = nil
-        isPlaying = false
-        isPause = false
-        
-        if wasPlaying {
-            playAudio()
-        }
-    }
-    
-    func setPreviousSong() {
-        guard !podcasts.isEmpty else { return }
-        
-        let wasPlaying = isPlaying
-        
-        currentIndex = max(0, currentIndex - 1)
-        
-        player = nil
-        isPlaying = false
-        isPause = false
-        
-        if wasPlaying {
-            playAudio()
-        }
     }
     
     func playNextSong() {
@@ -130,6 +105,44 @@ final class AudioManager {
     
     func setPodcasts(_ podcasts: [PodcastEpisode]) {
         self.podcasts = podcasts
+    }
+    
+    // MARK: - Private Methods
+    private func setNextSong() {
+        guard !podcasts.isEmpty else { return }
+        
+        let wasPlaying = isPlaying
+        currentIndex += 1
+        
+        if currentIndex >= podcasts.count {
+            currentIndex = podcasts.count - 1
+            stopAudio()
+            return
+        }
+        
+        player = nil
+        isPlaying = false
+        isPause = false
+        
+        if wasPlaying {
+            playAudio()
+        }
+    }
+    
+    private func setPreviousSong() {
+        guard !podcasts.isEmpty else { return }
+        
+        let wasPlaying = isPlaying
+        
+        currentIndex = max(0, currentIndex - 1)
+        
+        player = nil
+        isPlaying = false
+        isPause = false
+        
+        if wasPlaying {
+            playAudio()
+        }
     }
 }
 
