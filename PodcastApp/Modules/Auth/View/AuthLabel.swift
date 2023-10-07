@@ -18,7 +18,7 @@ final class AuthLabel: UILabel {
     init(title: String, activeString: String, font: FontSize) {
         super.init(frame: .zero)
         
-        textColor = UIColor.customLabelColor
+        textColor = UIColor.grayLabelColor
         self.font = (font == .small)
         ? UIFont.systemFont(ofSize: 13)
         : UIFont.custome(name: .plusJakartaSans600, size: 14)
