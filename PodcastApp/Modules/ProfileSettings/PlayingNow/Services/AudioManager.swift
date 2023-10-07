@@ -12,14 +12,13 @@ import AVFoundation
 final class AudioManager {
     static let shared = AudioManager()
     
-
-    
     // MARK: - Private Properties
     private var player: AVPlayer?
     
     private(set) var isPlaying = false
     private(set) var isPause = false
     
+    private var podcasts: [PodcastEpisode] = []
     
     // MARK: - Public Properties
     var currentTime: CMTime {
@@ -28,18 +27,10 @@ final class AudioManager {
     }
     
     var currentItemDuration: CMTime {
-
-        // Если у нас нет playerDuration или он равен CMTime.zero, то используем duration из модели данных
         guard let seconds = podcasts[currentIndex].duration else { return CMTime.zero }
         return CMTimeMake(value: Int64(seconds), timescale: 1)
     }
     
-//    var currentItemDuration: CMTime  {
-//        let currentItem = player?.currentItem?.duration ?? CMTime.zero
-//        return currentItem
-//    }
-
-    var podcasts: [PodcastEpisode] = []
     var currentIndex = 0
     
     // MARK: - Private Init
