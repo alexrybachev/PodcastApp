@@ -103,36 +103,8 @@ final class AccountSettingsViewController: UIViewController {
         params: saveButton
     )
     private lazy var horisontalStack = AccountSettingsViewController.makeStackHorisontal()
-    private let maleButtonParams = ButtonsParams(
-        size:
-            CGSize(
-                width: 156,
-                height: 48
-            ),
-        radius:
-            48/2,
-        color: .gray,
-        image: "checkmark.circle.fill",
-        title: "Male"
-    )
-    private lazy var maleButton = AccountSettingsViewController.makeButtonImage(
-        params: maleButtonParams
-    )
-    private let femaleButtonParams = ButtonsParams(
-        size:
-            CGSize(
-                width: 156,
-                height: 48
-            ),
-        radius:
-            48/2,
-        color: .gray,
-        image: "checkmark.circle",
-        title: "Female"
-    )
-    private lazy var femaleButton = AccountSettingsViewController.makeButtonImage(
-        params: femaleButtonParams
-    )
+    private lazy var maleButton = CustomProfileButton(title: "Male", imageName: "checkmark.circle.fill")
+    private lazy var femaleButton = CustomProfileButton(title: "Female", imageName: "circle")
     private lazy var blur = AccountSettingsViewController.makeBlur()
     private lazy var alertView = AccountSettingsViewController.makeView()
     private let alertTextParam = TextParameters(
@@ -226,6 +198,8 @@ final class AccountSettingsViewController: UIViewController {
         lastNameTextField.layer.cornerRadius = lastNameTextField.frame.height / 2
         emailTextField.layer.cornerRadius = emailTextField.frame.height / 2
         dateTextField.layer.cornerRadius = dateTextField.frame.height / 2
+        maleButton.layer.cornerRadius = maleButton.frame.height / 2
+        femaleButton.layer.cornerRadius = femaleButton.frame.height / 2
     }
     
     private func setViews() {
@@ -235,7 +209,6 @@ final class AccountSettingsViewController: UIViewController {
         view.addSubview(scrollView)
         profileView.addViews(views: profileImageView, editButton)
         scrollView.addSubview(profileView)
-        //scrollView.addSubview(verticalStack)
         scrollView.addViews(views:
                                 firstNameLable,
                             firstNameTextField,
@@ -246,12 +219,13 @@ final class AccountSettingsViewController: UIViewController {
                             dateLable,
                             dateTextField,
                             genderLable,
-                            horisontalStack
+                            maleButton,
+                            femaleButton
         )
         dateTextField.addSubview(imageViewCalendar)
         scrollView.addSubview(saveChangeButton)
         
-        horisontalStack.addViewInStack(stack: horisontalStack,views: maleButton,femaleButton)
+        //horisontalStack.addViewInStack(stack: horisontalStack,views: maleButton,femaleButton)
         view.addSubview(alertView)
         alertView.addSubview(alertLable)
         alertView.addSubview(verticalStackAlert)
@@ -352,12 +326,14 @@ final class AccountSettingsViewController: UIViewController {
         maleButton.snp.makeConstraints { make in
             make.leading.equalTo(firstNameTextField)
             make.height.equalTo(48)
+            make.top.equalTo(genderLable.snp.bottom).inset(-8)
         }
         
         femaleButton.snp.makeConstraints { make in
             make.trailing.equalTo(firstNameTextField)
-            make.leading.equalTo(maleButton.snp.trailing).inset(16)
+            make.leading.equalTo(maleButton.snp.trailing).inset(-16)
             make.width.height.equalTo(maleButton)
+            make.top.equalTo(maleButton)
         }
         
         //        saveChangeButton.snp.makeConstraints { make in
@@ -459,6 +435,11 @@ final class AccountSettingsViewController: UIViewController {
     
     
     //MARK: - private func
+    
+    private func makeRoundCorner( _ view: inout UIView) {
+        view.layer.cornerRadius = view.frame.height / 2
+    }
+    
     private func formatDate(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMMM yyyy"

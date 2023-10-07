@@ -15,7 +15,7 @@ class CustomTextFieldProfile: UITextField {
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
         self.leftViewMode = .always
         self.layer.masksToBounds = true
-        self.layer.borderColor =  UIColor.blue.cgColor
+        self.layer.borderColor =  UIColor.customBlue.cgColor
         self.layer.borderWidth = 1
         
     }

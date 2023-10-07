@@ -67,6 +67,7 @@
 		0AB04B142ACEDE6B00AFDB88 /* CustomCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB04B0C2ACEDE6B00AFDB88 /* CustomCarouselFlowLayout.swift */; };
 		0AB04B152ACEDE6B00AFDB88 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB04B0E2ACEDE6B00AFDB88 /* TestModel.swift */; };
 		0AB04B162ACEDE6B00AFDB88 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB04B0F2ACEDE6B00AFDB88 /* PlayerManager.swift */; };
+		0ABD2B942AD148B700FC01C1 /* CustomProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABD2B932AD148B700FC01C1 /* CustomProfileButton.swift */; };
 		0AC0B4A92AC5776B00252B8B /* UILabel + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4A82AC5776B00252B8B /* UILabel + Ext.swift */; };
 		0AC0B4AB2AC5778000252B8B /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4AA2AC5778000252B8B /* HomeModel.swift */; };
 		0AC0B4B32AC5779100252B8B /* PopularCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0B4AD2AC5779100252B8B /* PopularCategoryCell.swift */; };
@@ -142,6 +143,7 @@
 		0AB04B0C2ACEDE6B00AFDB88 /* CustomCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCarouselFlowLayout.swift; sourceTree = "<group>"; };
 		0AB04B0E2ACEDE6B00AFDB88 /* TestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		0AB04B0F2ACEDE6B00AFDB88 /* PlayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
+		0ABD2B932AD148B700FC01C1 /* CustomProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProfileButton.swift; sourceTree = "<group>"; };
 		0AC0B4A82AC5776B00252B8B /* UILabel + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel + Ext.swift"; sourceTree = "<group>"; };
 		0AC0B4AA2AC5778000252B8B /* HomeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		0AC0B4AD2AC5779100252B8B /* PopularCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCategoryCell.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				0A929E6D2AD087DB0050328D /* XIB */,
 				0A929E6A2AD07FA60050328D /* CustomProfileLabel.swift */,
 				0AAD87702AD1298C00A7FF25 /* CustomTextFieldProfile.swift */,
+				0ABD2B932AD148B700FC01C1 /* CustomProfileButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				0A94ECE52AC9898D00F0EE63 /* CustomLabel.swift in Sources */,
 				0A9596752AC8A7B0003F87CE /* FavoriteViewCell.swift in Sources */,
 				0AA1A3E62ACB340F00AE01A2 /* OnboardingViewController.swift in Sources */,
+				0ABD2B942AD148B700FC01C1 /* CustomProfileButton.swift in Sources */,
 				0AC0B4AB2AC5778000252B8B /* HomeModel.swift in Sources */,
 				0A125D372AC0CA0A0006EACA /* ProfileSettingsViewController.swift in Sources */,
 				0A125D502AC214850006EACA /* UIFont+Extension.swift in Sources */,
