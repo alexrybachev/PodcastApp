@@ -50,14 +50,14 @@ final class AudioManager {
     // MARK: - Public Methods
     func playAudio() {
         isPlaying = true
-
+        
         guard let currentURL = podcasts[currentIndex].enclosureUrl else { return }
-
+        
         if let audioURL = URL(string: currentURL) {
             let playerItem = AVPlayerItem(url: audioURL)
             player = AVPlayer(playerItem: playerItem)
         }
-
+        
         player?.play()
     }
     
