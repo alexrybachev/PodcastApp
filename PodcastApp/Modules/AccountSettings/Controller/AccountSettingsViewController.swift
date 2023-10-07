@@ -34,9 +34,13 @@ struct TextFieldParameters {
 }
 
 final class AccountSettingsViewController: UIViewController {
+    //MARK: - Variables
+    
+    private let textFieldHeight = 52
+    private let edgeOffset: CGFloat = 24
     
     private lazy var contentSize: CGSize = {
-        CGSize(width: view.frame.width, height: view.frame.height + 400)
+        CGSize(width: view.bounds.width, height: view.bounds.height + 400)
     }()
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -55,23 +59,10 @@ final class AccountSettingsViewController: UIViewController {
         return imageView
     }()
     
-    private let editButtonParameters = ButtonsParams(
-        size:
-            CGSize(
-                width: 32,
-                height: 32
-            ),
-        radius:
-            32/2,
-        color: .blueProfileColor,
-        image: "",
-        title: ""
-    )
     private lazy var editButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "pen"), for: .normal)
         button.backgroundColor = .blueProfileColor
-        //button.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 10)
         button.tintColor = .systemBackground
         button.clipsToBounds = true
         button.layer.borderColor =  UIColor.systemBackground.cgColor
@@ -79,32 +70,18 @@ final class AccountSettingsViewController: UIViewController {
         return button
     }()
     
-    private let verticalStack = AccountSettingsViewController.makeStackVertical()
+//    private lazy var verticalStack: UIStackView = {
+//        let view = UIStackView()
+//        view.axis = .vertical
+//        view.spacing = 3
+//        view.alignment = .center
+//        return view
+//    }()
     
     private var firstNameLable = CustomProfileLabel(title: "First Name")
-    private let textFieldParametersFirst = TextFieldParameters(
-        size: CGSize(
-            width: 327,
-            height: 52
-        ),
-        radius: 52/2,
-        placeholder: "Abigael"
-    )
-    private lazy var firstNameTextField = AccountSettingsViewController.makeTextField(
-        parameters: textFieldParametersFirst
-    )
+    private var firstNameTextField = CustomTextFieldProfile(placeholder: "Abigael")
     private lazy var lastNameLable = CustomProfileLabel(title: "Last Name")
-    private let textFieldParametersLast = TextFieldParameters(
-        size: CGSize(
-            width: 327,
-            height: 52
-        ),
-        radius: 52/2,
-        placeholder: "Amaniah"
-    )
-    private lazy var lastNameTextField = AccountSettingsViewController.makeTextField(
-        parameters: textFieldParametersLast
-    )
+    private lazy var lastNameTextField = CustomTextFieldProfile(placeholder: "Amaniah")
     private let textThirdParam = TextParameters(
         font: UIFont(name: "Arial-BoldMT", size: 12)!,
         text: "E-mail"
@@ -260,8 +237,15 @@ final class AccountSettingsViewController: UIViewController {
         setNavigationAppearance()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //hide back button text
+        navigationController?.navigationBar.backItem?.title = ""
+        navigationItem.backButtonTitle = ""
+    }
     
-    //MARK: - Life Cycle func
+    
+    //MARK: - Rendering
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         makeRoundShape()
@@ -274,6 +258,8 @@ final class AccountSettingsViewController: UIViewController {
     private func makeRoundShape() {
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         editButton.layer.cornerRadius = editButton.frame.height / 2
+        firstNameTextField.layer.cornerRadius = firstNameTextField.frame.height / 2
+        lastNameTextField.layer.cornerRadius = lastNameTextField.frame.height / 2
     }
     
     private func setViews() {
@@ -283,8 +269,8 @@ final class AccountSettingsViewController: UIViewController {
         view.addSubview(scrollView)
         profileView.addViews(views: profileImageView, editButton)
         scrollView.addSubview(profileView)
-        scrollView.addSubview(verticalStack)
-        verticalStack.addViews(views:
+        //scrollView.addSubview(verticalStack)
+        scrollView.addViews(views:
                                 firstNameLable,
                                firstNameTextField,
                                lastNameLable,
@@ -311,7 +297,6 @@ final class AccountSettingsViewController: UIViewController {
         let backViewImage = UIImage(named: "ArrowBackBig")?.withRenderingMode(.alwaysOriginal)
         navigationController?.navigationBar.backIndicatorImage = backViewImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
-        navigationItem.hidesBackButton = true
     }
     
     private func setDelegates() {
@@ -341,124 +326,147 @@ final class AccountSettingsViewController: UIViewController {
             make.bottom.trailing.equalToSuperview()
         }
         
+        firstNameLable.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(edgeOffset)
+            make.top.equalTo(profileView.snp.bottom).inset(-16)
+        }
+        
+        
+        
+        firstNameTextField.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(view).inset(edgeOffset)
+            make.height.equalTo(textFieldHeight)
+            make.top.equalTo(firstNameLable.snp.bottom).inset(-8)
+        }
+        
+        lastNameLable.snp.makeConstraints { make in
+            make.leading.equalToSuperview().inset(edgeOffset)
+            make.top.equalTo(firstNameTextField.snp.bottom).inset(-16)
+        }
+        
+        lastNameTextField.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(firstNameTextField)
+            make.height.equalTo(textFieldHeight)
+            make.top.equalTo(lastNameLable.snp.bottom).inset(-8)
+        }
+        
         NSLayoutConstraint.activate([
 
             
-            verticalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 261),
-            verticalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 23),
-            verticalStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -23),
-            verticalStack.heightAnchor.constraint(equalToConstant: 470),
+//            verticalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 261),
+//            verticalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 23),
+//            verticalStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -23),
+//            verticalStack.heightAnchor.constraint(equalToConstant: 470),
             
-            firstNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            firstNameLable.topAnchor.constraint(equalTo: verticalStack.topAnchor),
+//            firstNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+//            firstNameLable.topAnchor.constraint(equalTo: verticalStack.topAnchor),
             
-            firstNameTextField.topAnchor.constraint(equalTo: firstNameLable.bottomAnchor),
-            firstNameTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            firstNameTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
-            firstNameTextField.heightAnchor.constraint(equalToConstant: textFieldParametersFirst.size.height),
-            
-            lastNameLable.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: 10),
-            lastNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            
-            lastNameTextField.topAnchor.constraint(equalTo: lastNameLable.bottomAnchor),
-            lastNameTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            lastNameTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
-            lastNameTextField.heightAnchor.constraint(equalToConstant: textFieldParametersLast.size.height),
-            
-            emailLable.topAnchor.constraint(equalTo: lastNameTextField.bottomAnchor, constant: 10),
-            emailLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            
-            emailTextField.topAnchor.constraint(equalTo: emailLable.bottomAnchor),
-            emailTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
-            emailTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: textFieldParametersEmail.size.height),
+//            firstNameTextField.topAnchor.constraint(equalTo: firstNameLable.bottomAnchor),
+//            firstNameTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+//            firstNameTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
+//            firstNameTextField.heightAnchor.constraint(equalToConstant: textFieldParametersFirst.size.height),
+//
+//            lastNameLable.topAnchor.constraint(equalTo: firstNameTextField.bottomAnchor, constant: 10),
+//            lastNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+//
+//            lastNameTextField.topAnchor.constraint(equalTo: lastNameLable.bottomAnchor),
+//            lastNameTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+//            lastNameTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
+//            lastNameTextField.heightAnchor.constraint(equalToConstant: textFieldParametersLast.size.height),
+//
+//            emailLable.topAnchor.constraint(equalTo: lastNameTextField.bottomAnchor, constant: 10),
+//            emailLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+//
+//            emailTextField.topAnchor.constraint(equalTo: emailLable.bottomAnchor),
+//            emailTextField.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
+//            emailTextField.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor),
+//            emailTextField.heightAnchor.constraint(equalToConstant: textFieldParametersEmail.size.height),
             
         ])
         
-        saveChangeButton.snp.makeConstraints { make in
-            make.leading.equalTo(scrollView).offset(24)
-            make.trailing.equalTo(scrollView).offset(-24)
-            make.bottom.equalTo(scrollView).offset(-24)
-            make.height.equalTo(56)
-            make.width.equalTo(327)
-        }
-        
-        dateLable.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(verticalStack).offset(0)
-            //вопрос по отступу!!!
-            make.top.equalTo(emailTextField.snp_bottomMargin).offset(10)
-        }
-        
-        dateTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(verticalStack).offset(0)
-            //не понимаю пока инсет и офсет!!!
-            make.top.equalTo(dateLable.snp_bottomMargin).inset(-10)
-            make.height.equalTo(textFieldParametersDate.size.height)
-            make.width.equalTo(textFieldParametersDate.size.width)
-        }
-        
-        imageViewCalendar.snp.makeConstraints { make in
-            make.trailing.equalTo(dateTextField.snp_trailingMargin).offset(-10)
-            make.width.equalTo(imageCalendar.size.width)
-            make.height.equalTo(imageCalendar.size.height)
-            make.centerYWithinMargins.equalTo(dateTextField)
-        }
-        
-        genderLable.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(verticalStack).offset(0)
-            //вопрос по отступу!!!
-            make.top.equalTo(dateTextField.snp_bottomMargin).offset(10)
-        }
-        
-        horisontalStack.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(verticalStack).offset(0)
-            make.top.equalTo(genderLable.snp_bottomMargin).offset(10)
-        }
-        
-        maleButton.snp.makeConstraints { make in
-            make.bottom.top.equalTo(horisontalStack).offset(0)
-            make.width.equalTo(maleButtonParams.size.width)
-            make.height.equalTo(maleButtonParams.size.height)
-        }
-        
-        femaleButton.snp.makeConstraints { make in
-            make.bottom.top.equalTo(horisontalStack).offset(0)
-            make.width.equalTo(femaleButtonParams.size.width)
-            make.height.equalTo(femaleButtonParams.size.height)
-        }
-        
-        alertView.snp.makeConstraints { make in
-            make.centerXWithinMargins.equalTo(self.view)
-            make.top.equalTo(self.view).offset(180)
-            make.width.equalTo(328)
-            make.height.equalTo(340)
-        }
-        
-        alertLable.snp.makeConstraints { make in
-            make.centerXWithinMargins.equalTo(alertView)
-            make.top.equalTo(alertView).offset(20)
-        }
-        
-        verticalStackAlert.snp.makeConstraints { make in
-            make.leading.bottom.trailing.equalTo(alertView).offset(0)
-            make.top.equalTo(alertLable.snp_bottomMargin).offset(10)
-        }
-        
-        fotoButton.snp.makeConstraints { make in
-            make.centerXWithinMargins.equalTo(verticalStack)
-            make.width.equalTo(fotoButtonParams.size.width)
-            make.height.equalTo(fotoButtonParams.size.height)
-        }
-        chooseButton.snp.makeConstraints { make in
-            make.centerXWithinMargins.equalTo(verticalStack)
-            make.width.equalTo(chooseButtonParams.size.width)
-            make.height.equalTo(chooseButtonParams.size.height)
-        }
-        deleteButton.snp.makeConstraints { make in
-            make.centerXWithinMargins.equalTo(verticalStack)
-            make.width.equalTo(deleteButtonParams.size.width)
-            make.height.equalTo(deleteButtonParams.size.height)
-        }
+//        saveChangeButton.snp.makeConstraints { make in
+//            make.leading.equalTo(scrollView).offset(24)
+//            make.trailing.equalTo(scrollView).offset(-24)
+//            make.bottom.equalTo(scrollView).offset(-24)
+//            make.height.equalTo(56)
+//        }
+//
+//        dateLable.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(verticalStack).offset(0)
+//            //вопрос по отступу!!!
+//            make.top.equalTo(emailTextField.snp_bottomMargin).offset(10)
+//        }
+//
+//        dateTextField.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(verticalStack).offset(0)
+//            //не понимаю пока инсет и офсет!!!
+//            make.top.equalTo(dateLable.snp_bottomMargin).inset(-10)
+//            make.height.equalTo(textFieldParametersDate.size.height)
+//            make.width.equalTo(textFieldParametersDate.size.width)
+//        }
+//
+//        imageViewCalendar.snp.makeConstraints { make in
+//            make.trailing.equalTo(dateTextField.snp_trailingMargin).offset(-10)
+//            make.width.equalTo(imageCalendar.size.width)
+//            make.height.equalTo(imageCalendar.size.height)
+//            make.centerYWithinMargins.equalTo(dateTextField)
+//        }
+//
+//        genderLable.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(verticalStack).offset(0)
+//            //вопрос по отступу!!!
+//            make.top.equalTo(dateTextField.snp_bottomMargin).offset(10)
+//        }
+//
+//        horisontalStack.snp.makeConstraints { make in
+//            make.leading.trailing.equalTo(verticalStack).offset(0)
+//            make.top.equalTo(genderLable.snp_bottomMargin).offset(10)
+//        }
+//
+//        maleButton.snp.makeConstraints { make in
+//            make.bottom.top.equalTo(horisontalStack).offset(0)
+//            make.width.equalTo(maleButtonParams.size.width)
+//            make.height.equalTo(maleButtonParams.size.height)
+//        }
+//
+//        femaleButton.snp.makeConstraints { make in
+//            make.bottom.top.equalTo(horisontalStack).offset(0)
+//            make.width.equalTo(femaleButtonParams.size.width)
+//            make.height.equalTo(femaleButtonParams.size.height)
+//        }
+//
+//        alertView.snp.makeConstraints { make in
+//            make.centerXWithinMargins.equalTo(self.view)
+//            make.top.equalTo(self.view).offset(180)
+//            make.width.equalTo(328)
+//            make.height.equalTo(340)
+//        }
+//
+//        alertLable.snp.makeConstraints { make in
+//            make.centerXWithinMargins.equalTo(alertView)
+//            make.top.equalTo(alertView).offset(20)
+//        }
+//
+//        verticalStackAlert.snp.makeConstraints { make in
+//            make.leading.bottom.trailing.equalTo(alertView).offset(0)
+//            make.top.equalTo(alertLable.snp_bottomMargin).offset(10)
+//        }
+//
+//        fotoButton.snp.makeConstraints { make in
+//            make.centerXWithinMargins.equalTo(verticalStack)
+//            make.width.equalTo(fotoButtonParams.size.width)
+//            make.height.equalTo(fotoButtonParams.size.height)
+//        }
+//        chooseButton.snp.makeConstraints { make in
+//            make.centerXWithinMargins.equalTo(verticalStack)
+//            make.width.equalTo(chooseButtonParams.size.width)
+//            make.height.equalTo(chooseButtonParams.size.height)
+//        }
+//        deleteButton.snp.makeConstraints { make in
+//            make.centerXWithinMargins.equalTo(verticalStack)
+//            make.width.equalTo(deleteButtonParams.size.width)
+//            make.height.equalTo(deleteButtonParams.size.height)
+//        }
         
     }
     
@@ -547,13 +555,13 @@ private extension AccountSettingsViewController{
 //        return scrollView
 //    }
     
-    static func  makecontentView(contentSize: CGSize) -> UIView {
-        let contentView = UIView()
-        contentView.frame.size = contentSize
-        //contentView.backgroundColor = .magenta
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        return contentView
-    }
+//    static func  makecontentView(contentSize: CGSize) -> UIView {
+//        let contentView = UIView()
+//        contentView.frame.size = contentSize
+//        //contentView.backgroundColor = .magenta
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        return contentView
+//    }
     
     static func makeView() -> UIView {
         let view = UIView()
@@ -650,17 +658,16 @@ private extension AccountSettingsViewController{
     
     static func makeTextField(parameters: TextFieldParameters) -> UITextField {
         let textField = UITextField()
-        textField.frame.size = parameters.size
+        //textField.frame.size = parameters.size
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height)) //вынести конст
         textField.leftViewMode = .always
-        textField.layer.cornerRadius = parameters.radius
+        //textField.layer.cornerRadius = parameters.radius
         textField.placeholder = parameters.placeholder
         //установить стиль
         textField.layer.masksToBounds = true
         textField.layer.borderColor =  UIColor.blue.cgColor
         textField.layer.borderWidth = 1
         //textField.backgroundColor = .white
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }
     
