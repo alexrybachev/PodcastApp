@@ -36,6 +36,8 @@ extension UIColor {
     static var placeholderColor: UIColor {
         UIColor(named: "PlaceholderColor") ?? .clear
     }
+    
+    static let blueProfileColor = UIColor(named: "blueProfileColor") ?? .clear
 }
 
 // Рандомный цвет

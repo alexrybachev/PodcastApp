@@ -35,19 +35,19 @@ struct TextFieldParameters {
 
 final class AccountSettingsViewController: UIViewController {
     
-    private var contentSize: CGSize {
-        CGSize(
-            width: view.frame.width,
-            height: view.frame.height + 400
-        )
-    }
-    private lazy var scrollView = AccountSettingsViewController.makeScrolView(
-        contentSize: contentSize,
-        view: self.view
-    )
-    private lazy var contentView = AccountSettingsViewController.makecontentView(
-        contentSize: self.contentSize
-    )
+    private lazy var contentSize: CGSize = {
+        CGSize(width: view.frame.width, height: view.frame.height + 400)
+    }()
+    private lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.contentSize = contentSize
+        view.isScrollEnabled = true
+        return view
+    }()
+    
+//    private lazy var contentView = AccountSettingsViewController.makecontentView(
+//        contentSize: self.contentSize
+//    )
     private let imageProfileView = AccountSettingsViewController.makeView()
     private let imageParameters = ImageParameters(
         size: CGSize(
@@ -68,7 +68,7 @@ final class AccountSettingsViewController: UIViewController {
             ),
         radius:
             32/2,
-        color: .blue,
+        color: .blueProfileColor,
         image: "",
         title: ""
     )
@@ -246,38 +246,10 @@ final class AccountSettingsViewController: UIViewController {
     
 //MARK: - Life cycle
     
+    
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Profile"
-        view.backgroundColor = .systemBackground
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        imageProfileView.addViews(views: imageProfile, editButton)
-        contentView.addSubview(imageProfileView)
-        contentView.addSubview(verticalStack)
-        verticalStack.addViews(views:
-            firstNameLable,
-            firstNameTextField,
-            lastNameLable,
-            lastNameTextField,
-            emailLable,
-            emailTextField,
-            dateLable,
-            dateTextField,
-            genderLable,
-            horisontalStack
-        )
-        dateTextField.addSubview(imageViewCalendar)
-        contentView.addSubview(saveChangeButton)
-        
-        horisontalStack.addViewInStack(stack: horisontalStack,views: maleButton,femaleButton)
-        view.addSubview(alertView)
-        alertView.addSubview(alertLable)
-        alertView.addSubview(verticalStackAlert)
-        verticalStackAlert.addViewInStack(stack: verticalStackAlert, views: fotoButton, chooseButton, deleteButton)
-        
-        
-        
+        setViews()
         setDelegates()
         setAlertParams()
         setTargets()
@@ -295,6 +267,36 @@ final class AccountSettingsViewController: UIViewController {
     
     //MARK: - Methods
     
+    fileprivate func setViews() {
+        super.viewDidLoad()
+        title = "Profile"
+        view.backgroundColor = .systemBackground
+        view.addSubview(scrollView)
+        imageProfileView.addViews(views: imageProfile, editButton)
+        scrollView.addSubview(imageProfileView)
+        scrollView.addSubview(verticalStack)
+        verticalStack.addViews(views:
+                                firstNameLable,
+                               firstNameTextField,
+                               lastNameLable,
+                               lastNameTextField,
+                               emailLable,
+                               emailTextField,
+                               dateLable,
+                               dateTextField,
+                               genderLable,
+                               horisontalStack
+        )
+        dateTextField.addSubview(imageViewCalendar)
+        scrollView.addSubview(saveChangeButton)
+        
+        horisontalStack.addViewInStack(stack: horisontalStack,views: maleButton,femaleButton)
+        view.addSubview(alertView)
+        alertView.addSubview(alertLable)
+        alertView.addSubview(verticalStackAlert)
+        verticalStackAlert.addViewInStack(stack: verticalStackAlert, views: fotoButton, chooseButton, deleteButton)
+    }
+    
     private func setNavigationAppearance() {
     //set custom arrow for back button
         let backViewImage = UIImage(named: "ArrowBackBig")?.withRenderingMode(.alwaysOriginal)
@@ -311,14 +313,21 @@ final class AccountSettingsViewController: UIViewController {
     
     private func setupConstraints() {
         
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        imageProfileView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(37)
+            make.width.height.equalTo(100)
+        }
+        
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             
-            imageProfileView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageProfileView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 145),
+            
+            imageProfileView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            imageProfileView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 145),
             imageProfileView.heightAnchor.constraint(equalToConstant: 100),
             imageProfileView.widthAnchor.constraint(equalToConstant: 105),
             
@@ -333,9 +342,9 @@ final class AccountSettingsViewController: UIViewController {
             editButton.widthAnchor.constraint(equalToConstant: editButtonParameters.size.width),
             editButton.heightAnchor.constraint(equalToConstant: editButtonParameters.size.height),
             
-            verticalStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 261),
-            verticalStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 23),
-            verticalStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -23),
+            verticalStack.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 261),
+            verticalStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 23),
+            verticalStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -23),
             verticalStack.heightAnchor.constraint(equalToConstant: 470),
             
             firstNameLable.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor),
@@ -365,9 +374,9 @@ final class AccountSettingsViewController: UIViewController {
         ])
         
         saveChangeButton.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).offset(24)
-            make.trailing.equalTo(contentView).offset(-24)
-            make.bottom.equalTo(contentView).offset(-24)
+            make.leading.equalTo(scrollView).offset(24)
+            make.trailing.equalTo(scrollView).offset(-24)
+            make.bottom.equalTo(scrollView).offset(-24)
             make.height.equalTo(56)
             make.width.equalTo(327)
         }
@@ -527,14 +536,14 @@ final class AccountSettingsViewController: UIViewController {
 
 //MARK: - private extension
 private extension AccountSettingsViewController{
-    static func makeScrolView(contentSize: CGSize, view: UIView) -> UIScrollView {
-        let scrollView = UIScrollView()
-        scrollView.contentSize = contentSize
-        scrollView.frame = view.bounds
-        scrollView.isScrollEnabled = true
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }
+//    static func makeScrolView(contentSize: CGSize, view: UIView) -> UIScrollView {
+//        let scrollView = UIScrollView()
+//        scrollView.contentSize = contentSize
+//        scrollView.frame = view.bounds
+//        scrollView.isScrollEnabled = true
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        return scrollView
+//    }
     
     static func  makecontentView(contentSize: CGSize) -> UIView {
         let contentView = UIView()
