@@ -41,13 +41,15 @@ final class PlayingNowView: UIView {
     
     // MARK: - Labels
     lazy var podcastTitleLabel: UILabel = {
-        var songName = createLabel(
+        var title = createLabel(
             with: "Baby Pesut Ups 56",
             color: #colorLiteral(red: 0.2606227994, green: 0.2478592694, blue: 0.3162897527, alpha: 1),
             font: UIFont.custome(name: .manrope700, size: 16)
             ?? UIFont.systemFont(ofSize: 16)
         )
-        return songName
+        title.textAlignment = .center
+        title.lineBreakMode = .byTruncatingTail
+        return title
     }()
     
     lazy var authorNameLabel: UILabel = {
@@ -79,8 +81,9 @@ final class PlayingNowView: UIView {
             font: UIFont.custome(name: .manrope400, size: 14)
             ?? UIFont.systemFont(ofSize: 14)
         )
+        startLabel.textAlignment = .left
         startLabel.snp.makeConstraints { make in
-            make.width.equalTo(40)
+            make.width.equalTo(45)
         }
         return startLabel
     }()
@@ -92,9 +95,11 @@ final class PlayingNowView: UIView {
             font: UIFont.custome(name: .manrope400, size: 14)
             ?? UIFont.systemFont(ofSize: 14)
         )
+        endLabel.textAlignment = .right
         endLabel.snp.makeConstraints { make in
-            make.width.equalTo(40)
+            make.width.equalTo(45)
         }
+        
         return endLabel
     }()
     
@@ -238,6 +243,8 @@ final class PlayingNowView: UIView {
         
         podcastTitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(30)
+            make.right.equalToSuperview().offset(-30)
             make.bottom.equalTo(authorNameLabel.snp.top).offset(-5)
         }
         
