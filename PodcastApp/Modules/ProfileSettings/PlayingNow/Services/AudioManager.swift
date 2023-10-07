@@ -28,15 +28,17 @@ final class AudioManager {
         return currentItem
     }
     
-//    var podcasts: [TestModel] = []
     var podcasts: [PodcastEpisode] = []
-    
     var currentIndex = 0
     
     // MARK: - Private Init
     private init() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                options: [.mixWithOthers, .allowAirPlay]
+            )
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Ошибка настройки аудиосесии \(error)")

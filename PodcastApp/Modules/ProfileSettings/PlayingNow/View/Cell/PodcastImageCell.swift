@@ -36,18 +36,17 @@ final class PodcastImageCell: UICollectionViewCell {
     }
     
     // MARK: - Public Methods
-        func configureView(with imageURL: String) {
-            guard let url = URL(string: imageURL) else { return }
-            mainImageVIew.kf.setImage(
-                with: url,
-                placeholder: nil,
-                options: [
-                    .transition(.fade(1.0)),
-                    .cacheOriginalImage
-                    
-                ]
-            )
-        }
+    func configureView(with imageURL: String) {
+        guard let url = URL(string: imageURL) else { return }
+        mainImageVIew.kf.setImage(
+            with: url,
+            placeholder: nil,
+            options: [
+                .transition(.fade(1.0)),
+                .cacheOriginalImage
+            ]
+        )
+    }
     
     // MARK: - Private Methods
     private func setupConstraints() {

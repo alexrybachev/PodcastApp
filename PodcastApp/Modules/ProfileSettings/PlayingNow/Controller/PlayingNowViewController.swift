@@ -43,17 +43,6 @@ final class PlayingNowViewController: UIViewController {
         return pageSize
     }
     
-    // MARK: - Test Properties
-    //    private let colors = [UIColor.red, UIColor.green, UIColor.brown, UIColor.blue]
-    //    private var testArraySongs = [
-    //        TestModel(color: .blue, url: "https://www.kozco.com/tech/32.mp3"),
-    //        TestModel(color: .green, url: "https://file-examples.com/storage/feaade38c1651bd01984236/2017/11/file_example_MP3_700KB.mp3"),
-    //        TestModel(color: .orange, url: "https://www.kozco.com/tech/LRMonoPhase4.mp3"),
-    //        TestModel(color: .red, url: "https://www.kozco.com/tech/piano2-CoolEdit.mp3"),
-    //        TestModel(color: .yellow, url: "https://www.kozco.com/tech/organfinale.mp3")
-    //    ]
-    //    private var currentIndex = 2
-    
     // MARK: - Init
     init(podcastEpisode: [PodcastEpisode]?, author: String?, index: Int) {
         self.podcasts = podcastEpisode
@@ -225,7 +214,12 @@ final class PlayingNowViewController: UIViewController {
     
     // метод для перехода к следующему или предыдущему item
     private func scrollToNextOrPreviousCell(_ sender: UIButton) {
-        guard let currentVisibleIndexPath = centralVisibleIndexPath(in: playingNowView.mainCollectionView) else { return }
+        guard
+            let currentVisibleIndexPath = centralVisibleIndexPath(in: playingNowView.mainCollectionView)
+        else
+        {
+            return
+        }
         let currentItemIndex = currentVisibleIndexPath.item
         let numberOfItems = (podcasts?.count ?? 1) - 1
         var nextIndexPath = IndexPath(item: currentItemIndex, section: 0) // устанавливаем индекс по умолчанию
@@ -233,7 +227,7 @@ final class PlayingNowViewController: UIViewController {
         
         if sender == playingNowView.nextButton {
             player.playNextSong()
-          
+            
             
             if currentItemIndex < numberOfItems {
                 nextIndexPath = IndexPath(item: currentItemIndex + 1, section: 0)
@@ -369,8 +363,6 @@ extension PlayingNowViewController: UICollectionViewDataSource {
         
         let podcastImage = podcasts?[indexPath.row].image ?? ""
         cell.configureView(with: podcastImage)
-        //        let song = testArraySongs[indexPath.row].color
-        //        cell.configureView(with: song)
         return cell
     }
 }
@@ -402,18 +394,10 @@ extension PlayingNowViewController {
                     player.playAudio()
                 }
                 
-                //                // обновляем слайдер
-                //                updateSlider()
-                //
-                //                // загружаем длительность трека в label
                 loadDurationForCurrentTrack()
-                //
-                //                updateCurrentTimeLabel()
-                //                updateRemainingTimeLabel()
                 
                 // переход к следующей ячейке коллекции в зависимости индекса
                 playingNowView.mainCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                
             }
         }
     }

@@ -34,7 +34,6 @@
 		0A929E992AD09A1B0050328D /* PodcastImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E912AD09A1B0050328D /* PodcastImageCell.swift */; };
 		0A929E9A2AD09A1B0050328D /* PlayingNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E922AD09A1B0050328D /* PlayingNowView.swift */; };
 		0A929E9B2AD09A1B0050328D /* CustomCarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E932AD09A1B0050328D /* CustomCarouselFlowLayout.swift */; };
-		0A929E9C2AD09A1B0050328D /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E952AD09A1B0050328D /* TestModel.swift */; };
 		0A929E9D2AD09A1B0050328D /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A929E962AD09A1B0050328D /* AudioManager.swift */; };
 		0A94ECCD2AC9894100F0EE63 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A94ECCC2AC9894100F0EE63 /* GoogleService-Info.plist */; };
 		0A94ECCF2AC9897300F0EE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94ECCE2AC9897300F0EE63 /* AppDelegate.swift */; };
@@ -115,7 +114,6 @@
 		0A929E912AD09A1B0050328D /* PodcastImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastImageCell.swift; sourceTree = "<group>"; };
 		0A929E922AD09A1B0050328D /* PlayingNowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingNowView.swift; sourceTree = "<group>"; };
 		0A929E932AD09A1B0050328D /* CustomCarouselFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCarouselFlowLayout.swift; sourceTree = "<group>"; };
-		0A929E952AD09A1B0050328D /* TestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		0A929E962AD09A1B0050328D /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		0A94ECCC2AC9894100F0EE63 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A94ECCE2AC9897300F0EE63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -424,7 +422,6 @@
 		0A929E942AD09A1B0050328D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0A929E952AD09A1B0050328D /* TestModel.swift */,
 				0A929E962AD09A1B0050328D /* AudioManager.swift */,
 			);
 			path = Services;
@@ -830,7 +827,6 @@
 				0ABD2BB72AD1523E00FC01C1 /* CustomTextField.swift in Sources */,
 				28EC5DA02AC9F5AF002FFFA8 /* Category.swift in Sources */,
 				0ABD2BAC2AD1520900FC01C1 /* UserModel.swift in Sources */,
-				0A929E9C2AD09A1B0050328D /* TestModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
