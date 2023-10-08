@@ -15,8 +15,9 @@ final class AudioManager {
     // MARK: - Private Properties
     private var player: AVPlayer?
     
-    private(set) var isPlaying = false
+    var isPlaying = false
     private(set) var isPause = false
+    
     
     private var podcasts: [PodcastEpisode] = []
     
@@ -55,11 +56,28 @@ final class AudioManager {
         
         if let audioURL = URL(string: currentURL) {
             let playerItem = AVPlayerItem(url: audioURL)
-            player = AVPlayer(playerItem: playerItem)
+            if player == nil {
+                player = AVPlayer(playerItem: playerItem)
+            } else {
+                player?.replaceCurrentItem(with: playerItem)
+            }
         }
         
         player?.play()
     }
+
+//    func playAudio() {
+//        isPlaying = true
+//
+//        guard let currentURL = podcasts[currentIndex].enclosureUrl else { return }
+//
+//        if let audioURL = URL(string: currentURL) {
+//            let playerItem = AVPlayerItem(url: audioURL)
+//            player = AVPlayer(playerItem: playerItem)
+//        }
+//
+//        player?.play()
+//    }
     
     func playNextSong() {
         setNextSong()
