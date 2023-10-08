@@ -104,8 +104,15 @@ final class AuthViewController: UIViewController {
         FirebaseManager.shared.signInWithGoogle(
             presentingViewController: self) { result in
                 switch result {
-                case .success(_):
+                case .success(let user):
                     print("Successfully")
+                    
+                    let email = user.email
+                    let userName = user.displayName
+                    let userImage = user.photoURL
+                    let stringURL = userImage?.absoluteString
+                    StorageManager.shared.checkedUser(for: email, with: userName, and: stringURL)
+                    
                     //navigation to next screen
                     self.navigateToHomeScreen()
                 case .failure(let error):
@@ -125,6 +132,9 @@ final class AuthViewController: UIViewController {
                 switch result {
                 case .success(_):
                     print("You login successfully")
+                    
+                    StorageManager.shared.checkedUser(for: email)
+                    
                     self.loginField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
                     self.passwordField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
                     self.loginField.text = ""

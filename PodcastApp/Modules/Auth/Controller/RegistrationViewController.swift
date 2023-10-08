@@ -245,6 +245,11 @@ final class RegistrationViewController: UIViewController {
                 
             case .success(_):
                 print("User was successfully registered")
+                let userInfo = UserInfo(firstName: textFieldsToCheck[0].text ?? "",
+                                        lastName: textFieldsToCheck[1].text ?? "",
+                                        eMail: textFieldsToCheck[2].text ?? "")
+                StorageManager.shared.saveUser(userInfo)
+                
                 //navigation to next screen
                 let isOnboardingCompleted = AppSettingsManager.onboardingStatus()
                 let startVC = isOnboardingCompleted ? CustomTabBarController() : OnboardingViewController()
