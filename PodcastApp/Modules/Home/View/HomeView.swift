@@ -36,6 +36,7 @@ class HomeView: UIView {
         imageView.layer.shadowRadius = 8
         imageView.layer.shadowOpacity = 0.4
         imageView.layer.shadowOffset = CGSize(width: 1, height: 5)
+        imageView.clipsToBounds = true
         return imageView
     }()
     
