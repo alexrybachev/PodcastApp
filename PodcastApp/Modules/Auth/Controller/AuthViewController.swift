@@ -133,6 +133,15 @@ final class AuthViewController: UIViewController {
                 case .success(_):
                     print("You login successfully")
                     
+                    let imageURL = "https://kartinkof.club/uploads/posts/2022-04/1649608700_6-kartinkof-club-p-ugarnie-kartinki-pro-ugarnogo-parnya-6.jpg"
+                    
+                    let userInfo = UserInfo(firstName: "Красавчик",
+                                            lastName: "Сердцеед",
+                                            eMail: email,
+                                            dateOfBithday: Date.now,
+                                            gender: .Male,
+                                            imageURL: imageURL)
+                    StorageManager.shared.saveUser(userInfo)
                     StorageManager.shared.checkedUser(for: email)
                     
                     self.loginField.layer.borderColor = #colorLiteral(red: 0.9294117689, green: 0.9294117093, blue: 0.9294117093, alpha: 1)
