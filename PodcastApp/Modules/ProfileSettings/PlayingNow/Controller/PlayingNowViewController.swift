@@ -111,8 +111,8 @@ final class PlayingNowViewController: UIViewController {
         if player.isPause {
             player.resetPlayer()
         }
+        
         player.isPlaying = false
-       
     }
     
     // MARK: - Privaet Methods
