@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
     
     private func getUser() {
         let user = StorageManager.shared.getCurrentUser()
-        homeView.setupUser(user?.firstName, user?.imageURL)
+        homeView.setupUser(for: user)
     }
 }
 

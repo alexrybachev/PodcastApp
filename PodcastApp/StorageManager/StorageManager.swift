@@ -14,8 +14,6 @@ class StorageManager {
     
     private let realm = try! Realm()
     
-//    private var userInfo: Results<UserInfo>!
-    
     private var favorites: Results<PodcastModel>!
     
     private var isUserSaved = false
@@ -65,6 +63,22 @@ class StorageManager {
                 newUser.gender = gender
                 newUser.image = image
                 realm.add(newUser)
+            }
+        }
+    }
+    
+    func updateUserInfo(for user: UserInfo?) {
+        
+        try! realm.write {
+            if currentUser?.eMail == getCurrentUser()?.eMail {
+                currentUser?.firstName = user?.firstName
+                currentUser?.lastName = user?.lastName
+                currentUser?.dateOfBithday = user?.dateOfBithday
+                currentUser?.gender = user?.gender
+                currentUser?.imageURL = user?.imageURL
+                currentUser?.image = user?.image
+            } else {
+                saveUser(user!)
             }
         }
     }
