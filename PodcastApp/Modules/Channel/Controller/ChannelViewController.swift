@@ -70,6 +70,7 @@ class ChannelViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    //MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,15 +78,12 @@ class ChannelViewController: UIViewController {
         title = "Channel"
         setupViews()
         makeConstraints()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
-        nameChannelLabel.text = podcast?.title
-        numberEpizodesLabel.text = podcast?.author
+        setLables()
         loadImage()
         fetchEpisodsForPodcast()
     }
@@ -95,6 +93,18 @@ class ChannelViewController: UIViewController {
         //hide back button text
         navigationController?.navigationBar.backItem?.title = ""
         navigationItem.backButtonTitle = ""
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    //MARK: - Methods
+    
+    fileprivate func setLables() {
+        nameChannelLabel.text = podcast?.title
+        numberEpizodesLabel.text = podcast?.author
     }
     
     private func setupViews(){

@@ -18,25 +18,25 @@ class CustomTabBarController: UITabBarController {
     
    //MARK: Methods
     private func setControllers() {
-        let homeVC = HomeViewController()
+        let homeVC = UINavigationController(rootViewController: HomeViewController() )
         let homeSelectedImage = UIImage(named: "HomeActive")?.withRenderingMode(.alwaysOriginal)
         let homeItem = UITabBarItem(title: nil, image: UIImage(named: "Home"), selectedImage: homeSelectedImage)
         homeItem.imageInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
         homeVC.tabBarItem = homeItem
         
-        let searchVC = SearchViewController()
+        let searchVC = UINavigationController(rootViewController: SearchViewController() )
         let searchSelectedImage =  UIImage(named: "SearchActive")?.withRenderingMode(.alwaysOriginal)
         let searchItem = UITabBarItem(title: nil, image: UIImage(named: "Search"), selectedImage: searchSelectedImage)
         searchItem.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
         searchVC.tabBarItem = searchItem
         
-        let favoritesVC = FavoritesViewController()
+        let favoritesVC = UINavigationController(rootViewController: FavoritesViewController() )
         let favoritesSelectedImage = UIImage(named: "BookmarkActive")?.withRenderingMode(.alwaysOriginal)
         let favoritesItem = UITabBarItem(title: nil, image: UIImage(named: "Bookmark"), selectedImage: favoritesSelectedImage)
         favoritesItem.imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
         favoritesVC.tabBarItem = favoritesItem
         
-        let settingsVC = ProfileSettingsViewController()
+        let settingsVC = UINavigationController(rootViewController: ProfileSettingsViewController() )
         let settingsSelectedImage = UIImage(named: "SettingActive")?.withRenderingMode(.alwaysOriginal)
         let settingsItem = UITabBarItem(title: nil, image: UIImage(named: "Setting"), selectedImage: settingsSelectedImage)
         settingsItem.imageInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 30)

@@ -29,26 +29,29 @@ class SearchViewController: UIViewController {
         }
     }
     
-    // MARK: - Initial
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Search"
-        view = searchView
-        
-        searchView.showCollectionView(for: isSearched)
-        
-        searchView.transferDelegates(dataSource: self, delegate: self)
-        searchView.setupOriginalCompositionalLayout(layout: createInitialCompositionalLayout())
-        
-        searchView.transferSearchBarDelegate(delegate: self)
-        searchView.transferSBDelegate(delegate: self)
+        setupViews()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //hide label in tabBar
         title = nil
+    }
+    
+    //MARK: - Methods
+    
+    private func setupViews() {
+        view = searchView
+        searchView.showCollectionView(for: isSearched)
+        searchView.transferDelegates(dataSource: self, delegate: self)
+        searchView.setupOriginalCompositionalLayout(layout: createInitialCompositionalLayout())
+        searchView.transferSearchBarDelegate(delegate: self)
+        searchView.transferSBDelegate(delegate: self)
+        title = "Search"
     }
 }
 
