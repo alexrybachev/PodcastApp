@@ -105,12 +105,14 @@ class ChannelViewCell: UITableViewCell {
         nameEpizode.text = episode?.title
         epizodeSubtitle.text = "\(episode?.formattedTime ?? "00:00:00")  •  \(episode?.episode ?? 0) Eps"
         
-        guard let imageURL = episode?.feedImage else { return }
+        guard let imageURL = episode?.image else { return }
         let cache = ImageCache.default
         cache.diskStorage.config.expiration = .seconds(1)
         let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
         imageEpizode.kf.indicatorType = .activity
-        imageEpizode.kf.setImage(with: URL(string: imageURL), placeholder: nil, options: [.processor(processor),
-                                                                                          .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+        imageEpizode.kf.setImage(with: URL(string: imageURL),
+                                 placeholder: nil,
+                                 options: [.processor(processor),
+                                           .cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
 }
