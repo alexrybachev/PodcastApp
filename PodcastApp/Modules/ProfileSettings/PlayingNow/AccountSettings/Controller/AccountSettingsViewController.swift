@@ -40,7 +40,7 @@ final class AccountSettingsViewController: UIViewController {
     private let edgeOffset: CGFloat = 24
     
     private lazy var contentSize: CGSize = {
-        CGSize(width: view.bounds.width, height: view.bounds.height + 400)
+        CGSize(width: view.bounds.width, height: view.bounds.height + 100)
     }()
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -87,24 +87,17 @@ final class AccountSettingsViewController: UIViewController {
     }()
     private lazy var datePiker = UIDatePicker()
     private lazy var genderLable = CustomProfileLabel(title: "Gender")
-    private let saveButton = ButtonsParams(
-        size:
-            CGSize(
-                width: 327,
-                height: 56
-            ),
-        radius:
-            15,
-        color: .gray,
-        image: "",
-        title: ""
-    )
-    private lazy var saveChangeButton = AccountSettingsViewController.makeButton(
-        params: saveButton
-    )
-    private lazy var horisontalStack = AccountSettingsViewController.makeStackHorisontal()
     private lazy var maleButton = CustomProfileButton(title: "Male", imageName: "checkmark.circle.fill")
     private lazy var femaleButton = CustomProfileButton(title: "Female", imageName: "circle")
+    private lazy var saveChangeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Save changes", for: .normal)
+        button.backgroundColor = .saveButtonColor
+        button.layer.cornerRadius = 24
+        //button.font = .custome(name: .plusJakartaSans600, size: 16) ?? UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
     private lazy var blur = AccountSettingsViewController.makeBlur()
     private lazy var alertView = AccountSettingsViewController.makeView()
     private let alertTextParam = TextParameters(
@@ -163,8 +156,6 @@ final class AccountSettingsViewController: UIViewController {
     
     //MARK: - Life cycle
     
-    
-    
     override func viewDidLoad() {
         setViews()
         setDelegates()
@@ -173,11 +164,21 @@ final class AccountSettingsViewController: UIViewController {
         setNavigationAppearance()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //hide back button text
         navigationController?.navigationBar.backItem?.title = ""
         navigationItem.backButtonTitle = ""
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     
@@ -200,6 +201,7 @@ final class AccountSettingsViewController: UIViewController {
         dateTextField.layer.cornerRadius = dateTextField.frame.height / 2
         maleButton.layer.cornerRadius = maleButton.frame.height / 2
         femaleButton.layer.cornerRadius = femaleButton.frame.height / 2
+        saveChangeButton.layer.cornerRadius = saveChangeButton.frame.height / 2
     }
     
     private func setViews() {
@@ -220,10 +222,10 @@ final class AccountSettingsViewController: UIViewController {
                             dateTextField,
                             genderLable,
                             maleButton,
-                            femaleButton
+                            femaleButton,
+                            saveChangeButton
         )
         dateTextField.addSubview(imageViewCalendar)
-        scrollView.addSubview(saveChangeButton)
         
         //horisontalStack.addViewInStack(stack: horisontalStack,views: maleButton,femaleButton)
         view.addSubview(alertView)
@@ -336,28 +338,15 @@ final class AccountSettingsViewController: UIViewController {
             make.top.equalTo(maleButton)
         }
         
-        //        saveChangeButton.snp.makeConstraints { make in
-        //            make.leading.equalTo(scrollView).offset(24)
-        //            make.trailing.equalTo(scrollView).offset(-24)
-        //            make.bottom.equalTo(scrollView).offset(-24)
-        //            make.height.equalTo(56)
-        //        }
+                saveChangeButton.snp.makeConstraints { make in
+                    make.leading.trailing.equalTo(firstNameTextField)
+                    make.height.equalTo(56)
+                    make.top.equalTo(femaleButton.snp.bottom).inset(-242)
+                }
         //
         //        horisontalStack.snp.makeConstraints { make in
         //            make.leading.trailing.equalTo(verticalStack).offset(0)
         //            make.top.equalTo(genderLable.snp_bottomMargin).offset(10)
-        //        }
-        //
-        //        maleButton.snp.makeConstraints { make in
-        //            make.bottom.top.equalTo(horisontalStack).offset(0)
-        //            make.width.equalTo(maleButtonParams.size.width)
-        //            make.height.equalTo(maleButtonParams.size.height)
-        //        }
-        //
-        //        femaleButton.snp.makeConstraints { make in
-        //            make.bottom.top.equalTo(horisontalStack).offset(0)
-        //            make.width.equalTo(femaleButtonParams.size.width)
-        //            make.height.equalTo(femaleButtonParams.size.height)
         //        }
         //
         //        alertView.snp.makeConstraints { make in

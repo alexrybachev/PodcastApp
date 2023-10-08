@@ -38,7 +38,10 @@ extension UIColor {
     }
     
     static let blueProfileColor = UIColor(named: "blueProfileColor") ?? .clear
+    static let saveButtonColor = UIColor(named: "saveButtonColor") ?? .clear
 }
+
+
 
 // Рандомный цвет
 extension UIColor {

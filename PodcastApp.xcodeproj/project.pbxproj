@@ -587,7 +587,6 @@
 		0AC0B4D32AC6154600252B8B /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				0AC0B4D62AC6154600252B8B /* Model */,
 				0AC0B4D72AC6154600252B8B /* View */,
 				0AC0B4D42AC6154600252B8B /* Controller */,
 			);
@@ -600,13 +599,6 @@
 				0A56F1172AC7F7C100740A92 /* SearchViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		0AC0B4D62AC6154600252B8B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0AC0B4D72AC6154600252B8B /* View */ = {
