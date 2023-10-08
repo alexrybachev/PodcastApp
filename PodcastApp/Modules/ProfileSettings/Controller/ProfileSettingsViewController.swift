@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileSettingsViewController: UIViewController {
     
@@ -63,108 +64,124 @@ class ProfileSettingsViewController: UIViewController {
         setupView()
         setupConstraints()
         addTargets()
-        self.view.backgroundColor = .systemBackground
+        setUserData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     // MARK: - Methods
-    
-    private func setupView(){
-        view.addSubview(profileImage)
-        view.addSubview(nameAndSecondNameLabel)
-        view.addSubview(quoteLabel)
-        view.addSubview(accountSettingsButton)
-        view.addSubview(changePasswordButton)
-        view.addSubview(forgetPasswordButton)
-        view.addSubview(logoutButton)
-    }
-    
-    private func addTargets(){
-        accountSettingsButton.addTarget(self, action: #selector(accountSettingsButtonTapped), for: .touchUpInside)
-        changePasswordButton.addTarget(self, action: #selector(changePasswordButtonTapped), for: .touchUpInside)
-        forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordButtonTapped), for: .touchUpInside)
-        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         
-    }
-    
-    private func setupConstraints(){
-        
-        profileImage.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(56)
-            make.leading.equalToSuperview().offset(32)
-            make.width.height.equalTo(48)
+        private func setUserData() {
+            //getting user data
+            guard let user = StorageManager.shared.getCurrentUser() else {return}
+            //set user name
+            nameAndSecondNameLabel.text = "\(user.firstName ?? "No name") \(user.lastName ?? "")"
+            //set image
+            guard let url = user.imageURL else { return }
+            let cache = ImageCache.default
+            cache.diskStorage.config.expiration = .seconds(1)
+            let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+            profileImage.kf.indicatorType = .activity
+            profileImage.kf.setImage(with: URL(string: url), placeholder: nil, options: [.processor(processor),
+                                                                                       .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+            
         }
         
-        nameAndSecondNameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(profileImage).offset(1)
-            make.leading.equalTo(profileImage.snp.trailing).offset(16)
-            make.trailing.equalToSuperview().inset(32)
+        private func setupView(){
+            self.view.backgroundColor = .systemBackground
+            view.addSubview(profileImage)
+            view.addSubview(nameAndSecondNameLabel)
+            view.addSubview(quoteLabel)
+            view.addSubview(accountSettingsButton)
+            view.addSubview(changePasswordButton)
+            view.addSubview(forgetPasswordButton)
+            view.addSubview(logoutButton)
         }
         
-        quoteLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameAndSecondNameLabel.snp.bottom).offset(4)
-            make.leading.equalTo(nameAndSecondNameLabel)
+        private func addTargets(){
+            accountSettingsButton.addTarget(self, action: #selector(accountSettingsButtonTapped), for: .touchUpInside)
+            changePasswordButton.addTarget(self, action: #selector(changePasswordButtonTapped), for: .touchUpInside)
+            forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordButtonTapped), for: .touchUpInside)
+            logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+            
         }
         
-        accountSettingsButton.snp.makeConstraints { make in
-            make.top.equalTo(profileImage.snp.bottom).offset(32)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        
-        changePasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(accountSettingsButton.snp.bottom).offset(1)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        
-        forgetPasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(changePasswordButton.snp.bottom).offset(1)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(56)
-        }
-        
-        logoutButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(112)
-            make.leading.equalToSuperview().offset(25)
-            make.trailing.equalToSuperview().inset(25)
-            make.height.equalTo(60)
-        
-        }
-    }
-    // MARK: - button actions
-    
-    @objc private func accountSettingsButtonTapped(){
-        navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
-    }
-    
-    @objc private func changePasswordButtonTapped(){
-    
-
-    }
-    
-    @objc private func forgetPasswordButtonTapped(){
-       
-    }
-    
-    @objc private func logoutButtonTapped(){
-        
-        FirebaseManager.shared.logOut { result in
-            switch result {
-            case .success(_) :
-                self.dismiss(animated: true)
-            case .failure(let error):
-                print(error.localizedDescription)
+        private func setupConstraints(){
+            
+            profileImage.snp.makeConstraints { (make) in
+                make.top.equalToSuperview().offset(56)
+                make.leading.equalToSuperview().offset(32)
+                make.width.height.equalTo(48)
+            }
+            
+            nameAndSecondNameLabel.snp.makeConstraints { (make) in
+                make.top.equalTo(profileImage).offset(1)
+                make.leading.equalTo(profileImage.snp.trailing).offset(16)
+                make.trailing.equalToSuperview().inset(32)
+            }
+            
+            quoteLabel.snp.makeConstraints { make in
+                make.top.equalTo(nameAndSecondNameLabel.snp.bottom).offset(4)
+                make.leading.equalTo(nameAndSecondNameLabel)
+            }
+            
+            accountSettingsButton.snp.makeConstraints { make in
+                make.top.equalTo(profileImage.snp.bottom).offset(32)
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.height.equalTo(56)
+            }
+            
+            changePasswordButton.snp.makeConstraints { make in
+                make.top.equalTo(accountSettingsButton.snp.bottom).offset(1)
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.height.equalTo(56)
+            }
+            
+            forgetPasswordButton.snp.makeConstraints { make in
+                make.top.equalTo(changePasswordButton.snp.bottom).offset(1)
+                make.leading.equalToSuperview()
+                make.trailing.equalToSuperview()
+                make.height.equalTo(56)
+            }
+            
+            logoutButton.snp.makeConstraints { make in
+                make.bottom.equalToSuperview().inset(112)
+                make.leading.equalToSuperview().offset(25)
+                make.trailing.equalToSuperview().inset(25)
+                make.height.equalTo(60)
+                
             }
         }
+        // MARK: - button actions
         
+        @objc private func accountSettingsButtonTapped(){
+            navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
+        }
+        
+        @objc private func changePasswordButtonTapped(){
+            
+            
+        }
+        
+        @objc private func forgetPasswordButtonTapped(){
+            
+        }
+        
+        @objc private func logoutButtonTapped(){
+            
+            FirebaseManager.shared.logOut { result in
+                switch result {
+                case .success(_) :
+                    self.dismiss(animated: true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            
+        }
     }
-    
-
-}
 
