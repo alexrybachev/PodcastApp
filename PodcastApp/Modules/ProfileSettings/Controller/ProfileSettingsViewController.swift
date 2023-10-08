@@ -20,6 +20,7 @@ class ProfileSettingsViewController: UIViewController {
         image.layer.shadowOffset = CGSize(width: 1, height: 5)
         image.layer.cornerRadius = 12
         image.clipsToBounds = true
+        image.contentMode = .scaleAspectFill
         return image
     }()
     

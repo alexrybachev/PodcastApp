@@ -25,12 +25,18 @@ class FavoritesViewController: UIViewController {
         self.setupView()
         self.setupConstraints()
         self.setupTableView()
-        title = "Favorites"
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = "Favorites"
         fetchData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setNavigationAppearance()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -40,6 +46,13 @@ class FavoritesViewController: UIViewController {
     }
     
     // MARK: - Private methodes
+    
+    private func setNavigationAppearance() {
+    //set custom arrow for back button
+        let backViewImage = UIImage(named: "ArrowLeft")?.withRenderingMode(.alwaysOriginal)
+        navigationController?.navigationBar.backIndicatorImage = backViewImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
+    }
     
     private func setupView() {
         view.backgroundColor = .systemBackground

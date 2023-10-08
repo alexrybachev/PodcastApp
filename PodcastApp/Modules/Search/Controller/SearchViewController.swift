@@ -36,6 +36,16 @@ class SearchViewController: UIViewController {
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = "Search"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setNavigationAppearance()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //hide label in tabBar
@@ -44,6 +54,13 @@ class SearchViewController: UIViewController {
     
     //MARK: - Methods
     
+    private func setNavigationAppearance() {
+        //set custom arrow for back button
+            let backViewImage = UIImage(named: "ArrowLeft")?.withRenderingMode(.alwaysOriginal)
+            navigationController?.navigationBar.backIndicatorImage = backViewImage
+            navigationController?.navigationBar.backIndicatorTransitionMaskImage = backViewImage
+        }
+    
     private func setupViews() {
         view = searchView
         searchView.showCollectionView(for: isSearched)
@@ -51,7 +68,7 @@ class SearchViewController: UIViewController {
         searchView.setupOriginalCompositionalLayout(layout: createInitialCompositionalLayout())
         searchView.transferSearchBarDelegate(delegate: self)
         searchView.transferSBDelegate(delegate: self)
-        title = "Search"
+        
     }
 }
 
