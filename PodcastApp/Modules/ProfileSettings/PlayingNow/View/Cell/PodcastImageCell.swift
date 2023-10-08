@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class PodcastImageCell: UICollectionViewCell {
     
@@ -13,17 +14,20 @@ final class PodcastImageCell: UICollectionViewCell {
     static let reuseId = String(describing: PodcastImageCell.self)
     
     // MARK: - Private UI Properties
-    private lazy var mainView: UIView = {
-        var mainView = UIView()
-        mainView.layer.cornerRadius = 25
-        mainView.layer.shouldRasterize = true
-        return mainView
+    private lazy var mainImageVIew: UIImageView = {
+        var mainImageVIew = UIImageView()
+        mainImageVIew.layer.cornerRadius = 25
+        mainImageVIew.layer.shouldRasterize = true
+        mainImageVIew.contentMode = .scaleAspectFill
+        mainImageVIew.clipsToBounds = true
+        mainImageVIew.kf.indicatorType = .activity
+        return mainImageVIew
     }()
     
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(mainView)
+        contentView.addSubview(mainImageVIew)
         setupConstraints()
     }
     
@@ -32,13 +36,21 @@ final class PodcastImageCell: UICollectionViewCell {
     }
     
     // MARK: - Public Methods
-    func configureView(with color: UIColor) {
-        mainView.backgroundColor = color
+    func configureView(with imageURL: String) {
+        guard let url = URL(string: imageURL) else { return }
+        mainImageVIew.kf.setImage(
+            with: url,
+            placeholder: nil,
+            options: [
+                .transition(.fade(1.0)),
+                .cacheOriginalImage
+            ]
+        )
     }
     
     // MARK: - Private Methods
     private func setupConstraints() {
-        mainView.snp.makeConstraints { make in
+        mainImageVIew.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }

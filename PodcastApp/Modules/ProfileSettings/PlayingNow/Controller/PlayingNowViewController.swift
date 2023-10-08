@@ -13,12 +13,15 @@ final class PlayingNowViewController: UIViewController {
     // MARK: - Private UI Properties
     private let playingNowView = PlayingNowView()
     
+    // MARK: - Scroll Properties
+    private var previousIndex = 0
+    
     // MARK: - AV Properties
     private let player = AudioManager.shared
     private var podcasts: [PodcastEpisode]?
     
     // MARK: - Private Timers
-    private var timer: Timer?
+    private var sliderTimer: Timer?
     private var timeLabelsTimer: Timer?
     
     // MARK: - Layout Properties
@@ -43,17 +46,6 @@ final class PlayingNowViewController: UIViewController {
         return pageSize
     }
     
-    // MARK: - Test Properties
-    private let colors = [UIColor.red, UIColor.green, UIColor.brown, UIColor.blue]
-    private var testArraySongs = [
-        TestModel(color: .blue, url: "https://www.kozco.com/tech/32.mp3"),
-        TestModel(color: .green, url: "https://file-examples.com/storage/feaade38c1651bd01984236/2017/11/file_example_MP3_700KB.mp3"),
-        TestModel(color: .orange, url: "https://www.kozco.com/tech/LRMonoPhase4.mp3"),
-        TestModel(color: .red, url: "https://www.kozco.com/tech/piano2-CoolEdit.mp3"),
-        TestModel(color: .yellow, url: "https://www.kozco.com/tech/organfinale.mp3")
-    ]
-    private var currentIndex = 2
-    
     // MARK: - Init
     init(podcastEpisode: [PodcastEpisode]?, author: String?, index: Int) {
         self.podcasts = podcastEpisode
@@ -69,26 +61,30 @@ final class PlayingNowViewController: UIViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemBackground
         addViews()
         setupConstraints()
         setupNavigationBar()
         
+        // разворачиваем подкасты
+        guard let unwrapPodcasts = podcasts else { return }
+        
         // передаем массив с подкастами и индекс в playerManager
-        player.setPodcasts(testArraySongs, index: currentIndex)
+        player.setPodcasts(unwrapPodcasts)
+        playingNowView.podcastTitleLabel.text = unwrapPodcasts[player.currentIndex].title
         
         playingNowView.transferDelegates(dataSource: self, delegate: self)
+        
+        previousIndex = player.currentIndex
         
         // настройка кнопок next и back
         setupNavigationButton()
         
         // настройка кнопки play и pause
-        player.currentIndex = currentIndex
         setupPlayPauseButton()
         
         // устанавливаем длительность подкаста при загрузке экрана
-        loadDurationForCurrentTrack()
+        setupCurrentRemainingTimeLabel(with: player.currentIndex)
         
         // настройка обновления слайдера
         changeActionTime()
@@ -98,7 +94,7 @@ final class PlayingNowViewController: UIViewController {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
         
-        let indexPath = IndexPath(item: currentIndex, section: 0)
+        let indexPath = IndexPath(item: player.currentIndex, section: 0)
         
         // отображаем ячейку по индексу который пришел из предыдущего экрана
         DispatchQueue.main.async {
@@ -110,12 +106,7 @@ final class PlayingNowViewController: UIViewController {
         }
     }
     
-    // MARK: - Private Actions
-    @objc private func rightBarButtonDidTapped() {
-    }
-    
     // MARK: - Privaet Methods
-    
     // MARK: - Setup PlayPause
     private func setupPlayPauseButton() {
         playingNowView.playPauseAction = { [weak self] in
@@ -125,11 +116,17 @@ final class PlayingNowViewController: UIViewController {
                 self.player.pauseAudio()
                 self.stopUpdatingSlider()
                 self.stopUpdatingLabels()
-                self.playingNowView.playPauseButton.setImage(UIImage(named: "Play"), for: .normal)
+                self.playingNowView.playPauseButton.setImage(
+                    UIImage(named: "Play"),
+                    for: .normal
+                )
             } else if AudioManager.shared.isPause {
                 self.player.resumeAudio()
                 self.startUpdatingSlider()
-                self.playingNowView.playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
+                self.playingNowView.playPauseButton.setImage(
+                    UIImage(named: "Stop"),
+                    for: .normal
+                )
             } else {
                 self.player.playAudio()
                 self.startUpdatingSlider()
@@ -140,7 +137,10 @@ final class PlayingNowViewController: UIViewController {
                     name: .AVPlayerItemDidPlayToEndTime,
                     object: nil
                 )
-                self.playingNowView.playPauseButton.setImage(UIImage(named: "Stop"), for: .normal)
+                self.playingNowView.playPauseButton.setImage(
+                    UIImage(named: "Stop"),
+                    for: .normal
+                )
             }
         }
     }
@@ -162,7 +162,7 @@ final class PlayingNowViewController: UIViewController {
     
     // начинаем обновление слайдре
     private func startUpdatingSlider() {
-        timer = Timer.scheduledTimer(
+        sliderTimer = Timer.scheduledTimer(
             timeInterval: 0.1,
             target: self,
             selector: #selector(updateSlider),
@@ -173,11 +173,11 @@ final class PlayingNowViewController: UIViewController {
     
     // останавливаем обновление слайдера
     private func stopUpdatingSlider() {
-        timer?.invalidate()
-        timer = nil
+        sliderTimer?.invalidate()
+        sliderTimer = nil
     }
     
-    // переход на новую песню после окончания текущей
+    // MARK: - Finish Playing
     @objc func playerDidFinishPlaying(note: NSNotification) {
         // останавливаем обновление слайдера
         stopUpdatingSlider()
@@ -196,7 +196,7 @@ final class PlayingNowViewController: UIViewController {
         startUpdatingSlider()
     }
     
-    // перемотка
+    // MARK: - Rewind
     private func changeActionTime() {
         playingNowView.sliderAction = { [weak self] in
             guard let weakSelf = self else { return }
@@ -206,47 +206,64 @@ final class PlayingNowViewController: UIViewController {
         }
     }
     
-    // MARK: - Next or Back Button Methods
+    // MARK: - Next or Previous Button Logic
     private func setupNavigationButton() {
         playingNowView.nextOrBackAction = { [weak self] sender in
             self?.scrollToNextOrPreviousCell(sender)
         }
     }
     
+    // метод для нахождения текущего индекса видимой ячейки
+    private func centralVisibleIndexPath(in collectionView: UICollectionView) -> IndexPath? {
+        let center = collectionView.convert(
+            collectionView.center,
+            from: collectionView.superview
+        )
+        return collectionView.indexPathForItem(at: center)
+    }
+    
     // метод для перехода к следующему или предыдущему item
     private func scrollToNextOrPreviousCell(_ sender: UIButton) {
-        let contentOffset = playingNowView.mainCollectionView.contentOffset
-        let cellSize = playingNowView.layout.itemSize
-        let numberOfItems = playingNowView.mainCollectionView.numberOfItems(inSection: 0)
-        let currentItemIndex = Int(round(contentOffset.x / cellSize.width))
-        var currentIndexPath = IndexPath()
-        
-        if sender == playingNowView.nextButton {
-            player.playNextSong()
-            
-            if currentItemIndex < numberOfItems - 1 {
-                currentIndexPath = IndexPath(item: currentItemIndex + 1, section: 0)
-            } else {
-                // Если уже на последней ячейке, не изменяем индекс
-                currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
-            }
-        } else {
-            player.playPreviousSong()
-            
-            if currentItemIndex > 0 {
-                currentIndexPath = IndexPath(item: currentItemIndex - 1, section: 0)
-            } else {
-                // Если уже на первой ячейке, не изменяем индекс
-                currentIndexPath = IndexPath(item: currentItemIndex, section: 0)
-            }
+        guard
+            let currentVisibleIndexPath = centralVisibleIndexPath(in: playingNowView.mainCollectionView)
+        else {
+            return
         }
         
-        loadDurationForCurrentTrack()
-        updateCurrentTimeLabel()
-        updateRemainingTimeLabel()
+        let isNextButton = (sender == playingNowView.nextButton)
+        let newIndex = updatedIndex(
+            current: currentVisibleIndexPath.item,
+            isNext: isNextButton
+        )
         
-        // переход к следующей ячейке коллекции в зависимости индекса
-        playingNowView.mainCollectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: true)
+        if isNextButton {
+            player.playNextSong()
+        } else {
+            player.playPreviousSong()
+        }
+        
+        if let title = podcasts?[newIndex].title {
+            playingNowView.podcastTitleLabel.text = title
+        }
+        
+        setupCurrentRemainingTimeLabel(with: newIndex)
+        let nextIndexPath = IndexPath(item: newIndex, section: 0)
+        playingNowView.mainCollectionView.scrollToItem(
+            at: nextIndexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
+    }
+    
+    private func updatedIndex(current index: Int, isNext: Bool) -> Int {
+        let numberOfItems = (podcasts?.count ?? 1) - 1
+        if isNext {
+            previousIndex += 1
+            return min(index + 1, numberOfItems)
+        } else {
+            previousIndex -= 1
+            return max(0, index - 1)
+        }
     }
     
     // MARK: - Update labels with current time
@@ -289,6 +306,12 @@ final class PlayingNowViewController: UIViewController {
         playingNowView.endDurationLabel.text = formattedTime
     }
     
+    // установка начальной длительности подкаста
+    func setupCurrentRemainingTimeLabel(with index: Int) {
+        let formattedDuration = formatTime(seconds: Double(podcasts?[index].duration ?? 0))
+        playingNowView.endDurationLabel.text = formattedDuration
+    }
+    
     @objc func updateLabels() {
         updateCurrentTimeLabel()
         updateRemainingTimeLabel()
@@ -297,20 +320,6 @@ final class PlayingNowViewController: UIViewController {
     func stopUpdatingLabels() {
         timeLabelsTimer?.invalidate()
         timeLabelsTimer = nil
-    }
-    
-    // загрузка длительности трека label
-    func loadDurationForCurrentTrack() {
-        guard let url = URL(string: player.podcasts[player.currentIndex].url) else { return }
-        AudioManager.shared.getDuration(for: url) { [weak self] (time) in
-            DispatchQueue.main.async {
-                if let duration = time {
-                    let durationInSeconds = CMTimeGetSeconds(duration)
-                    let formattedDuration = self?.formatTime(seconds: durationInSeconds)
-                    self?.playingNowView.endDurationLabel.text = formattedDuration
-                }
-            }
-        }
     }
 }
 
@@ -333,7 +342,7 @@ extension PlayingNowViewController {
             image: UIImage(named: "PlaylistIcon"),
             style: .done,
             target: self,
-            action: #selector(rightBarButtonDidTapped)
+            action: nil
         )
         
         rightBarButton.tintColor = .black
@@ -344,7 +353,7 @@ extension PlayingNowViewController {
 // MARK: - UICollectionViewDataSource
 extension PlayingNowViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        testArraySongs.count
+        podcasts?.count ?? 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -356,8 +365,8 @@ extension PlayingNowViewController: UICollectionViewDataSource {
             return  UICollectionViewCell()
         }
         
-        let song = testArraySongs[indexPath.row].color
-        cell.configureView(with: song)
+        let podcastImage = podcasts?[indexPath.row].image ?? ""
+        cell.configureView(with: podcastImage)
         return cell
     }
 }
@@ -376,32 +385,39 @@ extension PlayingNowViewController: UICollectionViewDelegate {
 // MARK: - UIScrollViewDelegate
 extension PlayingNowViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == playingNowView.mainCollectionView {
-            let visibleRect = CGRect(origin: scrollView.contentOffset, size: scrollView.bounds.size)
-            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-            
-            if let indexPath = playingNowView.mainCollectionView.indexPathForItem(at: visiblePoint) {
-                let currentIndex = indexPath.item
-                
-                player.currentIndex = currentIndex
-                if player.isPlaying {
-                    loadDurationForCurrentTrack()
-                    player.playAudio()
-                }
-                
-                // обновляем слайдер
-                updateSlider()
-                
-                // загружаем длительность трека в label
-                loadDurationForCurrentTrack()
-                
-                updateCurrentTimeLabel()
-                updateRemainingTimeLabel()
-                
-                // переход к следующей ячейке коллекции в зависимости индекса
-                playingNowView.mainCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-                
-            }
+        guard scrollView == playingNowView.mainCollectionView else { return }
+        
+        let visibleRect = CGRect(
+            origin: scrollView.contentOffset,
+            size: scrollView.bounds.size
+        )
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        guard let indexPath = playingNowView.mainCollectionView.indexPathForItem(at: visiblePoint) else {
+            return
         }
+        
+        // Сравниваем новый индекс с предыдущим
+        if indexPath.item > previousIndex {
+            player.playNextSong()
+        } else if indexPath.item < previousIndex {
+            player.playPreviousSong()
+        }
+        
+        // Обновляем предыдущий индекс новым значением
+        previousIndex = indexPath.item
+        
+        updatePlayerAndUI(for: indexPath.item)
+        setupCurrentRemainingTimeLabel(with: indexPath.item)
+        playingNowView.mainCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+    private func updatePlayerAndUI(for index: Int) {
+        player.currentIndex = index
+        playingNowView.podcastTitleLabel.text = podcasts?[index].title
+        setupCurrentRemainingTimeLabel(with: index)
+        updateCurrentTimeLabel()
+        updateSlider()
     }
 }
+

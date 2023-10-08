@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 
+
 final class AudioManager {
     static let shared = AudioManager()
     
@@ -17,24 +18,29 @@ final class AudioManager {
     private(set) var isPlaying = false
     private(set) var isPause = false
     
+    private var podcasts: [PodcastEpisode] = []
+    
     // MARK: - Public Properties
     var currentTime: CMTime {
         guard let currentTime = player?.currentTime() else { return CMTime() }
         return currentTime
     }
     
-    var currentItemDuration: CMTime  {
-        let currentItem = player?.currentItem?.duration ?? CMTime.zero
-        return currentItem
+    var currentItemDuration: CMTime {
+        guard let seconds = podcasts[currentIndex].duration else { return CMTime.zero }
+        return CMTimeMake(value: Int64(seconds), timescale: 1)
     }
     
-    var podcasts: [TestModel] = []
     var currentIndex = 0
     
     // MARK: - Private Init
     private init() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+            try AVAudioSession.sharedInstance().setCategory(
+                .playback,
+                mode: .default,
+                options: [.mixWithOthers, .allowAirPlay]
+            )
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Ошибка настройки аудиосесии \(error)")
@@ -45,50 +51,14 @@ final class AudioManager {
     func playAudio() {
         isPlaying = true
         
-        let currentURL = podcasts[currentIndex].url
+        guard let currentURL = podcasts[currentIndex].enclosureUrl else { return }
+        
         if let audioURL = URL(string: currentURL) {
             let playerItem = AVPlayerItem(url: audioURL)
             player = AVPlayer(playerItem: playerItem)
         }
         
         player?.play()
-    }
-    
-    func setNextSong() {
-        guard !podcasts.isEmpty else { return }
-        
-        let wasPlaying = isPlaying
-        currentIndex += 1
-        
-        if currentIndex >= podcasts.count {
-            currentIndex = podcasts.count - 1 
-            stopAudio()
-            return
-        }
-        
-        player = nil
-        isPlaying = false
-        isPause = false
-        
-        if wasPlaying {
-            playAudio()
-        }
-    }
-    
-    func setPreviousSong() {
-        guard !podcasts.isEmpty else { return }
-        
-        let wasPlaying = isPlaying
-        
-        currentIndex = max(0, currentIndex - 1)
-        
-        player = nil
-        isPlaying = false
-        isPause = false
-        
-        if wasPlaying {
-            playAudio()
-        }
     }
     
     func playNextSong() {
@@ -124,9 +94,46 @@ final class AudioManager {
         player?.seek(to: CMTime.zero) // Перемещаемся в начало трека
     }
     
-    func setPodcasts(_ podcasts: [TestModel], index: Int) {
+    func setPodcasts(_ podcasts: [PodcastEpisode]) {
         self.podcasts = podcasts
-        self.currentIndex = index
+    }
+    
+    // MARK: - Private Methods
+    private func setNextSong() {
+        guard !podcasts.isEmpty else { return }
+        
+        let wasPlaying = isPlaying
+        currentIndex += 1
+        
+        if currentIndex >= podcasts.count {
+            currentIndex = podcasts.count - 1
+            stopAudio()
+            return
+        }
+        
+        player = nil
+        isPlaying = false
+        isPause = false
+        
+        if wasPlaying {
+            playAudio()
+        }
+    }
+    
+    private func setPreviousSong() {
+        guard !podcasts.isEmpty else { return }
+        
+        let wasPlaying = isPlaying
+        
+        currentIndex = max(0, currentIndex - 1)
+        
+        player = nil
+        isPlaying = false
+        isPause = false
+        
+        if wasPlaying {
+            playAudio()
+        }
     }
 }
 
