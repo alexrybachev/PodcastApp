@@ -49,23 +49,6 @@ final class AudioManager {
     }
     
     // MARK: - Public Methods
-    func playAudio() {
-        isPlaying = true
-        
-        guard let currentURL = podcasts[currentIndex].enclosureUrl else { return }
-        
-        if let audioURL = URL(string: currentURL) {
-            let playerItem = AVPlayerItem(url: audioURL)
-            if player == nil {
-                player = AVPlayer(playerItem: playerItem)
-            } else {
-                player?.replaceCurrentItem(with: playerItem)
-            }
-        }
-        
-        player?.play()
-    }
-
 //    func playAudio() {
 //        isPlaying = true
 //
@@ -73,11 +56,28 @@ final class AudioManager {
 //
 //        if let audioURL = URL(string: currentURL) {
 //            let playerItem = AVPlayerItem(url: audioURL)
-//            player = AVPlayer(playerItem: playerItem)
+//            if player == nil {
+//                player = AVPlayer(playerItem: playerItem)
+//            } else {
+//                player?.replaceCurrentItem(with: playerItem)
+//            }
 //        }
 //
 //        player?.play()
 //    }
+
+    func playAudio() {
+        isPlaying = true
+
+        guard let currentURL = podcasts[currentIndex].enclosureUrl else { return }
+
+        if let audioURL = URL(string: currentURL) {
+            let playerItem = AVPlayerItem(url: audioURL)
+            player = AVPlayer(playerItem: playerItem)
+        }
+
+        player?.play()
+    }
     
     func playNextSong() {
         setNextSong()
@@ -114,6 +114,11 @@ final class AudioManager {
     
     func setPodcasts(_ podcasts: [PodcastEpisode]) {
         self.podcasts = podcasts
+    }
+    
+    func resetPlayer() {
+//        player?.pause() // На случай, если воспроизведение активно
+        player = nil
     }
     
     // MARK: - Private Methods

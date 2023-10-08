@@ -108,6 +108,9 @@ final class PlayingNowViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        if player.isPause {
+            player.resetPlayer()
+        }
         player.isPlaying = false
        
     }
