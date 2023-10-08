@@ -30,6 +30,7 @@ class HomeView: UIView {
     private lazy var userAvatar: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.9864392877, green: 0.8254926801, blue: 0.8242263198, alpha: 1)
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 16
         imageView.layer.shadowColor = UIColor.black.cgColor
         imageView.layer.shadowRadius = 8
@@ -111,18 +112,18 @@ class HomeView: UIView {
 
 extension HomeView {
     
-    public func setupUser(_ name: String?, _ imageURL: String?) {
-        if let name = name {
-            userNameLabel.text = name
-            
-            guard let url = imageURL else { return }
-            let cache = ImageCache.default
-            cache.diskStorage.config.expiration = .seconds(1)
-            let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
-            userAvatar.kf.indicatorType = .activity
-            userAvatar.kf.setImage(with: URL(string: url), placeholder: nil, options: [.processor(processor),
-                                                                                       .cacheSerializer(FormatIndicatedCacheSerializer.png)])
-        }
+    public func setupUser(for userInfo: UserInfo?) {
+        let userFirstName = userInfo?.firstName ?? ""
+        let userLastName = userInfo?.lastName ?? ""
+        userNameLabel.text = "\(userFirstName) \(userLastName)"
+        
+        guard let url = userInfo?.imageURL else { return }
+        let cache = ImageCache.default
+        cache.diskStorage.config.expiration = .seconds(1)
+        let processor = RoundCornerImageProcessor(cornerRadius: 12, backgroundColor: .clear)
+        userAvatar.kf.indicatorType = .activity
+        userAvatar.kf.setImage(with: URL(string: url), placeholder: nil, options: [.processor(processor),
+                                                                                   .cacheSerializer(FormatIndicatedCacheSerializer.png)])
     }
     
     public func setupCompositionalLayout(layout: UICollectionViewLayout) {
