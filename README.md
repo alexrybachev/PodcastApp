@@ -31,17 +31,25 @@
 
 ## Screenshots
 <p align="center">
-<img src="" width="140"/> <img src="" width="140"/>  <img src="" width="140"/> 
+<img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/LoginVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.58.42.png" width="140"/> <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/RegistrationVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.58.47.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/CreateAccountVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.59.08.png" width="140"/> 
 </p>
 
 <p align="center">
-  <img src="" width="140"/>  <img src="" width="140"/>  <img src="" width="140"/>
+  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/GoogleSignIn.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.59.18.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/Onboarding.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.56.35.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/HomeVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.56.46.png" width="140"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/ChanelVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.57.02.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/PlayingNowVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.57.35.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/SearchVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.57.51.png" width="140"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/FavotitesVC.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.57.57.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/AccountSettings.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.58.05.png" width="140"/>  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/ProfileSettings.imageset/Simulator%20Screen%20Shot%20-%20iPhone%2014%20-%202023-10-09%20at%2009.58.11.png" width="140"/>
 </p>
 
 ## Video demonstration of the application
 
 <p align="center">
-  <img src="" width="300"/>
+  <img src="https://github.com/DmitryLorents/PodcastApp/blob/develop/PodcastApp/SupportingFiles/Assets.xcassets/Readme/overallGifAnimation.dataset/Simulator%20Screen%20Recording%20-%20iPhone%2014%20-%202023-10-09%20at%2009.49.51.gif" width="300"/>
 </p>
 
 
