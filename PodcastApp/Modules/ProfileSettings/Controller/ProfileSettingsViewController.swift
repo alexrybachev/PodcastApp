@@ -68,15 +68,12 @@ class ProfileSettingsViewController: UIViewController {
         setUserData()
         
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+
     // MARK: - Methods
         
         private func setUserData() {
             //getting user data
-            guard let user = StorageManager.shared.getCurrentUser() else {return}
+            guard let user = StorageManager.shared.getCurrentUser() else { return }
             //set user name
             nameAndSecondNameLabel.text = "\(user.firstName ?? "No name") \(user.lastName ?? "")"
             //set image
